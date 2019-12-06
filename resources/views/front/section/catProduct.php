@@ -1,26 +1,254 @@
-<div class="categories_product_area mb-55">
+    <div class="categories_product_area">
+       <div class="container">
+            <div class="categories_product_inner">
 
-    <div class="container">
-        <div class="categories_product_inner">
+                <h3 class="text-center" style="font-size: 24px;  font-weight: 600;letter-spacing: .2px;    margin-bottom: .5rem;">FROM GALLERY</h3>
 
-            <?php foreach($cats as $cat) { ?>
-            <div class="single_categories_product" style="background: url('/uploads/category/<?=$cat->image?>'); background-size:cover;">
-                <div class="categories_product_content text-center">
-                    <h4 class="text-center"><?=$cat->name?></h4>
-                    <div class="hover_content">
-                        <ul class="mt-4 mb-4">
-                            <?php
-                            $limit = 5;
-                            foreach($subCats[$cat->id] as $subCat) { ?>
-                            <li><a class="text-la" href="#"><?=$subCat->name?></a></li>
-                                <?php if(!(--$limit)) break; } ?>
-                        </ul>
-                        <button type="button" class="btn btn-primary">Shop Now</button>
+                  <p class="text-center time-to mb-10">Time to shop special</p>
+                <div class="single_categories_product" style="background: url('<?=ASSETS?>/img/bg/person.jpg'); background-size:cover;">
+                    <div class="categories_product_content text-center">
+                        <h4 class="text-center">Men</h4>
+                        <div class="hover_content">
+                            <ul class="mt-4 mb-4">
+                                <li><a class="text-la" href="#">Pant</a></li>
+                                <li><a class="text-la" href="#">Shart</a></li>
+                                <li><a class="text-la" href="#">Tops</a></li>
+                                <li><a class="text-la" href="#">Hood</a></li>
+                                <li><a class="text-la" href="#">Shoes</a></li>
+                            </ul>
+
+                        </div>
+                        <button type="button" class="shopnow btn btn-primary">Shop Now</button>
                     </div>
+
+                </div>
+
+                <div class="single_categories_product" style="background: url('<?=ASSETS?>/img/bg/person5.jpg'); background-size:cover;">
+                    <div class="categories_product_content text-center">
+                        <h4 class="text-center">Women</h4>
+                        <div class="hover_content">
+                            <ul class="mt-4 mb-4">
+                                <li><a class="text-la" href="#">Pant</a></li>
+                                <li><a class="text-la" href="#">Shart</a></li>
+                                <li><a class="text-la" href="#">Tops</a></li>
+                                <li><a class="text-la" href="#">Hood</a></li>
+                                <li><a class="text-la" href="#">Shoes</a></li>
+                            </ul>
+
+                        </div>
+                        <button type="button" class="shopnow btn btn-primary">Shop Now</button>
+                    </div>
+
+                </div>
+
+                <div class="single_categories_product" style="background: url('<?=ASSETS?>/img/bg/person2.jpg'); background-size:cover;">
+                    <div class="categories_product_content text-center">
+                        <h4 class="text-center">Kids And Baby</h4>
+                        <div class="hover_content">
+                            <ul class="mt-4 mb-4">
+                                <li><a class="text-la" href="#">Pant</a></li>
+                                <li><a class="text-la" href="#">Shart</a></li>
+                                <li><a class="text-la" href="#">Tops</a></li>
+                                <li><a class="text-la" href="#">Hood</a></li>
+                                <li><a class="text-la" href="#">Shoes</a></li>
+                            </ul>
+
+                        </div>
+                        <button type="button" class="shopnow btn btn-primary">Shop Now</button>
+                    </div>
+
+                </div>
+
+                <div class="single_categories_product" style="background: url('<?=ASSETS?>/img/bg/person3.jpg'); background-size:cover;">
+                    <div class="categories_product_content text-center">
+                        <h4 class="text-center">Junior's</h4>
+                        <div class="hover_content">
+                            <ul class="mt-4 mb-4">
+                                <li><a class="text-la" href="#">Pant</a></li>
+                                <li><a class="text-la" href="#">Shart</a></li>
+                                <li><a class="text-la" href="#">Tops</a></li>
+                                <li><a class="text-la" href="#">Hood</a></li>
+                                <li><a class="text-la" href="#">Shoes</a></li>
+                            </ul>
+
+                        </div>
+                        <button type="button" class="shopnow btn btn-primary">Shop Now</button>
+                    </div>
+
+                </div>
+
+                <div class="single_categories_product" style="background: url('<?=ASSETS?>/img/bg/person4.jpg'); background-size:cover;">
+                    <div class="categories_product_content text-center">
+                        <h4 class="text-center">Bed &amp; Bath</h4>
+                        <div class="hover_content">
+                            <ul class="mt-4 mb-4">
+                                <li><a class="text-la" href="#">Pant</a></li>
+                                <li><a class="text-la" href="#">Shart</a></li>
+                                <li><a class="text-la" href="#">Tops</a></li>
+                                <li><a class="text-la" href="#">Hood</a></li>
+                                <li><a class="text-la" href="#">Shoes</a></li>
+                            </ul>
+
+                        </div>
+                        <button type="button" class="shopnow btn btn-primary">Shop Now</button>
+                    </div>
+
                 </div>
             </div>
-
-            <?php }  ?>
         </div>
+
+    
+     
+<!--<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+   <section class="customer-logos">
+      <div class="slide"> 
+         <div class="single_categories_product" style="background: url('<?=ASSETS?>/img/bg/person5.jpg'); background-size:cover;">
+                    <div class="categories_product_content text-center">
+                        <h4 class="text-center">Women</h4>
+                        <div class="hover_content">
+                            <ul class="mt-4 mb-4">
+                                <li><a class="text-la" href="#">Pant</a></li>
+                                <li><a class="text-la" href="#">Shart</a></li>
+                                <li><a class="text-la" href="#">Tops</a></li>
+                                <li><a class="text-la" href="#">Hood</a></li>
+                                <li><a class="text-la" href="#">Shoes</a></li>
+                            </ul>
+
+                        </div>
+                        <button type="button" class="shopnow btn btn-primary">Shop Now</button>
+                    </div>
+
+                </div>
     </div>
-</div>
+
+      <div class="slide">
+           <div class="single_categories_product" style="background: url('<?=ASSETS?>/img/bg/person.jpg'); background-size:cover;">
+                    <div class="categories_product_content text-center">
+                        <h4 class="text-center">Men</h4>
+                        <div class="hover_content">
+                            <ul class="mt-4 mb-4">
+                                <li><a class="text-la" href="#">Pant</a></li>
+                                <li><a class="text-la" href="#">Shart</a></li>
+                                <li><a class="text-la" href="#">Tops</a></li>
+                                <li><a class="text-la" href="#">Hood</a></li>
+                                <li><a class="text-la" href="#">Shoes</a></li>
+                            </ul>
+
+                        </div>
+                        <button type="button" class="shopnow btn btn-primary">Shop Now</button>
+                    </div>
+
+                </div>
+      </div>
+      
+      <div class="slide">
+       <div class="single_categories_product" style="background: url('<?=ASSETS?>/img/bg/person3.jpg'); background-size:cover;">
+                    <div class="categories_product_content text-center">
+                        <h4 class="text-center">Junior's</h4>
+                        <div class="hover_content">
+                            <ul class="mt-4 mb-4">
+                                <li><a class="text-la" href="#">Pant</a></li>
+                                <li><a class="text-la" href="#">Shart</a></li>
+                                <li><a class="text-la" href="#">Tops</a></li>
+                                <li><a class="text-la" href="#">Hood</a></li>
+                                <li><a class="text-la" href="#">Shoes</a></li>
+                            </ul>
+
+                        </div>
+                        <button type="button" class="shopnow btn btn-primary">Shop Now</button>
+                    </div>
+
+                </div>
+    </div>
+
+      <div class="slide">
+           <div class="single_categories_product" style="background: url('<?=ASSETS?>/img/bg/person3.jpg'); background-size:cover;">
+                    <div class="categories_product_content text-center">
+                        <h4 class="text-center">Junior's</h4>
+                        <div class="hover_content">
+                            <ul class="mt-4 mb-4">
+                                <li><a class="text-la" href="#">Pant</a></li>
+                                <li><a class="text-la" href="#">Shart</a></li>
+                                <li><a class="text-la" href="#">Tops</a></li>
+                                <li><a class="text-la" href="#">Hood</a></li>
+                                <li><a class="text-la" href="#">Shoes</a></li>
+                            </ul>
+
+                        </div>
+                        <button type="button" class="shopnow btn btn-primary">Shop Now</button>
+                    </div>
+
+                </div>
+      </div>
+
+      <div class="slide"> 
+
+         <div class="single_categories_product" style="background: url('<?=ASSETS?>/img/bg/person3.jpg'); background-size:cover;">
+                    <div class="categories_product_content text-center">
+                        <h4 class="text-center">Junior's</h4>
+                        <div class="hover_content">
+                            <ul class="mt-4 mb-4">
+                                <li><a class="text-la" href="#">Pant</a></li>
+                                <li><a class="text-la" href="#">Shart</a></li>
+                                <li><a class="text-la" href="#">Tops</a></li>
+                                <li><a class="text-la" href="#">Hood</a></li>
+                                <li><a class="text-la" href="#">Shoes</a></li>
+                            </ul>
+
+                        </div>
+                        <button type="button" class="shopnow btn btn-primary">Shop Now</button>
+                    </div>
+
+                </div>
+      </div>
+
+      <div class="slide"> 
+ <div class="single_categories_product" style="background: url('<?=ASSETS?>/img/bg/person3.jpg'); background-size:cover;">
+                    <div class="categories_product_content text-center">
+                        <h4 class="text-center">Junior's</h4>
+                        <div class="hover_content">
+                            <ul class="mt-4 mb-4">
+                                <li><a class="text-la" href="#">Pant</a></li>
+                                <li><a class="text-la" href="#">Shart</a></li>
+                                <li><a class="text-la" href="#">Tops</a></li>
+                                <li><a class="text-la" href="#">Hood</a></li>
+                                <li><a class="text-la" href="#">Shoes</a></li>
+                            </ul>
+
+                        </div>
+                        <button type="button" class="shopnow btn btn-primary">Shop Now</button>
+                    </div>
+
+                </div>
+
+      </div>
+
+      <div class="slide">
+          
+           <div class="single_categories_product" style="background: url('<?=ASSETS?>/img/bg/person3.jpg'); background-size:cover;">
+                    <div class="categories_product_content text-center">
+                        <h4 class="text-center">Junior's</h4>
+                        <div class="hover_content">
+                            <ul class="mt-4 mb-4">
+                                <li><a class="text-la" href="#">Pant</a></li>
+                                <li><a class="text-la" href="#">Shart</a></li>
+                                <li><a class="text-la" href="#">Tops</a></li>
+                                <li><a class="text-la" href="#">Hood</a></li>
+                                <li><a class="text-la" href="#">Shoes</a></li>
+                            </ul>
+
+                        </div>
+                        <button type="button" class="shopnow btn btn-primary">Shop Now</button>
+                    </div>
+
+                </div>
+      </div>-->
+
+      
+
+
+    </div>

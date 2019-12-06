@@ -1,50 +1,49 @@
     <div class="shipping_area mb-60">
         <div class="container">
-            <div class="shipping_inner">
-                <div class="single_shipping">
-                    <div class="shipping_icone">
-                        <img src="<?=ASSETS?>/img/about/shipping1.png" alt="">
+            <div class=" row">
+
+                <div class="col-lg-3 col-md-6 col-12 ">
+                   <div class="col-shipping-box border">
+                    <div class="shipping_content pl-3 ppb-4 ppt-4">
+					<i class="fa fa-paper-plane float-left pr-4 fa-2x" aria-hidden="true"></i>
+
+                        <h4 class="pt-1">Money Back</h4>
+                        <p>30 Days Money Back</p>
                     </div>
-                    <div class="shipping_content">
-                        <h4>Free Delivery</h4>
-                        <p>For all oders over $120</p>
-                    </div>
+				   </div>
                 </div>
-                <div class="single_shipping">
-                    <div class="shipping_icone">
-                        <img src="<?=ASSETS?>/img/about/shipping2.png" alt="">
+			
+               <div class="col-lg-3 col-md-6 col-12 ">
+                   <div class="col-shipping-box border">
+                    <div class="shipping_content pl-3 ppb-4 ppt-4">
+					<i class="fa fa-map-marker float-left pr-4 fa-2x" aria-hidden="true"></i>
+
+                        <h4 class="pt-1">Worldwide Shipping</h4>
+                        <p>On Order Over $100</p>
                     </div>
-                    <div class="shipping_content">
-                        <h4>Free Delivery</h4>
-                        <p>For all oders over $120</p>
-                    </div>
+				   </div>
                 </div>
-                <div class="single_shipping">
-                    <div class="shipping_icone">
-                        <img src="<?=ASSETS?>/img/about/shipping3.png" alt="">
+				
+				 <div class="col-lg-3 col-md-6 col-12 ">
+                   <div class="col-shipping-box border">
+                    <div class="shipping_content pl-3 ppb-4 ppt-4">
+					<i class="fa fa-tag float-left pr-4 fa-2x" aria-hidden="true"></i>
+
+                        <h4 class="pt-1">Member Discount</h4>
+                        <p>Upto 70 % Discount</p>
                     </div>
-                    <div class="shipping_content">
-                        <h4>Free Delivery</h4>
-                        <p>For all oders over $120</p>
-                    </div>
+				   </div>
                 </div>
-                <div class="single_shipping">
-                    <div class="shipping_icone">
-                        <img src="<?=ASSETS?>/img/about/shipping4.png" alt="">
+				
+				 <div class="col-lg-3 col-md-6 col-12 ">
+                   <div class="col-shipping-box border">
+                    <div class="shipping_content pl-3 ppb-4 ppt-4">
+					<i class="fa fa-life-ring float-left pr-4 fa-2x" aria-hidden="true"></i>
+
+                        <h4 class="pt-1">24/7 Online Support</h4>
+                        <p>Technical Support 24/7</p>
                     </div>
-                    <div class="shipping_content">
-                        <h4>Free Delivery</h4>
-                        <p>For all oders over $120</p>
-                    </div>
-                </div>
-                <div class="single_shipping">
-                    <div class="shipping_icone">
-                        <img src="<?=ASSETS?>/img/about/shipping5.png" alt="">
-                    </div>
-                    <div class="shipping_content">
-                        <h4>Free Delivery</h4>
-                        <p>For all oders over $120</p>
-                    </div>
+				   </div>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@
                         <div class="canvas_close">
                             <a href="javascript:void(0)"><i class="ion-android-close"></i></a>
                         </div>
-                        <div class="antomi_message">
+                       <!-- <div class="antomi_message">
                              <ul>
                                 <li><a href="#">Store Locations</a></li>
                                 <li><a href="#">Track Your Order</a></li>
@@ -18,16 +18,16 @@
                                 <li>Quality Guarantee Of Products</li>
                             </ul>
                             <p>Get free shipping – Free 30 day money back guarantee</p>
-                        </div>
-                        <div class="header_top_settings text-right">
+                        </div>-->
+                        <!--<div class="header_top_settings text-right">
                             <ul>
                                 <li><a href="#">Store Locations</a></li>
                                 <li><a href="#">Track Your Order</a></li>
                                 <li>Hotline: <a href="tel:+(012)800456789">(012) 800 456 789 </a></li>
                                 <li>Quality Guarantee Of Products</li>
                             </ul>
-                        </div>
-                        <div class="header_configure_area">
+                        </div>-->
+                       <!-- <div class="header_configure_area">
                             <div class="header_wishlist">
                                 <a href="wishlist.html"><i class="ion-android-favorite-outline"></i>
                                     <span class="wishlist_count">3</span>
@@ -40,7 +40,7 @@
                                     <span class="cart_count">2</span>
 
                                 </a>
-                                <!--mini cart-->
+                              
                                 <div class="mini_cart">
                                     <div class="mini_cart_inner">
                                         <div class="cart_item">
@@ -88,9 +88,9 @@
 
                                     </div>
                                 </div>
-                                <!--mini cart end-->
+                              
                             </div>
-                        </div>
+                        </div>-->
                         <div class="search_container">
                             <form action="#">
                                 <div class="hover_category">
@@ -121,15 +121,12 @@
                         </div>
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
-                                <li class="menu-item-has-children active">
-                                    <a href="#">Home</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="index.html">Home 1</a></li>
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                        <li><a href="index-3.html">Home 3</a></li>
-                                        <li><a href="index-4.html">Home 4</a></li>
-                                        <li><a href="index-5.html">Home 5</a></li>
-                                        <li><a href="index-6.html">Home 6</a></li>
+                               <li class="menu-item-has-children active">
+                                    <a href="index.php">Home</a>
+                                <ul class="sub-menu">
+                                      <li><a href="catagoryProducts.php">Catagory Page</a></li>
+                                    <li><a href="singleProduct.php">Product Single Page</a></li>
+                                    <li><a href="dashboard.php">Dashboard</a></li>
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
@@ -138,12 +135,14 @@
                                         <li class="menu-item-has-children">
                                             <a href="#">Shop Layouts</a>
                                             <ul class="sub-menu">
-                                                <li><a href="shop.html">shop</a></li>
-                                                <li><a href="shop-fullwidth.html">Full Width</a></li>
-                                                <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
-                                                <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                                <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
-                                                <li><a href="shop-list.html">List View</a></li>
+                                                <li><a href="#">Shop Layouts</a>
+                                                                                                            </li>
+                                                    <li><a href="#">other Pages</a>
+                                                      
+                                                    </li>
+                                                    <li><a href="#">Product Types</a>
+                                                        
+                                                    </li>
                                             </ul>
                                         </li>
                                         <li class="menu-item-has-children">
@@ -169,35 +168,35 @@
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="#">blog</a>
-                                    <ul class="sub-menu">
+                                    <a href="blog.php">blog</a>
+                                    <!--<ul class="sub-menu">
                                         <li><a href="blog.html">blog</a></li>
                                         <li><a href="blog-details.html">blog details</a></li>
                                         <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
                                         <li><a href="blog-sidebar.html">blog sidebar</a></li>
                                         <li><a href="blog-no-sidebar.html">blog no sidebar</a></li>
-                                    </ul>
+                                    </ul>-->
 
                                 </li>
                                 <li class="menu-item-has-children">
                                     <a href="#">pages </a>
-                                    <ul class="sub-menu">
+                                   <!-- <ul class="sub-menu">
                                         <li><a href="about.html">About Us</a></li>
                                         <li><a href="faq.html">Frequently Questions</a></li>
                                         <li><a href="privacy-policy.html">privacy policy</a></li>
                                         <li><a href="contact.html">contact</a></li>
                                         <li><a href="login.html">login</a></li>
                                         <li><a href="404.html">Error 404</a></li>
-                                    </ul>
+                                    </ul>-->
                                 </li>
-                                <li class="menu-item-has-children">
+                                <!--<li class="menu-item-has-children">
                                     <a href="my-account.html">my account</a>
+                                </li>-->
+                                <li class="menu-item-has-children">
+                                    <a href="about.php">About Us</a>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="about.html">About Us</a>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="contact.html"> Contact Us</a>
+                                    <a href="contact.php"> Contact Us</a>
                                 </li>
                             </ul>
                         </div>
@@ -209,6 +208,11 @@
                                 <li class="pinterest"><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
                                 <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
                                 <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+
+
+
+
+                                  
                             </ul>
                         </div>
                     </div>

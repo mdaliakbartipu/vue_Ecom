@@ -1,45 +1,95 @@
-    <section class="slider_section slider_s_one mb-60 mt-20">
-        <div class="container">
-            <div class="row">
-            <div class="s_banner col-lg-3 col-md-12">
-                    <!--banner area start-->
-                    <div class="sidebar_banner_area">
-                    <?php foreach($banners as $banner) { ?>    
-                    <figure class="single_banner mb-20 ">
-                            <div class="banner_thumb">
-                                <a href="shop.html"><img src="<?=ASSETS?>/img/bg/<?=$banner->image?>" alt=""></a>
-                            </div>
-                        </figure>
-                    
-                    <?php } ?>
-                </div>
-                    <!--banner area end-->
-            </div>
-            
-            <div class="col-lg-9 slider col-md-12">
-                <div class="swiper-container gallery-top">
-                    <div class="slider_area swiper-wrapper">
-                    <?php foreach($sliders as $slider){ ?>    
-                    <div class="single_slider swiper-slide d-flex align-items-center" data-bgimg="/uploads/slider/<?=($slider->image)?>">
-                            <div class="slider_content">
-                                <h3><?=$slider->title?></h3>
-                                <h1><?=$slider->sub_title?></h1>
-                                <p>discount <span> -30% off</span> this week</p>
-                                <a class="button" href="shop.html">DISCOVER NOW</a>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    </div>
-                    <!-- Add Arrows -->
+    <section class=" mt-3 mb-4 slider-rpt-2">
+    	<div class="container">
 
-                    <div class="swiper-pagination"></div>
-                </div>
-                <div class="swiper-container gallery-thumbs">
-                    
-                </div>
+    		<div class="row">
+    			<div class="s_banner col-lg-3 col-md-12">
+    				<!--banner area start-->
+    				<div class="sidebar_banner_area">
+    					<figure class="single_banner ">
+    						<div class="banner_thumb mb-2 para-one">
+    							<a href="shop.html"><img src="<?=ASSETS?>/img/bg/ad1.png" alt=""></a>
+    						</div>
+    					</figure>
+    					<figure class="single_banner ">
+    						<div class="banner_thumb mb-2 para-one">
+    							<a href="shop.html"><img src="<?=ASSETS?>/img/bg/ad2.png" alt=""></a>
+    						</div>
+    					</figure>
+    					<figure class="single_banner ">
+    						<div class="banner_thumb para-one">
+    							<a href="shop.html"><img src="<?=ASSETS?>/img/bg/ad3.png" alt=""></a>
+    						</div>
+    					</figure>
+    				</div>
+    				<!--banner area end-->
+    			</div>
 
-            </div>
-               
-            </div>
-        </div>
+
+    			<div class="col-lg-9 col-md-12">
+    			
+    			<!-- Add Arrows -->
+
+				<div id="container">
+  <ul id="slides">
+    <li class="slide">
+      <div class="slide-partial slide-left"><img src="<?=ASSETS?>/img/slider/sl1a.jpg"/></div>
+      <div class="slide-partial slide-right"><img src="<?=ASSETS?>/img/slider/sl1b.jpg"//></div>
+       <h3 class="title1 title"><span class="title-text">New Arrivals</span></h3><br>
+      <h1 class="title"><span class="title-text">Summer collection 2019</span></h1>
+      <p class="title3 title "><span class="title-text">discount <b style="color:red;">40%</b> off this week </span></p>
+      <a href="" class="text-uppercase title4 wow flipInX"> discover Now</a>
+    </li>
+    <li class="slide">
+      <div class="slide-partial slide-left"><img src="<?=ASSETS?>/img/slider/sl3a.jpeg"/></div>
+      <div class="slide-partial slide-right"><img src="<?=ASSETS?>/img/slider/sl3b.jpeg"/></div>
+      <h3 class="title1 title"><span class="title-text">New Arrivals</span></h3><br>
+      <h1 class="title"><span class="title-text">Winter collection 2019</span></h1>
+      <p class="title3 title"><span class="title-text">discount <b style="color:red;">20%</b> off this week </span></p>
+      <a href="" class="text-uppercase title4 wow flipInX"> discover Now</a>
+    </li>
+
+    <li class="slide">
+      <div class="slide-partial slide-left"><img src="<?=ASSETS?>/img/slider/sl2a.jpg"/></div>
+      <div class="slide-partial slide-right"><img src="<?=ASSETS?>/img/slider/sl2b.jpg"/></div>
+      <h3 class="title1 title"><span class="title-text">New Arrivals</span></h3><br>
+      <h1 class="title"><span class="title-text">Fall collection 2019</span></h1>
+      <p class="title3 title"><span class="title-text">discount <b style="color:red;">20%</b> off this week </span></p>
+      <a href="" class="text-uppercase title4 wow flipInX"> discover Now</a>
+    </li>
+
+    <!--<li class="slide">
+      <div class="slide-partial slide-left"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/canyon-left.jpg"/></div>
+      <div class="slide-partial slide-right"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/canyon-right.jpg"/></div>
+      <h3 class="title1 title"><span class="title-text">New Arrivals</span></h3><br>
+      <h1 class="title"><span class="title-text">summer collection 2019</span></h1>
+      <p class="title3 title"><span class="title-text">discount <b style="color:red;">30%</b> off this week </span></p>
+      <a href="" class="text-uppercase title4 wow flipInX"> discover Now</a>
+    </li>
+
+    <li class="slide">
+      <div class="slide-partial slide-left"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/lake-left.jpg"/></div>
+      <div class="slide-partial slide-right"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/lake-right.jpg"/></div>
+    <h3 class="title1 title"><span class="title-text">New Arrivals</span></h3><br>
+      <h1 class="title"><span class="title-text">summer collection 2019</span></h1>
+      <p class="title3 title"><span class="title-text">discount <b style="color:red;">30%</b> off this week </span></p>
+      <a href="" class="text-uppercase title4 wow flipInX"> discover Now</a>
+    </li>-->
+
+  </ul>
+  <ul id="slide-select">
+
+    <li class="selector"></li>
+    <li class="selector"></li>
+    <li class="selector"></li>
+    
+    
+  </ul>
+</div><a class="codepen-link" href="" target="_blank" style="background-image: url('<?=ASSETS?>/img/ftIcon.png');"></a>
+				
+    			</div>
+    		
+
+    		</div>
+
+    	</div>
     </section>

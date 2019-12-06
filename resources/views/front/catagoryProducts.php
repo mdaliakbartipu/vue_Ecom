@@ -8,14 +8,17 @@
     <?php include("section/offcanvas.php");?>
     <!--Offcanvas menu area end-->
     <!--header area start-->
-    
-    <?php include("section/header.blade.php");?>
+    <div class="new-mar-pad">
+    <?php include("section/header.php");?>
     <!--header area end-->
+    </ div>
 
 
+    <div >
     <!--Product section bg area start-->
    <?php include("section/catagoryProductSection.php");?>
     <!--Product section bg area end-->
+</div>
 
     <!--footer area start-->
     <?php include("section/footer.php");?>
