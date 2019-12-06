@@ -15,10 +15,10 @@ class CreateTestimonialsTable extends Migration
     {
         Schema::create('testimonials', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('designation');
-            $table->text('message');
-            $table->string('image')->default('profile.jpg');
+            $table->string('name')->default('His/Her Name');
+            $table->string('designation')->default('What he/she does');
+            $table->text('message')->nullable();
+            $table->string('image')->default('noimage.jpg');
             $table->timestamps();
         });
     }
