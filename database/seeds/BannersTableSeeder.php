@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class BannersTableSeeder extends Seeder
 {
@@ -15,26 +17,30 @@ class BannersTableSeeder extends Seeder
             [
                 'title'     => 'Something',
                 'subTitle'  => 'Something More',
-                'img'       => 'banner1.jpg'
+                'img'       => 'ad1.png',
+                'slug'      => '#',
             ],
             [
                 'title'     => 'Something',
                 'subTitle'  => 'Something More',
-                'img'       => 'banner2.jpg'
+                'img'       => 'ad2.png',
+                'slug'      => '#',
             ],
             [
                 'title'     => 'Something',
                 'subTitle'  => 'something More',
-                'img'       => 'banner3.jpg'
+                'img'       => 'ad3.png',
+                'slug'      => '#',
             ]
             
         ];
 
         foreach($banners as $banner){
             DB::table('banners')->insert([
-                'title' => $banner['title'],
+                'title'     => $banner['title'],
                 'sub_title' => $banner['subTitle'],
-                'image' => $banner['img']
+                'image'     => $banner['img'],
+                'slug'      => $banner['slug'],
             ]);
         }
     }
