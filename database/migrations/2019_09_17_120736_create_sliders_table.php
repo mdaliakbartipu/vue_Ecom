@@ -17,7 +17,10 @@ class CreateSlidersTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('sub_title');
-            $table->string('image')->default('default.png');
+            $table->string('image_1')->default('noimage.png');
+            $table->string('image_2')->default('noimage.png');
+            $table->integer('discount')->nullable()->default(0);
+            $table->string('slug')->nullable()->default('#');
             $table->timestamps();
         });
     }

@@ -1,10 +1,6 @@
 <footer class="footer_widgets">
     <!--newsletter area start-->
-    <div class="newsletter_area">
-        <div class="container">
-
-        </div>
-    </div>
+   
     <!--newsletter area end-->
     <div class="footer_top">
         <div class="container">
@@ -91,7 +87,6 @@
 
                                 <li><img src="<?=ASSETS?>/img/payments/payment-skrill.png" alt="" class="payments-img" /></li>
                                 <li><img src="<?=ASSETS?>/img/payments/payment-paypal.png" alt="" class="payments-img" /></li>
-                                 <li><img src="<?=ASSETS?>/img/payments/payment-paypal.png" alt="" class="payments-img" /></li>
                             </ul>
                         </div>
                     </div>

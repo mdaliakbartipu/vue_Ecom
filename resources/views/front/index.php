@@ -32,7 +32,7 @@
     <?php include("section/homeSection.php");?>
     <!--home section bg area end-->
     </div>
-
+    <?php include("section/blogArea.php");?>
     <!--footer area start-->
     <?php include("section/footer.php");?>
     <!--footer area end-->
@@ -40,10 +40,8 @@
     <!-- modal area start-->
     <?php include("section/modelArea.php");?>
     <!-- modal area end-->
+ 
 
-    <!--news letter popup start-->
-     <?php include("section/newsLetter.php");?>
-    <!--news letter popup start-->
     <?php include("section/script.php");?>
     
 <?php include("section/foot.php");?>

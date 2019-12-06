@@ -9,7 +9,7 @@
               </script> 
               <!--owlcarusol-->
               
-         <script>
+</script>
 
 
   

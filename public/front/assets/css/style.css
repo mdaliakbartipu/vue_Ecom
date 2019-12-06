@@ -466,6 +466,7 @@ End*/
 
 .bg-gray {
     background: #F5F5F9;
+    padding-right: 1em;
 }
 
 .related_thumb {
@@ -521,14 +522,17 @@ margin-bottom: 10px;
 }
 
 .profile_img{
-    position: absolute;
-max-width:100% !important;
+    /* position: absolute; */
+    max-width:100% !important;
     height: auto;
     border-radius: 50%;
     margin-left: 2.5em;
-    bottom: 1%;
+    bottom: -10%;
     overflow: hidden;
     transition: .9s;
+    width: 100px;
+    /* top: 15em; */
+    transform: scale(1.1);
 }
 
 .single_related {
@@ -681,6 +685,7 @@ body {
     font-family: "Rubik", sans-serif;
     color: #222222;
     overflow-x: hidden;
+    margin-right: 0em;
 }
 
 h1,
@@ -769,6 +774,13 @@ input[type="submit"] {
 img {
     max-width: 100%;
     height: auto;
+    /* position: absolute; */
+}
+
+.gif_text img {
+    max-width: 100%;
+    height: 100px;
+    position: relative;
 }
 
 ul {
@@ -936,7 +948,7 @@ textarea:-ms-input-placeholder {
     height: 45px;
     line-height: 39px;
     position: fixed;
-    right: 12px;
+    right: 45px;
     text-align: center;
     width: 45px;
     z-index: 9999;
@@ -945,6 +957,7 @@ textarea:-ms-input-placeholder {
     -webkit-transition: .3s;
     -o-transition: .3s;
     transition: .3s;
+    opacity: 0.6;
 }
 
 #scrollUp:hover i {
@@ -2693,7 +2706,7 @@ position: relative;
     -o-transition: 0.3s;
     transition: 0.3s;
     background: #ebebeb;
-    margin-left: 25px;
+    margin-left: 7px;
     marin-right: 12px;
 }
 
@@ -2843,6 +2856,7 @@ position: relative;
 .hover_category .select_option ul.list {
     max-height: 300px;
     overflow: auto;
+    width: 100%;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -3106,7 +3120,7 @@ height: 36px;
     height:40px;
     line-height: 37px;
     /*! border-radius: 4px; */
-    width: 253px;
+    width: 132%;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -3271,7 +3285,7 @@ height: 36px;
     border: 1px solid #ebebeb;
     background: #fff;
     position: absolute;
-    width: 110%;
+    width: 132%;
     top: 150%;
     z-index: 9;
     border-top: 3px solid #35999e;
@@ -5675,7 +5689,7 @@ height: 36px;
         -ms-flex-align: inherit;
         align-items: inherit;
         margin-bottom: 20px;
-        margin-left: -68px;
+        margin-left: -66px;
     }
 }
 
@@ -12451,11 +12465,9 @@ margin-left: 42px;
 
 }
 .banner_area .row .col-md-6 {
-
-    padding-right: 14px;
-    padding-left: 9px;
-    width: 670px;
-
+padding-right: 14px;
+padding-left: 9px;
+width: 670px;
 }
 }
 
@@ -13275,8 +13287,8 @@ margin-left: 42px;
 }
 
 .banner_area .row .col-md-6 {
-    padding-right: 14px;
-    padding-left:0px;
+    /* padding-right: 14px; */
+    /* padding-left:0px; */
 }
 
 .abc .row .bcd {
@@ -13936,7 +13948,7 @@ max-width: 72.5%
     }
     .banner_thumb .banner-area-img-a {
         height: 300px;
-        margin-left:13px;
+        /* margin-left:13px; */
     }
     .banner_thumb .banner-area-img-c {
         height: 300px;
@@ -14074,6 +14086,7 @@ max-width: 72.5%
     }*/
     .product_tab_btn ul li {
         margin-right:30px;
+        width: 82%;
     }
     .product_tab_btn ul li a {
         padding: 8px 8px;
@@ -14083,7 +14096,7 @@ max-width: 72.5%
     }
     .banner_thumb .banner-area-img-a {
         height: 300px;
-        margin-left:13px;
+        /* margin-left:13px; */
     }
     .banner_thumb .banner-area-img-c {
         height: 300px;
@@ -14201,7 +14214,7 @@ max-width: 72.5%
 
 
 @media only screen and (max-width: 360px) {
-    .product_tab_btn h3{margin-left: -94px;}
+    .product_tab_btn h3{margin-left: -62px;}
 
     .product_tab_btn p{ margin-right: 87px;}
     .new-mar-pad {
@@ -14265,6 +14278,7 @@ max-width: 72.5%
     }
     .product_tab_btn ul li {
         margin-right: 16px;
+        /* width: 82%; */
     }
     .product_tab_btn ul li a {
         padding: 8px 8px;
@@ -14274,7 +14288,7 @@ max-width: 72.5%
     }
     .banner_thumb .banner-area-img-a {
         height: 300px;
-        margin-left:13px;
+        /* margin-left:13px; */
     }
     .banner_thumb .banner-area-img-c {
         height: 300px;
@@ -14305,6 +14319,7 @@ max-width: 72.5%
     }
     .single_related {
         margin-left: 14px;
+        margin-top: 1rem;
     }
     .carousel-control-prev {
 
@@ -14338,7 +14353,7 @@ max-width: 72.5%
         margin-bottom: 50px;
     }
     .footer_social {
-        margin-top: 0px;
+        margin-top: 8px;
     }
     .footer-note.mt-5 {
         margin-top: 0rem !important;

@@ -1,4 +1,8 @@
-    <section class=" mt-3 mb-4 slider-rpt-2">
+  <?php
+
+
+?>
+  <section class=" mt-3 mb-4 slider-rpt-2">
     	<div class="container">
 
     		<div class="row">
@@ -31,49 +35,32 @@
 
 				<div id="container">
   <ul id="slides">
-    <li class="slide">
-      <div class="slide-partial slide-left"><img src="<?=ASSETS?>/img/slider/sl1a.jpg"/></div>
-      <div class="slide-partial slide-right"><img src="<?=ASSETS?>/img/slider/sl1b.jpg"//></div>
-       <h3 class="title1 title"><span class="title-text">New Arrivals</span></h3><br>
-      <h1 class="title"><span class="title-text">Summer collection 2019</span></h1>
-      <p class="title3 title "><span class="title-text">discount <b style="color:red;">40%</b> off this week </span></p>
-      <a href="" class="text-uppercase title4 wow flipInX"> discover Now</a>
+    
+  
+  <?php
+  foreach($sliders as $slider):
+    $img_one = file_exists(ASSETS."/.uploads/slider/".$slider->image_1)? 
+                        ASSETS.'/.uploads/slider/'.$slider->image_1 :
+                        ASSETS.'/.img/slider/'.$slider->image_1;
+    $img_two = file_exists(ASSETS."/.uploads/slider/".$slider->image_2)? 
+                        ASSETS.'/.uploads/slider/'.$slider->image_2 :
+                        ASSETS.'/.img/slider/'.$slider->image_2 ; 
+  ?>
+  <li class="slide">
+      <div class="slide-partial slide-left"><img src="<?=$img_one?>"/></div>
+      <div class="slide-partial slide-right"><img src="<?=$img_two?>"></div>
+       <h3 class="title1 title"><span class="title-text"><?=$slider->title?></span></h3><br>
+      <h1 class="title"><span class="title-text"><?=$slider->sub_title?></span></h1>
+      <p class="title3 title "><span class="title-text">discount <b style="color:red;"><?=$slider->discount?>%</b> off this week </span></p>
+      <a href="<?=$slider->slug?>" class="text-uppercase title4 wow flipInX"> discover Now </a>
     </li>
-    <li class="slide">
-      <div class="slide-partial slide-left"><img src="<?=ASSETS?>/img/slider/sl3a.jpeg"/></div>
-      <div class="slide-partial slide-right"><img src="<?=ASSETS?>/img/slider/sl3b.jpeg"/></div>
-      <h3 class="title1 title"><span class="title-text">New Arrivals</span></h3><br>
-      <h1 class="title"><span class="title-text">Winter collection 2019</span></h1>
-      <p class="title3 title"><span class="title-text">discount <b style="color:red;">20%</b> off this week </span></p>
-      <a href="" class="text-uppercase title4 wow flipInX"> discover Now</a>
-    </li>
+<?php
+endforeach;
 
-    <li class="slide">
-      <div class="slide-partial slide-left"><img src="<?=ASSETS?>/img/slider/sl2a.jpg"/></div>
-      <div class="slide-partial slide-right"><img src="<?=ASSETS?>/img/slider/sl2b.jpg"/></div>
-      <h3 class="title1 title"><span class="title-text">New Arrivals</span></h3><br>
-      <h1 class="title"><span class="title-text">Fall collection 2019</span></h1>
-      <p class="title3 title"><span class="title-text">discount <b style="color:red;">20%</b> off this week </span></p>
-      <a href="" class="text-uppercase title4 wow flipInX"> discover Now</a>
-    </li>
+?>
+ 
 
-    <!--<li class="slide">
-      <div class="slide-partial slide-left"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/canyon-left.jpg"/></div>
-      <div class="slide-partial slide-right"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/canyon-right.jpg"/></div>
-      <h3 class="title1 title"><span class="title-text">New Arrivals</span></h3><br>
-      <h1 class="title"><span class="title-text">summer collection 2019</span></h1>
-      <p class="title3 title"><span class="title-text">discount <b style="color:red;">30%</b> off this week </span></p>
-      <a href="" class="text-uppercase title4 wow flipInX"> discover Now</a>
-    </li>
 
-    <li class="slide">
-      <div class="slide-partial slide-left"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/lake-left.jpg"/></div>
-      <div class="slide-partial slide-right"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/lake-right.jpg"/></div>
-    <h3 class="title1 title"><span class="title-text">New Arrivals</span></h3><br>
-      <h1 class="title"><span class="title-text">summer collection 2019</span></h1>
-      <p class="title3 title"><span class="title-text">discount <b style="color:red;">30%</b> off this week </span></p>
-      <a href="" class="text-uppercase title4 wow flipInX"> discover Now</a>
-    </li>-->
 
   </ul>
   <ul id="slide-select">
