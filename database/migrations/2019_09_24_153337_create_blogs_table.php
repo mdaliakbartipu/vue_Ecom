@@ -18,7 +18,8 @@ class CreateBlogsTable extends Migration
             $table->string('title');
             $table->bigInteger('author_id')->unsigned();
             $table->text('desc');
-            $table->string('image')->default('default.png');
+            $table->string('image')->default('noimage.png');
+            $table->string('slug')->nullable()->default('no_slug');
             $table->timestamps();
             $table->foreign('author_id')->references('id')->on('users');
         });

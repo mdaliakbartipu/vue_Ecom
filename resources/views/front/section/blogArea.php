@@ -36,73 +36,13 @@
                               </div>						
 			             </figure>
                     </div>
+
+<!-- Blog Section -->
+
                     <div class="col-lg-8 col-md-8">
-                        <div class="row">
-                                    <div class="col-lg-4 col-md-6">
-                                        <article class="single_related article_one">
-                                            <figure>
-                                                <div class="related_thumb">
-                                                    <img src="<?=ASSETS?>/img/blog/blog7.jpg" alt="">
-													<div class="overlay">
-														<a href=""></a>
-													</div>
-                                                </div>
-                                                <figcaption class="related_content">
-                                                    <h4><a href="#">Post with Gallery</a></h4>
-                                                    <div class="blog_meta">
-                                                        <span class="author">By : <a href="#">admin</a> / </span>
-                                                        <span class="meta_date"> April 11, 2019 </span>
-                                                    </div>
-                                                </figcaption>
-                                                    <div class="short_note">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, magnam?Lorem ipsum dolor sit amet, consectetur adipisicing</div>
-                                                    <button class="btn btn-info">Read more...</button>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6">
-                                        <article class="single_related article_two">
-                                            <figure>
-                                                <div class="related_thumb">
-                                                    <img src="<?=ASSETS?>/img/blog/blog7.jpg" alt="">
-													<div class="overlay">
-														<a href=""></a>
-													</div>
-                                                </div>
-                                                <figcaption class="related_content">
-                                                    <h4><a href="#">Post with Gallery</a></h4>
-                                                    <div class="blog_meta">
-                                                        <span class="author">By : <a href="#">admin</a> / </span>
-                                                        <span class="meta_date"> April 11, 2019 </span>
-                                                    </div>
-                                                </figcaption>
-                                                    <div class="short_note">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, magnam?Lorem ipsum dolor sit amet, consectetur adipisicing</div>
-                                                    <button class="btn btn-info">Read more...</button>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6">
-                                        <article class="single_related article_tree">
-                                            <figure>
-                                                <div class="related_thumb">
-                                                    <img src="<?=ASSETS?>/img/blog/blog7.jpg" alt="">
-													<div class="overlay">
-														<a href=""></a>
-													</div>
-                                                </div>
-                                                <figcaption class="related_content">
-                                                    <h4><a href="#">Post with Gallery</a></h4>
-                                                    <div class="blog_meta">
-                                                        <span class="author">By : <a href="#">admin</a> / </span>
-                                                        <span class="meta_date"> April 11, 2019 </span>
-                                                    </div>
-                                                </figcaption>
-                                                    <div class="short_note">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, magnam?Lorem ipsum dolor sit amet, consectetur adipisicing</div>
-                                                    <button class="btn btn-info">Read more...</button>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                </div>
+                      <?php include('blogs.php'); ?>
                     </div>
+
                    
                 </div>
             </div>

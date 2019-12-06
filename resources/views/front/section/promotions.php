@@ -1,18 +1,12 @@
 <?php
-
-$src = array();
-$img = array();
-
-foreach($promotions as $promotion){
+$src = array(); $img = array();
+// Getting promotions data and storing to variable for easy binding for later
+foreach($promotions as $promotion):
     $img[] =  file_exists(ASSETS."/.uploads/promotions/".$promotion->image)? 
                 ASSETS.'/.uploads/promotions/'.$promotion->image :
                 ASSETS.'/.img/promotions/'.$promotion->image;
     $src[] = $promotion->slug;
-}
-
-// dd($img);
-
-?>
+endforeach; ?>
 
 <div class="banner_area mb-55 ">
             <div class="container">
