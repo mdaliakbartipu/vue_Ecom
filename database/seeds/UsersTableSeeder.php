@@ -18,6 +18,13 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@demo.com',
             'email_verified_at' => today(),
             'password' => bcrypt('admin'),
+        ],
+        [
+            'company_id' => 1,
+            'name' => 'Mr. Admin',
+            'email' => 'ceo@smartsoftware.com.bd',
+            'email_verified_at' => today(),
+            'password' => bcrypt('1234567'),
         ]);
     }
 }
