@@ -15,8 +15,10 @@ class CreatePromotionsTable extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('image')->default('default.png');
-            $table->string('slug');
+            $table->string('title')->nullable();
+            $table->string('sub_title')->nullable();
+            $table->string('image')->default('noimage.png');
+            $table->string('slug')->default("#");
             $table->timestamps();
         });
     }

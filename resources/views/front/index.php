@@ -32,6 +32,9 @@
     <?php include("section/homeSection.php");?>
     <!--home section bg area end-->
     </div>
+
+    <?php include("section/promotions.php");?>
+
     <?php include("section/blogArea.php");?>
     <!--footer area start-->
     <?php include("section/footer.php");?>

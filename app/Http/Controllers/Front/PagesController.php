@@ -15,6 +15,7 @@ class PagesController extends FrontController
 
     public function index()
     { 
+        // dd(UI::getAllPromotions());
         return view('front.index',
         [
             'cats'          => $this->cat,

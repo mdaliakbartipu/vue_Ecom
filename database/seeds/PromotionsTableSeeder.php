@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PromotionsTableSeeder extends Seeder
 {
@@ -11,38 +12,41 @@ class PromotionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $banners = [
+        $promotions = [
             [   
-                'slug'      => 'Something More',
-                'img'       => 'width_12.jpg'
+                'title'     => 'some title',
+                'subTitle'  => 'some sub title',
+                'slug'      => '#',
+                'img'       => 'grid17.jpg'
             ],
             [
-                
-                'slug'      => 'Something More',
-                'img'       => 'width_11.png'
+
+                'title'     => 'some title',
+                'subTitle'  => 'some sub title',
+                'slug'      => '#',
+                'img'       => 'grid18.jpg'
             ],
             [
-                
-                'slug'      => 'something More',
-                'img'       => 'width_26.jpg'
+                'title'     => 'some title',
+                'subTitle'  => 'some sub title',
+                'slug'      => '#',
+                'img'       => 'grid19.jpg'
             ],
             [
-                
-                'slug'      => 'something More',
-                'img'       => 'width_27.jpg'
+                'title'     => 'some title',
+                'subTitle'  => 'some sub title',
+                'slug'      => '#',
+                'img'       => 'grid20.jpg'
             ],
-            [
-                
-                'slug'      => 'something More',
-                'img'       => 'width_27.jpg'
-            ]
             
         ];
 
-        foreach($banners as $banner){
+        foreach($promotions as $promotion){
             DB::table('promotions')->insert([
-                'image' => $banner['img'],
-                'slug'  => $banner['slug']
+                'title' => $promotion['title'],
+                'sub_title' => $promotion['subTitle'],
+                'image' => $promotion['img'],
+                'slug'  => $promotion['slug']
             ]);
         }
     }
