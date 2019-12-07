@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Table')
+@section('title','Testimonial')
 @section('page-header')
     <i class="fa fa-list"></i> Table
 @stop
@@ -29,11 +29,11 @@
         </div>
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title "> Update User</h4>
+                  <h4 class="card-title "> Update Testimonial</h4>
                   
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('testimonial.update',$testimonial->id) }}" >
+                    <form method="POST" action="{{ route('testimonial.update',$testimonial->id) }}" enctype="multipart/form-data">
                          {{ csrf_field() }}
                        {{ method_field('PUT') }}
                     
@@ -41,8 +41,14 @@
             <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Testimonial Name</label>
+                          <label class="bmd-label-floating">Given By</label>
                           <input type="text" class="form-control" name="name" value="{{ $testimonial->name }}">
+                        </div>
+                       </div>
+                       <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Photo</label>
+                          <input type="file" class="form-control" name="image" style="background:grey">
                         </div>
                        </div>
                       </div>

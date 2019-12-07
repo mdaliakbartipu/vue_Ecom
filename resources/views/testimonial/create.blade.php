@@ -34,7 +34,7 @@
                   
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('testimonial.store') }}">
+                    <form method="POST" action="{{ route('testimonial.store') }}" enctype="multipart/form-data">
                          @csrf
 
                  <div class="row">

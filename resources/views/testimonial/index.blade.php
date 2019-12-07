@@ -45,8 +45,7 @@
                         <th> Name </th>
                         <th> Designation </th>
                         <th> Message </th> 
-                       
-                       
+                        <th>Image</th>
                         <th> Action </th>
                       </thead>
                <tbody>
@@ -56,9 +55,8 @@
                             <td> {{ $testimonial->name }} </td>
                             <td> {{ $testimonial->designation }} </td>
                             <td> {{ $testimonial->message }} </td>
-                            
-
-                      <td> <a href="{{route('testimonial.edit',$testimonial->id)}}" style="margin-right:10px"><span class="glyphicon glyphicon-edit"></span>  </a>  
+                            <td> <img width="100px" src="front/assets/.uploads/testimonials/{{ $testimonial->image }}" alt=""> </td>
+                            <td> <a href="{{route('testimonial.edit',$testimonial->id)}}" style="margin-right:10px"><span class="glyphicon glyphicon-edit"></span>  </a>  
                   
                   
                     

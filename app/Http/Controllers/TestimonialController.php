@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Input;
 
 class TestimonialController extends Controller
 {
+
+     protected $imagePath = "front/assets/.uploads/testimonials/";
+
     /**
      * Display a listing of the resource.
      *
@@ -47,16 +50,20 @@ class TestimonialController extends Controller
         $testimonial->name = $request->name;
         $testimonial->designation = $request->designation;
         $testimonial->message = $request->message;
-     
+
         if(Input::hasFile('image'))
           {
                $image = Input::file('image');
                $imageName = time() . '-' . $image->getClientOriginalName();
-               $image = $image->move(('uploads/testimonials'), $imageName);
+                    if(!file_exists($this->imagePath)){
+                         mkdir($this->imagePath,0777,true);
+                    }
+               $image = $image->move(($this->imagePath), $imageName);
                $testimonial->image= $imageName;
           }
 
         $testimonial->save();
+
         return redirect()->route('testimonial.index')->with('successMsg','Testimonial Successfully Added');
     }
 
@@ -102,7 +109,17 @@ class TestimonialController extends Controller
          $testimonial->name = $request->name;
         $testimonial->designation = $request->designation;
         $testimonial->message = $request->message;
-       
+          
+        if(Input::hasFile('image'))
+          {
+               $image = Input::file('image');
+               $imageName = time() . '-' . $image->getClientOriginalName();
+                    if(!file_exists($this->imagePath)){
+                         mkdir($this->imagePath,0777,true);
+                    }
+               $image = $image->move(($this->imagePath), $imageName);
+               $testimonial->image= $imageName;
+          }
         
          $testimonial->save();
          return redirect()->route('testimonial.index')->with('successMsg','Testimonial Successfully Updated');
