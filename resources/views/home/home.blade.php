@@ -1,7 +1,7 @@
 @extends('layouts.master')
-@section('title','Dashboard')
+@section('title','Admin Panel')
 @section('page-header')
-    <i class="fa fa-tachometer"></i> Dashboard
+    <i class="fa fa-tachometer"></i> Admin Panel
 @stop
 @section('css')
     
@@ -14,7 +14,6 @@
     <div class="row">
         <div class="col-xs-12">
             <!-- PAGE CONTENT BEGINS -->
-
 
             <div class="row">
                 <div class="space-6"></div>

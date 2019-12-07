@@ -51,7 +51,7 @@
                         <tr>
                             <td> {{ $key +1 }} </td>
         <td> 
-                <img class="img-responsive img-thumbnail" src="{{ asset('uploads/promotion/'.$promotion->image) }}"  style="height: 50px; weight: 30px;" alt=""> 
+                <img class="img-responsive img-thumbnail" src="{{ asset('front/assets/.uploads/promotions/'.$promotion->image) }}"  style="height: 50px; weight: 30px;" alt=""> 
         </td>            
                            
                           <a> <td> {{ $promotion->slug }} </td>  </a>   

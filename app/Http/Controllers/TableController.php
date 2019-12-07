@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\page;
-
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class pageController extends Controller
+class TableController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +13,7 @@ class pageController extends Controller
      */
     public function index()
     {
-        $pages = page::all();
-        return view('page.index',compact('pages'));
+        //
     }
 
     /**
@@ -27,7 +23,7 @@ class pageController extends Controller
      */
     public function create()
     {
-         return view('page.create');
+        //
     }
 
     /**
@@ -38,18 +34,7 @@ class pageController extends Controller
      */
     public function store(Request $request)
     {
-
-         $this->validate($request,[
-           'pageSlug'     => 'required',
-           'pageName'      =>  'required'
-       ]);
-    
-        $page = new page();
-        $page->pageslug = $request->pageSlug;
-        $page->pageName = $request->pageName;
-       
-        $page->save();
-        return redirect()->route('page.index')->with('successMsg','Page Successfully Added');
+        //
     }
 
     /**
@@ -71,8 +56,7 @@ class pageController extends Controller
      */
     public function edit($id)
     {
-        $page = page::findOrFail($id);
-        return view('page.edit',compact('page'));
+        //
     }
 
     /**
@@ -84,18 +68,7 @@ class pageController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $this->validate($request,[
-           'pageSlug'     => 'required',
-           'pageName'      =>  'required'
-        ]);
-     
-         $page = page::find($id); 
-         $page->pageSlug = $request->pageSlug;
-         $page->pageName = $request->pageName;
-       
-        
-         $page->save();
-         return redirect()->route('page.index')->with('successMsg','Page Successfully Updated');
+        //
     }
 
     /**
@@ -106,8 +79,6 @@ class pageController extends Controller
      */
     public function destroy($id)
     {
-         $page = page::find($id);
-         $page->delete();
-        return redirect()->back()->with('successMsg','Page Deleted successfully');
+        //
     }
 }

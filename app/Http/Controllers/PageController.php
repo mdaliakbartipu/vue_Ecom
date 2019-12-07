@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Fit;
+use App\page;
+
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class fitController extends Controller
+class PageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +16,8 @@ class fitController extends Controller
      */
     public function index()
     {
-         $fits = Fit::all();
-        return view('fit.index',compact('fits'));
+        $pages = page::all();
+        return view('page.index',compact('pages'));
     }
 
     /**
@@ -25,7 +27,7 @@ class fitController extends Controller
      */
     public function create()
     {
-        return view('fit.create');
+         return view('page.create');
     }
 
     /**
@@ -36,15 +38,18 @@ class fitController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-           'name'     => 'required',
-          
+
+         $this->validate($request,[
+           'pageSlug'     => 'required',
+           'pageName'      =>  'required'
        ]);
     
-        $fit = new Fit();
-        $fit->name = $request->name;
-        $fit->save();
-        return redirect()->route('fit.index')->with('successMsg','Fit Successfully Added');
+        $page = new page();
+        $page->pageslug = $request->pageSlug;
+        $page->pageName = $request->pageName;
+       
+        $page->save();
+        return redirect()->route('page.index')->with('successMsg','Page Successfully Added');
     }
 
     /**
@@ -66,8 +71,8 @@ class fitController extends Controller
      */
     public function edit($id)
     {
-        $fit = Fit::findOrFail($id);
-        return view('fit.edit',compact('fit'));
+        $page = page::findOrFail($id);
+        return view('page.edit',compact('page'));
     }
 
     /**
@@ -80,13 +85,17 @@ class fitController extends Controller
     public function update(Request $request, $id)
     {
          $this->validate($request,[
-           'name'     => 'required',
-           ]);
+           'pageSlug'     => 'required',
+           'pageName'      =>  'required'
+        ]);
      
-         $fit = Fit::find($id); 
-        $fit->name = $request->name;
-        $fit->save();
-        return redirect()->route('fit.index')->with('successMsg','Fit Successfully Updated');
+         $page = page::find($id); 
+         $page->pageSlug = $request->pageSlug;
+         $page->pageName = $request->pageName;
+       
+        
+         $page->save();
+         return redirect()->route('page.index')->with('successMsg','Page Successfully Updated');
     }
 
     /**
@@ -97,8 +106,8 @@ class fitController extends Controller
      */
     public function destroy($id)
     {
-        $fit = Fit::find($id);
-        $fit->delete();
-         return redirect()->back()->with('successMsg','Fit Deleted successfully');
+         $page = page::find($id);
+         $page->delete();
+        return redirect()->back()->with('successMsg','Page Deleted successfully');
     }
 }

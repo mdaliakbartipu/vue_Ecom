@@ -67,19 +67,19 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function (){
     Route::get('/admin', 'HomeController@index')->name('home');
     Route::resource('group', 'GroupController');
-    Route::resource('slider','sliderContoller');
+    Route::resource('slider','SliderContoller');
 	Route::resource('size','SizeController');
-	Route::resource('page','pageController');
+	Route::resource('page','PageController');
 	Route::resource('user','userController');
-	Route::resource('company','companyController');
-	Route::resource('category','categoryController');
+	Route::resource('company','CompanyController');
+	Route::resource('category','CategoryController');
     Route::resource('testimonial','TestimonialController');
 	Route::resource('blog','BlogController');
 	Route::resource('promotion','PromotionController');
 	Route::resource('color','ColorController');
 	Route::resource('sleeve','SleeveController');
 	Route::resource('leglength','LeglengthController');
-	Route::resource('fit','fitController');
+	Route::resource('fit','FitController');
 	Route::resource('product','ProductController');
 	
 

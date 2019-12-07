@@ -46,27 +46,22 @@
                         </div>
                        </div>
                       </div>
-                     {{--  <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Sub Category</label>
-                          <input type="text" class="form-control" name="subCategory" value="{{ $category->subCategory }}">
-                        </div>
-                       </div>
-                      </div>   --}}
 
-                      <div class="row">
-                      <div class="col-md-2">
+                      <div class="row" style="margin-bottom:1em">
+                      <div class="col-md-6">
                          <label class="control-label">Image</label>
                           <input type="file" name="image" id="image">
                        </div>
+
+                       <div class="col-md-6">
+                         <label class="control-label">Position</label>
+                          <select name="position" id="position">
+                            <option value="1" selected> Gallery</option>
+                              <option value="0"> No Position </option>
+                          </select>
+                       </div>
                       </div>
-                    
 
-            
-
-       
-                      
                        <button type="submit" class="btn btn-primary"> Save </button>
                       <a href="{{route('category.index')}}" class="btn btn-danger">Back</a>
                      

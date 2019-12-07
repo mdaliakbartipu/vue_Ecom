@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Fit;
 use Illuminate\Http\Request;
 
-class tableController extends Controller
+class FitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,8 @@ class tableController extends Controller
      */
     public function index()
     {
-        //
+         $fits = Fit::all();
+        return view('fit.index',compact('fits'));
     }
 
     /**
@@ -23,7 +25,7 @@ class tableController extends Controller
      */
     public function create()
     {
-        //
+        return view('fit.create');
     }
 
     /**
@@ -34,7 +36,15 @@ class tableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+           'name'     => 'required',
+          
+       ]);
+    
+        $fit = new Fit();
+        $fit->name = $request->name;
+        $fit->save();
+        return redirect()->route('fit.index')->with('successMsg','Fit Successfully Added');
     }
 
     /**
@@ -56,7 +66,8 @@ class tableController extends Controller
      */
     public function edit($id)
     {
-        //
+        $fit = Fit::findOrFail($id);
+        return view('fit.edit',compact('fit'));
     }
 
     /**
@@ -68,7 +79,14 @@ class tableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $this->validate($request,[
+           'name'     => 'required',
+           ]);
+     
+         $fit = Fit::find($id); 
+        $fit->name = $request->name;
+        $fit->save();
+        return redirect()->route('fit.index')->with('successMsg','Fit Successfully Updated');
     }
 
     /**
@@ -79,6 +97,8 @@ class tableController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fit = Fit::find($id);
+        $fit->delete();
+         return redirect()->back()->with('successMsg','Fit Deleted successfully');
     }
 }

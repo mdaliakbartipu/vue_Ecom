@@ -13,16 +13,17 @@ class CatagoryTableSeeder extends Seeder
     public function run()
     {
         $cats = [
-        'Men'           =>'-2019-10-16-5da6ef583d090.jpg',
-        'Women'         =>'-2019-10-16-5da6ec079c671.jpg',
-        'Kids'          =>'-2019-10-16-5da6ec5d826a3.jpg',
-        'Home & Living' =>'-2019-10-16-5da6ecd219fcd.jpg',
-        'Discover'      =>'-2019-10-16-5da6efc909896.jpg'
+        'Men'           =>'person.jpg',
+        'Women'         =>'person2.jpg',
+        'Kids'          =>'person3.jpg',
+        'Home & Living' =>'person4.jpg',
+        'Discover'      =>'person5.jpg'
     ];
         foreach($cats as $name=>$image){
             DB::table('categories')->insert([
-                'name' => $name,
-                'image'=> $image
+                'name'      => $name,
+                'image'     => $image,
+                'position' => '1',
             ]);
         }
 

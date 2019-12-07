@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use File;
 use Carbon\Carbon;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-class companyController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.

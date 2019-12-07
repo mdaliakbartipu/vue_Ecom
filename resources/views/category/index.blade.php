@@ -1,5 +1,9 @@
+<?php
+    $categoryImage = 'front/assets/.uploads/category/';
+?>
+
 @extends('layouts.master')
-@section('title','Table')
+@section('title','Category')
 @section('page-header')
     <i class="fa fa-list"></i> Pages
 @stop
@@ -45,6 +49,7 @@
                         <th> Category Name </th>
                         <th> Sub Category  </th>
                         <th> Image </th>
+                         <th> Position </th>
                          <th> Action </th>
                       </thead>
                       <tbody>
@@ -58,9 +63,10 @@
                             {{ $category->subCategories->count() }} 
                          </td> 
 
-     <td> 
-        <img class="img-responsive img-thumbnail" src="{{ asset('uploads/category/'.$category->image) }}"  style="height: 50px; weight: 30px;" alt=""> 
-    </td>
+                    <td> 
+                        <img class="img-responsive img-thumbnail" src="<?=$categoryImage.$category->image?>"  style="height: 50px; weight: 30px;" alt=""> 
+                    </td>
+                    <td>{{ $category->position }}</td>
                           
                             
                            

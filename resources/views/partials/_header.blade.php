@@ -14,7 +14,7 @@
         <div class="navbar-header pull-left">
             <a href="index.html" class="navbar-brand">
                 <small>
-                    <i class="fa fa-flag"></i>
+                <img src="https://img.icons8.com/color/2x/magento.png" alt="" width="25px">
                     Ecommerce
                 </small>
             </a>
@@ -279,10 +279,10 @@
 
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
+                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="<?=Auth::user()->name?>'s Photo" />
                         <span class="user-info">
 									<small>Welcome,</small>
-									Jason
+									<?=Auth::user()->name?>
 								</span>
 
                         <i class="ace-icon fa fa-caret-down"></i>

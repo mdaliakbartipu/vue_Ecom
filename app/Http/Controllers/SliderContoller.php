@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
 
-class sliderContoller extends Controller
+class SliderContoller extends Controller
 {
     /**
      * Display a listing of the resource.

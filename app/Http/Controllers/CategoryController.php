@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
-use File;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use App\Category;
@@ -14,6 +12,10 @@ use App\subSubCategory;
 
 class CategoryController extends Controller
 {
+
+
+    protected $imagePath = 'front/assets/.uploads/category';
+
     /**
      * Display a listing of the resource.
      *
@@ -56,10 +58,10 @@ class CategoryController extends Controller
         if(null!==($image)){
             $currentDate = Carbon::now()->toDateString();
             $imageName = $slug .'-'. $currentDate .'-'. uniqid() .'.'. $image->getClientOriginalExtension();
-        if(!file_exists('uploads/category')){
-            mkdir('uploads/category',0777,true);
+        if(!file_exists($this->imagePath)){
+            mkdir($this->imagePath,0777,true);
         }
-        $image->move('uploads/category',$imageName);
+        $image->move($this->imagePath,$imageName);
         } else {
             $imageName = 'default.png';
         }
@@ -105,44 +107,31 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
           $this->validate($request,[
-           'name'     => 'required',
-          
-           'image'     => 'mimes:jpeg,jpg,png',
+           'name'       => 'required',
+           'image'      => 'mimes:jpeg,jpg,png',
+           'position'  => 'required'
        ]);
 
-           //use File;
-       //use Illuminate\Support\Facades\Input;
-     
-    //  $category = category::find($id);
-    //     if(Input::hasFile('image'))
-    // {
-    //     $usersImage = public_path("uploads/category/{$category->image}"); // get previous image from folder
-    //     if (file::exists($usersImage)) { // unlink or remove previous image from folder
-    //         unlink($usersImage);
-    //     }
-    //     $image = Input::file('image');
-    //     $imageName = time() . '-' . $image->getClientOriginalName();
-    //     $image = $image->move(('uploads/category'), $imageName);
-    //     $category->image = $imageName;
-    // }
 
         $image = $request->file('image');
         $slug = str_slug($request->title);
         $category = category::find($id);
+
          if(null!==($image)){
              $currentDate = Carbon::now()->toDateString();
              $imageName = $slug .'-'.  $currentDate .'-'. uniqid() .'.'. $image->getClientOriginalExtension();
          
-            if(!file_exists('uploads/category')){
-             mkdir('uploads/category',0777,true);
+            if(!file_exists($this->imagePath)){
+             mkdir($this->imagePath,0777,true);
          }
-         $image->move('uploads/category',$imageName);
+         $image->move($this->imagePath,$imageName);
          } else {
              $imageName = $category->image;
          }     
 
         $category->image = $imageName;  
         $category->name = $request->name;
+        $category->position = $request->position;
       
        $category->save();
          return redirect()->route('category.index')->with('successMsg','Category Successfully Updated');

@@ -16,6 +16,7 @@ class PagesController extends FrontController
     public function index()
     { 
         // dd(UI::getThreeBlogs());
+        // dd($this->subCat);
         return view('front.index',
         [
             'cats'          => $this->cat,
