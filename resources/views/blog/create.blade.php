@@ -147,7 +147,6 @@ style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1p
                 // https://github.com/yajra/laravel-datatables
                 // processing: true,
                 // serverSide: true,
-                {{--ajax: '{{ url('') }}',--}}
                 // columns:[
                 //     {"data":"first_name"},
                 //     {"data":"last_name"},

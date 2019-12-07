@@ -56,7 +56,7 @@
                             <td> {{ $blog->author_name }} </td>
                           
                             <td>
-                                <img class="img-responsive img-thumbnail" src="front/assets/.uploads/blogs/<?=$blog->image?>"  style="height: 50px; weight: 30px;" alt="">
+                                <img class="img-responsive img-thumbnail" src="front/assets/.uploads/blogs/<?=$blog->image?>"  style="height: 50px; width: 30px;" alt="">
                             </td>
                            
                  
@@ -160,7 +160,6 @@
                 // https://github.com/yajra/laravel-datatables
                 // processing: true,
                 // serverSide: true,
-                {{--ajax: '{{ url('') }}',--}}
                 // columns:[
                 //     {"data":"first_name"},
                 //     {"data":"last_name"},

@@ -16,6 +16,9 @@ class FrontController extends Controller
         //Getting all menues so that it can be available in all pages
         
         $this->cat = Category::all();
+        if(!$this->cat){
+            echo "Please configure your Database";
+        }
 
         foreach($this->cat as $this->category){
             $this->subCat[$this->category->id] = SubCategory::getAllsubcat($this->category->id);
