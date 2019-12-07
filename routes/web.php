@@ -1,24 +1,26 @@
 <?php
 
+// Should be deleted
+
+Route::get('/catagory_products/', 'Front\PagesController@catagoryProducts');
+Route::get('/subcat_products/', 'Front\PagesController@subcatProducts');
+Route::get('/subsubcat_products/', 'Front\PagesController@subsubcatProducts');
+
+
+
+
 // UI Routes
 
 Route::get('/', 'Front\PagesController@index');
 Route::get('/store', 'Front\PagesController@index');
-Route::get('/catagoryProducts', 'Front\PagesController@catagoryProducts');
+
+Route::get('/catagory_products/{id}', 'Front\PagesController@catagoryProducts');
+Route::get('/subcat_products/{id}', 'Front\PagesController@subcatProducts');
+Route::get('/subsubcat_products/{id}', 'Front\PagesController@subsubcatProducts');
+
 Route::get('/productCart', 'Front\PagesController@cart');
 Route::get('/productCheckout', 'Front\PagesController@checkout');
-Route::get('/singleProduct', 'Front\PagesController@singleProduct');
-
-
-
-// ###################### Admin ROUTE #########################
-
-//Route::get('master', function (){
-//   return view('home.home');
-//});
-
-//sub-categories
-
+Route::get('/singleProduct/{id}', 'Front\PagesController@singleProduct');
 
 
 // Get Sub category
@@ -50,14 +52,6 @@ Route::put('category/{id}/sub-sub-category', 'CategoryController@subSubUpdate')
 Route::DELETE('sub-sub-delete/{id}','CategoryController@subSubDelete')->name('sub-sub-delete');
 
 
-
-
-
-       
-
-
-
-
 Route::get('form', function (){
    return view('form');
 });
@@ -66,21 +60,21 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function (){
     Route::get('/admin', 'HomeController@index')->name('home');
-    Route::resource('group', 'GroupController');
-    Route::resource('slider','SliderContoller');
-	Route::resource('size','SizeController');
-	Route::resource('page','PageController');
-	Route::resource('user','userController');
-	Route::resource('company','CompanyController');
-	Route::resource('category','CategoryController');
-    Route::resource('testimonial','TestimonialController');
-	Route::resource('blog','BlogController');
-	Route::resource('promotion','PromotionController');
-	Route::resource('color','ColorController');
-	Route::resource('sleeve','SleeveController');
-	Route::resource('leglength','LeglengthController');
-	Route::resource('fit','FitController');
-	Route::resource('product','ProductController');
+Route::resource('group', 'GroupController');
+Route::resource('slider','SliderContoller');
+Route::resource('size','SizeController');
+Route::resource('page','PageController');
+Route::resource('user','UserController');
+Route::resource('company','CompanyController');
+Route::resource('category','CategoryController');
+Route::resource('testimonial','TestimonialController');
+Route::resource('blog','BlogController');
+Route::resource('promotion','PromotionController');
+Route::resource('color','ColorController');
+Route::resource('sleeve','SleeveController');
+Route::resource('leglength','LeglengthController');
+Route::resource('fit','FitController');
+Route::resource('product','ProductController');
 	
 
 	Route::get('/get-sub/ajax/{id}','ProductController@ajaxGetSub');

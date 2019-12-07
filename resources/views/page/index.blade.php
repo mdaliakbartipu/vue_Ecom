@@ -44,6 +44,7 @@
                         <th> ID </th>
                         <th> Page Name </th>
                         <th> Page Slug </th>
+                        <th> Page Tag </th>
                          <th> Action </th>
                       </thead>
                       <tbody>
@@ -52,6 +53,8 @@
                             <td> {{ $key +1 }} </td>
                             <td> {{ $page->pageName }} </td>
                             <td> {{ $page->pageSlug }} </td>
+                            <td>{{ $page->tag }}</td>
+
                             
                            
                            

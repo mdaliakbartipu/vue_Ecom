@@ -54,7 +54,7 @@
                             <td> {{ $slider->title }} </td>
                             <td> {{ $slider->sub_title }} </td>
                           
-     <td> <img class="img-responsive img-thumbnail" src="{{ asset('uploads/slider/'.$slider->image) }}"  style="height: 50px; weight: 30px;" alt=""> </td>
+     <td> <img class="img-responsive img-thumbnail" src="front/assets/.uploads/sliders/'.<?=$slider->image?>"  style="height: 50px; weight: 30px;" alt=""> </td>
                            
                  
                  

@@ -45,15 +45,8 @@
                         </div>
                        </div>
                       </div>
-                     {{--  <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Sub Category</label>
-                          <input type="text" class="form-control" name="subCategory">
-                        </div>
-                       </div>
-                      </div>  --}}  
-                      <div class="row">
+             
+                      <div class="row" style="margin-bottom:1em">
                       <div class="col-md-2">
                          <label class="control-label">Image</label>
                           <input type="file" name="image">

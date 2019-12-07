@@ -42,25 +42,15 @@
                                     <ul>
                                         <li><a href="/">home<i class="fa fa-angle-down"></i></a>
                                             <ul class="sub_menu">
-                                                <li><a href="catagoryProducts">Catagory Page</a></li>
+                                                <li><a href="/catagory_products">Catagory Page</a></li>
                                                 <li><a href="singleProduct">Product Single Page</a></li>
-                                                <li><a href="index-3.html">Home shop 3</a></li>
-                                                <li><a href="index-4.html">Home shop 4</a></li>
-                                                <li><a href="index-5.html">Home shop 5</a></li>
-                                                <li><a href="index-6.html">Home shop 6</a></li>
                                             </ul>
                                         </li>
                                         <li class="mega_items"><a href="shop.html">shop<i class="fa fa-angle-down"></i></a>
                                             <div class="mega_menu">
                                                 <ul class="mega_menu_inner">
-                                                    <li><a href="#">Shop Layouts</a>
-                                                        <ul>
-                                                            <li><a href="shop-fullwidth.html">Full Width</a></li>
-                                                            <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
-                                                            <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                                            <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
-                                                            <li><a href="shop-list.html">List View</a></li>
-                                                        </ul>
+                                                    <li><a href="#">Sshop Layouts</a>
+                                                       
                                                     </li>
                                                     <li><a href="#">other Pages</a>
                                                         <ul>

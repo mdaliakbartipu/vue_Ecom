@@ -54,10 +54,9 @@
                             <td> {{ $key +1 }} </td>
                             <td> {{ $blog->title }} </td>
                             <td> {{ $blog->author_name }} </td>
-                            {{-- <td> {{ $blog->desc }} </td> --}}
                           
                             <td>
-                                <img class="img-responsive img-thumbnail" src="{{ asset('uploads/blog/'.$blog->image) }}"  style="height: 50px; weight: 30px;" alt="">
+                                <img class="img-responsive img-thumbnail" src="front/assets/.uploads/blogs/<?=$blog->image?>"  style="height: 50px; weight: 30px;" alt="">
                             </td>
                            
                  

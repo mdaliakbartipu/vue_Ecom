@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Color;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use File;
 use Illuminate\Support\Facades\Input;
 
 class ColorController extends Controller

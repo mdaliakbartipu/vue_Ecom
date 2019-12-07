@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\leglength;
+use App\Leglength;
 use Illuminate\Http\Request;
 
 class LeglengthController extends Controller
@@ -14,7 +14,7 @@ class LeglengthController extends Controller
      */
     public function index()
     {
-        $leglengths = leglength::all();
+        $leglengths = Leglength::all();
         return view('leglength.index',compact('leglengths'));
     }
 
@@ -41,7 +41,7 @@ class LeglengthController extends Controller
           
        ]);
     
-        $leglength = new leglength();
+        $leglength = new Leglength();
         $leglength->name = $request->name;
         $leglength->save();
         return redirect()->route('leglength.index')->with('successMsg','Leg length Successfully Added');

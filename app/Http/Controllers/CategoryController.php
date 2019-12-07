@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use App\Category;
 use Illuminate\Http\Request;
 use App\SubCategory;
-use App\subSubCategory;
+use App\SubSubCategory;
 
 
 class CategoryController extends Controller
@@ -68,8 +68,8 @@ class CategoryController extends Controller
     
         $category = new Category();
         $category->name = $request->name;
-       
         $category->image = $imageName;
+        $category->icon = $request->icon??null;
         $category->save();
         return redirect()->route('category.index')->with('successMsg','Category Successfully Added');
     }
@@ -132,6 +132,7 @@ class CategoryController extends Controller
         $category->image = $imageName;  
         $category->name = $request->name;
         $category->position = $request->position;
+        $category->icon = $request->icon??null;
       
        $category->save();
          return redirect()->route('category.index')->with('successMsg','Category Successfully Updated');
@@ -166,6 +167,7 @@ class CategoryController extends Controller
         $subCategory = new SubCategory();
         $subCategory->category_id = $request->category_id;
         $subCategory->name = $request->name;
+        
         
         $subCategory->save();  
        

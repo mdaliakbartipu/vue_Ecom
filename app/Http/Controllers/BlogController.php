@@ -52,10 +52,10 @@ class BlogController extends Controller
         if(null!==($image)){
             $currentDate = Carbon::now()->toDateString();
             $imageName = $slug .'-'. $currentDate .'-'. uniqid() .'.'. $image->getClientOriginalExtension();
-        if(!file_exists('uploads/blog')){
-            mkdir('uploads/blog',0777,true);
+        if(!file_exists('front/assets/.uploads/blogs')){
+            mkdir('front/assets/.uploads/blogs',0777,true);
         }
-        $image->move('uploads/blog',$imageName);
+        $image->move('front/assets/.uploads/blogs',$imageName);
         } else {
             $imageName = 'default.png';
         }
@@ -129,13 +129,13 @@ class BlogController extends Controller
      $blog = Blog::find($id);
     if(Input::hasFile('image'))
             {
-                $usersImage = public_path("uploads/blog/{$blog->image}"); // get previous image from folder
+                $usersImage = public_path("front/assets/.uploads/blogs/{$blog->image}"); // get previous image from folder
                 if (file::exists($usersImage)) { // unlink or remove previous image from folder
                     unlink($usersImage);
                 }
                 $image = Input::file('image');
                 $imageName = time() . '-' . $image->getClientOriginalName();
-                $image = $image->move(('uploads/blog'), $imageName);
+                $image = $image->move(('front/assets/.uploads/blogs/'), $imageName);
                 $blog->image= $imageName;
             }
 
@@ -155,9 +155,9 @@ class BlogController extends Controller
     public function destroy($id)
     {
         $blog = Blog::find($id);
-        if(file_exists('uploads/blog'.$blog->image))
+        if(file_exists('front/assets/.uploads/blogs'.$blog->image))
         {
-               unlink('uploads/blog/'.$blog->image);
+               unlink('front/assets/.uploads/blogs/'.$blog->image);
         }
         $blog->delete();
         return redirect()->back()->with('successMsg','Blog Deleted successfully');

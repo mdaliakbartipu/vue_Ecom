@@ -3,8 +3,14 @@
         <div class="col-lg-4 col-md-6">
             <article class="single_related article_one">
                 <figure>
+                    <?php
+						$image = file_exists(ltrim(ASSETS, '/')."/.uploads/blogs/".$blog->image)? 
+									ASSETS.'/.uploads/blogs/'.$blog->image :
+									ASSETS.'/img/blogs/'.$blog->image;
+                        ?>
+                        
                     <div class="related_thumb">
-                        <img src="<?=ASSETS?>/img/blogs/<?=$blog->image?>" alt="">
+                        <img src="<?=$image?>" alt="">
                         <div class="overlay">
                             <a href=""></a>
                         </div>

@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     public function category(){
-        return $this->belongsTo(category::class);
+        return $this->belongsTo(Category::class);
     }
     public function subcategory(){
         return $this->belongsTo(SubCategory::class);
     }
      public function subsubcats(){
-        return $this->belongsTo(subSubCategory::class);
+        return $this->belongsTo(SubSubCategory::class);
     }
     
     public function color(){
@@ -25,13 +25,13 @@ class Product extends Model
     }
 
     public function sleeves(){
-    	 return  $this->belongsTo(sleeve::class);
+    	 return  $this->belongsTo(Sleeve::class);
     }
 
     public function leglenghts(){
-    	 return  $this->belongsTo(legLength::class);
+    	 return  $this->belongsTo(LegLength::class);
     }
     public function fits(){
-    	 return  $this->belongsTo(fit::class);
+    	 return  $this->belongsTo(Fit::class);
     }
 }

@@ -13,10 +13,10 @@ class SubCategory extends Model
 
     public function category()
     {
-    	return $this->belongsTo(category::class);
+    	return $this->belongsTo(Category::class);
     }
     public function sub_sub_categories(){
-    	return $this->hasMany(subSubCategory::class);
+    	return $this->hasMany(SubSubCategory::class);
     }
 
     public static function getAllSubCat(int $catID){

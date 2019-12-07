@@ -5,9 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class subSubCategory extends Model
+class SubSubCategory extends Model
 {
-	protected $fillable = ['sub_category_id','name'];
+    protected $fillable = ['sub_category_id' , 'name'];
+    
     public function sub_cateroy(){
     	return $this->belongsTo(SubCategory::class);
     }

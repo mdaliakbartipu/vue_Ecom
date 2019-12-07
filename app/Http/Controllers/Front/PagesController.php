@@ -31,8 +31,31 @@ class PagesController extends FrontController
     }
 
 
-    public function catagoryProducts()
+    public function catagoryProducts( $id = null)
     {
+
+        return view('front.catagoryProducts',
+        [
+            'cats' => $this->cat,
+            'subCats' => $this->subCat,
+            'subSubCats' => $this->subSubCat,
+        ]);
+    }
+
+    public function subcatProducts( $id = null)
+    {
+
+        return view('front.catagoryProducts',
+        [
+            'cats' => $this->cat,
+            'subCats' => $this->subCat,
+            'subSubCats' => $this->subSubCat,
+        ]);
+    }
+
+    public function subsubcatProducts( $id = null)
+    {
+
         return view('front.catagoryProducts',
         [
             'cats' => $this->cat,

@@ -6,9 +6,9 @@
     				<!--banner area start-->
     				<div class="sidebar_banner_area">	
 						<?php foreach($banners as $banner):
-						$image = file_exists(ASSETS."/.uploads/banners/".$banner->image)? 
+						$image = file_exists(ltrim(ASSETS, '/')."/.uploads/banners/".$banner->image)? 
 									ASSETS.'/.uploads/banners/'.$banner->image :
-									ASSETS.'/.img/banners/'.$banner->image;
+									ASSETS.'/img/banners/'.$banner->image;
 						?>
 						<figure class="single_banner ">
     						<div class="banner_thumb mb-2 para-one">
@@ -26,12 +26,12 @@
 	<ul id="slides">
 		
 	<?php foreach($sliders as $slider):
-		$img_one = file_exists(ASSETS."/.uploads/sliders/".$slider->image_1)? 
+		$img_one = file_exists(ltrim(ASSETS, '/')."/.uploads/sliders/".$slider->image_1)? 
 							ASSETS.'/.uploads/sliders/'.$slider->image_1 :
-							ASSETS.'/.img/sliders/'.$slider->image_1;
-		$img_two = file_exists(ASSETS."/.uploads/sliders/".$slider->image_2)? 
+							ASSETS.'/img/sliders/'.$slider->image_1;
+		$img_two = file_exists(ltrim(ASSETS, '/')."/.uploads/sliders/".$slider->image_2)? 
 							ASSETS.'/.uploads/sliders/'.$slider->image_2 :
-							ASSETS.'/.img/sliders/'.$slider->image_2 ;  ?>
+							ASSETS.'/img/sliders/'.$slider->image_2 ;  ?>
 	<li class="slide">
 		<div class="slide-partial slide-left"><img src="<?=$img_one?>"/></div>
 		<div class="slide-partial slide-right"><img src="<?=$img_two?>"></div>

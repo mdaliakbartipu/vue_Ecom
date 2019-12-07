@@ -235,9 +235,6 @@
             </div>
         </div>
 
-        <!--product area start-->
-        <?php include("section/relatedProducts.php"); ?>
-        <!--product area end-->
 
         <!--product area start-->
         <!--product area end-->

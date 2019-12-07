@@ -45,19 +45,25 @@
                           <input type="text" class="form-control" name="name" value="{{ $category->name }}">
                         </div>
                        </div>
+                       <div class="col-md-4">
+                           <div class="form-group">
+                                <label class="control-label">Icons</label>  <a  class="pull-right" href="https://fontawesome.com/v4.7.0/icons/" target="_blank" style="color:brown"> Need Icons Class ? </a>
+                                <input type="text" name="icon" id="icon" class="form-control" value="{{$category->icon}}">
+                            </div>
+                       </div>
                       </div>
 
                       <div class="row" style="margin-bottom:1em">
                       <div class="col-md-6">
                          <label class="control-label">Image</label>
-                          <input type="file" name="image" id="image">
+                          <input type="file" name="image" id="image" class="form-control">
                        </div>
 
-                       <div class="col-md-6">
+                       <div class="col-md-4">
                          <label class="control-label">Position</label>
-                          <select name="position" id="position">
-                            <option value="1" selected> Gallery</option>
-                              <option value="0"> No Position </option>
+                          <select name="position" id="position" class="form-control">
+                            <option value="1" {{ $category->position=='1'?'Selected':'' }} > Gallery</option>
+                              <option value="0" {{ $category->position=='0'?'Selected':'' }} > No Position </option>
                           </select>
                        </div>
                       </div>

@@ -24,6 +24,7 @@ class CatagoryTableSeeder extends Seeder
                 'name'      => $name,
                 'image'     => $image,
                 'position' => '1',
+                'icon' => 'fa fa-eercast',
             ]);
         }
 

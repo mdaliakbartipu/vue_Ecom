@@ -8,11 +8,10 @@
     <?php include("section/offcanvas.php");?>
     <!--Offcanvas menu area end-->
     <!--header area start-->
-    <div class="new-mar-pad">
+    <div class="container">
     <?php include("section/header.php");?>
     <!--header area end-->
-    </ div>
-
+    </div>
 
     <div >
     <!--Product section bg area start-->
@@ -28,9 +27,6 @@
     <?php include("section/modelArea.php");?>
     <!-- modal area end-->
 
-    <!--news letter popup start-->
-     <?php include("section/newsLetter.php");?>
-    <!--news letter popup start-->
     <?php include("section/script.php");?>
     
 <?php include("section/foot.php");?>

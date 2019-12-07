@@ -37,76 +37,42 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-6 col-xs-12">
                             <div class="logo">
-                                <a href="index.php"><img src="<?=ASSETS?>/img/logo/logo.png" alt="" style="max-width:120%;"></a>
+                                <a href="/"><img src="<?=ASSETS?>/img/logo/logo.png" alt="" style="max-width:120%;"></a>
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-12 col-xs-12 text-center ">
                             <div class="main_menu menu_position text-center">
                                 <nav>
                                     <ul>
-                                        <li><a href="index.php">home</a>
+                                        <li><a href="/">home</a>
                                             <ul class="sub_menu">
-                                                <li><a href="catagoryProducts.php">Catagory Page</a></li>
-                                                <li><a href="singleProduct.php">Product Single Page</a></li>
-                                                <li><a href="dashboard.php">Dashboard</a></li>
-                                               
+                                                <li><a href="/catagory_products">Catagory Page</a></li>
+                                                <li><a href="/singleProduct/1">Product Single Page</a></li>
                                             </ul>
                                         </li>
-                                        <li class="mega_items"><a href="shop.html">shop</a>
-                                            <div class="mega_menu">
+                                        <li class="mega_items"><a href="#">shop</a>
+                                            <!-- <div class="mega_menu">
                                                 <ul class="mega_menu_inner">
                                                     <li><a href="#">Shop Layouts</a>
                                                         <ul>
-                                                            <!-- <li><a href="shop-fullwidth.html">Full Width</a></li>
-                                                            <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
-                                                            <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                                            <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
-                                                            <li><a href="shop-list.html">List View</a></li> -->
                                                         </ul>
                                                     </li>
                                                     <li><a href="#">other Pages</a>
                                                         <ul>
-                                                            <!-- <li><a href="cart.html">cart</a></li>
-                                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                                            <li><a href="checkout.html">Checkout</a></li>
-                                                            <li><a href="my-account.html">my account</a></li>
-                                                            <li><a href="404.html">Error 404</a></li> -->
                                                         </ul>
                                                     </li>
                                                     <li><a href="#">Product Types</a>
-                                                        <ul>
-                                                            <!-- <li><a href="product-details.html">product details</a></li>
-                                                            <li><a href="product-sidebar.html">product sidebar</a></li>
-                                                            <li><a href="product-grouped.html">product grouped</a></li>
-                                                            <li><a href="variable-product.html">product variable</a></li>
-                                                            <li><a href="product-countdown.html">product countdown</a></li> -->
-
-                                                        </ul>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div> -->
                                         </li>
-                                        <li><a href="blog.php">blog</a>
-                                              <!-- <ul class="sub_menu pages">
-                                              <li><a href="blog-details.html">blog details</a></li>
-                                                <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
-                                                <li><a href="blog-sidebar.html">blog sidebar</a></li>
-                                                <li><a href="blog-no-sidebar.html">blog no sidebar</a></li>
-                                            </ul> -->
+                                        <li><a href="/blog">blog</a>
                                         </li>
                                         <li><a class="#" href="#">pages</a>
-                                              <!-- <ul class="sub_menu pages">
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="faq.html">Frequently Questions</a></li>
-                                                <li><a href="privacy-policy.html">privacy policy</a></li>
-                                                <li><a href="contact.html">contact</a></li>
-                                                <li><a href="login.html">login</a></li>
-                                                <li><a href="404.html">Error 404</a></li> 
-                                            </ul>-->
                                         </li>
 
-                                        <li><a href="about.php">About Us</a></li>
-                                        <li><a href="contact.php"> Contact Us</a></li>
+                                        <li><a href="/about">About Us</a></li>
+                                        <li><a href="/contact"> Contact Us</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -114,12 +80,12 @@
                         <div class="col-lg-2 col-xs-12">
                             <div class="header_configure_area">
                                 <div class="header_wishlist text-right">
-                                    <a href="wishlist.html"><i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                    <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i>
                                         <span class="wishlist_count">0</span>
                                     </a>
                                 </div>
                                 <div class="header_wishlist">
-                                    <a href="wishlist.html"><i class="fa fa-heart text-right" aria-hidden="true"></i>
+                                    <a href="#"><i class="fa fa-heart text-right" aria-hidden="true"></i>
 
                                         <span class="wishlist_count">0</span>
                                     </a>
@@ -193,54 +159,22 @@
                                             <nav class="pro_hide">
 
                                                 <ul class="navbar-nav mr-auto">
-                                                    <li class="dropdown col-md-4 col-sm-4 col-lg-4 hidden-xs ">
-                                                        <a href="ProductCategory.php" class="top-cat-option ml-5" style="font-size: 15px; font-weight: 400; margin-top: -11px;"><i class="fa fa-bars" aria-hidden="true"></i>
-</a>
-                                                        <ul id="top_bar_menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(15px, 50px, 0px); width: 200px;">
-                                                            <li class="top_bar_menu_item">
-                                                                <a href="#" class="dropbtn">
-                                                                    WHAT'S NEW Two
-                                                                    <!--  <i class="fa fa-caret-down"></i> -->
-                                                                </a>
-
-
-                                                            </li>
-                                                            <li class="top_bar_menu_item">
-                                                                <a href="#" class="dropbtn">
-                                                                    WHAT'S NEW Two
-                                                                </a>
-
-
-                                                            </li>
-                                                            <li class="top_bar_menu_item">
-                                                                <a href="#" class="dropbtn">
-                                                                    WHAT'S NEW Two
-                                                                </a>
-
-
-                                                            </li>
-                                                            <li class="top_bar_menu_item">
-                                                                <a href="#" class="dropbtn">
-                                                                    WHAT'S NEW Two
-                                                                </a>
-
-
-                                                            </li>
-                                                            <li class="top_bar_menu_item">
-                                                                <a href="#" class="dropbtn">
-                                                                    WHAT'S NEW Two
-                                                                </a>
-
-
-                                                            </li>
-                                                            <li class="top_bar_menu_item">
-                                                                <a href="#" class="dropbtn">
-                                                                    WHAT'S NEW Two
-                                                                </a>
-
-                                                            </li>
+                                                 
+                                                <li class="dropdown col-md-4 col-sm-4 col-lg-4 hidden-xs ">
+                                                        <a href="#" class="top-cat-option ml-5" style="font-size: 15px; font-weight: 400; margin-top: -11px;"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                                                        <ul id="top_bar_menu" style="width:150px">
+                                                        <?php foreach($cats as $cat): ?>              
+                                                            <li class="top_bar_menu_item" style="width:150px">
+                                                                    <a href="/category_products/<?=$cat->id?>" class="dropbtn">
+                                                                    <?=$cat->name?>
+                                                                        <!--  <i class="fa fa-caret-down"></i> -->
+                                                                    </a>
+                                                                </li>
+                                                            <?php endforeach;?>
+                                                        
                                                         </ul>
                                                     </li>
+
                                                 </ul>
                                             </nav>
                                         </div>
@@ -345,12 +279,6 @@
                                                 <div><i class="fa fa-briefcase"></i> Career</div>
                                             </div>
                                         </li>
-
-
-
-
-
-
                                     </ul>
                                 </div>
                             </div>
@@ -358,8 +286,6 @@
                     </nav><!-- /.top-bar -->
 
                 </div>
-
-
                 <!--header bottom satrt-->
                 <div class="header_bottom">
                     <div class="row align-items-center">
@@ -371,146 +297,36 @@
                                 <div class="categories_menu_toggle">
                                     <ul>
 
-                                        <li class="menu_item_children"><a href="#"><i class="fa fa-laptop mr-10" aria-hidden="true"></i>
-Brake Parts <i class="fa fa-angle-right"></i></a>
-
+                                    <?php foreach($cats as $cat): ?>
+                                        <li class="menu_item_children"><a href="/catagory_products/<?=$cat->id?>">
+                                            <i class="<?=$cat->icon?> mr-10" aria-hidden="true"></i>
+                                            <?=$cat->name?> <i class="fa fa-angle-right"></i></a>
                                             <ul class="categories_mega_menu">
-                                                <li class="menu_item_children"><a href="#"> Dresses</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Sweater</a></li>
-                                                        <li><a href="#">Evening</a></li>
-                                                        <li><a href="#">Day</a></li>
-                                                        <li><a href="#">Sports</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">Handbags</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Shoulder</a></li>
-                                                        <li><a href="#">Satchels</a></li>
-                                                        <li><a href="#">kids</a></li>
-                                                        <li><a href="#">coats</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">shoes</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Ankle Boots</a></li>
-                                                        <li><a href="#">Clog sandals </a></li>
-                                                        <li><a href="#">run</a></li>
-                                                        <li><a href="#">Books</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">Clothing</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Coats Jackets </a></li>
-                                                        <li><a href="#">Raincoats</a></li>
-                                                        <li><a href="#">Jackets</a></li>
-                                                        <li><a href="#">T-shirts</a></li>
-                                                    </ul>
-                                                </li>
+                                               <?php foreach($subCats[$cat->id] as $sub): ?>
+                                                    <li class="menu_item_children"><a href="/subcat_products/<?=$sub->id?>"><?=$sub->name?></a>
+                                                            <ul class="categorie_sub_menu">
+                                                                <?php foreach($subSubCats[$sub->id] as $subsub): ?>
+                                                                    <li><a href="/subsubcat_products/<?=$subsub->id?>"><?=$subsub->name?></a></li>
+                                                                <?php endforeach;?>
+                                                            </ul>
+                                                    </li>
+                                               <?php endforeach;?>
                                             </ul>
                                         </li>
+                                <?php endforeach;?>
 
-                                        <li class="menu_item_children"><a href="#"><i class="fa fa-podcast mr-10" aria-hidden="true"></i>
-
-Wheels & Tires <i class="fa fa-angle-right"></i></a>
-
-                                            <ul class="categories_mega_menu column_3">
-                                                <li class="menu_item_children"><a href="#">Chair</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Dining room</a></li>
-                                                        <li><a href="#">bedroom</a></li>
-                                                        <li><a href="#"> Home & Office</a></li>
-                                                        <li><a href="#">living room</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">Lighting</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Ceiling Lighting</a></li>
-                                                        <li><a href="#">Wall Lighting</a></li>
-                                                        <li><a href="#">Outdoor Lighting</a></li>
-                                                        <li><a href="#">Smart Lighting</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">Sofa</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Fabric Sofas</a></li>
-                                                        <li><a href="#">Leather Sofas</a></li>
-                                                        <li><a href="#">Corner Sofas</a></li>
-                                                        <li><a href="#">Sofa Beds</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="menu_item_children"><a href="#"><i class="fa fa-id-badge mr-10" aria-hidden="true"></i>
-
-Furnitured & Decor <i class="fa fa-angle-right"></i></a>
-
-                                            <ul class="categories_mega_menu column_2">
-                                                <li class="menu_item_children"><a href="#">Brake Tools</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Driveshafts</a></li>
-                                                        <li><a href="#">Spools</a></li>
-                                                        <li><a href="#">Diesel </a></li>
-                                                        <li><a href="#">Gasoline</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">Emergency Brake</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Dolls for Girls</a></li>
-                                                        <li><a href="#">Girls' Learning Toys</a></li>
-                                                        <li><a href="#">Arts and Crafts for Girls</a></li>
-                                                        <li><a href="#">Video Games for Girls</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="menu_item_children"><a href="#"><i class="fa fa-building mr-10" aria-hidden="true"></i>
-
-Turbo System <i class="fa fa-angle-right"></i></a>
-
-                                            <ul class="categories_mega_menu column_2">
-                                                <li class="menu_item_children"><a href="#">Check Trousers</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Building</a></li>
-                                                        <li><a href="#">Electronics</a></li>
-                                                        <li><a href="#">action figures </a></li>
-                                                        <li><a href="#">specialty & boutique toy</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu_item_children"><a href="#">Calculators</a>
-                                                    <ul class="categorie_sub_menu">
-                                                        <li><a href="#">Dolls for Girls</a></li>
-                                                        <li><a href="#">Girls' Learning Toys</a></li>
-                                                        <li><a href="#">Arts and Crafts for Girls</a></li>
-                                                        <li><a href="#">Video Games for Girls</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#"><i class="fa fa-lightbulb-o mr-10" aria-hidden="true"></i>
-										Lighting</a></li>
-                                        <li><a href="#"><i class="fa fa-handshake-o mr-10" aria-hidden="true"></i>
-  Accessories</a></li>
-                                        <li><a href="#"><i class="fa fa-wpforms mr-10" aria-hidden="true"></i>
- Body Parts</a></li>
-                                        <li><a href="#"><i class="fa fa-laptop mr-10" aria-hidden="true"></i> Networking</a></li>
-                                        <li><a href="#"><i class="fa fa-superpowers mr-10" aria-hidden="true"></i>
- Perfomance Filters</a></li>
-                                        <li><a href="#"><i class="fa fa-etsy mr-10" aria-hidden="true"></i>
-  Engine Parts</a></li>
                                         <li id="cat_toggle" class="has-sub"><a href="#"><i class="fa fa-caret-square-o-down mr-10" aria-hidden="true"></i>
   More Categories</a>
                                             <ul class="categorie_sub">
                                                 <li><a href="#">Hide Categories</a></li>
                                             </ul>
-
                                         </li>
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
+
                         <div class="column2 col-lg-6 col-sm-12">
                             <div class="search_container">
                                 <form action="#">

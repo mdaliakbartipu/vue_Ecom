@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\page;
+use App\Page;
+use App\Tags;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,7 +17,12 @@ class PageController extends Controller
      */
     public function index()
     {
-        $pages = page::all();
+        $pages = Page::all();
+        
+        foreach($pages as &$page){
+            $page->tag = Page::getPageTag($page->id);
+        }
+
         return view('page.index',compact('pages'));
     }
 
@@ -27,7 +33,8 @@ class PageController extends Controller
      */
     public function create()
     {
-         return view('page.create');
+        $tags = Tags::forPage();
+         return view('page.create', compact('tags'));
     }
 
     /**
@@ -44,11 +51,17 @@ class PageController extends Controller
            'pageName'      =>  'required'
        ]);
     
-        $page = new page();
+        $page = new Page();
         $page->pageslug = $request->pageSlug;
         $page->pageName = $request->pageName;
-       
         $page->save();
+
+        $tag  = new Tags;
+        $tag->type = 'page';
+        $tag->tag_id = $request->tag;
+        $tag->page_id = $page->id;
+        $tag->pin();
+
         return redirect()->route('page.index')->with('successMsg','Page Successfully Added');
     }
 
@@ -71,8 +84,8 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        $page = page::findOrFail($id);
-        return view('page.edit',compact('page'));
+        $page = Page::findOrFail($id);
+        return view('page.edit', compact('page'));
     }
 
     /**
@@ -89,7 +102,7 @@ class PageController extends Controller
            'pageName'      =>  'required'
         ]);
      
-         $page = page::find($id); 
+         $page = Page::find($id); 
          $page->pageSlug = $request->pageSlug;
          $page->pageName = $request->pageName;
        
@@ -106,7 +119,7 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-         $page = page::find($id);
+         $page = Page::find($id);
          $page->delete();
         return redirect()->back()->with('successMsg','Page Deleted successfully');
     }

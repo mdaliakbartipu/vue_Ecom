@@ -1,4 +1,4 @@
-<?php define("ASSETS" , "front/assets"); ?>
+<?php define("ASSETS" , "/front/assets"); ?>
 
 <head>
     <meta charset="utf-8">

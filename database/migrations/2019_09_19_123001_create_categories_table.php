@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('image')->default('noimage.png');
+            $table->string('icon')->nullable();
             $table->tinyInteger('position')->nullable();
             $table->timestamps();
         });

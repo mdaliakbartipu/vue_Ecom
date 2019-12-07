@@ -20,6 +20,14 @@
      <?php include("section/productSingleViewSection.php");?>
     </div>
     <!--Product section bg area end-->
+
+
+            <!--product area start-->
+            <div class="container">
+            <?php include("section/relatedProducts.php"); ?>
+            </div>
+
+        <!--product area end-->
    
     <!--footer area start-->
     <?php include("section/footer.php");?>
@@ -27,7 +35,8 @@
 
 
     <?php include("section/script.php");?>
+
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script type="text/javascript" src="assets/js/zoomOnHover.js"></script>
-    <script type="text/javascript" src="assets/js/shamsvue.js"></script>
+    <script type="text/javascript" src="<?=ASSETS?>/js/zoomOnHover.js"></script>
+    <script type="text/javascript" src="<?=ASSETS?>/js/shamsvue.js"></script>
 <?php include("section/foot.php");?>

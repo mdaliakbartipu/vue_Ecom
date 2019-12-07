@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
 use App\SubCategory;
-use App\subSubCategory;
+use App\SubSubCategory;
 
 
 class FrontController extends Controller
@@ -15,13 +15,13 @@ class FrontController extends Controller
     {
         //Getting all menues so that it can be available in all pages
         
-        $this->cat = category::all();
+        $this->cat = Category::all();
 
         foreach($this->cat as $this->category){
             $this->subCat[$this->category->id] = SubCategory::getAllsubcat($this->category->id);
                    
             foreach($this->subCat[$this->category->id] as $this->subCategory){
-                $this->subSubCat[$this->subCategory->id] = subSubCategory::getAllSubSubCat($this->subCategory->id);
+                $this->subSubCat[$this->subCategory->id] = SubSubCategory::getAllSubSubCat($this->subCategory->id);
             }
          }
     }

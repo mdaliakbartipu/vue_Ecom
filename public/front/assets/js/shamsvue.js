@@ -4,13 +4,13 @@ var singleVue = new Vue({
         qty: 1,
         product: {   
             images:{
-                "img-normal":"assets/img/product/productbig5.jpg",
+                "img-normal":"/front/assets/img/product/productbig5.jpg",
                 thumb:{
-                    img1 : "assets/img/product/productbig1.jpg",
-                    img2 : "assets/img/product/productbig2.jpg",
-                    img3 : "assets/img/product/productbig3.jpg",
-                    img4 : "assets/img/product/productbig4.jpg",
-                    img5 : "assets/img/product/productbig5.jpg"
+                    img1 : "/front/assets/img/product/productbig1.jpg",
+                    img2 : "/front/assets/img/product/productbig2.jpg",
+                    img3 : "/front/assets/img/product/productbig3.jpg",
+                    img4 : "/front/assets/img/product/productbig4.jpg",
+                    img5 : "/front/assets/img/product/productbig5.jpg"
                 }
             },
         }

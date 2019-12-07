@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\category;
+use App\Category;
 use App\SubCategory;
-use App\subSubCategory;
+use App\SubSubCategory;
 use App\Color;
 use App\Size;
-use App\sleeve;
-use App\legLength;
-use App\fit;
+use App\Sleeve;
+use App\LegLength;
+use App\Fit;
 use App\Product;
 use App\Product_image;
 use Carbon\Carbon;
-use File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
@@ -45,19 +44,19 @@ class ProductController extends Controller
 
     public function ajaxGetSubsub(Request $request){
         $id = (int)$request['id'];
-        $subSubcategories = subSubCategory::where('sub_category_id', '=', $id)->get();
+        $subSubcategories = SubSubCategory::where('sub_category_id', '=', $id)->get();
         return json_encode($subSubcategories);
     }
     public function create()
     {
-        $categories = category::all();
+        $categories = Category::all();
         $subcategories = SubCategory::all();
-        $subsubcats =  subSubCategory::all();
+        $subsubcats =  SubSubCategory::all();
         $colors = Color::all();
         $sizes = Size::all();
-        $sleeves = sleeve::all();
-        $leglenghts = legLength::all();
-        $fits = fit::all();
+        $sleeves = Sleeve::all();
+        $leglenghts = LegLength::all();
+        $fits = Fit::all();
         return view('product.create',compact('categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits'));
     }
 
@@ -151,14 +150,14 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::with('category','subcategory','subsubcats','sleeves','leglenghts','fits')->find($id);
-        $categories = category::all();
+        $categories = Category::all();
         $subcategories = SubCategory::all();
-        $subsubcats =  subSubCategory::all();
+        $subsubcats =  SubSubCategory::all();
         $colors = Color::all();
         $sizes = Size::all();
-        $sleeves = sleeve::all();
-        $leglenghts = legLength::all();
-        $fits = fit::all();
+        $sleeves = Sleeve::all();
+        $leglenghts = LegLength::all();
+        $fits = Fit::all();
         //$product = Product::find($id);
         return view('product.edit',compact('product','categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits'));
     }
@@ -186,7 +185,7 @@ class ProductController extends Controller
         if(Input::hasFile('image'))
     {
         $usersImage = public_path("uploads/product/{$product->image}"); // get previous image from folder
-        if (file::exists($usersImage)) { // unlink or remove previous image from folder
+        if (file_exists($usersImage)) { // unlink or remove previous image from folder
             unlink($usersImage);
         }
         $image = Input::file('image');

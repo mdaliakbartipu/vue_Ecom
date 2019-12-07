@@ -53,13 +53,21 @@
                         </div>
                        </div>
                       </div>   
+                      <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Page Tag</label>
+                          <select name="tag" id="tag" class="form-control">
+                              <?php foreach($tags as $tag): ?>
+                              <option value="<?=$tag->id?>"><?=$tag->name?></option>
+                              <?php endforeach; ?>
+                          </select>
+                        </div>
+                       </div>
+                      </div>   
 
-         
-      
            <button type="submit" class="btn btn-primary"> Save </button>     
          <a href="{{route('page.index')}}" class="btn btn-danger">Back</a>
-        
-
                     </form>
                   </div>
                 </div>

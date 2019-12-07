@@ -14,7 +14,7 @@
                         <div class="hover_content">
                             <ul class="mt-4 mb-4">
                                 <?php foreach($subCats[$cat->id] as $subcat): ?>
-                                    <li><a class="text-la" href="/subcat/<?=$subcat->id?>"><?=$subcat->name?></a></li>
+                                    <li><a class="text-la" href="/subcat_products/<?=$subcat->id?>"><?=$subcat->name?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>

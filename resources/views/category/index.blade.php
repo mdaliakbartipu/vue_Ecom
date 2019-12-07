@@ -50,6 +50,7 @@
                         <th> Sub Category  </th>
                         <th> Image </th>
                          <th> Position </th>
+                         <th> Icon </th>
                          <th> Action </th>
                       </thead>
                       <tbody>
@@ -66,7 +67,8 @@
                     <td> 
                         <img class="img-responsive img-thumbnail" src="<?=$categoryImage.$category->image?>"  style="height: 50px; weight: 30px;" alt=""> 
                     </td>
-                    <td>{{ $category->position }}</td>
+                    <td>{{ $category->position=='1'?'Gallery':'No Position' }}</td>
+                    <td><i class="{{ $category->icon }}"></i> {{ $category->icon }} </td>
                           
                             
                            

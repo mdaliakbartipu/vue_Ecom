@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\slider;
+use App\Slider;
 use Carbon\Carbon;
-use File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
@@ -18,7 +17,7 @@ class SliderContoller extends Controller
      */
     public function index()
     {
-        $sliders = slider::all();
+        $sliders = Slider::all();
         return view('slider.index',compact('sliders'));
     }
 
@@ -58,7 +57,7 @@ class SliderContoller extends Controller
             $imageName = 'default.png';
         }
 
-        $slider = new slider();
+        $slider = new Slider();
         $slider->title = $request->title;
         $slider->sub_title = $request->sub_title;
         $slider->image = $imageName;
@@ -85,7 +84,7 @@ class SliderContoller extends Controller
      */
     public function edit($id)
     {
-        $slider = slider::find($id);
+        $slider = Slider::find($id);
         return view('slider.edit',compact('slider'));
     }
 
@@ -105,11 +104,11 @@ class SliderContoller extends Controller
         ]);
      
 
-         $slider = slider::find($id);
+         $slider = Slider::find($id);
         if(Input::hasFile('image'))
     {
         $usersImage = public_path("uploads/slider/{$slider->image}"); // get previous image from folder
-        if (file::exists($usersImage)) { // unlink or remove previous image from folder
+        if (file_exists($usersImage)) { // unlink or remove previous image from folder
             unlink($usersImage);
         }
         $image = Input::file('image');
@@ -132,7 +131,7 @@ class SliderContoller extends Controller
      */
     public function destroy($id)
     {
-         $slider = slider::find($id);
+         $slider = Slider::find($id);
         if(file_exists('uploads/slider'.$slider->image))
         {
                unlink('uploads/slider/'.$slider->image);
