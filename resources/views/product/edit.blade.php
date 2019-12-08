@@ -4,29 +4,7 @@
     <i class="fa fa-plus-circle"></i> Product
 @stop
 @section('css')
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery.gritter.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.custom.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/chosen.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker3.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-timepicker.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/daterangepicker.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-colorpicker.min.css') }}" />
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-       {{-- Add button --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-  
-
-    
-    {{-- Auto populate Dropdown with jQuery AJAX --}}
-   
-  
-
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 @stop
 
 
@@ -35,8 +13,7 @@
 
     <div class="row">
 
-        <div class="col-sm-8 col-sm-offset-2">
-          {{--   <div class="widget-box"> --}}
+        <div class="col-sm-8">
                 <div class="widget-header">
                     <h4 class="widget-title"> @yield('page-header')</h4>
 
@@ -140,7 +117,7 @@
                                 <label class="col-sm-3 control-label" for="form-field-1-1"> Product Short Description </label>
 
                                 <div class="col-sm-9">
-                                    <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control" name="desc">{{ $product->desc }}</textarea>
+                                    <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control summernote" name="desc">{{ $product->desc }}</textarea>
                                     
                                 </div>
                             </div>
@@ -162,7 +139,7 @@
                                 <label class="col-sm-3 control-label" for="form-field-1-1"> Product Details  </label>
 
                                 <div class="col-sm-9">
-                                    <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control" name="details" >{{ $product->details }}</textarea>
+                                    <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control summernote" name="details" >{{ $product->details }}</textarea>
                                     
                                 </div>
                             </div>
@@ -293,66 +270,35 @@
 
 
 @endsection
-
 @section('js')
-
-    <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-ui.custom.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.ui.touch-punch.min.js') }}"></script>
-    <script src="{{ asset('assets/js/chosen.jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/spinbox.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-timepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
-    <script src="{{ asset('assets/js/daterangepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-colorpicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.knob.min.js') }}"></script>
-    <script src="{{ asset('assets/js/autosize.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.inputlimiter.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.maskedinput.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-tag.min.js') }}"></script>
-   
-    <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
-    <script src="{{ asset('assets/js/ace.min.js') }}"></script>
+<script type="text/javascript">
 
 
-     {{-- <!-- Script --> Auto populate Dropdown with jQuery AJAX  --}}
-  
-
-
-   
-
-     {{-- snippets --}}
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-   
-   <script type="text/javascript">
-      let rowIndex = 0;
+      let rowIndex = 1;
+      //  will start by naming name from adding 2 as postfix
     
-      
-
-
-$("#addrows").click(function () {
   
-  $('#table tr:last').after(`<tr>
+$("#addrows").click(function () {
+    event.preventDefault();
+    console.log(rowIndex);
+    $('#table tr:last').after(`<tr>
       <td>   <div class="col-md-20">
-      <select class="chosen-select form-control"  name="color${rowIndex++}">
+      <select class="chosen-select form-control"  name="color[]">
                  @foreach ($colors as $color)
                         <option value="{{ $color->id }}">{{ $color->name }}</option>
                  @endforeach
       </select> </div> </td>
       <td>     <div class="col-md-20">
-       <select class="chosen-select form-control" id="form-field-select-3"  name="size${rowIndex++}">
+       <select class="chosen-select form-control" id="form-field-select-3"  name="size[]">
                  @foreach ($sizes as $size)
                         <option value="{{ $size->id }}">{{ $size->name }}</option>
                 @endforeach
             </select> </div> </td>
       <td> <div class="col-sm-9">
-               <input type="text" class="form-control" placeholder="Product Quantity" name="quantity${rowIndex++}" /> 
+               <input type="text" class="form-control" placeholder="Product Quantity" name="quantity[]" /> 
           </div > </td>
       <td> <div class="col-xs-12 col-sm-12">
-                 <input multiple="" type="file" id="id-input-file-3" name="image${rowIndex++}" />
+                 <input multiple="" type="file" id="id-input-file-3" name="image[]" />
      </div> </td>
      <td>
      <a href="#" type="submit" class="btn btn-danger delete"> X
@@ -361,6 +307,7 @@ $("#addrows").click(function () {
       </tr>`);
      
       $(".delete").click(function() {
+        event.preventDefault();
       $(this).closest("tr").remove();
     });
 
@@ -571,137 +518,12 @@ var quantitiy=0;
             });
 
         });
-//         $('#category').on('keyup', function(){
-//           var id = $(this).val();
-//           $.ajax({
-//            url: '{{ url("/create") }}',
-//            type: 'GET',
-//            data: 'id='+id,
-//            dataType: 'json',
-//            success: function(response){ 
-              
-//            }
-//          })
-//         })
-// ;
+
     </script>
-   {{-- <script>
-$('#category').change(function(){
-   $("#sub_category option").remove();
-   $("#sub_sub_category option").remove();
-   var id = $(this).value();
-   $.ajax({
-      url : '{{ route( 'loadSubcat' ) }}',
-      data: {
-        "_token": "{{ csrf_token() }}",
-        "id": id
-        },
-      type: 'post',
-      dataType: 'json',
-      success: function( result )
-      {
-           $.each( result, function(k, v) {
-                $('#sub_category').append($('<option>', {value:k, text:v}));
-           });
-      },
-      error: function()
-     {
-         //handle errors
-         alert('error...');
-     }
-   });
-});
-$('#sub_category').change(function(){
-   $("#sub_sub_category option").remove();
-   var id = $(this).value();
-   $.ajax({
-      url : '{{ route( 'loadsubsubcat' ) }}',
-      data: {
-        "_token": "{{ csrf_token() }}",
-        "id": id
-        },
-      type: 'post',
-      dataType: 'json',
-      success: function( result )
-      {
-           $.each( result, function(k, v) {
-                $('#sub_sub_category').append($('<option>', {value:k, text:v}));
-           });
-      },
-      error: function()
-     {
-         //handle errors
-         alert('error...');
-     }
-   });
-});
-</script> --}}
+ 
 
-  {{-- <script type="text/javascript">
-    $('#category_id').on('change', function(e) {
-
-            let $id = e.target.value;
-            let $subCat = $('#sub_category');
-            
-            $.get('/get-sub/ajax/' + $id, function(data) {
-
-                //success data
-                    $subCat.empty();
-
-                    $subCat.append('<option>-- Choose one --</option>');
-
-                    $.each(data, function(index, Obj){
-
-                        $subCat.append('<option value='+ Obj.id +'>' + Obj.name + '</option>');
-                    });
-               });
-        });
-
-        $('#sub_category').on('change', function(e) {
-
-            let $id = e.target.value;
-            let $subSubCat = $('#sub_sub_category');
-          
-            $.get('/get-sub/sub/ajax/' + $id, function(data) {
-         
-                    //success data
-                    $subSubCat.empty();
-
-                    $subSubCat.append('<option>-- Choose one --</option>');
-
-                    $.each(data, function(index, Obj){
-
-                        $subSubCat.append('<option value='+ Obj.id +'>' + Obj.name + '</option>');
-                    });
-               });
-        });
-  </script> --}}
-
-{{-- <script type="text/javascript">
-    $(document).ready(function() {
-        $('select[name="category_id"]').on('change', function() {
-            var catID = $(this).val();
-            if(catID) {
-                $.ajax({
-                    url: '/product/ajax/'+catID,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
-
-                        
-                        $('select[name="sub_category"]').empty();
-                        $.each(data, function(key, value) {
-                            $('select[name="sub_category"]').append('<option value="'+ key +'">'+ value +'</option>');
-                        });
+  
 
 
-                    }
-                });
-            }else{
-                $('select[name="sub_category"]').empty();
-            }
-        });
-    });
-</script> --}}
 
 @stop

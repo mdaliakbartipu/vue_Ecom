@@ -16,8 +16,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-         $companies = Company::all();
-        return view('company.index',compact('companies'));
+         $company = Company::first();
+        return view('company.index',compact('company'));
     }
 
     /**
@@ -92,7 +92,7 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-         $company = Company::find($id);
+         $company = Company::first();
         return view('company.edit',compact('company'));
     }
 
@@ -105,29 +105,27 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request);
        $this->validate($request,[
            'name'     => 'required',
-           'head_office' => 'required',
-           'factory'     => 'required',
-           'contact_name'     => 'required',
-           'position'     => 'required',
-           'phone_number'     => 'required',
-           'fax'     => 'required',
+           'title'     => 'required',
+           'phone'     => 'nullable',
+           'fax'     => 'nullable',
            'email'     => 'required',
-           'country'     => 'required',
-           'top_text'     => 'required',
+           'facebook'     => 'nullable',
+           'twitter'     => 'nullable',
+           'linkedin'     => 'nullable',
+           'instagram'     => 'nullable',
             'logo'     => 'required'
 
            
        ]);
-       //use File;
-       //use Illuminate\Support\Facades\Input;
      
      $company = Company::find($id);
         if(Input::hasFile('logo'))
     {
-        $usersImage = public_path("uploads/company/{$company->logo}"); // get previous image from folder
-        if (file::exists($usersImage)) { // unlink or remove previous image from folder
+        $usersImage = public_path("front/uploads/company/{$company->logo}"); // get previous image from folder
+        if (file_exists($usersImage)) 
             unlink($usersImage);
         }
         $image = Input::file('logo');
