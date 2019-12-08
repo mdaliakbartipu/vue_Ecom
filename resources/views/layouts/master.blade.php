@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/font-awesome/4.5.0/css/font-awesome.min.css') }}" />
 
+    <!-- Rich text editor -->
+    
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+
     <!-- page specific plugin styles -->
     @yield('css')
 
@@ -86,25 +90,59 @@
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
 
+<!-- rich text editor -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+
+
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+
 @yield('js')
+
+
+<script>
+        $('.summernote').summernote({
+            placeholder: 'Write short description about your products',
+            tabsize: 2,
+            height: 300,
+            width: 800
+        });
+
+    
+$('.input-file').ace_file_input({
+    style: 'well',
+    btn_choose: 'Drop files here or click to choose',
+    btn_change: null,
+    no_icon: 'ace-icon fa fa-cloud-upload',
+    droppable: true,
+    thumbnail: 'small'//large | fit
+
+}).on('change', function(){
+    //console.log($(this).data('ace_input_files'));
+    //console.log($(this).data('ace_input_method'));
+});
+
+ </script>
+
+
 
 <script type="text/javascript">
 
-    @if(session()->get('message'))
+    if("{{session()->get('message')}}")
     swal.fire({
         title: "Success",
         text: "{{ session()->get('message') }}",
         type: "success",
         timer: 3000
     });
-    @elseif(session()->get('error'))
+    elseif("{{session()->get('error')}}")
     swal.fire({
         title: "Error",
         text: "{{ session()->get('error') }}",
         type: "error",
         timer: 3000
     });
-    @endif
+    endif
 
 </script>
 </body>

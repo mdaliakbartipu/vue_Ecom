@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/chosen.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker3.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-timepicker.min.css') }}" />
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
     <style type="text/css">
         .pagination {
             padding-left: 0;
@@ -54,22 +55,25 @@
             <!-- /.box-header -->
             <div class="box-body pad">
               
-        <textarea  name="desc"
-style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-  </textarea>
+        <textarea  name="desc" class="summernote">  </textarea>
             
             </div>
           </div>             
                       
                       <div class="row">
+                
                       <div class="col-md-2">
-                         <label class="control-label">Image</label>
-                          <input type="file" name="image">
-                       </div>
+                      <label class="control-label">Image</label>
+                          <input type="file" name="image" class="input-file" >
+                       </div> 
+
+                    <div class=" col-md-5 pull-right pr-10">
+                                <button type="submit" class="btn btn-primary"> Save </button>
+                                <a href="{{route('slider.index')}}" class="btn btn-danger">Back</a>
+                    </div>                       
+        
                       </div>
-           <br/>
-                       <button type="submit" class="btn btn-primary"> Save </button>
-                      <a href="{{route('slider.index')}}" class="btn btn-danger">Back</a>
+            
                      
                     </form>
                   </div>
@@ -79,7 +83,8 @@ style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1p
             
 
 @endsection
-
+<script>
+</script>
 @section('js')
 
     <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
@@ -88,15 +93,26 @@ style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1p
     <script src="{{ asset('assets/js/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ asset('assets/js/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/daterangepicker.min.js') }}"></script>
-
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.bootstrap.min.js') }}"></script>
 
     <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
     <script src="{{ asset('assets/js/ace.min.js') }}"></script>
 
+
+<!-- Rich text editor -->
+
+
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
+
+$('.summernote').summernote({
+            placeholder: 'Write short description about your products',
+            tabsize: 2,
+            height: 300,
+            width: 800
+        });
+
 
         function delete_check(id)
         {
@@ -202,25 +218,7 @@ style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1p
     <!--Drag and drop-->
     <script type="text/javascript">
 
-        jQuery(function($) {
-
-
-            $('#id-input-file-3').ace_file_input({
-                style: 'well',
-                btn_choose: 'Drop files here or click to choose',
-                btn_change: null,
-                no_icon: 'ace-icon fa fa-cloud-upload',
-                droppable: true,
-                thumbnail: 'small'//large | fit
-
-            }).on('change', function(){
-                //console.log($(this).data('ace_input_files'));
-                //console.log($(this).data('ace_input_method'));
-            });
-
-
-        });
-
+  
     </script>
 
     <!--date range picker-->

@@ -4,29 +4,8 @@
     <i class="fa fa-plus-circle"></i> Product
 @stop
 @section('css')
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery.gritter.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.custom.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/chosen.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker3.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-timepicker.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/daterangepicker.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-colorpicker.min.css') }}" />
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-       {{-- Add button --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   
-
-    
-    {{-- Auto populate Dropdown with jQuery AJAX --}}
-   
-  
-
-
-
 @stop
 
 
@@ -35,7 +14,7 @@
 
     <div class="row">
 
-        <div class="col-sm-8 col-sm-offset-2">
+        <div class="col-sm-8">
           {{--   <div class="widget-box"> --}}
                 <div class="widget-header">
                     <h4 class="widget-title"> @yield('page-header')</h4>
@@ -136,7 +115,7 @@
                                 <label class="col-sm-3 control-label" for="form-field-1-1"> Product Short Description </label>
 
                                 <div class="col-sm-9">
-                                    <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control" name="desc"></textarea>
+                                    <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="summernote" name="desc"></textarea>
                                     
                                 </div>
                             </div>
@@ -158,7 +137,7 @@
                                 <label class="col-sm-3 control-label" for="form-field-1-1"> Product Details  </label>
 
                                 <div class="col-sm-9">
-                                    <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control" name="details"></textarea>
+                                    <textarea type="text"  placeholder="Product Details" class="form-control summernote" name="details"></textarea>
                                     
                                 </div>
                             </div>
@@ -282,49 +261,14 @@
         </div>
     </div>
  
-
-    
-    
-    
-
-
-
 @endsection
 
 @section('js')
 
-    <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-ui.custom.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.ui.touch-punch.min.js') }}"></script>
-    <script src="{{ asset('assets/js/chosen.jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/spinbox.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-timepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
-    <script src="{{ asset('assets/js/daterangepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-colorpicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.knob.min.js') }}"></script>
-    <script src="{{ asset('assets/js/autosize.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.inputlimiter.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.maskedinput.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-tag.min.js') }}"></script>
-   
-    <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
-    <script src="{{ asset('assets/js/ace.min.js') }}"></script>
-
-
-     {{-- Auto populate Dropdown with jQuery AJAX  --}}
-  
-
-
-   
-
-     {{-- snippets --}}
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-   
+    
    <script type="text/javascript">
+
+
       let rowIndex = 1;
       //  will start by naming name from adding 2 as postfix
     

@@ -53,7 +53,7 @@
             <!-- /.box-header -->
             <div class="box-body pad">
               
-        <textarea  name="desc"
+        <textarea  name="desc" class="summernote"
 style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">       {{ $blog->desc }}
   </textarea>
             
@@ -63,7 +63,7 @@ style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1p
                       <div class="row">
                       <div class="col-md-2">
                          <label class="control-label">Image</label>
-                          <input type="file" name="image" id="image">
+                          <input type="file" name="image" class="input-file-image">
                        </div>
                       </div>
             <br/>
@@ -78,6 +78,8 @@ style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1p
             
 
 @endsection
+
+
 
 @push('scripts')
 

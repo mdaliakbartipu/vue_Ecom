@@ -45,12 +45,6 @@
                           <input type="text" class="form-control" name="name" value="{{ $testimonial->name }}">
                         </div>
                        </div>
-                       <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Photo</label>
-                          <input type="file" class="form-control" name="image" style="background:grey">
-                        </div>
-                       </div>
                       </div>
                       <div class="row">
                       <div class="col-md-6">
@@ -70,15 +64,24 @@
             <!-- /.box-header -->
             <div class="box-body pad">
               
-        <textarea  name="message"
+        <textarea  name="message" class="summernote"
 style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">         {{ $testimonial->message }}
   </textarea>
             
             </div>
           </div>  
-                    
-               <button type="submit" class="btn btn-primary"> Save </button>
+          <div class="col-md-2">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Photo</label>
+                          <input type="file" class="form-control input-file" name="image" style="background:grey">
+                        </div>
+                       </div>
+                       <br>
+                       <div class="pull-right col-md-5">
+                       <button type="submit" class="btn btn-primary"> Save </button>
                <a href="{{route('testimonial.index')}}" class="btn btn-danger">Back</a>
+
+                       </div>
                       
                     </form>
                   </div>
@@ -158,7 +161,6 @@ style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1p
                 // https://github.com/yajra/laravel-datatables
                 // processing: true,
                 // serverSide: true,
-                {{--ajax: '{{ url('') }}',--}}
                 // columns:[
                 //     {"data":"first_name"},
                 //     {"data":"last_name"},

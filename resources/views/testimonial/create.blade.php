@@ -64,17 +64,16 @@
             <!-- /.box-header -->
             <div class="box-body pad">
               
-        <textarea  name="message"
-style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+        <textarea  name="message" class="summernote" >
   </textarea>
             
             </div>
           </div>  
 
-          <div class="row" style="margin:1em;">
+          <div class="row" >
                       <div class="col-md-2">
                          <label class="control-label">Image</label>
-                          <input type="file" name="image">
+                          <input type="file" name="image" class="input-file">
                        </div>
           </div>
                     
@@ -166,7 +165,7 @@ style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1p
                 // https://github.com/yajra/laravel-datatables
                 // processing: true,
                 // serverSide: true,
-                {{--ajax: '{{ url('') }}',--}}
+            
                 // columns:[
                 //     {"data":"first_name"},
                 //     {"data":"last_name"},
