@@ -99,7 +99,9 @@ class PromotionController extends Controller
              'image'     => 'mimes:jpeg,jpg,png',
             'slug'     => 'required',
             ]);
+
         $promotion = Promotion::find($id);
+        
         if(Input::hasFile('image'))
     {
         $usersImage = public_path("front/assets/.uploads/promotions/{$promotion->image}"); // get previous image from folder

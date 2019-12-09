@@ -54,7 +54,10 @@
                             <td> {{ $slider->title }} </td>
                             <td> {{ $slider->sub_title }} </td>
                           
-     <td> <img class="img-responsive img-thumbnail" src="front/assets/.uploads/sliders/'.<?=$slider->image?>"  style="height: 50px; weight: 30px;" alt=""> </td>
+     <td> 
+          <img class="" src="{{ asset('front/assets/.uploads/sliders/'.$slider->image_1) }}"  style="height: 50px; width: 40px;" alt=""> 
+         <img class="" src="{{ asset('front/assets/.uploads/sliders/'.$slider->image_2) }}"  style="height: 50px; width: 40px;" alt="" > 
+        </td>
                            
                  
                  

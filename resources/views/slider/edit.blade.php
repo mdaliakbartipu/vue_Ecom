@@ -33,7 +33,7 @@
                   
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('slider.update',$slider->id) }}"  enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('slider.update', $slider->id) }}"  enctype="multipart/form-data">
                          {{ csrf_field() }}
                        {{ method_field('PUT') }}
                     <div class="row">
@@ -53,15 +53,21 @@
                       </div>
                       
                       <div class="row">
-                      <div class="col-md-2">
-                         <label class="control-label">Image</label>
-                          <input type="file" name="image" id="image">
+                      <div class="col-md-4">
+                         <label class="control-label input-file">Image left</label>
+                          <input type="file" name="image_1" id="image1">
+                       </div>
+                       <div class="col-md-4">
+                         <label class="control-label input-file">Image right</label>
+                          <input type="file" name="image_2" id="image2">
                        </div>
                       </div>
 
-                       <button type="submit" class="btn btn-primary"> Save </button>
-                      <a href="{{route('slider.index')}}" class="btn btn-danger">Back</a>
-                     
+                      <div style="margin-top:20px">
+                              <button type="submit" class="btn btn-primary"> Save </button>
+                              <a href="{{route('slider.index')}}" class="btn btn-danger">Back</a>                     
+                      </div>
+                       
                     </form>
                   </div>
                 </div>

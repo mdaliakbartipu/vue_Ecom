@@ -59,7 +59,7 @@ Route::get('form', function (){
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function (){
-    Route::get('/admin', 'HomeController@index')->name('home');
+    Route::get('/sadmin', 'HomeController@index')->name('home');
 Route::resource('group', 'GroupController');
 Route::resource('slider','SliderContoller');
 Route::resource('size','SizeController');
