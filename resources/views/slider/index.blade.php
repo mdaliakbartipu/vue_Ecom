@@ -42,8 +42,9 @@
                     <table id="table" class="table table-striped table-bordered" style="width:100%">
                       <thead class=" text-primary">
                         <th> ID </th>
-                        <th> title </th>
-                        <th> Sub_title </th>
+                        <th> Title </th>
+                        <th> Sub Title </th>
+                        <th> Slug </th>
                         <th> Image </th>
                         <th> Action </th>
                       </thead>
@@ -53,6 +54,7 @@
                             <td> {{ $key +1 }} </td>
                             <td> {{ $slider->title }} </td>
                             <td> {{ $slider->sub_title }} </td>
+                            <td> {{ $slider->slug }} </td>
                           
      <td> 
           <img class="" src="{{ asset('front/assets/.uploads/sliders/'.$slider->image_1) }}"  style="height: 50px; width: 40px;" alt=""> 

@@ -43,11 +43,21 @@
                           <input type="text" class="form-control" name="title" value="{{ $slider->title }}">
                         </div>
                        </div>
-                      </div><div class="row">
+                      </div>
+                      <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Sub_title</label>
+                          <label class="bmd-label-floating">Sub Title</label>
                           <input type="text" class="form-control" name="sub_title"  value="{{ $slider->sub_title }}">
+                        </div>
+                       </div>
+                      </div>
+
+                      <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Slug</label>
+                          <input type="text" class="form-control" name="slug"  value="{{ $slider->slug }}">
                         </div>
                        </div>
                       </div>

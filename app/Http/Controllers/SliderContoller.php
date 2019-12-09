@@ -137,6 +137,7 @@ class SliderContoller extends Controller
 
         $slider->title = $request->title;
          $slider->sub_title = $request->sub_title;
+         $slider->slug = $request->slug;
          $slider->save();
 
          return redirect()->route('slider.index')->with('successMsg','Slider Successfully Updated');
