@@ -1,4 +1,8 @@
 <div class="clearfix"></div>
+<div>
+<button-counter>    </button-counter>
+</div>
+
 
 <div class="home_section_bg">
         <div class="product_area deals_product">

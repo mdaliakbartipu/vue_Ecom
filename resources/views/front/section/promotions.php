@@ -4,7 +4,7 @@ $src = array(); $img = array();
 foreach($promotions as $promotion):
     $img[] =  file_exists(ASSETS."/.uploads/promotions/".$promotion->image)? 
                 ASSETS.'/.uploads/promotions/'.$promotion->image :
-                ASSETS.'/.img/promotions/'.$promotion->image;
+                ASSETS.'/img/promotions/'.$promotion->image;
     $src[] = $promotion->slug;
 endforeach; ?>
 

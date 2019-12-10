@@ -1,4 +1,4 @@
-    <header>
+<header>
 
         <div class="main_header header_padding">
  <div class="container">
