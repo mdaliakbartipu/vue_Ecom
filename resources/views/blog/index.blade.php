@@ -29,7 +29,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
-                <a href="{{route('blog.create')}}" class="pull-right btn btn-primary">Add new</a>
+                <a href="{{route('blog.create')}}" class="btn btn-primary" style="margin-top:1em">Add new</a>
               <div class="card">
                 <div class="card-header card-header-primary">
                 <h4 class="card-title ">Blog</h4>

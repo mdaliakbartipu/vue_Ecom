@@ -5,11 +5,11 @@
 @stop
 @section('css')
 
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/chosen.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker3.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-timepicker.min.css') }}" />
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
     <style type="text/css">
         .pagination {
             padding-left: 0;
