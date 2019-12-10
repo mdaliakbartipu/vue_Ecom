@@ -11,6 +11,7 @@ endforeach; ?>
 <div class="banner_area mb-55 ">
             <div class="container">
                 <div class="row" >
+                    
                     <div class="col-lg-6 col-md-6" >
                         <figure class="single_banner">
                             <div class="banner_thumb para-two">
@@ -20,7 +21,8 @@ endforeach; ?>
                             </div>
                         </figure>
                     </div>
-                    <div class="col"style="margin-left:-2px;" >
+
+                    <div class="col">
                         <div class="row">
                             <figure class="single_banner" style="height:100%;margin-top:-3px" >
                                 <div class="banner_thumb">

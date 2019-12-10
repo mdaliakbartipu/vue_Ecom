@@ -7,20 +7,16 @@
                   <p class="text-center time-to mb-10">Time to shop special</p>
 <?php foreach($cats as $cat): 
     if($cat->position == '0') continue; ?>
-
-                <div class="single_categories_product" style="background: url('<?=ASSETS?>/.uploads/category/<?=$cat->image?>'); background-size:cover;">
-                    <div class="categories_product_content text-center">
-                        <h4 class="text-center"><?=$cat->name?></h4>
-                        <div class="hover_content">
-                            <ul class="mt-4 mb-4">
-                                <?php foreach($subCats[$cat->id] as $subcat): ?>
-                                    <li><a class="text-la" href="/subcat_products/<?=$subcat->id?>"><?=$subcat->name?></a></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                        <a href="/cat/<?=$cat->id?>" type="button" class="shopnow btn btn-primary" style="color:black">Shop Now</a>
-                    </div>
-                </div>
+                <catproduct
+                    catname="<?=$cat->name?>" 
+                    styletext = "background: url('<?=ASSETS?>/.uploads/category/<?=$cat->image?>'); background-size:cover;"
+                    catlink = "/cat/<?=$cat->id?>"
+                    subcatlist = ""
+                >
+                <?php foreach($subCats[$cat->id] as $subcat): ?>
+                    <li><a class="text-la" href="/subcat_products/<?=$subcat->id?>"><?=$subcat->name?></a></li>
+                <?php endforeach; ?>
+                </catproduct> 
                 
 <?php endforeach; ?>
             </div>

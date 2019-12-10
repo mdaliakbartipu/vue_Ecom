@@ -10,11 +10,7 @@
 									ASSETS.'/.uploads/banners/'.$banner->image :
 									ASSETS.'/img/banners/'.$banner->image;
 						?>
-						<figure class="single_banner ">
-    						<div class="banner_thumb mb-2 para-one">
-    							<a href="<?=$banner->slug?>"><img src="<?=$image?>" alt=""></a>
-    						</div>
-						</figure>
+						<addvertise slug="<?=$banner->slug?>" image="<?=$image?>"> </addvertise>
 						<?php endforeach; ?>
     				</div>
     				<!--banner area end-->
@@ -32,14 +28,16 @@
 		$img_two = file_exists(ltrim(ASSETS, '/')."/.uploads/sliders/".$slider->image_2)? 
 							ASSETS.'/.uploads/sliders/'.$slider->image_2 :
 							ASSETS.'/img/sliders/'.$slider->image_2 ;  ?>
-	<li class="slide">
-		<div class="slide-partial slide-left"><img src="<?=$img_one?>"/></div>
-		<div class="slide-partial slide-right"><img src="<?=$img_two?>"></div>
-		<h3 class="title1 title"><span class="title-text"><?=$slider->title?></span></h3><br>
-		<h1 class="title"><span class="title-text"><?=$slider->sub_title?></span></h1>
-		<p class="title3 title "><span class="title-text">discount <b style="color:red;"><?=$slider->discount?>%</b> off this week </span></p>
-		<a href="<?=$slider->slug?>" class="text-uppercase title4 wow flipInX"> discover Now </a>
-	</li>
+
+	<slider-image 
+		title	  = "<?=$slider->title?>" 
+		subtitle  = "<?=$slider->sub_title?>" 
+		imgleft   = "<?=$img_one?>" 
+		imgright  = "<?=$img_two?>" 
+		slug      = "<?=$slider->slug?>" 
+		discount  = "<?=$slider->discount?>"
+		>
+	</slider-image>
 	<?php endforeach;?>
 
 	</ul>

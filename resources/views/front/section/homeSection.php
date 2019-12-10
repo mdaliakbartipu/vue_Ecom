@@ -1,6 +1,5 @@
 <div class="clearfix"></div>
 <div>
-<button-counter>    </button-counter>
 </div>
 
 
