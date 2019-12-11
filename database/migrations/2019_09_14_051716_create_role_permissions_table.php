@@ -21,7 +21,6 @@ class CreateRolePermissionsTable extends Migration
             $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('permission_id');
             $table->timestamps();
-            $table->unique(['company_id','role_id','permission_id']);
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
             $table->foreign('role_id')->references('id')->on('roles');

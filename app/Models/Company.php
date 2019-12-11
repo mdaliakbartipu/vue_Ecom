@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\App;
 
 class Company extends Model
 {
+    protected $table = 'company';
     protected $fillable = [
         'group_id', 'name', 'head_office', 'factory', 'contact_name',  'position',  'phone_number',  'fax', 'email', 'country', 'top_text', 'logo'
     ];
