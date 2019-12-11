@@ -105,7 +105,7 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request);
+        // dd($request);
        $this->validate($request,[
            'name'     => 'required',
            'title'     => 'required',
@@ -117,7 +117,6 @@ class CompanyController extends Controller
            'linkedin'     => 'nullable',
            'instagram'     => 'nullable',
             'logo'     => 'required'
-
            
        ]);
      
@@ -125,27 +124,31 @@ class CompanyController extends Controller
         if(Input::hasFile('logo'))
     {
         $usersImage = public_path("front/uploads/company/{$company->logo}"); // get previous image from folder
-        if (file_exists($usersImage)) 
+        
+        if (file_exists($usersImage)) {
             unlink($usersImage);
         }
+
         $image = Input::file('logo');
         $imageName = time() . '-' . $image->getClientOriginalName();
         $image = $image->move(('uploads/company'), $imageName);
         $company->logo= $imageName;
     }
 
-          $company->name = $request->name;
-          $company->head_office = $request->head_office;
-          $company->factory = $request->factory;
-          $company->contact_name = $request->contact_name;
-          $company->position = $request->position;
-          $company->phone_number = $request->phone_number;
-          $company->fax = $request->fax;
-          $company->email = $request->email;
-          $company->country = $request->country;
-          $company->top_text = $request->top_text;
+          $company->name                = $request->name;
+          $company->title                   = $request->title;
+          $company->phone               = $request->phone;
+          $company->fax                     = $request->fax;
+          $company->email                 = $request->email;
+          $company->logo                   = $request->logo;
 
+          $company->facebook                 = $request->facebook??null;
+          $company->twitter                      = $request->twitter??null;
+          $company->linkedin                    = $request->linkedin??null;
+          $company->instagram                = $request->instagram??null;
           $company->save();
+
+
          return redirect()->route('company.index')->with('successMsg','Company Successfully Updated');
     }
 

@@ -3,7 +3,7 @@
 use App\Models\Company;
 use Illuminate\Database\Seeder;
 
-class CompaniesTableSeeder extends Seeder
+class CompanyTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,11 +13,10 @@ class CompaniesTableSeeder extends Seeder
     public function run()
     {
         Company::create([
-            'group_id' => 1,
-            'name' => 'Company Pacific',
-            'head_office' => 'Here is Head office Information',
-            'factory' => 'Here is Factory office Information',
-            'contact_name' => 'Mr. Contact Name',
+            'name' => 'D7 Brigus',
+            'title' => 'Shop Fashion Clothing & Accessories - Official Site - d7brigus.com',
+            'logo' => 'logo.png',
+            'phone' => 'Mr. Contact Name',
             'position' => 'CEO',
             'phone_number' => '01777777777',
             'fax' => '01777777777',
