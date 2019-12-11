@@ -39,6 +39,10 @@
                 <i class="menu-icon fa fa-tachometer"></i>
                 <span class="menu-text"> Dashboard </span>
             </a>
+            
+            <a target="_blank" href="{{ url('/') }}" class="text-center" style="border:1px solid grey;padding:1em;margin:1em;background:rgb(140, 145, 152);color:rgb(170, 203, 255)">
+                <span class="menu-text text-center"><b>Visit Website </b> </span>
+            </a>
 
             <b class="arrow"></b>
         </li>

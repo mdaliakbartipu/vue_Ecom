@@ -45,15 +45,15 @@
                         </div>
                        </div>
                       </div>
-                      <div class="row">
+                      <div class="row" >
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Color Code <small>(HEX)</small></label>
+                          <label class="bmd-label-floating">Color Code <small>(HEX)</small><a target="_blank" href="https://www.color-hex.com/color-names.html"> <b>Colors List</b></a></label>
                           <input type="text" class="form-control" name="code">
                         </div>
                        </div>
                       </div>   
-                      <div class="row">
+                      <div class="row" style="margin-bottom:1em">
                       <div class="col-md-2">
                          <label class="control-label">Image</label>
                           <input type="file" name="image">

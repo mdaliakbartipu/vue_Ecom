@@ -29,7 +29,7 @@
         </div>
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title "> Update Category</h4>
+                  <h4 class="card-title "> Update Color</h4>
                   
                 </div>
                 <div class="card-body">
@@ -55,7 +55,7 @@
                        </div>
                       </div>  
 
-                      <div class="row">
+                      <div class="row" style="margin-bottom:1em">
                       <div class="col-md-2">
                          <label class="control-label">Image</label>
                           <input type="file" name="image" id="image">
@@ -138,15 +138,6 @@
         jQuery(function($) {
             $('#dynamic-table').DataTable({
                 "ordering": false,
-                // install laravel datatable this package
-                // https://github.com/yajra/laravel-datatables
-                // processing: true,
-                // serverSide: true,
-                {{--ajax: '{{ url('') }}',--}}
-                // columns:[
-                //     {"data":"first_name"},
-                //     {"data":"last_name"},
-                // ],
                 "bPaginate": true,
             });
 

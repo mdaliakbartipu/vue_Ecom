@@ -41,17 +41,20 @@ class ColorController extends Controller
          $this->validate($request,[
            'name'     => 'required',
            'code' => 'required',
-           'image'     => 'required|mimes:jpeg,jpg,png'
+           'image'     => 'required|mimes:jpeg,jpg,png,gif'
        ]);
+
+       $path = "front/assets/.uploads/color";
+
      $image = $request->file('image');
      $slug = str_slug($request->name);
         if(null!==($image)){
             $currentDate = Carbon::now()->toDateString();
             $imageName = $slug .'-'. $currentDate .'-'. uniqid() .'.'. $image->getClientOriginalExtension();
-        if(!file_exists('uploads/color')){
-            mkdir('uploads/color',0777,true);
+        if(!file_exists($path)){
+            mkdir($path,0777,true);
         }
-        $image->move('uploads/color',$imageName);
+        $image->move($path,$imageName);
         } else {
             $imageName = 'default.png';
         }
@@ -99,20 +102,28 @@ class ColorController extends Controller
          $this->validate($request,[
             'name'     => 'required',
             'code'     => 'required',
-            'image'    => 'mimes:jpeg,jpg,png',
+            'image'    => 'mimes:jpeg,jpg,png,gif',
         ]);
      
+        $path = "front/assets/.uploads/color";
+       
+        if(!file_exists($path)){
+            mkdir($path,0777,true);
+        }
+
 
          $color = Color::find($id);
         if(Input::hasFile('image'))
     {
-        $usersImage = public_path("uploads/color/{$color->image}"); // get previous image from folder
-        if (file::exists($usersImage)) { // unlink or remove previous image from folder
+        $usersImage = "/".$path; // get previous image from folder
+        
+        if (file_exists($usersImage)) { // unlink or remove previous image from folder
             unlink($usersImage);
         }
+
         $image = Input::file('image');
         $imageName = time() . '-' . $image->getClientOriginalName();
-        $image = $image->move(('uploads/color'), $imageName);
+        $image = $image->move(($path), $imageName);
         $color->image = $imageName;
     }
 
