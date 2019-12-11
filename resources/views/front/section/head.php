@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>D7 Brigus - Shop Fashion Clothing & Accessories - Official Site - d7brigus.com</title>
+    <title><?=$company->name?> - <?=$company->title?></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="front/assets/img/logo/favicon.png">
 
     <!-- CSS 
     ========================= -->

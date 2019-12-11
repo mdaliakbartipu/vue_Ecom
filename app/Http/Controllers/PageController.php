@@ -52,8 +52,11 @@ class PageController extends Controller
        ]);
     
         $page = new Page();
-        $page->pageslug = $request->pageSlug;
-        $page->pageName = $request->pageName;
+        $page->slug = $request->pageSlug;
+        $page->name = $request->pageName;
+        $page->content = $request->content;
+        $page->tag = $request->tag;
+        
         $page->save();
 
         $tag  = new Tags;
@@ -84,8 +87,10 @@ class PageController extends Controller
      */
     public function edit($id)
     {
+        $tags = Tags::forPage();
         $page = Page::findOrFail($id);
-        return view('page.edit', compact('page'));
+
+        return view('page.edit', compact('page' ,'tags'));
     }
 
     /**
@@ -103,11 +108,15 @@ class PageController extends Controller
         ]);
      
          $page = Page::find($id); 
-         $page->pageSlug = $request->pageSlug;
-         $page->pageName = $request->pageName;
-       
-        
+         $page->slug = $request->pageSlug;
+         $page->name = $request->pageName;
+         $page->content = $request->content??'Comming Soon...';
+         $page->tag = (int)$request->tag;
          $page->save();
+        
+         $tag = Tags::where('page_id', $page->id);
+         $tag? $tag->tag_id = (int)$request->tag:null;
+
          return redirect()->route('page.index')->with('successMsg','Page Successfully Updated');
     }
 

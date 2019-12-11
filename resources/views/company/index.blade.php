@@ -48,7 +48,7 @@
                        <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Title</label>
-                          <input type="text" class="form-control" name="title" value="{{ $company->contact_name }}">
+                          <input type="text" class="form-control" name="title" value="{{ $company->title }}">
                         </div>
                        </div>
                       </div>
@@ -99,27 +99,27 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Facebook</label>
-                          <input type="text" class="form-control" name="facebook" value="">
+                          <input type="text" class="form-control" name="facebook" value="{{ $company->facebook }}">
                         </div>
                        </div>
                        <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Twitter</label>
-                          <input type="text" class="form-control" name="twitter" value="">
+                          <input type="text" class="form-control" name="twitter" value="{{ $company->twitter }}">
                         </div>
                        </div>
 
                        <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Instagram</label>
-                          <input type="text" class="form-control" name="instagram" value="">
+                          <input type="text" class="form-control" name="instagram" value="{{ $company->instagram }}">
                         </div>
                        </div>
 
                        <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Linkedin</label>
-                          <input type="text" class="form-control" name="linkedin" value="">
+                          <input type="text" class="form-control" name="linkedin" value="{{ $company->linkedin }}">
                         </div>
                        </div>
                       </div>

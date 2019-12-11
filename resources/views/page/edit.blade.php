@@ -42,7 +42,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Page Name</label>
-                          <input type="text" class="form-control" name="pageName" value="{{ $page->pageName }}">
+                          <input type="text" class="form-control" name="pageName" value="{{ $page->name }}">
                         </div>
                        </div>
                       </div>
@@ -50,17 +50,35 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Page Slug</label>
-                          <input type="text" class="form-control" name="pageSlug" value="{{ $page->pageSlug }}">
+                          <input type="text" class="form-control" name="pageSlug" value="{{ $page->slug }}">
                         </div>
                        </div>
                       </div>  
-                    
 
-            
+                      <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Page Tag</label>
+                          <select name="tag" id="tag" class="form-control">
+                              <?php foreach($tags as $tag): ?>
+                              <option value="<?=$tag->id?>" <?=$tag->id==$page->tag?'selected':''?>><?=$tag->name?></option>
+                              <?php endforeach; ?>
+                          </select>
+                        </div>
+                       </div>
+                      </div>   
 
-       
-                      
-                      
+                      <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Content</label>
+                            <textarea  name="content" class="summernote" style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                            {{ $page->content?? 'Your page content goes here ' }}
+                            </textarea>
+                        </div>
+                       </div>
+                      </div>  
+
                       <a href="{{route('page.index')}}" class="btn btn-danger">Back</a>
                       <button type="submit" class="btn btn-primary"> Save </button>
                     </form>
@@ -141,7 +159,6 @@
                 // https://github.com/yajra/laravel-datatables
                 // processing: true,
                 // serverSide: true,
-                {{--ajax: '{{ url('') }}',--}}
                 // columns:[
                 //     {"data":"first_name"},
                 //     {"data":"last_name"},

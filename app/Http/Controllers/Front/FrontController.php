@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Category;
 use App\SubCategory;
 use App\SubSubCategory;
@@ -16,6 +17,8 @@ class FrontController extends Controller
         //Getting all menues so that it can be available in all pages
         
         $this->cat = Category::all();
+        $this->company = Company::first();
+
         if(!$this->cat){
             echo "Please configure your Database";
         }
@@ -27,5 +30,7 @@ class FrontController extends Controller
                 $this->subSubCat[$this->subCategory->id] = SubSubCategory::getAllSubSubCat($this->subCategory->id);
             }
          }
+
+
     }
 }

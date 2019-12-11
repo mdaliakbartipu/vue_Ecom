@@ -6,12 +6,8 @@
                     <div class="col-12 col-lg-12 col-md-12">
                         <figure>
                             <figcaption class="about_content">
-                                <h1>We are a digital agency focused on delivering content and utility user-experiences.</h1>
-                                <p class="text-justify">
-                                    Our brand is inspired by the go-getters, the innovators, the dreamers; and our designs embody this very spirit. We re-imagine timeless aesthetics for a modern era, creating original prints and designing unique pieces that are accessible to all. Our passion is to provide quality apparel to our customers. We’re confident that you’ll love what we will bring to you. We were founded on the belief that style shouldn’t break the bank. Our goal is to change the way you think about fashion by delivering premium designs at radically fair prices.
-                                </p>
-                               
-                            </figcaption>
+                                    something
+                        </figcaption>
                         </figure>
                     </div>
                 </div>

@@ -25,7 +25,7 @@ class ProductsTableSeeder extends Seeder
                     $subSubCats = DB::table('sub_sub_categories')->where('sub_category_id', $subcat->id)->get('id');
                     {
                         foreach($subSubCats as $subSubCat){
-                            for($start = 0 ; $start<5; $start++){
+                            for($start = 0 ; $start<1; $start++){
                                 DB::table('products')->insert([
                                     'category_id' => (int)$cat->id,
                                     'sub_category_id' => (int)$subcat->id,

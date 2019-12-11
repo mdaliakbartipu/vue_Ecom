@@ -1,4 +1,5 @@
-  <div class="contact_page_bg">
+<div class="">
+         <div class="contact_page_bg">
         <!--contact map start-->
         <div class="contact_map">
             <div class="map-area">
@@ -50,4 +51,4 @@
             </div>
             <!--contact area end-->
         </div>
-    </div>
+    </div>  </div>

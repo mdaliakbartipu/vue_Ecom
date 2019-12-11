@@ -2,7 +2,6 @@
 <html class="no-js" lang="en">
 
     <?php include('section/head.php');?>
-<div id="app">
    <!--Offcanvas menu area start-->
     <?php include("section/offcanvas.php");?>
     <!--Offcanvas menu area end-->
@@ -10,8 +9,10 @@
     <div class="new-mar-pad">
      <?php include("section/header.php");?>
     </div>
+
+    <div id="app">
     
-	<!--header area end-->
+    <!--header area end-->
     <div class="new-mar-pad">
     <!--slider area start-->
     <?php include("section/slider.php");?>
@@ -50,4 +51,4 @@
     <!-- Vuejs ended -->
     <?php include("section/script.php");?>
     
-<?php include("section/foot.php");?>
+    <?php include("section/foot.php");?>

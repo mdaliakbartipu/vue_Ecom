@@ -15,7 +15,7 @@ class SubCatagoryTableSeeder extends Seeder
     {   
         $cats = DB::table('categories')->get('id'); 
         foreach($cats as $cat){
-            for($limit=0; $limit<4; $limit++){
+            for($limit=0; $limit<2; $limit++){
                 
                 DB::table('sub_categories')->insert([
                     'category_id' => (String)$cat->id,

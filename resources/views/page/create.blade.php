@@ -66,6 +66,17 @@
                        </div>
                       </div>   
 
+                      <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Content</label>
+                            <textarea  name="content" class="summernote" style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                            {{ $page->content?? 'Your page content goes here ' }}
+                            </textarea>
+                        </div>
+                       </div>
+                      </div>  
+
            <button type="submit" class="btn btn-primary"> Save </button>     
          <a href="{{route('page.index')}}" class="btn btn-danger">Back</a>
                     </form>

@@ -22,6 +22,13 @@ Route::get('/productCart', 'Front\PagesController@cart');
 Route::get('/productCheckout', 'Front\PagesController@checkout');
 Route::get('/singleProduct/{id}', 'Front\PagesController@singleProduct');
 
+Route::get('/pages/{slug}', 'Front\PagesController@pages');
+
+
+Route::get('/about', 'Front\PagesController@about');
+Route::get('/contact', 'Front\PagesController@contact');
+
+
 
 // Get Sub category
 Route::get('category/{category}/sub-category', 'CategoryController@subCategories')

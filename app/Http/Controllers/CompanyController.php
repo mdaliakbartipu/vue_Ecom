@@ -116,7 +116,7 @@ class CompanyController extends Controller
            'twitter'     => 'nullable',
            'linkedin'     => 'nullable',
            'instagram'     => 'nullable',
-            'logo'     => 'required'
+            'logo'     => 'nullable'
            
        ]);
      
@@ -130,9 +130,16 @@ class CompanyController extends Controller
         }
 
         $image = Input::file('logo');
+        
+        $imageFilePath = "front/assets/.uploads/company";
+
+        if($image){
+            if (!file_exists($imageFilePath)) {
+                mkdir($imageFilePath, 0777, true);
+            }
+        }
         $imageName = time() . '-' . $image->getClientOriginalName();
-        $image = $image->move(('uploads/company'), $imageName);
-        $company->logo= $imageName;
+        $image = $image->move(($imageFilePath), $imageName);
     }
 
           $company->name                = $request->name;
@@ -140,7 +147,8 @@ class CompanyController extends Controller
           $company->phone               = $request->phone;
           $company->fax                     = $request->fax;
           $company->email                 = $request->email;
-          $company->logo                   = $request->logo;
+
+          $request->logo?$company->logo= $imageName:null;
 
           $company->facebook                 = $request->facebook??null;
           $company->twitter                      = $request->twitter??null;

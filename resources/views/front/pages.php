@@ -13,8 +13,10 @@
     <div id="app">
     
 
+    <?php include("section/commonPage.php");?>
 
-    <?php include("section/contact-us.php");?>
+
+    
     <!--footer area start-->
     <?php include("section/footer.php");?>
     <!--footer area end-->

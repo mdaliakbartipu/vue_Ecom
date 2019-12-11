@@ -1,5 +1,4 @@
 <header>
-
         <div class="main_header header_padding">
  <div class="container">
                 <!--header top start-->
@@ -37,7 +36,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-6 col-xs-12">
                             <div class="logo">
-                                <a href="/"><img src="<?=ASSETS?>/img/logo/logo.png" alt="" style="max-width:120%;"></a>
+                                <a href="/"><img src="<?=ASSETS?>/.uploads/company/<?=$company->logo?>" alt="" style="max-width:120%;"></a>
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-12 col-xs-12 text-center ">
@@ -51,27 +50,13 @@
                                             </ul>
                                         </li>
                                         <li class="mega_items"><a href="#">shop</a>
-                                            <!-- <div class="mega_menu">
-                                                <ul class="mega_menu_inner">
-                                                    <li><a href="#">Shop Layouts</a>
-                                                        <ul>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">other Pages</a>
-                                                        <ul>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">Product Types</a>
-                                                    </li>
-                                                </ul>
-                                            </div> -->
                                         </li>
                                         <li><a href="/blog">blog</a>
                                         </li>
                                         <li><a class="#" href="#">pages</a>
                                         </li>
 
-                                        <li><a href="/about">About Us</a></li>
+                                        <li><a href="/pages/about-us">About Us</a></li>
                                         <li><a href="/contact"> Contact Us</a></li>
                                     </ul>
                                 </nav>
@@ -89,55 +74,6 @@
 
                                         <span class="wishlist_count">0</span>
                                     </a>
-                                    <!--mini cart-->
-                                    <!-- <div class="mini_cart">
-                                        <div class="mini_cart_inner">
-                                            <div class="cart_item">
-                                                <div class="cart_img">
-                                                    <a href="#"><img src="<?=ASSETS?>/img/s-product/product.jpg" alt=""></a>
-                                                </div>
-                                                <div class="cart_info">
-                                                    <a href="#">Sit voluptatem rhoncus sem lectus</a>
-                                                    <p>Qty: 1 X <span> $60.00 </span></p>
-                                                </div>
-                                                <div class="cart_remove">
-                                                    <a href="#"><i class="ion-android-close"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="cart_item">
-                                                <div class="cart_img">
-                                                    <a href="#"><img src="<?=ASSETS?>/img/s-product/product2.jpg" alt=""></a>
-                                                </div>
-                                                <div class="cart_info">
-                                                    <a href="#">Natus erro at congue massa commodo</a>
-                                                    <p>Qty: 1 X <span> $60.00 </span></p>
-                                                </div>
-                                                <div class="cart_remove">
-                                                    <a href="#"><i class="ion-android-close"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="mini_cart_table">
-                                                <div class="cart_total">
-                                                    <span>Sub total:</span>
-                                                    <span class="price">$138.00</span>
-                                                </div>
-                                                <div class="cart_total mt-10">
-                                                    <span>total:</span>
-                                                    <span class="price">$138.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mini_cart_footer">
-                                            <div class="cart_button">
-                                                <a href="cart.html">View cart</a>
-                                            </div>
-                                            <div class="cart_button">
-                                                <a href="checkout.html">Checkout</a>
-                                            </div>
-
-                                        </div>
-                                    </div>-->
-                                    <!--mini cart end-->
                                 </div>
                             </div>
                         </div>
@@ -146,7 +82,6 @@
 
                 <!--header middel end-->
                 <!--header middel end-->
-
 
                 <div class="header_middle sticky-header second d-none sticky d-none">
                     <nav class="top-bar animate-dropdown fixed-icon" style="padding-top: 5px;">
@@ -159,18 +94,17 @@
                                             <nav class="pro_hide">
 
                                                 <ul class="navbar-nav mr-auto">
-                                                 
                                                 <li class="dropdown col-md-4 col-sm-4 col-lg-4 hidden-xs ">
                                                         <a href="#" class="top-cat-option ml-5" style="font-size: 15px; font-weight: 400; margin-top: -11px;"><i class="fa fa-bars" aria-hidden="true"></i></a>
                                                         <ul id="top_bar_menu" style="width:150px">
-                                                        <?php foreach($cats as $cat): ?>              
+                                                        <?php foreach($cats as $cat){ ?>  
                                                             <li class="top_bar_menu_item" style="width:150px">
                                                                     <a href="/category_products/<?=$cat->id?>" class="dropbtn">
                                                                     <?=$cat->name?>
                                                                         <!--  <i class="fa fa-caret-down"></i> -->
                                                                     </a>
                                                                 </li>
-                                                            <?php endforeach;?>
+                                                        <?php } ?>
                                                         
                                                         </ul>
                                                     </li>
@@ -195,6 +129,7 @@
                                 last-13">
 
                                     <img class="header-fixed-logo" src="<?=ASSETS?>/img/logo/companyIcon.png" alt="" style=" margin-top:3px; width:53px;">
+
                                 </div>
 
                                 <div class="hidden-xs hidden-xs hidden-sm col-md-5 col-lg-4 col-sm-d-none">
@@ -286,18 +221,21 @@
                     </nav><!-- /.top-bar -->
 
                 </div>
+
+
+                <!-- This should be added to vuejs -->
+                
                 <!--header bottom satrt-->
                 <div class="header_bottom">
                     <div class="row align-items-center">
-                        <div class="column1 col-lg-3 col-md-6 hide col-12 col-sm-d-none">
+                        <div class="column1 col-lg-3 col-md-6  col-12 col-sm-d-none">
                             <div class="categories_menu categories_three">
                                 <div class="categories_title">
-                                    <h2 class="categori_toggle">SHOP BY CATEGORY</h2>
+                                    <h2 class="">SHOP BY CATEGORY</h2>
                                 </div>
                                 <div class="categories_menu_toggle">
                                     <ul>
-
-                                    <?php foreach($cats as $cat): ?>
+                                    <?php foreach($cats as $cat):  ?>
                                         <li class="menu_item_children"><a href="/catagory_products/<?=$cat->id?>">
                                             <i class="<?=$cat->icon?> mr-10" aria-hidden="true"></i>
                                             <?=$cat->name?> <i class="fa fa-angle-right"></i></a>
@@ -332,30 +270,17 @@
                                 <form action="#">
 
                                   
+                                <!-- Should be added to vue -->
 								  <div class="hover_category">
                                         <select class="select_option" name="select" id="categori2">
                                             <option selected value="1">All Categories</option>
-                                            <option value="2">Accessories</option>
-                                            <option value="3">Accessories & More</option>
-                                            <option value="4">Butters & Eggs</option>
-                                            <option value="5">Camera & Video </option>
-                                            <option value="6">Mornitors</option>
-                                            <option value="7">Tablets</option>
-                                            <option value="8">Laptops</option>
-                                            <option value="9">Handbags</option>
-                                            <option value="10">Headphone & Speaker</option>
-                                            <option value="11">Herbs & botanicals</option>
-                                            <option value="12">Vegetables</option>
-                                            <option value="13">Shop</option>
-                                            <option value="14">Laptops & Desktops</option>
-                                            <option value="15">Watchs</option>
-                                            <option value="16">Electronic</option>
+                                            <?php foreach($cats as $cat): ?>
+                                            <option value="<?=$cat->id?>"><?=$cat->name?></option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div> 
+								  <!-- !!!!!!!!!!!!!!!!!!!!!!!!! -->
 								  
-								  
-								  
-
                                     <div class="search_box show last-day-7">
                                         <input placeholder="Search or enter web ID" type="text">
                                         <a href=""><button type="submit"><i class="fa fa-search"></i></button></a>

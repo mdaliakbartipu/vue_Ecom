@@ -51,8 +51,8 @@
                         @foreach($pages as $key=>$page)
                         <tr>
                             <td> {{ $key +1 }} </td>
-                            <td> {{ $page->pageName }} </td>
-                            <td> {{ $page->pageSlug }} </td>
+                            <td> {{ $page->name }} </td>
+                            <td> {{ $page->slug }} </td>
                             <td>{{ $page->tag }}</td>
 
                             
