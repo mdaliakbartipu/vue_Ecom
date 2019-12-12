@@ -1,3 +1,4 @@
 /vendor
 .env
 /public/front/.upload
+/public/front/shams

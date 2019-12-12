@@ -15,22 +15,22 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->unsignedBigInteger('sub_category_id');
-            $table->foreign('sub_category_id')->references('id')->on('sub_categories');
-            $table->unsignedBigInteger('sub_sub_category_id');
-            $table->foreign('sub_sub_category_id')->references('id')->on('sub_sub_categories');
+            $table->unsignedBigInteger('cat');
+            $table->foreign('cat')->references('id')->on('categories');
+            $table->unsignedBigInteger('sub');
+            $table->foreign('sub')->references('id')->on('sub_categories');
+            $table->unsignedBigInteger('super');
+            $table->foreign('super')->references('id')->on('sub_sub_categories');
             $table->string('name');
-            $table->string('pro_code');
-            $table->text('desc');
+            $table->string('code');
+            $table->text('description');
             $table->string('price');
             $table->string('discount');
             $table->text('details');
             $table->integer('sleeve');
             $table->integer('leglength');
             $table->integer('fit');
-            $table->string('image')->default('default.png');
+            $table->string('thumb')->default('noproduct.png');
             $table->timestamps();
         });
     }
