@@ -35,7 +35,7 @@ class ProductsTableSeeder extends Seeder
                                     'desc' => Str::random(150),
                                     'price' => rand(),
                                     'discount' => rand(),
-                                    'details' => Str::random(200),
+                                    'details' => Str::random(100),
                                     'sleeve' => $sleeves[array_rand($sleeves)]['id'],
                                     'leglength' => $leg_lengths[array_rand($leg_lengths)]['id'],
                                     'fit' => $fits[array_rand($fits)]['id']

@@ -23,10 +23,10 @@ class CreateProductsTable extends Migration
             $table->foreign('sub_sub_category_id')->references('id')->on('sub_sub_categories');
             $table->string('name');
             $table->string('pro_code');
-            $table->string('desc');
+            $table->text('desc');
             $table->string('price');
             $table->string('discount');
-            $table->string('details');
+            $table->text('details');
             $table->integer('sleeve');
             $table->integer('leglength');
             $table->integer('fit');
