@@ -60,7 +60,7 @@
                         $colorImage = file_exists('front/assets/.uploads/color/'."{{$color->image}}")?'front/assets/.uploads/color/{{$color->image}}':'front/assets/img/color/color.gif';
                      ?>
      <td class="text-center"> 
-        <img style="border-radius:50%;width:50px;height:50px" class="img-responsive img-thumbnail" src="{{ $colorImage }}"  style="height: 50px; weight: 30px;" alt=""> 
+        <img style="border-radius:50%;width:50px;height:50px" class="img-responsive img-thumbnail" src="{{ $colorImage }}"/>>
     </td>
                           
          <td> <a href="{{route('color.edit',$color->id)}}" style="margin-right:10px"><span class="glyphicon glyphicon-edit"></span>  </a>  
@@ -155,15 +155,6 @@
         jQuery(function($) {
             $('#dynamic-table').DataTable({
                 "ordering": false,
-                // install laravel datatable this package
-                // https://github.com/yajra/laravel-datatables
-                // processing: true,
-                // serverSide: true,
-                {{--ajax: '{{ url('') }}',--}}
-                // columns:[
-                //     {"data":"first_name"},
-                //     {"data":"last_name"},
-                // ],
                 "bPaginate": true,
             });
 
