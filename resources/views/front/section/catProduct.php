@@ -7,9 +7,14 @@
                   <p class="text-center time-to mb-10">Time to shop special</p>
 <?php foreach($cats as $cat): 
     if($cat->position == '0') continue; ?>
+    <?php
+$image = file_exists(ltrim(ASSETS, '/')."/.uploads/category/".$cat->image)? 
+ASSETS.'/.uploads/banners/'.$cat->image :
+ASSETS.'/img/category/'.$cat->image;
+    ?>
                 <catproduct
                     catname="<?=$cat->name?>" 
-                    styletext = "background: url('<?=ASSETS?>/.uploads/category/<?=$cat->image?>'); background-size:cover;"
+                    styletext = "background: url('<?=$image?>'); background-size:cover;"
                     catlink = "/cat/<?=$cat->id?>"
                     subcatlist = ""
                 >

@@ -52,7 +52,7 @@
                         <tr>
                             <td> {{ $key +1 }} </td>
                             <td> {{ $color->name }} </td>
-                            <td class="text-center" style='padding-top:1em;background:{{$color->code}}'>
+                            <td class="text-center" style="padding-top:1em;background:{{$color->code}} ">
                                  {{ $color->code }} 
                             </td>
          
@@ -60,7 +60,7 @@
                         $colorImage = file_exists('front/assets/.uploads/color/'."{{$color->image}}")?'front/assets/.uploads/color/{{$color->image}}':'front/assets/img/color/color.gif';
                      ?>
      <td class="text-center"> 
-        <img style="border-radius:50%;width:50px;height:50px" class="img-responsive img-thumbnail" src="{{ $colorImage }}"/>>
+        <img style="border-radius:50%;width:50px;height:50px" class="img-responsive img-thumbnail" src="{{ $colorImage }}"/>
     </td>
                           
          <td> <a href="{{route('color.edit',$color->id)}}" style="margin-right:10px"><span class="glyphicon glyphicon-edit"></span>  </a>  
