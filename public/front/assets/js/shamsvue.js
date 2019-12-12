@@ -111,11 +111,22 @@ Vue.component('productbigimage', {
 });
 
 Vue.component('imagescolumn', {
+    props: ['images'],
     template: `
     <div class="col-lg-6 col-md-6">
         <div class="product-details-tab">
             <div class="row">
-                <slot></slot>
+            
+                <productthubslist :thumbimages="images.thumb"></productthubslist>
+            
+                <productbigimage                              
+                    idtext="zoom1" 
+                    :srclink = "images.big"
+                    :datazoom = "images.big"
+                ></productbigimage> 
+                
+                <product_options></product_options>
+                
             </div>
         </div>
     </div>
@@ -213,9 +224,80 @@ Vue.component('product_availability', {
     `
 });
 
-Vue.component('add_to_cart', {
+Vue.component('product_extra_info', {
         template: `
-    <button class="button add-to-cart" type="submit"><i class="fa fa-shopping-cart pull-left"></i> add to cart</button>
+    <div class="accordion product_accordian">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <span style="float:left">Product Details</span> <i class="fa fa-plus pull-right"></i>
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <span style="float:left">Price Details</span> <i class="fa fa-plus pull-right"></i>
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="product_d_table">
+                            <form action="#">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="first_child">Compositions</td>
+                                            <td>Polyester</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first_child">Styles</td>
+                                            <td>Girly</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first_child">Properties</td>
+                                            <td>Short Dress</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <span style="float:left">Shipping &amp; Returns</span> <i class="fa fa-plus pull-right"></i>
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
+    }),
+
+
+    Vue.component('add_to_cart', {
+        props: ['text'],
+        template: `
+    <button class="button add-to-cart" type="submit"><i class="fa fa-shopping-cart pull-left"></i>{{text}}</button>
     `
     }),
 
@@ -223,7 +305,8 @@ Vue.component('add_to_cart', {
     Vue.component('product_quantity', {
         data: function() {
             return {
-                count: 0
+                count: 0,
+                cartMessage: "Add To Cart"
             }
         },
         template: `
@@ -234,7 +317,7 @@ Vue.component('add_to_cart', {
         <div @click="count++" class="plus fa fa-plus-circle"></div>
         <div @click="count--" class="minus fa fa-minus-circle"></div>
     </div>
-    <slot></slot>
+    <add_to_cart :text="cartMessage"></add_to_cart>
 </div>
     `
     });
@@ -257,11 +340,29 @@ Vue.component('product_price', {
 
 
 Vue.component('product_info', {
+    data: function() {
+        return {
+            name: 'Nonstick Dishwasher PFOA',
+            price: '10,59',
+        }
+    },
     template: `
     <div class="col-lg-6 col-md-6">
         <div class="product_d_right">
             <form action="">
-                <slot></slot>
+                <product_name :name="name"></product_name>
+                <product_price_notice></product_price_notice>
+                <product_price :price="price"></product_price>
+                <product_description 
+                    description_line_one="from 5 items: 9,40"
+                    description_line_two="from 30 items: 8,21"
+                ></product_description>
+                <colors_variant></colors_variant>
+                <size_variant></size_variant>
+                <br>
+                <product_availability></product_availability>
+                <br/>
+                <product_quantity></product_quantity>
             </form>
         </div>
     </div>      
@@ -270,10 +371,12 @@ Vue.component('product_info', {
 
 
 Vue.component('product_details', {
+    props: ['product'],
     template: `
     <div class="product_details">
         <div class="row">
-            <slot></slot>
+            <imagescolumn :images="product.images"></imagescolumn>
+            <product_info> </product_info>
         </div>
     </div>  
     `
@@ -335,6 +438,8 @@ new Vue({
     data: {
         qty: 1,
         product: {
+            qty: 5,
+
             images: {
                 big: "/front/assets/img/product/productbig5.jpg",
                 thumb: {
@@ -363,4 +468,4 @@ new Vue({
         }
     }
 
-});
+})
