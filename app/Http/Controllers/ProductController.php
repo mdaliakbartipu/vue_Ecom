@@ -10,9 +10,14 @@ use App\Size;
 use App\Sleeve;
 use App\LegLength;
 use App\Fit;
+use App\Tags;
+use App\ProductTags;
 use App\Product;
-use App\Product_image;
+use App\ProductImages;
+use App\ProductStorage;
+use App\ProductVariant;
 use Carbon\Carbon;
+
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
@@ -57,7 +62,9 @@ class ProductController extends Controller
         $sleeves = Sleeve::all();
         $leglenghts = LegLength::all();
         $fits = Fit::all();
-        return view('product.create',compact('categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits'));
+        $tags = Tags::forProduct();
+
+        return view('product.create',compact('categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits', 'tags'));
     }
 
     /**
@@ -68,6 +75,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        
           //print_r($request->color);die();
           $this->validate($request,[
            'name'     => 'required',
@@ -82,11 +90,11 @@ class ProductController extends Controller
 
         $product = new Product();
         $product->name = $request->name;
-        $product->category_id = $request->category;
-        $product->sub_category_id = $request->sub_category;
-        $product->sub_sub_category_id = $request->sub_sub_category;
-        $product->pro_code = $request->pro_code;
-        $product->desc = $request->desc;
+        $product->cat = $request->category;
+        $product->sub = $request->sub_category;
+        $product->super = $request->sub_sub_category;
+        $product->code = $request->pro_code;
+        $product->description = $request->desc;
         $product->price = $request->price;
         $product->discount = $request->discount;
         $product->details = $request->details;
@@ -97,6 +105,17 @@ class ProductController extends Controller
         //below id line should be deleted after creating image objec
         
        $product->save();
+
+        // Saving Tags
+        $tags = $request->tags;
+
+        foreach( $tags as $tag){
+            $ptag = new ProductTags;
+
+            $ptag->product_id    = $product->id;
+            $ptag->tag_id             = $tag;  
+            $ptag->Save();
+        }
 
         //saving images
         
@@ -114,13 +133,9 @@ class ProductController extends Controller
 
                 $images[$index]->move('uploads/product', $imageName);
                 
-                $image = new Product_image();
+                $image = new ProductImages;
                 $image->product_id = $product->id;
-                $image->link = $request->color[$index];
-                $image->color_id = $request->color[$index];
-                $image->size_id = $request->size[$index];
-                $image->quantity = $request->quantity[$index];
-                $image->link = $imageName;
+                $image->image = $imageName;
                 $image->timestamps = false;
                 echo "########################";
                 $image->save();
@@ -158,8 +173,14 @@ class ProductController extends Controller
         $sleeves = Sleeve::all();
         $leglenghts = LegLength::all();
         $fits = Fit::all();
-        //$product = Product::find($id);
-        return view('product.edit',compact('product','categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits'));
+        $tags = Tags::forProduct();
+        $variant  = ProductVariant::where('product_id', $product->id)->get();
+        // dd($variant);
+
+
+        $productTags = ProductTags::where('product_id', $product->id)->get();
+
+        return view('product.edit',compact('product','categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits', 'tags', 'productTags'));
     }
 
     /**
@@ -195,20 +216,20 @@ class ProductController extends Controller
     }
 
         $product->name = $request->name;
-        $product->category_id = $request->category;
-        $product->sub_category_id = $request->sub_category;
-        $product->sub_sub_category_id = $request->sub_sub_category;
-        $product->pro_code = $request->pro_code;
-        $product->desc = $request->desc;
+        $product->cat = $request->category;
+        $product->sub = $request->sub_category;
+        $product->super = $request->sub_sub_category;
+        $product->code = $request->pro_code;
+        $product->description = $request->desc;
         $product->price = $request->price;
         $product->discount = $request->discount;
         $product->details = $request->details;
         $product->sleeve = (int)$request->sleeve;
         $product->leglength = (int)$request->leglength;
         $product->fit = (int)$request->fit;
-        $product->color = $request->color;
-        $product->size = (int)$request->size;
-        $product->quantity = $request->quantity;
+        // $product->color = $request->color;
+        // $product->size = (int)$request->size;
+        // $product->quantity = $request->quantity;
         $product->save();
          return redirect()->route('product.index')->with('successMsg','Product Successfully Updated');
     }

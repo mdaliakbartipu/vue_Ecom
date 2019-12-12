@@ -53,8 +53,6 @@
                             <td> {{ $key +1 }} </td>
                             <td> {{ $product->name }} </td>
                             <td> {{ $product->category['name'] }} </td>
-                            
-     
                            
                  <td> <a href="{{route('product.edit',$product->id)}} "  style="margin-right:10px"><span class="glyphicon glyphicon-edit"></span>  </a>
                 

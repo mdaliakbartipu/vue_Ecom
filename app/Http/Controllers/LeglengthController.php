@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Leglength;
+use App\LegLength;
 use Illuminate\Http\Request;
 
 class LeglengthController extends Controller

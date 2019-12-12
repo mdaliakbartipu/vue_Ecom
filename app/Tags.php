@@ -18,6 +18,7 @@ class Tags extends Model
     {
         return Tags::where('type', 'page')->get();
     }
+    
 
     public static function forProduct()
     {

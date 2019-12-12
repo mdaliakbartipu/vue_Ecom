@@ -19,7 +19,10 @@ ASSETS.'/img/category/'.$cat->image;
                     subcatlist = ""
                 >
                 <?php foreach($subCats[$cat->id] as $subcat): ?>
-                    <li><a class="text-la" href="/subcat_products/<?=$subcat->id?>"><?=$subcat->name?></a></li>
+                    <vuelist  
+                        listlink ="/subcat_products/<?=$subcat->id?>"
+                        listdata ="<?=$subcat->name?>"
+                    ></vuelist>
                 <?php endforeach; ?>
                 </catproduct> 
                 

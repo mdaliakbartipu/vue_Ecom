@@ -110,14 +110,14 @@
                                 <label class="col-sm-3 control-label" for="form-field-1-1"> Product Code </label>
 
                                 <div class="col-sm-9">
-                                    <input type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" name="pro_code" value="{{ $product->pro_code }}" />
+                                    <input type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" name="pro_code" value="{{ $product->code }}" />
                                 </div>
                             </div>
                              <div class="form-group">
                                 <label class="col-sm-3 control-label" for="form-field-1-1"> Product Short Description </label>
 
                                 <div class="col-sm-9">
-                                    <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control summernote" name="desc">{{ $product->desc }}</textarea>
+                                    <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control summernote" name="desc">{{ $product->description }}</textarea>
                                     
                                 </div>
                             </div>
@@ -186,6 +186,27 @@
                                 </div>
                             </div>
                          </div>
+
+                         <div class="form-group">
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Tags</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <div class="checkbox">
+                                @foreach($tags as $key=>$tag)
+                                <label>
+                                    <?php
+                                            $selected = false;
+                                            foreach($productTags as $ptag):
+                                                if($ptag->tag_id == $key)
+                                                $selected = true;
+                                            endforeach;
+                                    ?>
+                                    <input type="checkbox" class="ace" name="tags[]" value="{{ $key+1 }}" <?=$selected?'checked':''?>>
+                                    <span class="lbl"> {{ $tag->name }}</span>
+                                </label>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
 
 
               <div class="card-body">

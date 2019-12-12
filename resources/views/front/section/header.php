@@ -36,7 +36,17 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-6 col-xs-12">
                             <div class="logo">
-                                <a href="/"><img src="<?=ASSETS?>/.uploads/company/<?=$company->logo?>" alt="" style="max-width:120%;"></a>
+                                <?php
+                                        $img = null;
+
+                                        if(file_exists(ASSETS."/.uploads/company/".$company->logo)){
+                                            $img = ASSETS."/.uploads/company/".$company->logo;
+                                        } else {
+                                            $img = ASSETS."/img/company/".$company->logo;
+                                        }
+                                ?>
+                                <a href="/"><img src="<?=$img?>" alt="" style="max-width:120%;"></a>
+                                
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-12 col-xs-12 text-center ">
