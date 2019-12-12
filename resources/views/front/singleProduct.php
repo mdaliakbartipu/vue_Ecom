@@ -12,31 +12,26 @@
     <div class="new-mar-pad">
         <?php include("section/header.php");?>
     </div>
-  
+    <div id="app">
     <!--header area end-->
-  
     <!--Product section bg area start-->  
     <div class="new-mar-pad">
      <?php include("section/productSingleViewSection.php");?>
     </div>
+ 
     <!--Product section bg area end-->
 
 
-            <!--product area start-->
-            <div class="container">
-            <?php include("section/relatedProducts.php"); ?>
-            </div>
+    <!--product area start-->
+    <div class="container">
+    <?php include("section/relatedProducts.php"); ?>
+    </div>
 
-        <!--product area end-->
-   
+    <!--product area end-->
     <!--footer area start-->
     <?php include("section/footer.php");?>
     <!--footer area end-->
 
 
     <?php include("section/script.php");?>
-
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script type="text/javascript" src="<?=ASSETS?>/js/zoomOnHover.js"></script>
-    <script type="text/javascript" src="<?=ASSETS?>/js/shamsvue.js"></script>
-<?php include("section/foot.php");?>
+    <?php include("section/foot.php");?>

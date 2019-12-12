@@ -1,175 +1,40 @@
 <div class="container" id="singleProduct">
     <div class="product_details_wrapper mb-55">
         <!--product details start-->
-        <div class="product_details">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="product-details-tab">
-                        <div class="row">
-                            <div class=" col-md-2 single-zoom-thumb">
+        <product_details>
+            <imagescolumn>  
+                <productthubslist :thumbimages="product.images.thumb"></productthubslist>           
+                <productbigimage                              
+                        idtext="zoom1" 
+                        :srclink = "product.images.big"
+                        :datazoom = "product.images.big"
+                ></productbigimage>
+                <product_options></product_options>
+            </imagescolumn>           
+                    
+            <product_info>
+                    <product_name 
+                        name="Nonstick Dishwasher PFOA"
+                    ></product_name>
+                    <product_price_notice></product_price_notice>
+                    <product_price price="10,59"></product_price>      
+                    <product_description 
+                        description_line_one="from 5 items: 9,40"
+                        description_line_two="from 30 items: 8,21"
+                    ></product_description>
+                    <colors_variant></colors_variant>
+                    <size_variant></size_variant>
+                    <br>
+                    <product_availability></product_availability>
+                    <br>
+                    <product_quantity>
+                        <add_to_cart></add_to_cart>
+                    </product_quantity>
+            </product_info>
 
-                                <ul class="s-tab-zoom" id="gallery_01">
-                                    <li v-for="(thumb,idx) in product.images.thumb" @click.prevent="selectImage(idx)">
-                                        <a href="#" class="elevatezoom-gallery">
-                                            <img v-bind:src="thumb" alt="zo-th-1">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div id="img-1" class="col-md-10 zoomWrapper single-zoom">
-                                <a href="#">
-                                    <zoom-on-hover v-bind="product.images" :scale="2"></zoom-on-hover>
-                                    <!-- <img id="zoom1" src="<?=ASSETS?>/img/product/productbig5.jpg" data-zoom-image="<?=ASSETS?>/img/product/productbig5.jpg" alt="big-1"> -->
-                                </a>
-                                
-                            </div>
-                            <div class="product_options mt-5 ml-5">
-                                    <span class="btn last-day2" style="width:30%" style=""><i class="fa fa-puzzle-piece"></i> Embroidery &amp; Print</span>
-                                    <span class="btn" style="width:15%"><i class="fa fa-play"></i> Video</span>
-                                    <span class="btn" style="width:35%"><i class="fa fa-thumb-tack"></i> Article recommendation</span>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="product_d_right">
-                        <form action="#">
-
-                            <h3><a href="#">Nonstick Dishwasher PFOA</a></h3>
-
-                            <div class="product_rating">
-                                <p style="font-size:.8em;">prices in VAT <u>plus shipping</u></p>
-
-                            </div>
-                            <div class="price_box">
-                                <span class="current_price">10,59 EUR <span style="font-weight:400">( <b>inc VAT</b> | ex VAT</span>)</span>
-                            </div>
-                            <div class="product_desc">
-                                <p style="font-weight:200"><i>from 5 items: 9,40<br>from 30 items: 8,21</i></p>
-                            </div>
-                            <div class="product_variant color">
-                                <ul>
-                                    <li class="color1">
-                                        <a href="#" data-toggle="tooltip" title="Black"></a>
-                                    </li>
-                                    <li class="color2">
-                                        <a href="#" data-toggle="tooltip" title="Gray"></a>
-                                    </li>
-                                    <li class="color3">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color4">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color4">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color1">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color2">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color3">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color4">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color4">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color1">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color2">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color3">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color4">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color4">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color1">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color2">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color3">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color4">
-                                        <a href="#"></a>
-                                    </li>
-                                    <li class="color4">
-                                        <a href="#"></a>
-                                    </li>
-                                </ul>
-                                <p style="color:grey;font-weight:.5em">Color: BLACK
-                                </p>
-                            </div>
-                            <div class="product_size">
-                                <p style="float:right">SizeTable</p><br>
-                                <hr style="">
-                                <ul id="product_size">
-                                    <li class="selected">
-                                        <a href="#" data-toggle="tooltip" title="XS">XS</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">S</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">M</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">L</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">XL</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">2XL</a>
-                                    </li>
-                                </ul>
-                                <p style="color:grey;font-weight:.5em">Size: XS
-                                </p>
-
-                            </div>
-                            <br>
-                            <div class="product-availability">
-                                <i class="fa fa-wifi"></i> Availability: In Stock
-                            </div>
-                            <br>
-
-                            <div class="product_variant quantity">
-                                <label>quantity</label>
-                                <input v-model="qty" type="text" value=1>
-                                <div id="qty_count" style="display:flex;flex-direction:column;margin-right:1em">
-                                    <div @click="increase" class="plus fa fa-plus-circle"></div>
-                                    <div @click="decrease" class="minus fa fa-minus-circle"></div>
-                                </div>
-
-                                <button class="button add-to-cart" type="submit"><i class="fa fa-shopping-cart pull-left"></i> add to cart</button>
-
-
-                            </div>
-
-
-
-                        </form>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
+        </product_details>
         <!--product details end-->
-
+      
         <div class="accordion product_accordian">
             <div class="card">
                 <div class="card-header" id="headingOne">

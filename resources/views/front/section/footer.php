@@ -1,3 +1,5 @@
+
+
 <footer class="footer_widgets">
     <!--newsletter area start-->
    
@@ -93,3 +95,6 @@
     </div>
    
 </footer>
+
+                                </div> 
+                                <!-- Vue end -->

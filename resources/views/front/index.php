@@ -11,7 +11,6 @@
     </div>
 
     <div id="app">
-    
     <!--header area end-->
     <div class="new-mar-pad">
     <!--slider area start-->
@@ -47,7 +46,6 @@
     <!-- modal area end-->
  
 
-    </div> 
     <!-- Vuejs ended -->
     <?php include("section/script.php");?>
     
