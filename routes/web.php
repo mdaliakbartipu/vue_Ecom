@@ -44,12 +44,10 @@ Route::put('category/{id}/sub-category', 'CategoryController@subUpdate')
 // Delete Sub Category                    
 Route::DELETE('/sub-delete/{id}','CategoryController@subDelete')->name('sub-delete');
 
-
-
  // Store Sub Sub category
-  Route::post('sub-sub-category/{id}','CategoryController@subSubCategorySave')->name('subSubCategroy.save');
+Route::post('sub-sub-category/{id}','CategoryController@subSubCategorySave')->name('subSubCategroy.save');
 //Get Sub Sub category
- Route::get('sub-sub-category/{id}','CategoryController@subSubCategory')->name('sub-sub-cat');  
+Route::get('sub-sub-category/{id}','CategoryController@subSubCategory')->name('sub-sub-cat');  
 //Edit Sub sub Category
 Route::get('/sub-sub-edit/{id}','CategoryController@subSubCatEdit')->name('sub-sub-edit');
  //Update Sub sub Category
@@ -66,7 +64,8 @@ Route::get('form', function (){
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function (){
-    Route::get('/sadmin', 'HomeController@index')->name('home');
+
+Route::get('/sadmin', 'HomeController@index')->name('home');
 Route::resource('group', 'GroupController');
 Route::resource('slider','SliderContoller');
 Route::resource('size','SizeController');
@@ -83,10 +82,8 @@ Route::resource('leglength','LeglengthController');
 Route::resource('fit','FitController');
 Route::resource('product','ProductController');
 	
-
-	Route::get('/get-sub/ajax/{id}','ProductController@ajaxGetSub');
-	Route::get('/get-sub/sub/ajax/{id}','ProductController@ajaxGetSubsub');
-	
+Route::get('/get-sub/ajax/{id}','ProductController@ajaxGetSub');
+Route::get('/get-sub/sub/ajax/{id}','ProductController@ajaxGetSubsub');	
     
 });
 

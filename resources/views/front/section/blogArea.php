@@ -6,7 +6,7 @@
 
                     <div class="col-lg-4 col-md-4 bg-gray">
 					<h2 class="h1 pt-3" style="text-align:left">Testimonials</h2>
-                        <figure class="single_banner" style="background: url('<?=ASSETS?>/img/8-bgclient.png'); background-size:cover; background-size: cover;height: 80%;width: 100%;background-position: center;">
+                        <figure class="single_banner" style="background: url('<?=ASSETS?>/img/8-bgclient.png'); background-size:cover; background-size: cover;width: 100%;background-position: center;">
                         
                             <div class="owl-carousel owl-theme" >
             

@@ -21,4 +21,9 @@ class Page extends Model
         }
     }
 
+    public static function dataBySlug($slug){
+        
+        return Page::where('slug', $slug)->first();
+    }
+
 }

@@ -75,7 +75,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        
           //print_r($request->color);die();
           $this->validate($request,[
            'name'     => 'required',
@@ -85,9 +84,8 @@ class ProductController extends Controller
            'discount' => 'required',
            'details'  => 'required'
         ]);
-       
-
-
+        
+    // saving product
         $product = new Product();
         $product->name = $request->name;
         $product->cat = $request->category;
@@ -101,47 +99,65 @@ class ProductController extends Controller
         $product->sleeve = (int)$request->sleeve;
         $product->leglength = (int)$request->leglength;
         $product->fit = (int)$request->fit;
+        $product->save();
 
-        //below id line should be deleted after creating image objec
-        
-       $product->save();
-
-        // Saving Tags
+    // Saving Tags
         $tags = $request->tags;
+        $ptags = new ProductTags;
+        $ptags->saveTags($tags, $product->id);
 
-        foreach( $tags as $tag){
-            $ptag = new ProductTags;
+    // saving product variant
+        $sizes      = $request->size;
+        $colors     = $request->color;
+        $quantities = $request->quantity;
+        $images     = $request->image;
 
-            $ptag->product_id    = $product->id;
-            $ptag->tag_id             = $tag;  
-            $ptag->Save();
-        }
+        foreach($quantities as $key => $qty){
+            if(
+                $qty??null &&
+                $sizes[$key]??false &&
+                $colors[$key]??false &&
+                $images[$key]??false
+            ):
+                $variant =  new ProductVariant;
+                $variant->product_id = $product->id;
+                $variant->color_id   = $colors[$key]??0;
+                $variant->size_id    = $sizes[$key]??0;
+                $variant->timestamps = false;
+                $variant->save();
 
-        //saving images
-        
-        $images = $request->file('image');
-        
-        if(!file_exists('uploads/product')){
-            mkdir('uploads/product',0777,true);
-        }
-        
-        if(count($request->color)&count($request->size)&count($request->quantity)){
-            $count = count($request->color);
-            //echo $count;exit;
-            for($index =0; $index < $count; $index++ ){
-                $imageName = time().'-'.uniqid(). $images[$index]->getClientOriginalName();
+            // saving product image for that variant
 
-                $images[$index]->move('uploads/product', $imageName);
-                
+                //cheacking if image folder is there
+                $imagePath = "uploads/product";
+                if(!file_exists($imagePath)){
+                    mkdir($imagePath,0777,true);
+                };
+
+                // Uploading to server
+                $imageName = "pimage".time().'-'.uniqid();
+                $images[$key]->move($imagePath, $imageName);
+       
+                // saving to database
                 $image = new ProductImages;
                 $image->product_id = $product->id;
                 $image->image = $imageName;
                 $image->timestamps = false;
-                echo "########################";
                 $image->save();
-            }
+
+                // managing product storage
+                $storage = new ProductStorage;
+                $storage->product_id = $product->id;
+                $storage->variant_id = $variant->id;
+                $storage->stock      = $qty;
+                $storage->sell       = 0;
+                $storage->order      = 0;
+                $storage->save();
+            else:
+                return redirect()->back()->with('error','All variant info were not there');
+            endif;
         }
-//        print_r($image);die;
+
         return redirect()->route('product.index')->with('successMsg','Product Successfully Added');
     }
 

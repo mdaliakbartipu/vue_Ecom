@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Front\FrontController;
 use App\Models\Front\UI;
 use App\Page;
-use App\Tags;
 
 class PagesController extends FrontController
 {
@@ -20,33 +19,21 @@ class PagesController extends FrontController
 
         return view('front.index',
         [   
-            'company'               => $this->company,
-            'cats'                         => $this->cat,
-            'subCats'                 => $this->subCat,
-            'subSubCats'          => $this->subSubCat,
-            'sliders'                    => UI::getAll(),
-            'banners'                 => UI::getAllBanners(),
-            'promotions'          => UI::getAllPromotions(),
-            'blogs'                      => UI::getThreeBlogs(),
+            'sliders'              => UI::getAll(),
+            'banners'              => UI::getAllBanners(),
+            'promotions'           => UI::getAllPromotions(),
+            'blogs'                => UI::getThreeBlogs(),
             'testimonials'         => UI::getTestimonials(),
-            'tags'                         => Tags::forPage(),
-            'pages'                      => Page::all(), 
         ]);
     }
 
 
     public function catagoryProducts( $id = null)
     {
-
         return view('front.catagoryProducts',
         [
-            'company'  => $this->company,
-            'cats' => $this->cat,
-            'subCats' => $this->subCat,
-            'subSubCats' => $this->subSubCat,
-            'tags'                         => Tags::forPage(),
-            'pages'                      => Page::all(), 
-        ]);
+
+       ]);
     }
 
     public function subcatProducts( $id = null)
@@ -54,14 +41,8 @@ class PagesController extends FrontController
 
         return view('front.catagoryProducts',
         [
-            'company'  => $this->company,
-            'cats' => $this->cat,
-            'subCats' => $this->subCat,
-            'subSubCats' => $this->subSubCat,
-            'tags'                         => Tags::forPage(),
-            'pages'                      => Page::all(), 
-            'tags'                         => Tags::forPage(),
-            'pages'                      => Page::all(), 
+            
+            
         ]);
     }
 
@@ -70,12 +51,7 @@ class PagesController extends FrontController
 
         return view('front.catagoryProducts',
         [
-            'company'  => $this->company,
-            'cats' => $this->cat,
-            'subCats' => $this->subCat,
-            'subSubCats' => $this->subSubCat,
-            'tags'                         => Tags::forPage(),
-            'pages'                      => Page::all(), 
+            
         ]);
     }
 
@@ -83,12 +59,8 @@ class PagesController extends FrontController
     {
         return view('front.singleProduct',
         [
-            'company'  => $this->company,
-            'cats' => $this->cat,
-            'subCats' => $this->subCat,
-            'subSubCats' => $this->subSubCat,
-            'tags'                         => Tags::forPage(),
-            'pages'                      => Page::all(), 
+            
+         
         ]);
 
     }
@@ -106,12 +78,7 @@ class PagesController extends FrontController
     public function about()
     {
         return view('front.about', [
-            'company'       => $this->company,
-            'cats'                 => $this->cat,
-            'subCats'                 => $this->subCat,
-            'subSubCats'                 => $this->subSubCat,
-            'tags'                         => Tags::forPage(),
-            'pages'                      => Page::all(), 
+           
         ]);
     }
 
@@ -119,29 +86,16 @@ class PagesController extends FrontController
     public function contact()
     {
         return view('front.contact', [
-            'company'       => $this->company,
-            'cats'                 => $this->cat,
-            'subCats'                 => $this->subCat,
-            'subSubCats'                 => $this->subSubCat,
-            'tags'                         => Tags::forPage(),
-            'pages'                      => Page::all(), 
+            
         ]);
     }
 
     public function pages(string $slug)
-    {
-        
-        $pageContent = Page::where('slug', $slug)->first();
-        
+    {    
+ 
         return view('front.pages', [
-            'company'                => $this->company,
-            'cats'                          => $this->cat,
-            'subCats'                  => $this->subCat,
-            'subSubCats'           => $this->subSubCat,
-            'tags'                         => Tags::forPage(),
-            'pages'                      => Page::all(), 
-            'pageContent'       => $pageContent,
-            'slug'                         => $slug,
+            'pageContent'       => Page::dataBySlug($slug),
+            'slug'              => $slug,
         ]);
 
     }
