@@ -40,7 +40,7 @@ class PromotionController extends Controller
     public function store(Request $request)
     {
          $this->validate($request,[
-            'image'     => 'required|mimes:jpeg,jpg,png',
+            'image'     => 'required|mimes:jpeg,jpg,png,gif',
             'slug'     => 'required',
           ]);
        $image = $request->file('image');
@@ -96,7 +96,7 @@ class PromotionController extends Controller
     public function update(Request $request, $id)
     {
          $this->validate($request,[
-             'image'     => 'mimes:jpeg,jpg,png',
+             'image'     => 'mimes:jpeg,jpg,png,gif',
             'slug'     => 'required',
             ]);
 

@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Front\FrontController;
 use App\Models\Front\UI;
 use App\Page;
+use App\ProductTags;
+use App\Product;
 
 class PagesController extends FrontController
 {
@@ -15,7 +17,16 @@ class PagesController extends FrontController
     }
 
     public function index()
-    { 
+    {   
+        $productTags = ProductTags::all();
+        $products = array();
+
+        if($productTags):
+            foreach($productTags as $ptag):
+                // dd($ptag);
+                $products[] = Product::find($ptag->product_id);
+            endforeach;
+        endif;
 
         return view('front.index',
         [   
@@ -24,6 +35,7 @@ class PagesController extends FrontController
             'promotions'           => UI::getAllPromotions(),
             'blogs'                => UI::getThreeBlogs(),
             'testimonials'         => UI::getTestimonials(),
+            'products'             => $products,
         ]);
     }
 

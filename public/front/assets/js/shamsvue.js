@@ -433,6 +433,84 @@ Vue.component('size_variant', {
 });
 
 
+Vue.component('product_article', {
+    data: function() {
+        return {
+            link: "/singleProduct/1" + this.id,
+        }
+    },
+    props: ['thumb1', 'thumb2', 'name', 'price', 'id'],
+    template: `
+    <article class="single_product">
+        <figure>
+            <div class="product_thumb">
+                <a class="primary_img" :href="link"><img :src="thumb1" alt=""></a>
+                <a class="secondary_img" :href="link"><img :src="thumb2" alt=""></a>
+                <div class="label_product_left label_product">
+                    <span class="label_sale_left">New</span>
+                </div>
+                    <div class="label_product">
+                    <span class="label_sale">29%</span>
+                </div>
+                <div class="action_links">
+                    <ul>
+                        <li class="wishlist"><a href="#" title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a></li>
+                        <li class="compare"><a href="#" title="Add to Compare"><i class="ion-ios-settings-strong"></i></a></li>
+                        <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="10 colors | quick view"><i class="ion-ios-search-strong"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="product_content">
+                <div class="product_timing">
+                        <div data-countdown="2020/02/16"></div>
+                    </div>
+                <div class="product_content_inner">
+                    <h2 class="product_name_brand_name">{{name}}</h2>
+                    <h3 class="product_name"><a href="product-countdown.html">{{name}}</a></h3>
+                    <h4 class="product_name_h4"><a href="">New ArriVal</a></h4>
+                    <div class="price_box">
+                        <span class="old_price">Reg. $49</span><br />
+                        <span class="current_price">Sale {{price}}</span>
+                    </div>
+                    <div class="countdown_text mb-3">
+                        <!-- <a href="">Extra 15% off use:SUNDAY </a>-->
+                        <a href="" class="chng-color">Free shipping at $45</a>
+                    </div>
+                    <div class="star_icon">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </figure>
+    </article>
+    `
+});
+
+
+
+
+Vue.component('tab_products', {
+
+    template: `
+    <div class="tab-pane fade show active" id="Fashion" role="tabpanel">
+        <div class="product_carousel product_style product_column5 owl-carousel">
+
+           <slot></slot>
+                            
+        </div>
+    </div>
+    `
+});
+
+
+
+
+
+
 new Vue({
     el: "#app",
     data: {

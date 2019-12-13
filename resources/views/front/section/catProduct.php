@@ -9,7 +9,7 @@
     if($cat->position == '0') continue; ?>
     <?php
 $image = file_exists(ltrim(ASSETS, '/')."/.uploads/category/".$cat->image)? 
-ASSETS.'/.uploads/banners/'.$cat->image :
+ASSETS.'/.uploads/category/'.$cat->image :
 ASSETS.'/img/category/'.$cat->image;
     ?>
                 <catproduct

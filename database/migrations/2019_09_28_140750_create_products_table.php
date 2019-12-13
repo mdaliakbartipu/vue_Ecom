@@ -30,7 +30,8 @@ class CreateProductsTable extends Migration
             $table->integer('sleeve');
             $table->integer('leglength');
             $table->integer('fit');
-            $table->string('thumb')->default('noproduct.png');
+            $table->string('thumb1')->nullable()->default('thumb1.jpg');
+            $table->string('thumb2')->nullable()->default('thumb1.jpg');
             $table->timestamps();
         });
     }

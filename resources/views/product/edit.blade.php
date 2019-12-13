@@ -4,6 +4,12 @@
     <i class="fa fa-plus-circle"></i> Product
 @stop
 @section('css')
+<style>
+    .checkbox label, .radio label {
+        margin-bottom:21px;
+    }
+</style>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 @stop
 
@@ -187,7 +193,7 @@
                             </div>
                          </div>
 
-                         <div class="form-group">
+                    <div class="form-group" style="width:100%">
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Tags</label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
@@ -196,7 +202,7 @@
                                     <?php
                                             $selected = false;
                                             foreach($productTags as $ptag):
-                                                if($ptag->tag_id == $key)
+                                                if($ptag->tag_id == $tag->id)
                                                 $selected = true;
                                             endforeach;
                                     ?>
@@ -209,9 +215,9 @@
                     </div>
 
 
-              <div class="card-body">
-                  <div class="table-responsive">
-                   <table id="table" class="table" style="width:100%">
+              <!-- <div class="card-body"> -->
+                  <!-- <div class="table-responsive"> -->
+                   <!-- <table id="table" class="table" style="width:100%">
                       <thead class=" text-primary">
                         <th> Select Color </th>
                         <th> Select Size </th>
@@ -224,7 +230,7 @@
                              <td >  
                                
                                 <div class="col-sm-20">
-                                    <select class="chosen-select form-control" id="form-field-select-3"  name="color">
+                                    <select class="chosen-select form-control" id="form-field-select-3"  name="color[]">
                                       @foreach ($colors as $color)
                                         <option value="{{ $color->id }}" {{ ($color->id == $product->color)? 'selected':'' }}> {{ $color->name }} </option>
                                       @endforeach
@@ -234,7 +240,7 @@
                             <td> 
                                
                                 <div class="col-md-20">    
-                                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Size..." name="size">
+                                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Size..." name="size[]">
                                       @foreach($sizes as $size)  
                                          <option value="{{ $size->id }}" {{ ($size->id == $product->size)?'selected':'' }}> {{ $size->name }} </option>
                                       @endforeach 
@@ -243,23 +249,23 @@
                              </td>
                           <td>
                               <div class="col-sm-9">
-                                    <input type="text" id="form-field-1-1" placeholder="Product quantity" class="form-control" name="quantity" value="{{ $product->quantity }}" />
+                                    <input type="text" id="form-field-1-1" placeholder="Product quantity" class="form-control" name="quantity[]" value="{{ $product->quantity }}" />
                                 </div>
                           </td>
                           <td>
                               <div class="col-xs-12 col-sm-12">
-                                 <input multiple="" type="file" id="image" name="image" />
+                                 <input multiple="" type="file" id="image" name="image[]" />
                             </div>
                           </td>
                          </tr>
                            
                     </tbody>
-                 </table>
-                     <a href="#" class="btn btn-info btn-sm col-lg-2 pull-right" id="addrows">
+                 </table> -->
+                     <!-- <a href="#" class="btn btn-info btn-sm col-lg-2 pull-right" id="addrows">
                             <span class="glyphicon glyphicon-plus"></span> Add 
-                       </a>
-                  </div>
-                 </div>
+                    </a>
+                  </div> -->
+                 <!-- </div> -->
                        
                         <div class="form-group">
                                 <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"></label>

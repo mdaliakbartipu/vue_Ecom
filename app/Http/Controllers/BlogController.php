@@ -45,7 +45,7 @@ class BlogController extends Controller
         $this->validate($request,[
            'title'     => 'required',
            'desc' => 'required',
-           'image'     => 'required|mimes:jpeg,jpg,png'
+           'image'     => 'required|mimes:jpeg,jpg,png,gif'
        ]);
      $image = $request->file('image');
      $slug = str_slug($request->title);
@@ -105,7 +105,7 @@ class BlogController extends Controller
         $this->validate($request,[
             'title'     => 'required',
             'desc' => 'required',
-            'image'     => 'mimes:jpeg,jpg,png',
+            'image'     => 'mimes:jpeg,jpg,png,gif',
         ]);
      
         // $image = $request->file('image');

@@ -2,11 +2,18 @@
 $src = array(); $img = array();
 // Getting promotions data and storing to variable for easy binding for later
 foreach($promotions as $promotion):
-    $img[] =  file_exists(ASSETS."/.uploads/promotions/".$promotion->image)? 
+    $img[] =  file_exists(ltrim(ASSETS, '/')."/.uploads/promotions/".$promotion->image)? 
                 ASSETS.'/.uploads/promotions/'.$promotion->image :
                 ASSETS.'/img/promotions/'.$promotion->image;
     $src[] = $promotion->slug;
 endforeach; ?>
+
+<?php
+$image = file_exists(ltrim(ASSETS, '/')."/.uploads/category/".$cat->image)? 
+ASSETS.'/.uploads/category/'.$cat->image :
+ASSETS.'/img/category/'.$cat->image;
+    ?>
+
 
 <div class="banner_area mb-55 ">
             <div class="container">

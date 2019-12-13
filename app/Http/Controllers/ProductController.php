@@ -82,7 +82,10 @@ class ProductController extends Controller
            'desc'     => 'required',
            'price'    => 'required',
            'discount' => 'required',
-           'details'  => 'required'
+           'details'  => 'required',
+           'category'  => 'required',
+           'sub_category'  => 'required',
+           'sub_sub_category'  => 'required'
         ]);
         
     // saving product
@@ -103,8 +106,10 @@ class ProductController extends Controller
 
     // Saving Tags
         $tags = $request->tags;
-        $ptags = new ProductTags;
-        $ptags->saveTags($tags, $product->id);
+        $save = ProductTags::saveTags($tags, $product->id);
+        if(!$save): 
+            return redirect()->back()->with('error','Product tags not saved correctly');
+        endif;
 
     // saving product variant
         $sizes      = $request->size;
@@ -141,6 +146,7 @@ class ProductController extends Controller
                 // saving to database
                 $image = new ProductImages;
                 $image->product_id = $product->id;
+                $image->color_id = $colors[$key];
                 $image->image = $imageName;
                 $image->timestamps = false;
                 $image->save();
@@ -215,22 +221,11 @@ class ProductController extends Controller
            'price'    => 'required',
            'discount' => 'required',
            'details'  => 'required',
-           'quantity' => 'required',
           // 'image'    => 'required|mimes:jpeg,jpg,png',
        ]);
-         $product = Product::find($id);
-        if(Input::hasFile('image'))
-    {
-        $usersImage = public_path("uploads/product/{$product->image}"); // get previous image from folder
-        if (file_exists($usersImage)) { // unlink or remove previous image from folder
-            unlink($usersImage);
-        }
-        $image = Input::file('image');
-        $imageName = time() . '-' . $image->getClientOriginalName();
-        $image = $image->move(('uploads/product'), $imageName);
-        $product->image = $imageName;
-    }
 
+        $product = Product::find($id);
+        // saving product
         $product->name = $request->name;
         $product->cat = $request->category;
         $product->sub = $request->sub_category;
@@ -243,12 +238,45 @@ class ProductController extends Controller
         $product->sleeve = (int)$request->sleeve;
         $product->leglength = (int)$request->leglength;
         $product->fit = (int)$request->fit;
-        // $product->color = $request->color;
-        // $product->size = (int)$request->size;
-        // $product->quantity = $request->quantity;
         $product->save();
-         return redirect()->route('product.index')->with('successMsg','Product Successfully Updated');
-    }
+
+    // Updating Tags
+        $tags = $request->tags;
+        $update = ProductTags::updateTags($tags, $product->id);
+        if(!$update):   
+            redirect()->back()->with('error','Product tags not updated.Old tags may be deleted too');  
+        endif;
+
+    // // updating product variant
+    //     $sizes      = $request->size;
+    //     $colors     = $request->color;
+    //     $quantities = $request->quantity;
+    //     $images     = $request->image;
+    
+    // // saving storage,images, variants
+    //     foreach($quantities as $key=>$qty):  
+    //         // Checking if variant is already there or isn't
+    //         $variant = ProductVariant::getVariant(
+    //             $product->id,
+    //             $sizes[$key],
+    //             $colors[$key]
+    //         );
+    //         if($variant):  
+    //             // updating qty to product storage
+    //             // updating images
+    //         else:
+    //             // create variant
+    //             // creating qty to product storage
+    //             // creating images
+    //         endif;
+    //     endforeach;
+
+    
+
+  
+    return redirect()->back()->with('message','Product Updated');
+
+}
 
     /**
      * Remove the specified resource from storage.
@@ -261,7 +289,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         if(file_exists('uploads/product'.$product->image))
         {
-              File::delete($product->image);
+              file_delete($product->image);
                //unlink('uploads/product/'.$product->image);
         }
         $product->delete();
