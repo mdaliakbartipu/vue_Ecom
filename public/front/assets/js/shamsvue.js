@@ -605,6 +605,156 @@ Vue.component('company_logo', {
 });
 
 
+Vue.component('top_bar_menu_item', {
+    props:['cat'],
+    template:
+            `<li class="top_bar_menu_item" style="width:150px">
+                    <a href="/category_products/<?=$cat->id?>" class="dropbtn">
+                            {{cat}}
+                            <!--  <i class="fa fa-caret-down"></i> -->
+                    </a>
+            </li>
+    `
+});
+
+
+Vue.component('all_categories', {
+
+    props:['cats'],
+    template:`
+    <div class="hover_category">
+            <select class="select_option" name="select" id="categori2">
+                <option selected value="1">All Categories</option>
+               <slot> </slot>
+                </select>
+    </div>
+    `
+});
+
+Vue.component('category_list', {
+    props:['cat_id', 'cat_name'],
+    template:`
+            <option :value="cat_id">{{cat_name}}</option>
+    `
+});
+
+Vue.component('top_search_box',{
+    template: 
+    `
+    <div class="search_box show last-day-7">
+            <input placeholder="Search or enter web ID" type="text">
+            <a href=""><button type="submit"><i class="fa fa-search"></i></button></a>
+    </div>
+    `
+});
+
+Vue.component('header_top', {
+    template:
+    `
+    <div class="header_top">
+                <div class="row ">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="antomi_message ">
+                            <ul style="display:flex">
+                                <li><a href="#">Welcome to Market</a></li>
+                                <li><a href="#">Sign In Or Register</a></li>
+                                <li class="hot">Special Offer!</li>
+                                <li class="hot">Black Friday</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header_top_settings text-right">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-user" style="color:#008F95" aria-hidden="true"></i> My Account</a></li>
+                                <li><a href="#">USD</a></li>
+                                <li><i class="fas fa-flag-usa" aria-hidden="true"></i>English</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+});
+
+
+
+Vue.component('shop_by_categories', {
+    template: 
+    `
+    <div class="column1 col-lg-3 col-md-6  col-12 col-sm-d-none">
+        <div class="categories_menu categories_three">
+            <div class="categories_title">
+                <h2 class="">SHOP BY CATEGORY</h2>
+            </div>
+            <div class="categories_menu_toggle">
+                <ul>
+                    <slot></slot>
+                <li id="cat_toggle" class="has-sub"><a href="#"><i class="fa fa-caret-square-o-down mr-10" aria-hidden="true"></i>
+                More Categories</a>
+            <ul class="categorie_sub">
+                <li><a href="#">Hide Categories</a></li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+</div>
+</div>
+    `
+});
+
+Vue.component('cat_section_list', {
+    props:['link', 'name'],
+    template: 
+    `
+    <li><a href="link">{{name}}</a></li>
+`
+});
+
+Vue.component('', {
+
+    template: 
+    `
+    <li class="menu_item_children">
+            <a href="/subcat_products/<?= $sub->id ?>"><?= $sub->name ?></a>
+            <ul class="categorie_sub_menu">
+            <slot></ slot>
+    `
+});
+
+// shop_by_categories
+
+
+
+Vue.component('singin_and_cart', {
+    props: ['cart_image'],
+    template:
+    `
+    <div class="column3 col-lg-3 col-md-6 hide col-sm-12 col-sm-d-none">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-sm-d-none">
+                    <div class="header_bigsale ">
+                        <p>Hi, Sign in </p>
+                        <div class="categories_menu categories_three">
+                            <div class="categories_market_second">
+                                <p class="categori_toggle font-weight-bold ">My Market</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="cart_img_page pl-5 text-right">
+                        <a href=""><img :src="cart_image" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
+});
+
+
 new Vue({
     el: "#app",
     data: {
