@@ -14,6 +14,8 @@ Route::get('/subsubcat_products/', 'Front\PagesController@subsubcatProducts');
 Route::get('/', 'Front\PagesController@index');
 Route::get('/store', 'Front\PagesController@index');
 
+Route::get('/cart', 'Front\PagesController@cart');
+
 Route::get('/catagory_products/{id}', 'Front\PagesController@catagoryProducts');
 Route::get('/subcat_products/{id}', 'Front\PagesController@subcatProducts');
 Route::get('/subsubcat_products/{id}', 'Front\PagesController@subsubcatProducts');

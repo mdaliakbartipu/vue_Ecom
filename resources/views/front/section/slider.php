@@ -12,13 +12,13 @@
 						<addvertise slug="<?= $banner->slug ?>" image="<?= $image ?>"> </addvertise>
 					<?php endforeach; ?>
 				</div>
-			
+
 			</div>
 
-	<!--banner area end-->
+			<!--banner area end-->
 
 
-	<!-- Slider Start -->
+			<!-- Slider Start -->
 			<div class="col-lg-9 col-md-12">
 				<!-- Add Arrows -->
 				<div id="container">
@@ -43,8 +43,8 @@
 				</div>
 				<a class="codepen-link" href="" target="_blank" style="background-image: url('<?= ASSETS ?>/img/ftIcon.png');"></a>
 			</div>
-<!-- Slider END -->
-				
+			<!-- Slider END -->
+
 		</div>
 
 	</div>

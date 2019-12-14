@@ -39,15 +39,174 @@ Vue.component('slider-image', {
     props: ['imgleft', 'imgright', 'title', 'subtitle', 'slug', 'discount'],
     template: `
     <li class="slide">
-    <div class="slide-partial slide-left"><img :src="imgleft"/></div>
-    <div class="slide-partial slide-right"><img :src="imgright"></div>
-    <h3 class="title1 title"><span class="title-text">{{title}}</span></h3><br>
-    <h1 class="title"><span class="title-text">{{subtitle}}</span></h1>
-    <p class="title3 title "><span class="title-text">discount <b style="color:red;">{{discount}}%</b> off this week </span></p>
-    <a :href="slug" class="text-uppercase title4 wow flipInX"> discover Now </a>
+        <div class="slide-partial slide-left"><img :src="imgleft"/></div>
+        <div class="slide-partial slide-right"><img :src="imgright"></div>
+        <h3 class="title1 title"><span class="title-text">{{title}}</span></h3><br>
+        <h1 class="title"><span class="title-text">{{subtitle}}</span></h1>
+        <p class="title3 title "><span class="title-text">discount <b style="color:red;">{{discount}}%</b> off this week </span></p>
+        <a :href="slug" class="text-uppercase title4 wow flipInX"> discover Now</a>
 </li>
     `
 });
+
+// cartstart
+
+
+Vue.component('cart_table', {
+
+    data: function () {
+        return {
+            products: [
+                {
+                    image: 'front/assets/img/s-product/product.jpg',
+                    name: "Test product",
+                    price: "100",
+                    qty: {
+                        min: 1,
+                        max: 10,
+                        selected: 3
+                    },
+                    total: 300
+                },
+                {
+                    image: 'front/assets/img/s-product/product.jpg',
+                    name: "Test product",
+                    price: "100",
+                    qty: {
+                        min: 1,
+                        max: 10,
+                        selected: 3
+                    },
+                    total: 300,
+                },
+            ]
+
+        }
+    },
+    template:
+        `
+    <div class="row">
+    <div class="col-12">
+        <div class="table_desc">
+            <div class="cart_page table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="product_remove">Delete</th>
+                            <th class="product_thumb">Image</th>
+                            <th class="product_name">Product</th>
+                            <th class="product-price">Price</th>
+                            <th class="product_quantity">Quantity</th>
+                            <th class="product_total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr v-for="product in products">
+                            <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                            <td class="product_thumb"><a href="#"><img :src="product.image" ></a></td>
+                            <td class="product_name"><a href="#">{{product.name}}</a></td>
+                            <td class="product-price">£{{product.price}}</td>
+                            <td class="product_quantity"><label>Quantity</label> <input :min="product.qty.min" :max="product.qty.max" :value="product.qty.selected" type="number"></td>
+                            <td class="product_total">£{{product.total}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="cart_submit">
+                <button type="submit">update cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+    `
+})
+
+Vue.component('coupon', {
+
+    template:
+        `
+    <div class="coupon_code left">
+            <h3>Coupon</h3>
+            <div class="coupon_inner">
+                <p>Enter your coupon code if you have one.</p>
+                <input placeholder="Coupon code" type="text">
+                <button type="submit">Apply coupon</button>
+            </div>
+    </div>
+    `
+});
+
+
+Vue.component('cart_total', {
+    template:
+    `
+    <div class="coupon_code right">
+            <h3>Cart Totals</h3>
+            <div class="coupon_inner">
+                    <div class="cart_subtotal">
+                        <p>Subtotal</p>
+                        <p class="cart_amount">£215.00</p>
+                    </div>
+                    <div class="cart_subtotal ">
+                        <p>Shipping</p>
+                        <p class="cart_amount"><span>Flat Rate:</span> £255.00</p>
+                    </div>
+                    <a href="#">Calculate shipping</a>
+
+                    <div class="cart_subtotal">
+                        <p>Total</p>
+                        <p class="cart_amount">£215.00</p>
+                    </div>
+                    <div class="checkout_btn">
+                        <a href="#">Proceed to Checkout</a>
+                    </div>
+            </div>
+        </div>
+    `
+})
+
+
+Vue.component('cart', {
+    template:
+    `
+    <div class="cart_page_bg">
+    <div class="container">
+        <div class="shopping_cart_area">
+            <form action="#">
+                <cart_table></cart_table>
+                <!--coupon code area start-->
+                <div class="coupon_area">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <coupon></coupon>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <cart_total></cart_total>
+                        </div>
+                    </div>
+                </div>
+                <!--coupon code area end-->
+            </form>
+        </div>
+    </div>
+</div>
+    `
+});
+
+
+
+
+// cartstop
+
+
+
+
+
+
+
+
 
 Vue.component('special', {
     props: ['iconclass', 'title', 'description'],
@@ -225,7 +384,7 @@ Vue.component('product_availability', {
 });
 
 Vue.component('product_extra_info', {
-        template: `
+    template: `
     <div class="accordion product_accordian">
             <div class="card">
                 <div class="card-header" id="headingOne">
@@ -291,7 +450,7 @@ Vue.component('product_extra_info', {
             </div>
         </div>
     `
-    }),
+}),
 
 
     Vue.component('add_to_cart', {
@@ -303,7 +462,7 @@ Vue.component('product_extra_info', {
 
 
     Vue.component('product_quantity', {
-        data: function() {
+        data: function () {
             return {
                 count: 0,
                 cartMessage: "Add To Cart"
@@ -340,7 +499,7 @@ Vue.component('product_price', {
 
 
 Vue.component('product_info', {
-    data: function() {
+    data: function () {
         return {
             name: 'Nonstick Dishwasher PFOA',
             price: '10,59',
@@ -434,12 +593,12 @@ Vue.component('size_variant', {
 
 
 Vue.component('product_article', {
-    data: function() {
+    data: function () {
         return {
             link: "/singleProduct/1" + this.id,
         }
     },
-    props:['thumb1', 'thumb2'],
+    props: ['thumb1', 'thumb2'],
     template: `
     <div class="slide">
     <article class="single_product mt-3">
@@ -503,19 +662,19 @@ Vue.component('product_article', {
 
 
 Vue.component('tab_products', {
-    data: function(){
+    data: function () {
         return {
-            products:{
-                images:{
-                    thumb1:"/front/assets/img/product/thumb1.jpg",
-                    thumb2:"/front/assets/img/product/thumb2.jpg",
-                    all:""
+            products: {
+                images: {
+                    thumb1: "/front/assets/img/product/thumb1.jpg",
+                    thumb2: "/front/assets/img/product/thumb2.jpg",
+                    all: ""
                 }
             },
-            count:10,
+            count: 10,
         }
     },
-    props:['tab_id'],
+    props: ['tab_id'],
     template: `
     <div class="tab-pane fade show" :id="tab_id" role="tabpanel">
         <section class="customer-logos">
@@ -532,19 +691,19 @@ Vue.component('tab_products', {
 
 
 Vue.component('related_products', {
-    data: function(){
+    data: function () {
         return {
-            products:{
-                images:{
-                    thumb1:"/front/assets/img/product/thumb1.jpg",
-                    thumb2:"/front/assets/img/product/thumb2.jpg",
-                    all:""
+            products: {
+                images: {
+                    thumb1: "/front/assets/img/product/thumb1.jpg",
+                    thumb2: "/front/assets/img/product/thumb2.jpg",
+                    all: ""
                 }
             },
-            count:10,
+            count: 10,
         }
     },
-    props:['tab_id'],
+    props: ['tab_id'],
     template: `
     <section class="product_area related_products">
             <div class="row">
@@ -570,7 +729,7 @@ Vue.component('related_products', {
 Vue.component('top_nav_bar', {
 
     template:
-    `
+        `
     <nav>
         <ul>
             <li><a href="/">home</a>
@@ -595,9 +754,9 @@ Vue.component('top_nav_bar', {
 
 
 Vue.component('company_logo', {
-    props:['logo'],
+    props: ['logo'],
     template:
-    `
+        `
     <div class="logo">
             <a href="/"><img :src="logo" alt="" style="max-width:120%;"></a>
     </div>
@@ -606,9 +765,9 @@ Vue.component('company_logo', {
 
 
 Vue.component('top_bar_menu_item', {
-    props:['cat'],
+    props: ['cat'],
     template:
-            `<li class="top_bar_menu_item" style="width:150px">
+        `<li class="top_bar_menu_item" style="width:150px">
                     <a href="/category_products/<?=$cat->id?>" class="dropbtn">
                             {{cat}}
                             <!--  <i class="fa fa-caret-down"></i> -->
@@ -620,8 +779,8 @@ Vue.component('top_bar_menu_item', {
 
 Vue.component('all_categories', {
 
-    props:['cats'],
-    template:`
+    props: ['cats'],
+    template: `
     <div class="hover_category">
             <select class="select_option" name="select" id="categori2">
                 <option selected value="1">All Categories</option>
@@ -632,15 +791,15 @@ Vue.component('all_categories', {
 });
 
 Vue.component('category_list', {
-    props:['cat_id', 'cat_name'],
-    template:`
+    props: ['cat_id', 'cat_name'],
+    template: `
             <option :value="cat_id">{{cat_name}}</option>
     `
 });
 
-Vue.component('top_search_box',{
-    template: 
-    `
+Vue.component('top_search_box', {
+    template:
+        `
     <div class="search_box show last-day-7">
             <input placeholder="Search or enter web ID" type="text">
             <a href=""><button type="submit"><i class="fa fa-search"></i></button></a>
@@ -650,7 +809,7 @@ Vue.component('top_search_box',{
 
 Vue.component('header_top', {
     template:
-    `
+        `
     <div class="header_top">
                 <div class="row ">
                     <div class="col-lg-6 col-md-6">
@@ -680,8 +839,8 @@ Vue.component('header_top', {
 
 
 Vue.component('shop_by_categories', {
-    template: 
-    `
+    template:
+        `
     <div class="column1 col-lg-3 col-md-6  col-12 col-sm-d-none">
         <div class="categories_menu categories_three">
             <div class="categories_title">
@@ -704,22 +863,45 @@ Vue.component('shop_by_categories', {
     `
 });
 
-Vue.component('cat_section_list', {
-    props:['link', 'name'],
-    template: 
-    `
+Vue.component('super_section_list', {
+    props: ['link', 'name'],
+    template:
+        `
     <li><a href="link">{{name}}</a></li>
 `
 });
 
-Vue.component('', {
-
-    template: 
-    `
+Vue.component('sub_section_list', {
+    props: ['link', 'name'],
+    template:
+        `
     <li class="menu_item_children">
-            <a href="/subcat_products/<?= $sub->id ?>"><?= $sub->name ?></a>
+            <a :href="link">{{name}}</a>
             <ul class="categorie_sub_menu">
-            <slot></ slot>
+            <slot></slot>
+            </ul>
+    </li>
+    `
+});
+
+
+Vue.component('cat_section_list', {
+    date: function () {
+        return {
+            catClassWithIcon: this.icon + " mr-10",
+            link: "/catagory_products/" + this.id,
+        }
+    },
+    props: ['icon', 'id', 'name'],
+    template:
+        `
+    <li class="menu_item_children"><a :href="this.link">
+            <i :class="this.catClassWithIcon" aria-hidden="true"></i>
+                {{name}} <i class="fa fa-angle-right"></i></a>
+            <ul class="categories_mega_menu">
+                    <slot></slot>
+            </ul>
+    </li>
     `
 });
 
@@ -730,7 +912,7 @@ Vue.component('', {
 Vue.component('singin_and_cart', {
     props: ['cart_image'],
     template:
-    `
+        `
     <div class="column3 col-lg-3 col-md-6 hide col-sm-12 col-sm-d-none">
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-sm-d-none">

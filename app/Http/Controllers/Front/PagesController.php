@@ -79,6 +79,7 @@ class PagesController extends FrontController
 
     public function cart()
     {
+        // dd("asa");
         return view('front.cart');
     }
     
@@ -111,6 +112,7 @@ class PagesController extends FrontController
         ]);
 
     }
+
 
 
 }

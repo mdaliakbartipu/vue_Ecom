@@ -196,23 +196,15 @@
                 <div class="row align-items-center">
                     <shop_by_categories>
                         <?php foreach ($cats as $cat) :  ?>
-                            <li class="menu_item_children"><a href="/catagory_products/<?= $cat->id ?>">
-                                    <i class="<?= $cat->icon ?> mr-10" aria-hidden="true"></i>
-                                    <?= $cat->name ?> <i class="fa fa-angle-right"></i></a>
-                                <ul class="categories_mega_menu">
-                                    <?php foreach ($subCats[$cat->id] as $sub) : ?>
-                                        
-                                                <?php foreach ($subSubCats[$sub->id] as $subsub) : ?>
-                                                    <cat_section_list
-                                                        link="/subsubcat_products/<?= $subsub->id ?>"
-                                                        name="<?= $subsub->name ?>"
-                                                    ></cat_section_list>
-                                                <?php endforeach; ?>
-                                            </ul>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </li>
+                            <cat_section_list icon="<?= $cat->icon ?>" id="<?= $cat->id ?>" name="<?= $cat->name ?>">
+                                <?php foreach ($subCats[$cat->id] as $sub) : ?>
+                                    <sub_section_list link="/subcat_products/<?= $sub->id ?>" name="<?= $sub->name ?>">
+                                        <?php foreach ($subSubCats[$sub->id] as $subsub) : ?>
+                                            <super_section_list link="/subsubcat_products/<?= $subsub->id ?>" name="<?= $subsub->name ?>"></super_section_list>
+                                        <?php endforeach; ?>
+                                    </sub_section_list>
+                                <?php endforeach; ?>
+                            </cat_section_list>
                         <?php endforeach; ?>
                     </shop_by_categories>
 
