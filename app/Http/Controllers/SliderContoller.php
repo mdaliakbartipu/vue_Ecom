@@ -40,28 +40,41 @@ class SliderContoller extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-           'title'     => 'required',
-           'sub_title' => 'required',
-           'image'     => 'required|mimes:jpeg,jpg,png'
+            'title'     => 'required',
+            'sub_title' => 'required',
+            'image_1'     => 'mimes:jpeg,jpg,png',
+            'image_2'     => 'mimes:jpeg,jpg,png',
        ]);
-     $image = $request->file('image');
-     $slug = str_slug($request->title);
-        if(null!==($image)){
-            $currentDate = Carbon::now()->toDateString();
-            $imageName = $slug .'-'. $currentDate .'-'. uniqid() .'.'. $image->getClientOriginalExtension();
-        if(!file_exists('uploads/slider')){
-            mkdir('uploads/slider',0777,true);
-        }
-        $image->move('uploads/slider',$imageName);
-        } else {
-            $imageName = 'default.png';
+
+
+        if(Input::hasFile('image_1'))
+    {        
+
+        $path = "front/assets/.uploads/sliders/";
+
+        if (!file_exists($path)) { // unlink or remove previous image from folder
+            mkdir($path,0777,true);
         }
 
-        $slider = new Slider();
+
+        $image1 = Input::file('image_1');
+        $image2 = Input::file('image_2');
+        $imageName1 = time() . '-' . $image1->getClientOriginalName();
+        $imageName2 = time() . '-' . $image2->getClientOriginalName();
+        
+        $image1 = $image1->move(('front/assets/.uploads/sliders/'), $imageName1);
+        $image2 = $image2->move(('front/assets/.uploads/sliders/'), $imageName2);
+
+        $slider = new Slider;
+        $slider->image_1= $imageName1;
+        $slider->image_2= $imageName2;
+    }
+
         $slider->title = $request->title;
-        $slider->sub_title = $request->sub_title;
-        $slider->image = $imageName;
-        $slider->save();
+         $slider->sub_title = $request->sub_title;
+         $slider->slug = $request->slug;
+         $slider->save();
+
         return redirect()->route('slider.index')->with('successMsg','Slider Successfully Added');
     }
 

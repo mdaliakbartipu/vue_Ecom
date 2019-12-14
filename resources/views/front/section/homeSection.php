@@ -40,7 +40,9 @@
 
 
                 <div class="tabcontent">
-                            <tab_products>
+                            <tab_products 
+                            tab_id="deals"
+                            >
                             </tab_products>           
                 </div>
             
