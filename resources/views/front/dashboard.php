@@ -7,19 +7,17 @@
    <!--Offcanvas menu area start-->
     <?php include("section/offcanvas.php");?>
     <!--Offcanvas menu area end-->
-    
     <!--header area start-->
-    <div style="margin-left:4em;margin-right:4em">
-        <?php include("section/header.php");?>
+    <div class="container">
+    <?php include("section/header.php");?>
+    <!--header area end-->
     </div>
-    <!-- Header Area ends -->
 
-    
-    <!-- Dashboard  Start-->
-    <div style="margin-left:4em;margin-right:4em">
+
     <?php include("section/dashboard.php");?>
-    </div>
-<!-- Dashboard Ends -->
+
+
+
     <!--footer area start-->
     <?php include("section/footer.php");?>
     <!--footer area end-->
@@ -28,9 +26,6 @@
     <?php include("section/modelArea.php");?>
     <!-- modal area end-->
 
-    <!--news letter popup start-->
-     <?php include("section/newsLetter.php");?>
-    <!--news letter popup start-->
     <?php include("section/script.php");?>
     
 <?php include("section/foot.php");?>

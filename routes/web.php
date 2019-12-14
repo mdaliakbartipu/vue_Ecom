@@ -7,6 +7,12 @@ Route::get('/subsubcat_products/', 'Front\PagesController@subsubcatProducts');
 
 
 
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::get('register', function(){
+   echo "Deactivated for security reasons. It will Open soon";
+});
+
 
 // UI Routes
 
@@ -15,6 +21,7 @@ Route::get('/store', 'Front\PagesController@index');
 
 Route::get('/cart', 'Front\PagesController@cart');
 Route::get('/checkout', 'Front\PagesController@checkout');
+Route::get('/dashboard', 'Front\PagesController@dashboard');
 
 Route::get('/catagory_products/{id}', 'Front\PagesController@catagoryProducts');
 Route::get('/subcat_products/{id}', 'Front\PagesController@subcatProducts');

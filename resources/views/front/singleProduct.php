@@ -12,7 +12,6 @@
     <div class="new-mar-pad">
         <?php include("section/header.php");?>
     </div>
-    <div id="app">
     <!--header area end-->
     <!--Product section bg area start-->  
     <div class="new-mar-pad">

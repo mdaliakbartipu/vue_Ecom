@@ -2,9 +2,30 @@
     <div class="main_header header_padding">
         <div class="container">
             <!--header top start-->
-            <header_top></header_top>
 
+            <?php
+            if(isset(\Auth::user()->id )){
+            ?>
+            <header_top 
+            user_name="<?=\Auth::user()->name?>"
+            user_id = "<?=\Auth::user()->id?>"
+            token=<?=csrf_token()?>
+            ></header_top>
+        
+        <?php
+        } else {?>
+            <header_top 
+            user_name=""
+            user_id = ""
+            ></header_top>
+            <?php
+        }
+?>
 
+<form id="logout-form-top" action="/logout" method="POST" style="display: none;">
+    <input type="hidden" name="_token" :value="token"></form>
+</li>
+            
 
             <!--header top start-->
             <?php

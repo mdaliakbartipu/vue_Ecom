@@ -27,7 +27,7 @@ class PagesController extends FrontController
                 $products[] = Product::find($ptag->product_id);
             endforeach;
         endif;
-
+            
         return view('front.index',
         [   
             'sliders'              => UI::getAll(),
@@ -99,6 +99,13 @@ class PagesController extends FrontController
     public function contact()
     {
         return view('front.contact', [
+            
+        ]);
+    }
+
+    public function dashboard()
+    {
+        return view('front.dashboard', [
             
         ]);
     }

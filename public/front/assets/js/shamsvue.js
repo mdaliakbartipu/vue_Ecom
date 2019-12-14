@@ -814,6 +814,34 @@ Vue.component('top_search_box', {
 });
 
 Vue.component('header_top', {
+
+    computed: {
+        // a computed getter
+        user: function () {
+          if(this.hasUser){
+              return true;
+          } else{
+              return false;
+          }
+        }
+      },
+
+      method:{
+            logout: function(){
+                event.preventDefault();
+                document.getElementById('logout-form-top').submit();
+            }
+      },
+
+    data: function(){
+        return {
+            hasUser : this.user_id,
+            userName: this.user_name,
+        }
+    },
+
+    props:['user_name', "user_id", 'token'],
+
     template:
         `
     <div class="header_top">
@@ -821,8 +849,6 @@ Vue.component('header_top', {
                     <div class="col-lg-6 col-md-6">
                         <div class="antomi_message ">
                             <ul style="display:flex">
-                                <li><a href="#">Welcome to Market</a></li>
-                                <li><a href="#">Sign In Or Register</a></li>
                                 <li class="hot">Special Offer!</li>
                                 <li class="hot">Black Friday</li>
                             </ul>
@@ -831,8 +857,18 @@ Vue.component('header_top', {
                     <div class="col-lg-6 col-md-6">
                         <div class="header_top_settings text-right">
                             <ul>
-                                <li><a href="#"><i class="fa fa-user" style="color:#008F95" aria-hidden="true"></i> My Account</a></li>
-                                <li><a href="#">USD</a></li>
+                                <li v-if="!user">
+                                    <a  href="/login"><i class="fa fa-user" style="color:#008F95;border-left:unset" ></i> Login</a>
+                                </li>
+                                <li v-if="!user">
+                                    <a  href="/register"><i class="fa fa-user" style="color:#008F95" ></i> Register</a>
+                                </li>
+                                <li v-if="user">
+                                    <a  href="/dashboard"><i class="fa fa-user" style="color:#008F95" ></i> My Account</a>
+                                </li>
+                                <li v-if="user">
+                                <a href="/logout"><i class="fa fa-user" style="color:#008F95" ></i> Logout</a>
+                                <li>USD</li>
                                 <li><i class="fas fa-flag-usa" aria-hidden="true"></i>English</li>
                             </ul>
                         </div>

@@ -8,7 +8,6 @@
     <?php include("section/offcanvas.php");?>
     <!--Offcanvas menu area end-->
     <!--header area start-->
-    <div id="app">
     <div class="container">
     <?php include("section/header.php");?>
     <!--header area end-->

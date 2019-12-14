@@ -9,8 +9,6 @@
     <div class="new-mar-pad">
      <?php include("section/header.php");?>
     </div>
-
-    <div id="app">
     
 
     <?php include("section/commonPage.php");?>

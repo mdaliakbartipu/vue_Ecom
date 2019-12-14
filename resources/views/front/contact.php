@@ -10,10 +10,6 @@
      <?php include("section/header.php");?>
     </div>
 
-    <div id="app">
-    
-
-
     <?php include("section/contact-us.php");?>
     <!--footer area start-->
     <?php include("section/footer.php");?>

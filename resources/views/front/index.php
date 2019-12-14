@@ -6,7 +6,6 @@
     <?php include("section/offcanvas.php");?>
     <!--Offcanvas menu area end-->
     <!--header area start--> 
-    <div id="app">
     <div class="new-mar-pad">
     <?php include("section/header.php");?>
     </div>
