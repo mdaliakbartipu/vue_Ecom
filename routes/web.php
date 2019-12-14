@@ -1,5 +1,4 @@
 <?php
-
 // Should be deleted
 
 Route::get('/catagory_products/', 'Front\PagesController@catagoryProducts');
@@ -15,6 +14,7 @@ Route::get('/', 'Front\PagesController@index');
 Route::get('/store', 'Front\PagesController@index');
 
 Route::get('/cart', 'Front\PagesController@cart');
+Route::get('/checkout', 'Front\PagesController@checkout');
 
 Route::get('/catagory_products/{id}', 'Front\PagesController@catagoryProducts');
 Route::get('/subcat_products/{id}', 'Front\PagesController@subcatProducts');

@@ -140,6 +140,12 @@ Vue.component('coupon', {
 
 
 Vue.component('cart_total', {
+
+    data: function() {
+            return {
+                message: "",
+            }
+    },
     template:
     `
     <div class="coupon_code right">
@@ -160,7 +166,7 @@ Vue.component('cart_total', {
                         <p class="cart_amount">£215.00</p>
                     </div>
                     <div class="checkout_btn">
-                        <a href="#">Proceed to Checkout</a>
+                        <a href="/checkout">Proceed to Checkout</a>
                     </div>
             </div>
         </div>
@@ -927,10 +933,105 @@ Vue.component('singin_and_cart', {
                 </div>
 
                 <div class="col-md-6">
-                    <div class="cart_img_page pl-5 text-right">
-                        <a href=""><img :src="cart_image" alt="" /></a>
+                    <miniCart></miniCart>
+                </div>
+            </div>
+        </div>
+    `
+});
+
+
+Vue.component('miniCart', {
+
+    data: function(){
+        return {
+            products: [
+                {
+                    name:"something",
+                    image:"front/assets/img/s-product/product.jpg",
+                    qty: 5,
+                    price: 100,
+                },
+                {
+                    name:"something",
+                    image:"front/assets/img/s-product/product.jpg",
+                    qty:1,
+                    price: 200,
+                }
+            ]
+        }
+    },
+
+    computed: {
+        // a computed getter
+        total: function () {
+          // counting total
+          let count = 0;
+          let t = 0;
+          for(count; count< this.products.length;count++){
+              t += this.products[count].qty * this.products[count].price;
+          }
+          return t;
+        }
+      },
+
+    template:
+    `
+    <div class="header_configure_area">
+            <div class="header_wishlist">
+                <a href="#">
+                    <span class="wishlist_count" style="padding-bottom:4em;padding-left:4em;">3</span>
+                </a>
+            </div>
+            <div class="mini_cart_wrapper">
+                <a href="javascript:void(0)">
+                        <div class="cart_img_page ">
+                        <a href=""><img src="front/assets/img/logo/cart.png" alt="" /></a>
+                        </div>
+                </a>
+                <!--mini cart-->
+                <div class="mini_cart">
+                    <div class="mini_cart_inner">
+                        
+                    
+                        <div class="cart_item" v-for="product in this.products">
+                            <div class="cart_img">
+                                <a href="#"><img :src="product.image" alt=""></a>
+                            </div>
+                            <div class="cart_info">
+                                <a href="#">Sit voluptatem rhoncus sem lectus</a>
+                                <p>Qty: {{ product.qty}} X <span> $ {{product.price}} </span></p>
+                            </div>
+                            <div class="cart_remove">
+                                <a href="#"><i class="ion-android-close"></i></a>
+                            </div>
+                        </div>
+          
+
+
+
+                        <div class="mini_cart_table">
+                            <div class="cart_total">
+                                <span>Sub total:</span>
+                                <span class="price">$ {{total}}</span>
+                            </div>
+                            <div class="cart_total mt-10">
+                                <span>total:</span>
+                                <span class="price">$ {{total}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mini_cart_footer">
+                        <div class="cart_button">
+                            <a href="/cart">View cart</a>
+                        </div>
+                        <div class="cart_button">
+                            <a href="/checkout">Checkout</a>
+                        </div>
+
                     </div>
                 </div>
+                <!--mini cart end-->
             </div>
         </div>
     `

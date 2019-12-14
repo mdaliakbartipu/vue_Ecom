@@ -4,8 +4,8 @@
             <div class="col-12">
                 <div class="breadcrumb_content">
                     <ul>
-                        <li><a href="index.html">home</a></li>
-                        <li>Shopping Cart</li>
+                        <li><a href="/">home</a></li>
+                        <li><?=$_GET['thisPage']??''?></li>
                     </ul>
                 </div>
             </div>
