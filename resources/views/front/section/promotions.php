@@ -17,8 +17,9 @@ ASSETS.'/img/category/'.$cat->image;
 
 <div class="banner_area mb-55 ">
             <div class="container">
+                               <h3 class="text-center mb-2">Promotions</h3>
+                                <p class="text-center time-to">Pick Yours !</p>
                 <div class="row" >
-                    
                     <div class="col-lg-6 col-md-6" >
                         <figure class="single_banner">
                             <div class="banner_thumb para-two">

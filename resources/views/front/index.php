@@ -6,11 +6,12 @@
     <?php include("section/offcanvas.php");?>
     <!--Offcanvas menu area end-->
     <!--header area start--> 
+    <div id="app">
     <div class="new-mar-pad">
-     <?php include("section/header.php");?>
+    <?php include("section/header.php");?>
     </div>
 
-    <div id="app">
+
     <!--header area end-->
     <div class="new-mar-pad">
     <!--slider area start-->

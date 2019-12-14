@@ -567,6 +567,44 @@ Vue.component('related_products', {
 });
 
 
+Vue.component('top_nav_bar', {
+
+    template:
+    `
+    <nav>
+        <ul>
+            <li><a href="/">home</a>
+                <ul class="sub_menu">
+                    <li><a href="/catagory_products">Catagory Page</a></li>
+                    <li><a href="/singleProduct/1">Product Single Page</a></li>
+                </ul>
+            </li>
+            <li class="mega_items"><a href="#">shop</a>
+            </li>
+            <li><a href="/blog">blog</a>
+            </li>
+            <li><a class="#" href="#">pages</a>
+            </li>
+
+            <li><a href="/pages/about-us">About Us</a></li>
+            <li><a href="/contact"> Contact Us</a></li>
+        </ul>
+    </nav>
+    `
+});
+
+
+Vue.component('company_logo', {
+    props:['logo'],
+    template:
+    `
+    <div class="logo">
+            <a href="/"><img :src="logo" alt="" style="max-width:120%;"></a>
+    </div>
+    `
+});
+
+
 new Vue({
     el: "#app",
     data: {

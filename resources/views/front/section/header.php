@@ -36,41 +36,25 @@
                 <div class="header_middle">
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-6 col-xs-12">
-                            <div class="logo">
-                                <?php
-                                        $img = null;
+                            
+                        <?php
+                            $img = null;
 
-                                        if(file_exists(ASSETS."/.uploads/company/".$company->logo)){
-                                            $img = ASSETS."/.uploads/company/".$company->logo;
-                                        } else {
-                                            $img = ASSETS."/img/company/".$company->logo;
-                                        }
+                            if(file_exists(ASSETS."/.uploads/company/".$company->logo)){
+                                $img = ASSETS."/.uploads/company/".$company->logo;
+                            } else {
+                                $img = ASSETS."/img/company/".$company->logo;
+                            }
                                 ?>
-                                <a href="/"><img src="<?=$img?>" alt="" style="max-width:120%;"></a>
-                                
-                            </div>
+
+                        <company_logo
+                        logo="<?=$img?>"
+                        ></company_logo>
+
                         </div>
                         <div class="col-lg-8 col-md-12 col-xs-12 text-center ">
                             <div class="main_menu menu_position text-center">
-                                <nav>
-                                    <ul>
-                                        <li><a href="/">home</a>
-                                            <ul class="sub_menu">
-                                                <li><a href="/catagory_products">Catagory Page</a></li>
-                                                <li><a href="/singleProduct/1">Product Single Page</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="mega_items"><a href="#">shop</a>
-                                        </li>
-                                        <li><a href="/blog">blog</a>
-                                        </li>
-                                        <li><a class="#" href="#">pages</a>
-                                        </li>
-
-                                        <li><a href="/pages/about-us">About Us</a></li>
-                                        <li><a href="/contact"> Contact Us</a></li>
-                                    </ul>
-                                </nav>
+                                <top_nav_bar></top_nav_bar>
                             </div>
                         </div>
                         <div class="col-lg-2 col-xs-12">
@@ -114,7 +98,7 @@
                                                                     <?=$cat->name?>
                                                                         <!--  <i class="fa fa-caret-down"></i> -->
                                                                     </a>
-                                                                </li>
+                                                            </li>
                                                         <?php } ?>
                                                         
                                                         </ul>
