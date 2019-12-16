@@ -54,10 +54,9 @@ Vue.component('slider-image', {
 
 Vue.component('cart_table', {
 
-    data: function () {
+    data: function() {
         return {
-            products: [
-                {
+            products: [{
                     image: 'front/assets/img/s-product/product.jpg',
                     name: "Test product",
                     price: "100",
@@ -83,8 +82,7 @@ Vue.component('cart_table', {
 
         }
     },
-    template:
-        `
+    template: `
     <div class="row">
     <div class="col-12">
         <div class="table_desc">
@@ -125,8 +123,7 @@ Vue.component('cart_table', {
 
 Vue.component('coupon', {
 
-    template:
-        `
+    template: `
     <div class="coupon_code left">
             <h3>Coupon</h3>
             <div class="coupon_inner">
@@ -142,12 +139,11 @@ Vue.component('coupon', {
 Vue.component('cart_total', {
 
     data: function() {
-            return {
-                message: "",
-            }
+        return {
+            message: "",
+        }
     },
-    template:
-    `
+    template: `
     <div class="coupon_code right">
             <h3>Cart Totals</h3>
             <div class="coupon_inner">
@@ -175,8 +171,7 @@ Vue.component('cart_total', {
 
 
 Vue.component('cart', {
-    template:
-    `
+    template: `
     <div class="cart_page_bg">
     <div class="container">
         <div class="shopping_cart_area">
@@ -390,7 +385,7 @@ Vue.component('product_availability', {
 });
 
 Vue.component('product_extra_info', {
-    template: `
+        template: `
     <div class="accordion product_accordian">
             <div class="card">
                 <div class="card-header" id="headingOne">
@@ -456,7 +451,7 @@ Vue.component('product_extra_info', {
             </div>
         </div>
     `
-}),
+    }),
 
 
     Vue.component('add_to_cart', {
@@ -468,7 +463,7 @@ Vue.component('product_extra_info', {
 
 
     Vue.component('product_quantity', {
-        data: function () {
+        data: function() {
             return {
                 count: 0,
                 cartMessage: "Add To Cart"
@@ -505,7 +500,7 @@ Vue.component('product_price', {
 
 
 Vue.component('product_info', {
-    data: function () {
+    data: function() {
         return {
             name: 'Nonstick Dishwasher PFOA',
             price: '10,59',
@@ -599,14 +594,14 @@ Vue.component('size_variant', {
 
 
 Vue.component('product_article', {
-    data: function () {
+    data: function() {
         return {
             link: "/singleProduct/1" + this.id,
         }
     },
     props: ['thumb1', 'thumb2'],
     template: `
-    <div class="slide">
+    <div class="slides">
     <article class="single_product mt-3">
         <figure>
 
@@ -668,7 +663,7 @@ Vue.component('product_article', {
 
 
 Vue.component('tab_products', {
-    data: function () {
+    data: function() {
         return {
             products: {
                 images: {
@@ -697,7 +692,7 @@ Vue.component('tab_products', {
 
 
 Vue.component('related_products', {
-    data: function () {
+    data: function() {
         return {
             products: {
                 images: {
@@ -734,8 +729,7 @@ Vue.component('related_products', {
 
 Vue.component('top_nav_bar', {
 
-    template:
-        `
+    template: `
     <nav>
         <ul>
             <li><a href="/">home</a>
@@ -761,8 +755,7 @@ Vue.component('top_nav_bar', {
 
 Vue.component('company_logo', {
     props: ['logo'],
-    template:
-        `
+    template: `
     <div class="logo">
             <a href="/"><img :src="logo" alt="" style="max-width:120%;"></a>
     </div>
@@ -772,8 +765,7 @@ Vue.component('company_logo', {
 
 Vue.component('top_bar_menu_item', {
     props: ['cat'],
-    template:
-        `<li class="top_bar_menu_item" style="width:150px">
+    template: `<li class="top_bar_menu_item" style="width:150px">
                     <a href="/category_products/<?=$cat->id?>" class="dropbtn">
                             {{cat}}
                             <!--  <i class="fa fa-caret-down"></i> -->
@@ -804,8 +796,7 @@ Vue.component('category_list', {
 });
 
 Vue.component('top_search_box', {
-    template:
-        `
+    template: `
     <div class="search_box show last-day-7">
             <input placeholder="Search or enter web ID" type="text">
             <a href=""><button type="submit"><i class="fa fa-search"></i></button></a>
@@ -817,33 +808,32 @@ Vue.component('header_top', {
 
     computed: {
         // a computed getter
-        user: function () {
-          if(this.hasUser){
-              return true;
-          } else{
-              return false;
-          }
-        }
-      },
-
-      method:{
-            logout: function(){
-                event.preventDefault();
-                document.getElementById('logout-form-top').submit();
+        user: function() {
+            if (this.hasUser) {
+                return true;
+            } else {
+                return false;
             }
-      },
+        }
+    },
 
-    data: function(){
+    method: {
+        logout: function() {
+            event.preventDefault();
+            document.getElementById('logout-form-top').submit();
+        }
+    },
+
+    data: function() {
         return {
-            hasUser : this.user_id,
+            hasUser: this.user_id,
             userName: this.user_name,
         }
     },
 
-    props:['user_name', "user_id", 'token'],
+    props: ['user_name', "user_id", 'token'],
 
-    template:
-        `
+    template: `
     <div class="header_top">
                 <div class="row ">
                     <div class="col-lg-6 col-md-6">
@@ -881,8 +871,7 @@ Vue.component('header_top', {
 
 
 Vue.component('shop_by_categories', {
-    template:
-        `
+    template: `
     <div class="column1 col-lg-3 col-md-6  col-12 col-sm-d-none">
         <div class="categories_menu categories_three">
             <div class="categories_title">
@@ -907,16 +896,14 @@ Vue.component('shop_by_categories', {
 
 Vue.component('super_section_list', {
     props: ['link', 'name'],
-    template:
-        `
+    template: `
     <li><a href="link">{{name}}</a></li>
 `
 });
 
 Vue.component('sub_section_list', {
     props: ['link', 'name'],
-    template:
-        `
+    template: `
     <li class="menu_item_children">
             <a :href="link">{{name}}</a>
             <ul class="categorie_sub_menu">
@@ -928,15 +915,14 @@ Vue.component('sub_section_list', {
 
 
 Vue.component('cat_section_list', {
-    date: function () {
+    date: function() {
         return {
             catClassWithIcon: this.icon + " mr-10",
             link: "/catagory_products/" + this.id,
         }
     },
     props: ['icon', 'id', 'name'],
-    template:
-        `
+    template: `
     <li class="menu_item_children"><a :href="this.link">
             <i :class="this.catClassWithIcon" aria-hidden="true"></i>
                 {{name}} <i class="fa fa-angle-right"></i></a>
@@ -953,8 +939,7 @@ Vue.component('cat_section_list', {
 
 Vue.component('singin_and_cart', {
     props: ['cart_image'],
-    template:
-        `
+    template: `
     <div class="column3 col-lg-3 col-md-6 hide col-sm-12 col-sm-d-none">
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-sm-d-none">
@@ -979,19 +964,18 @@ Vue.component('singin_and_cart', {
 
 Vue.component('miniCart', {
 
-    data: function(){
+    data: function() {
         return {
-            products: [
-                {
-                    name:"something",
-                    image:"front/assets/img/s-product/product.jpg",
+            products: [{
+                    name: "something",
+                    image: "front/assets/img/s-product/product.jpg",
                     qty: 5,
                     price: 100,
                 },
                 {
-                    name:"something",
-                    image:"front/assets/img/s-product/product.jpg",
-                    qty:1,
+                    name: "something",
+                    image: "front/assets/img/s-product/product.jpg",
+                    qty: 1,
                     price: 200,
                 }
             ]
@@ -1000,19 +984,18 @@ Vue.component('miniCart', {
 
     computed: {
         // a computed getter
-        total: function () {
-          // counting total
-          let count = 0;
-          let t = 0;
-          for(count; count< this.products.length;count++){
-              t += this.products[count].qty * this.products[count].price;
-          }
-          return t;
+        total: function() {
+            // counting total
+            let count = 0;
+            let t = 0;
+            for (count; count < this.products.length; count++) {
+                t += this.products[count].qty * this.products[count].price;
+            }
+            return t;
         }
-      },
+    },
 
-    template:
-    `
+    template: `
     <div class="header_configure_area">
             <div class="header_wishlist">
                 <a href="#">
