@@ -9,7 +9,7 @@
             <header_top 
             user_name="<?=\Auth::user()->name?>"
             user_id = "<?=\Auth::user()->id?>"
-            token=<?=csrf_token()?>
+            token="<?=csrf_token()?>"
             ></header_top>
         
         <?php
@@ -17,13 +17,14 @@
             <header_top 
             user_name=""
             user_id = ""
+            token="<?=csrf_token()?>"
             ></header_top>
             <?php
         }
 ?>
 
 <form id="logout-form-top" action="/logout" method="POST" style="display: none;">
-    <input type="hidden" name="_token" :value="token"></form>
+    <input type="hidden" name="_token" value="<?=csrf_token()?>"></form>
 </li>
             
 
@@ -34,7 +35,7 @@
             if (file_exists(ASSETS . "/.uploads/company/" . $company->logo)) {
                 $img = ASSETS . "/.uploads/company/" . $company->logo;
             } else {
-                $img = ASSETS . "/img/company/" . $company->logo;
+                $img = ASSETS . "/img/company/logo.png";
             }
             ?>
 
