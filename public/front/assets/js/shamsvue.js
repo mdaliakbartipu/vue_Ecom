@@ -465,6 +465,7 @@ Vue.component('product_info', {
         return {
             selected: {
                 variant:null,
+                color: null,
                 qty: null
             },
             colors: [{
@@ -489,8 +490,13 @@ Vue.component('product_info', {
         }
     },
     methods: {
-        setVariant: function(id) {
+        selectColor: function(id) {
             console.log("Color selected in child VariantID:" + id);
+            this.selected.color = id;
+            this.selected.variant = null;
+        },
+        selectVariant: function(id) {
+            console.log("Variantselected in child VariantID:" + id);
             this.selected.variant = id;
         }
     },
@@ -508,8 +514,10 @@ Vue.component('product_info', {
                     description_line_one="from 5 items: 9,40"
                     description_line_two="from 30 items: 8,21"
                 ></product_description>
-                <colors_variant :variants="variants" @color-selected="setVariant"></colors_variant>
-                <size_variant></size_variant>
+               
+                <colors_variant :variants="variants" @color-selected="selectColor"></colors_variant>
+                
+                <size_variant :sizeVariants="variants[this.selected.color]" @variant-selected="selectVariant"></size_variant>
                 <br>
                 <product_availability></product_availability>
                 <br/>
@@ -566,31 +574,39 @@ Vue.component('product_description', {
 
 
 Vue.component('size_variant', {
+    props:['sizeVariants'],
+    data: function(){
+        return {
+            listClass:"mr-2",
+            selected:{
+                size:{
+                    name:null,
+                    id:null,
+                },
+                variant:{
+                    id:null,
+                }
+            }
+        }
+    },
+    methods: {
+        selectSize: function(index){
+            this.$emit('variant-selected', this.sizeVariants[index].id);
+            console.log("selected:sizeid: "+ this.sizeVariants[index].size_id);
+            console.log("selected:Variant: "+ this.sizeVariants[index].id);
+            this.selected.size.name = this.sizeVariants[index].size.name;
+        }
+    },
     template: `
     <div class="product_size">
     <p style="float:right">SizeTable</p><br>
-    <hr style="">
+    <hr>
     <ul id="product_size">
-        <li class="selected">
-            <a href="#" data-toggle="tooltip" title="XS">XS</a>
-        </li>
-        <li>
-            <a href="#">S</a>
-        </li>
-        <li>
-            <a href="#">M</a>
-        </li>
-        <li>
-            <a href="#">L</a>
-        </li>
-        <li>
-            <a href="#">XL</a>
-        </li>
-        <li>
-            <a href="#">2XL</a>
+        <li v-for="(variant, $index) in sizeVariants" :key="$index" class="mr-3">
+            <button @click.prevent="selectSize($index)" :title="variant.size.name" class="btn btn-info">{{variant.size.name}}</button>
         </li>
     </ul>
-    <p style="color:grey;font-weight:.5em">Size: XS
+    <p style="color:grey;font-weight:.8em;margin-top:1em">Selected : {{this.selected.size.name}}
     </p>
 </div>
     `
