@@ -31,7 +31,7 @@ class CreateProductsTable extends Migration
             $table->integer('leglength');
             $table->integer('fit');
             $table->string('thumb1')->nullable()->default('thumb1.jpg');
-            $table->string('thumb2')->nullable()->default('thumb1.jpg');
+            $table->string('thumb2')->nullable()->default('thumb2.jpg');
             $table->timestamps();
         });
     }

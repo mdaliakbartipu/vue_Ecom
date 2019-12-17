@@ -336,6 +336,7 @@ Vue.component('product_availability', {
 });
 
 Vue.component('product_extra_info', {
+    props:['details'],
         template: `
     <div class="accordion product_accordian">
             <div class="card">
@@ -348,8 +349,7 @@ Vue.component('product_extra_info', {
                 </div>
 
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    <div v-html="details" class="card-body">
                     </div>
                 </div>
             </div>
@@ -451,6 +451,7 @@ Vue.component('product_price', {
 
 
 Vue.component('product_info', {
+    props:['product'],
     data: function() {
         return {
             selected: {
@@ -488,13 +489,16 @@ Vue.component('product_info', {
             this.selected.color = "selected";
         }
     },
+    mounted () {
+        console.log(this.product);
+      },
     template: `
     <div class="col-lg-6 col-md-6">
         <div class="product_d_right">
             <form action="">
-                <product_name :name="name"></product_name>
+                <product_name :name="product.name"></product_name>
                 <product_price_notice></product_price_notice>
-                <product_price :price="price"></product_price>
+                <product_price :price="product.price"></product_price>
                 <product_description 
                     description_line_one="from 5 items: 9,40"
                     description_line_two="from 30 items: 8,21"
@@ -513,12 +517,12 @@ Vue.component('product_info', {
 
 
 Vue.component('product_details', {
-    props: ['product'],
+    props: ['images', 'product'],
     template: `
     <div class="product_details">
         <div class="row">
-            <imagescolumn :images="product.images"></imagescolumn>
-            <product_info> </product_info>
+            <imagescolumn :images="images"></imagescolumn>
+            <product_info :product="product"> </product_info>
         </div>
     </div>  
     `
@@ -542,6 +546,7 @@ Vue.component('product_description', {
     </div>
     `
 });
+
 
 Vue.component('size_variant', {
     template: `
@@ -703,6 +708,28 @@ Vue.component('related_products', {
     </section>
     `
 });
+
+Vue.component('single_product_section', {
+    data: function(){
+        return {
+            product:null,
+        }
+    },
+    props: ['images'],
+    mounted () {
+        axios
+          .get('http://127.0.0.1:8000/get_product/23')
+          .then(response => (this.product = response.data
+            ));
+      },
+    template: `
+    <div>
+        <product_details v-if="product" :product="product" :images="images"></product_details>
+        <product_extra_info v-if="product" :details="product.details"></product_extra_info>
+    </div>
+    `
+});
+
 
 
 Vue.component('top_nav_bar', {

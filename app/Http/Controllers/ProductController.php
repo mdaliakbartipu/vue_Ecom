@@ -116,6 +116,7 @@ class ProductController extends Controller
         $colors     = $request->color;
         $quantities = $request->quantity;
         $images     = $request->image;
+        $quantity   = $request->quantity;
 
         foreach($quantities as $key => $qty){
             if(
@@ -124,10 +125,11 @@ class ProductController extends Controller
                 $colors[$key]??false &&
                 $images[$key]??false
             ):
-                $variant =  new ProductVariant;
+                $variant =  new ProductVariant();
                 $variant->product_id = $product->id;
                 $variant->color_id   = $colors[$key]??0;
                 $variant->size_id    = $sizes[$key]??0;
+                $variant->qty        = $qty;
                 $variant->timestamps = false;
                 $variant->save();
 
@@ -146,7 +148,7 @@ class ProductController extends Controller
                 // saving to database
                 $image = new ProductImages;
                 $image->product_id = $product->id;
-                $image->color_id = $colors[$key];
+                $image->variant_id =  $variant->id;
                 $image->image = $imageName;
                 $image->timestamps = false;
                 $image->save();
@@ -155,7 +157,6 @@ class ProductController extends Controller
                 $storage = new ProductStorage;
                 $storage->product_id = $product->id;
                 $storage->variant_id = $variant->id;
-                $storage->stock      = $qty;
                 $storage->sell       = 0;
                 $storage->order      = 0;
                 $storage->save();

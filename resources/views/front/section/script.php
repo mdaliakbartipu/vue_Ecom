@@ -4,6 +4,7 @@
     <!-- Main JS -->
     <script src="<?=ASSETS?>/js/main.js"></script>
     <script src="<?=ASSETS?>/js/wow.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
     <script src="<?=ASSETS?>/js/shamsvue.js"></script>
     <script>

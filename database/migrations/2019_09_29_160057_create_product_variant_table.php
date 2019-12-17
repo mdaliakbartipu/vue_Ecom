@@ -26,6 +26,8 @@ class CreateProductVariantTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
             
+            $table->unsignedInteger('qty');
+
             $table->index('product_id');
 
         });
