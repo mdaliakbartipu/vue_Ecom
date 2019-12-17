@@ -57,7 +57,7 @@ Vue.component('cart_table', {
     data: function() {
         return {
             products: [{
-                    image: 'front/assets/img/s-product/product.jpg',
+                    image: '/front/assets/img/s-product/product.jpg',
                     name: "Test product",
                     price: "100",
                     qty: {
@@ -68,7 +68,7 @@ Vue.component('cart_table', {
                     total: 300
                 },
                 {
-                    image: 'front/assets/img/s-product/product.jpg',
+                    image: '/front/assets/img/s-product/product.jpg',
                     name: "Test product",
                     price: "100",
                     qty: {
@@ -305,71 +305,22 @@ Vue.component('product_options', {
 
 
 Vue.component('colors_variant', {
+    props: ['colors'],
+    methods: {
+        selected: function(index) {
+            this.$emit('color-selected', index);
+        }
+    },
     template: `
     <div class="product_variant color">
     <ul>
-        <li class="color1">
-            <a href="#" data-toggle="tooltip" title="Black"></a>
-        </li>
-        <li class="color2">
-            <a href="#" data-toggle="tooltip" title="Gray"></a>
-        </li>
-        <li class="color3">
-            <a href="#"></a>
-        </li>
-        <li class="color4">
-            <a href="#"></a>
-        </li>
-        <li class="color4">
-            <a href="#"></a>
-        </li>
-        <li class="color1">
-            <a href="#"></a>
-        </li>
-        <li class="color2">
-            <a href="#"></a>
-        </li>
-        <li class="color3">
-            <a href="#"></a>
-        </li>
-        <li class="color4">
-            <a href="#"></a>
-        </li>
-        <li class="color4">
-            <a href="#"></a>
-        </li>
-        <li class="color1">
-            <a href="#"></a>
-        </li>
-        <li class="color2">
-            <a href="#"></a>
-        </li>
-        <li class="color3">
-            <a href="#"></a>
-        </li>
-        <li class="color4">
-            <a href="#"></a>
-        </li>
-        <li class="color4">
-            <a href="#"></a>
-        </li>
-        <li class="color1">
-            <a href="#"></a>
-        </li>
-        <li class="color2">
-            <a href="#"></a>
-        </li>
-        <li class="color3">
-            <a href="#"></a>
-        </li>
-        <li class="color4">
-            <a href="#"></a>
-        </li>
-        <li class="color4">
-            <a href="#"></a>
+        <li v-for="(color,index) in colors"  :key="index" class="color1">
+            <button data-toggle="tooltip" :title="color.name" @click="selected(index)">
+            <img width="20px" :src="color.image">
+            </button>
         </li>
     </ul>
-    <p style="color:grey;font-weight:.5em">Color: BLACK
+    <p style="color:red;font-weight:.5em">Color: Black
     </p>
 </div>
     `
@@ -502,8 +453,39 @@ Vue.component('product_price', {
 Vue.component('product_info', {
     data: function() {
         return {
+            selected: {
+                color: null,
+                size: null,
+                qty: null
+
+            },
             name: 'Nonstick Dishwasher PFOA',
             price: '10,59',
+            colors: [{
+                    id: 1,
+                    image: "/front/assets/img/color/color.png",
+                    code: "#FFFF",
+                    name: "Black"
+                },
+                {
+                    id: 1,
+                    image: "/front/assets/img/color/color.png",
+                    code: "#FFFF",
+                    name: "Black"
+                },
+                {
+                    id: 1,
+                    image: "/front/assets/img/color/color.png",
+                    code: "#FFFF",
+                    name: "Black"
+                }
+            ],
+        }
+    },
+    methods: {
+        setColor: function(id) {
+            console.log("Color selected in child id:" + id);
+            this.selected.color = "selected";
         }
     },
     template: `
@@ -517,7 +499,7 @@ Vue.component('product_info', {
                     description_line_one="from 5 items: 9,40"
                     description_line_two="from 30 items: 8,21"
                 ></product_description>
-                <colors_variant></colors_variant>
+                <colors_variant :colors="colors" @color-selected="setColor"></colors_variant>
                 <size_variant></size_variant>
                 <br>
                 <product_availability></product_availability>
@@ -964,13 +946,13 @@ Vue.component('miniCart', {
         return {
             products: [{
                     name: "something",
-                    image: "front/assets/img/s-product/product.jpg",
+                    image: "/front/assets/img/s-product/product.jpg",
                     qty: 5,
                     price: 100,
                 },
                 {
                     name: "something",
-                    image: "front/assets/img/s-product/product.jpg",
+                    image: "/front/assets/img/s-product/product.jpg",
                     qty: 1,
                     price: 200,
                 }
@@ -1001,7 +983,7 @@ Vue.component('miniCart', {
             <div class="mini_cart_wrapper">
                 <a href="javascript:void(0)">
                         <div class="cart_img_page ">
-                        <a href=""><img src="front/assets/img/logo/cart.png" alt="" /></a>
+                        <a href=""><img src="/front/assets/img/logo/cart.png" alt="" /></a>
                         </div>
                 </a>
                 <!--mini cart-->

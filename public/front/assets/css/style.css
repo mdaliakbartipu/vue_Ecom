@@ -13292,7 +13292,7 @@ End*/
                     }
                     
                     .cart_img_page img {
-                        max-width: 50%;
+                        max-width: 100%;
                         text-align: right;
                         margin-right: 2px;
                     }
