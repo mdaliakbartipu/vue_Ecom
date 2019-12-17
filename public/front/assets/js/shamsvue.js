@@ -305,22 +305,29 @@ Vue.component('product_options', {
 
 
 Vue.component('colors_variant', {
-    props: ['colors'],
+    props: ['colors','variants'],
     methods: {
         selected: function(index) {
             this.$emit('color-selected', index);
+            this.colorName = this.variants[index][0].color.name
+        }
+    },
+    data:function(){
+        return {
+            imageUrl : "/front/assets/img/color/",
+            colorName: null,
         }
     },
     template: `
     <div class="product_variant color">
     <ul>
-        <li v-for="(color,index) in colors"  :key="index" class="color1">
-            <button data-toggle="tooltip" :title="color.name" @click="selected(index)">
-            <img width="20px" :src="color.image">
+        <li v-for="(color,index) in variants"  :key="index" class="color1">
+            <button data-toggle="tooltip" :title="color[0].color.name" @click.prevent="selected(index)">
+            <img width="20px" :src="imageUrl + color[0].color.image">
             </button>
         </li>
     </ul>
-    <p style="color:red;font-weight:.5em">Color: Black
+    <p style="color:red;font-weight:.5em">Color: {{this.colorName}}
     </p>
 </div>
     `
@@ -451,17 +458,15 @@ Vue.component('product_price', {
 
 
 Vue.component('product_info', {
-    props:['product'],
+    // Variant will be sorted by Color
+    //  so loop will provide simple integration
+    props:['product', 'variants'],
     data: function() {
         return {
             selected: {
-                color: null,
-                size: null,
+                variant:null,
                 qty: null
-
             },
-            name: 'Nonstick Dishwasher PFOA',
-            price: '10,59',
             colors: [{
                     id: 1,
                     image: "/front/assets/img/color/color.png",
@@ -484,9 +489,9 @@ Vue.component('product_info', {
         }
     },
     methods: {
-        setColor: function(id) {
-            console.log("Color selected in child id:" + id);
-            this.selected.color = "selected";
+        setVariant: function(id) {
+            console.log("Color selected in child VariantID:" + id);
+            this.selected.variant = id;
         }
     },
     mounted () {
@@ -503,7 +508,7 @@ Vue.component('product_info', {
                     description_line_one="from 5 items: 9,40"
                     description_line_two="from 30 items: 8,21"
                 ></product_description>
-                <colors_variant :colors="colors" @color-selected="setColor"></colors_variant>
+                <colors_variant :variants="variants" @color-selected="setVariant"></colors_variant>
                 <size_variant></size_variant>
                 <br>
                 <product_availability></product_availability>
@@ -534,7 +539,7 @@ Vue.component('product_details', {
     <div class="product_details">
         <div class="row">
             <imagescolumn :images="images" :variant="this.variant"></imagescolumn>
-            <product_info :variant="this.variant" :product="product"> </product_info>
+            <product_info v-if="this.variant" :variants="this.variant" :product="product"> </product_info>
         </div>
     </div>  
     `
