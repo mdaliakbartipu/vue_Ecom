@@ -518,11 +518,23 @@ Vue.component('product_info', {
 
 Vue.component('product_details', {
     props: ['images', 'product'],
+    data:function(){
+        return {
+            variant:null,
+        }
+
+    },
+    mounted () {
+        axios
+          .get('http://127.0.0.1:8000/get_variant/'+this.product.id)
+          .then(response => (this.variant = response.data
+            ));
+      },
     template: `
     <div class="product_details">
         <div class="row">
-            <imagescolumn :images="images"></imagescolumn>
-            <product_info :product="product"> </product_info>
+            <imagescolumn :images="images" :variant="this.variant"></imagescolumn>
+            <product_info :variant="this.variant" :product="product"> </product_info>
         </div>
     </div>  
     `

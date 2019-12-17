@@ -8,6 +8,7 @@ use App\Models\Front\UI;
 use App\Page;
 use App\ProductTags;
 use App\Product;
+use App\ProductVariant;
 
 class PagesController extends FrontController
 {
@@ -80,6 +81,12 @@ class PagesController extends FrontController
     public function get_product($id)
     {
         $product = Product::find($id);
+        echo json_encode($product);
+    }
+
+    public function get_variant($id)
+    {
+        $product = ProductVariant::where('product_id',$id)->with('color')->with('size')->get()->keyBy('id')->groupBy('color_id');
         echo json_encode($product);
     }
 
