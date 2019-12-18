@@ -424,9 +424,13 @@ Vue.component('product_extra_info', {
 
 
     Vue.component('add_to_cart', {
-        props: ['text'],
+        methods:{
+            addToCart(){
+                this.$emit('addToCart');
+            }
+        },
         template: `
-    <button class="button add-to-cart" type="submit"><i class="fa fa-shopping-cart pull-left"></i>{{text}}</button>
+    <button @click.prevent="addToCart" class="button add-to-cart" type="submit"><i class="fa fa-shopping-cart pull-left"></i>Add to cart</button>
     `
     }),
 
@@ -435,18 +439,23 @@ Vue.component('product_extra_info', {
         props:['variant'],
         data: function() {
             return {
-                count: 0,
-                cartMessage: "Add To Cart"
+                count: 0
             }
         },
         methods:{
             up(){
                 if((this.count+1) <= this.variant.qty)
                     this.count++;
+                    this.$emit('setQty', this.count);
             },
             down(){
                 if((this.count-1) > 0)
                 this.count--;
+                this.$emit('setQty', this.count);
+            },
+            addToCart(){
+                console.log("Cart to be added");
+                this.$emit('addToCart');
             }
         },
         template: `
@@ -457,7 +466,7 @@ Vue.component('product_extra_info', {
         <div @click="up" class="plus fa fa-plus-circle"></div>
         <div @click="down" class="minus fa fa-minus-circle"></div>
     </div>
-    <add_to_cart v-if="this.count > 0 " :text="cartMessage"></add_to_cart>
+    <add_to_cart v-if="this.count > 0" @addToCart="addToCart"></add_to_cart>
 </div>
     `
     });
@@ -490,25 +499,8 @@ Vue.component('product_info', {
                 color: null,
                 qty: null
             },
-            colors: [{
-                    id: 1,
-                    image: "/front/assets/img/color/color.png",
-                    code: "#FFFF",
-                    name: "Black"
-                },
-                {
-                    id: 1,
-                    image: "/front/assets/img/color/color.png",
-                    code: "#FFFF",
-                    name: "Black"
-                },
-                {
-                    id: 1,
-                    image: "/front/assets/img/color/color.png",
-                    code: "#FFFF",
-                    name: "Black"
-                }
-            ],
+            cart : []
+            ,
         }
     },
     methods: {
@@ -520,6 +512,26 @@ Vue.component('product_info', {
         selectVariant: function(id) {
             console.log("Variantselected in child VariantID:" + id);
             this.selected.variant = id;
+        },
+        selectQuantity: function(qty) {
+            console.log(" Quantity selected in child VariantID:" + qty);
+            this.selected.qty = qty;
+        },
+        addToCart() {
+            console.log("Quantity selected in child VariantID:"+this.selected);
+            this.cart.push({variant : this.selected.variant.id, qty:this.selected.qty});
+            
+            axios.post('/add-to-cart', {
+                variant: this.selected.variant.id,
+                qty: this.selected.qty
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+            // alert("hi");
         }
     },
     mounted () {
@@ -543,7 +555,7 @@ Vue.component('product_info', {
                 <br>
                 <product_availability v-if="this.selected.variant" :qty="this.selected.variant.qty"></product_availability>
                 <br/>
-                <product_quantity v-if="this.selected.variant"  :variant="this.selected.variant"></product_quantity>
+                <product_quantity v-if="this.selected.variant"  :variant="this.selected.variant" @setQty="selectQuantity"  @addToCart="addToCart"></product_quantity>
             </form>
         </div>
     </div>      
@@ -1117,6 +1129,11 @@ Vue.component('miniCart', {
         </div>
     `
 });
+
+var eventBus = new Vue();
+
+
+
 
 
 new Vue({

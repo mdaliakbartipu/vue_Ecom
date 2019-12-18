@@ -28,6 +28,7 @@ Route::get('/subcat_products/{id}', 'Front\PagesController@subcatProducts');
 Route::get('/subsubcat_products/{id}', 'Front\PagesController@subsubcatProducts');
 
 Route::get('/productCart', 'Front\PagesController@cart');
+
 Route::get('/productCheckout', 'Front\PagesController@checkout');
 Route::get('/singleProduct/{id}', 'Front\PagesController@singleProduct');
 Route::get('/get_product/{id}', 'Front\PagesController@get_product');
@@ -95,6 +96,7 @@ Route::resource('product','ProductController');
 	
 Route::get('/get-sub/ajax/{id}','ProductController@ajaxGetSub');
 Route::get('/get-sub/sub/ajax/{id}','ProductController@ajaxGetSubsub');	
+Route::post('/add-to-cart','ProductController@addToCart');	
     
 });
 

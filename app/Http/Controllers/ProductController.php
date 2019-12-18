@@ -305,5 +305,23 @@ class ProductController extends Controller
    //      return json_encode($categories);
    //  }
 
+   public function addToCart(Request $request)
+   {
+            if(isset($request->variant) && isset($request->qty)){
+                
+            }
+   }
+
+   public function getCart(Request $request)
+   {
+            if(isset($request->variant) && isset($request->qty)){
+                // get product info with thumb
+                //make cart like object
+                // save to session
+                //response text
+            }
+
+            
+   }
     
 }
