@@ -748,10 +748,10 @@ Vue.component('single_product_section', {
             product:null,
         }
     },
-    props: ['images'],
+    props: ['images', 'id'],
     mounted () {
         axios
-          .get('http://127.0.0.1:8000/get_product/23')
+          .get('http://127.0.0.1:8000/get_product/'+this.id)
           .then(response => (this.product = response.data
             ));
       },

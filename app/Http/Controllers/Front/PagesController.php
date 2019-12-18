@@ -68,12 +68,12 @@ class PagesController extends FrontController
         ]);
     }
 
-    public function singleProduct()
+    public function singleProduct($id)
     {
-        $product = Product::get();
+
         return view('front.singleProduct',
         [
-            'product' =>json_encode($product),
+            'productID'=>$id
         ]);
 
     }
