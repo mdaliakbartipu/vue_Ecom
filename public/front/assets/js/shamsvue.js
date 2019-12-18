@@ -320,6 +320,7 @@ Vue.component('colors_variant', {
     },
     template: `
     <div class="product_variant color">
+    <h4 v-if="!colorName">Select Color</h4>
     <ul>
         <li v-for="(color,index) in variants"  :key="index" class="color1">
             <button data-toggle="tooltip" :title="color[0].color.name" @click.prevent="selected(index)">
@@ -327,7 +328,7 @@ Vue.component('colors_variant', {
             </button>
         </li>
     </ul>
-    <p style="color:red;font-weight:.5em">Color: {{this.colorName}}
+    <p v-if="colorName" style="font-weight:.5em">Selected color: {{this.colorName}}
     </p>
 </div>
     `
@@ -538,7 +539,7 @@ Vue.component('product_info', {
                
                 <colors_variant :variants="variants" @color-selected="selectColor"></colors_variant>
                 
-                <size_variant :sizeVariants="variants[this.selected.color]" @variant-selected="selectVariant"></size_variant>
+                <size_variant v-if="variants[this.selected.color]"  :sizeVariants="variants[this.selected.color]" @variant-selected="selectVariant"></size_variant>
                 <br>
                 <product_availability v-if="this.selected.variant" :qty="this.selected.variant.qty"></product_availability>
                 <br/>
@@ -621,12 +622,13 @@ Vue.component('size_variant', {
     <div class="product_size">
     <p style="float:right">SizeTable</p><br>
     <hr>
+    <h4 v-if="!this.selected.size.name">Select Size</h4>
     <ul id="product_size">
         <li v-for="(variant, $index) in sizeVariants" :key="$index" class="mr-3">
             <button @click.prevent="selectSize($index)" :title="variant.size.name" class="btn btn-info">{{variant.size.name}}</button>
         </li>
     </ul>
-    <p style="color:grey;font-weight:.8em;margin-top:1em">Selected : {{this.selected.size.name}}
+    <p v-if="this.selected.size.name" style="color:grey;font-weight:.8em;margin-top:1em">Selected size : {{this.selected.size.name}}
     </p>
 </div>
     `
