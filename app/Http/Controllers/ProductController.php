@@ -308,7 +308,7 @@ class ProductController extends Controller
    public function addToCart(Request $request)
    {
             if(isset($request->variant) && isset($request->qty)){
-                
+                echo json_encode(['response'=>"Thik ache", "qty", $request->qty]);
             }
    }
 
@@ -318,10 +318,8 @@ class ProductController extends Controller
                 // get product info with thumb
                 //make cart like object
                 // save to session
-                //response text
+                //response
             }
-
-            
    }
     
 }

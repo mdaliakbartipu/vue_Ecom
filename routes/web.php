@@ -96,9 +96,9 @@ Route::resource('product','ProductController');
 	
 Route::get('/get-sub/ajax/{id}','ProductController@ajaxGetSub');
 Route::get('/get-sub/sub/ajax/{id}','ProductController@ajaxGetSubsub');	
-Route::post('/add-to-cart','ProductController@addToCart');	
-    
 });
+
+Route::post('add-to-cart','ProductController@addToCart');	
 
 
 

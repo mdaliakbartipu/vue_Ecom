@@ -527,6 +527,7 @@ Vue.component('product_info', {
               })
               .then(function (response) {
                 console.log(response);
+                alert("product added to cart");
               })
               .catch(function (error) {
                 console.log(error);
