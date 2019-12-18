@@ -335,9 +335,19 @@ Vue.component('colors_variant', {
 
 
 Vue.component('product_availability', {
+    props:['qty'],
+    computed: {
+            message(){
+        if( this.qty >= 1 ){
+                    return "In";
+                } else {
+                    return  "Out of";
+                }     
+            }
+      },
     template: `
     <div class="product-availability">
-        <i class="fa fa-wifi"></i> Availability: In Stock
+        <i class="fa fa-wifi"></i> Availability: {{this.message}} Stock
     </div>
     `
 });
@@ -421,21 +431,32 @@ Vue.component('product_extra_info', {
 
 
     Vue.component('product_quantity', {
+        props:['variant'],
         data: function() {
             return {
                 count: 0,
                 cartMessage: "Add To Cart"
             }
         },
+        methods:{
+            up(){
+                if((this.count+1) <= this.variant.qty)
+                    this.count++;
+            },
+            down(){
+                if((this.count-1) > 0)
+                this.count--;
+            }
+        },
         template: `
-    <div class="product_variant quantity">
+    <div v-if="variant.qty > 0" class="product_variant quantity">
     <label>quantity</label>
-    <input  name="quantity" type="text" :value="count"></input>
+    <input  name="quantity" type="text" :value="count" min="1" :max="variant.qty"></input>
     <div id="qty_count" style="display:flex;flex-direction:column;margin-right:1em">
-        <div @click="count++" class="plus fa fa-plus-circle"></div>
-        <div @click="count--" class="minus fa fa-minus-circle"></div>
+        <div @click="up" class="plus fa fa-plus-circle"></div>
+        <div @click="down" class="minus fa fa-minus-circle"></div>
     </div>
-    <add_to_cart :text="cartMessage"></add_to_cart>
+    <add_to_cart v-if="this.count > 0 " :text="cartMessage"></add_to_cart>
 </div>
     `
     });
@@ -519,9 +540,9 @@ Vue.component('product_info', {
                 
                 <size_variant :sizeVariants="variants[this.selected.color]" @variant-selected="selectVariant"></size_variant>
                 <br>
-                <product_availability></product_availability>
+                <product_availability v-if="this.selected.variant" :qty="this.selected.variant.qty"></product_availability>
                 <br/>
-                <product_quantity></product_quantity>
+                <product_quantity v-if="this.selected.variant"  :variant="this.selected.variant"></product_quantity>
             </form>
         </div>
     </div>      
@@ -583,15 +604,14 @@ Vue.component('size_variant', {
                     name:null,
                     id:null,
                 },
-                variant:{
-                    id:null,
-                }
+                variant:null
             }
         }
     },
     methods: {
         selectSize: function(index){
-            this.$emit('variant-selected', this.sizeVariants[index].id);
+            this.selected.variant = this.sizeVariants[index];
+            this.$emit('variant-selected', this.selected.variant);
             console.log("selected:sizeid: "+ this.sizeVariants[index].size_id);
             console.log("selected:Variant: "+ this.sizeVariants[index].id);
             this.selected.size.name = this.sizeVariants[index].size.name;
@@ -743,11 +763,13 @@ Vue.component('related_products', {
 });
 
 Vue.component('single_product_section', {
+    
     data: function(){
         return {
             product:null,
         }
     },
+
     props: ['images', 'id'],
     mounted () {
         axios
