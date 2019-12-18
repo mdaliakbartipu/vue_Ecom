@@ -651,7 +651,7 @@ Vue.component('size_variant', {
 Vue.component('product_article', {
     data: function() {
         return {
-            link: "/singleProduct/1" + this.id,
+            link: "/singleProduct/22",
         }
     },
     props: ['thumb1', 'thumb2'],
@@ -660,8 +660,8 @@ Vue.component('product_article', {
     <article class="single_product">
     <figure>
         <div class="product_thumb">
-            <a class="primary_img" href="#"><img :src="thumb1" alt=""></a>
-            <a class="secondary_img" href="#"><img :src="thumb2" alt=""></a>
+            <a class="primary_img" :href="link"><img :src="thumb1" alt=""></a>
+            <a class="secondary_img" :href="link"><img :src="thumb2" alt=""></a>
             <div class="label_product_left label_product">
                 <span class="label_sale_left">New</span>
             </div>
