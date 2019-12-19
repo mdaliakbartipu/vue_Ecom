@@ -731,7 +731,7 @@ Vue.component('tab_products', {
         tab: function(newVal, oldVal) { // watch it
         console.log('Prop(tab) changed: ', newVal, ' | was: ', oldVal);
         axios
-            .get('http://127.0.0.1:8000/api/get-product/'+this.tab.id)
+            .get(window.location.href.split('/').slice(0, 3).join('/')+'/api/get-product/'+this.tab.id)
             .then(response => ((response.status==200)? (this.tabProducts=response.data)&&(this.count=2):null));
       }},
     props: ['tab'],
