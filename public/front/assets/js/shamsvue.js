@@ -54,30 +54,30 @@ Vue.component('slider-image', {
 
 Vue.component('cart_table', {
 
-    data: function() {
+    data: function () {
         return {
             products: [{
-                    image: '/front/assets/img/s-product/product.jpg',
-                    name: "Test product",
-                    price: "100",
-                    qty: {
-                        min: 1,
-                        max: 10,
-                        selected: 3
-                    },
-                    total: 300
+                image: '/front/assets/img/s-product/product.jpg',
+                name: "Test product",
+                price: "100",
+                qty: {
+                    min: 1,
+                    max: 10,
+                    selected: 3
                 },
-                {
-                    image: '/front/assets/img/s-product/product.jpg',
-                    name: "Test product",
-                    price: "100",
-                    qty: {
-                        min: 1,
-                        max: 10,
-                        selected: 3
-                    },
-                    total: 300,
+                total: 300
+            },
+            {
+                image: '/front/assets/img/s-product/product.jpg',
+                name: "Test product",
+                price: "100",
+                qty: {
+                    min: 1,
+                    max: 10,
+                    selected: 3
                 },
+                total: 300,
+            },
             ]
 
         }
@@ -138,7 +138,7 @@ Vue.component('coupon', {
 
 Vue.component('cart_total', {
 
-    data: function() {
+    data: function () {
         return {
             message: "",
         }
@@ -305,16 +305,16 @@ Vue.component('product_options', {
 
 
 Vue.component('colors_variant', {
-    props: ['colors','variants'],
+    props: ['colors', 'variants'],
     methods: {
-        selected: function(index) {
+        selected: function (index) {
             this.$emit('color-selected', index);
             this.colorName = this.variants[index][0].color.name
         }
     },
-    data:function(){
+    data: function () {
         return {
-            imageUrl : "/front/assets/img/color/",
+            imageUrl: "/front/assets/img/color/",
             colorName: null,
         }
     },
@@ -336,16 +336,16 @@ Vue.component('colors_variant', {
 
 
 Vue.component('product_availability', {
-    props:['qty'],
+    props: ['qty'],
     computed: {
-            message(){
-        if( this.qty >= 1 ){
-                    return "In";
-                } else {
-                    return  "Out of";
-                }     
+        message() {
+            if (this.qty >= 1) {
+                return "In";
+            } else {
+                return "Out of";
             }
-      },
+        }
+    },
     template: `
     <div class="product-availability">
         <i class="fa fa-wifi"></i> Availability: {{this.message}} Stock
@@ -354,8 +354,8 @@ Vue.component('product_availability', {
 });
 
 Vue.component('product_extra_info', {
-    props:['details'],
-        template: `
+    props: ['details'],
+    template: `
     <div class="accordion product_accordian">
             <div class="card">
                 <div class="card-header" id="headingOne">
@@ -420,12 +420,12 @@ Vue.component('product_extra_info', {
             </div>
         </div>
     `
-    }),
+}),
 
 
     Vue.component('add_to_cart', {
-        methods:{
-            addToCart(){
+        methods: {
+            addToCart() {
                 this.$emit('addToCart');
             }
         },
@@ -436,24 +436,24 @@ Vue.component('product_extra_info', {
 
 
     Vue.component('product_quantity', {
-        props:['variant'],
-        data: function() {
+        props: ['variant'],
+        data: function () {
             return {
                 count: 0
             }
         },
-        methods:{
-            up(){
-                if((this.count+1) <= this.variant.qty)
+        methods: {
+            up() {
+                if ((this.count + 1) <= this.variant.qty)
                     this.count++;
-                    this.$emit('setQty', this.count);
-            },
-            down(){
-                if((this.count-1) > 0)
-                this.count--;
                 this.$emit('setQty', this.count);
             },
-            addToCart(){
+            down() {
+                if ((this.count - 1) > 0)
+                    this.count--;
+                this.$emit('setQty', this.count);
+            },
+            addToCart() {
                 console.log("Cart to be added");
                 this.$emit('addToCart');
             }
@@ -491,53 +491,53 @@ Vue.component('product_price', {
 Vue.component('product_info', {
     // Variant will be sorted by Color
     //  so loop will provide simple integration
-    props:['product', 'variants'],
-    data: function() {
+    props: ['product', 'variants'],
+    data: function () {
         return {
             selected: {
-                variant:null,
+                variant: null,
                 color: null,
                 qty: null
             },
-            cart : []
+            cart: []
             ,
         }
     },
     methods: {
-        selectColor: function(id) {
+        selectColor: function (id) {
             console.log("Color selected in child VariantID:" + id);
             this.selected.color = id;
             this.selected.variant = null;
         },
-        selectVariant: function(id) {
+        selectVariant: function (id) {
             console.log("Variantselected in child VariantID:" + id);
             this.selected.variant = id;
         },
-        selectQuantity: function(qty) {
+        selectQuantity: function (qty) {
             console.log(" Quantity selected in child VariantID:" + qty);
             this.selected.qty = qty;
         },
         addToCart() {
-            console.log("Quantity selected in child VariantID:"+this.selected);
-            this.cart.push({variant : this.selected.variant.id, qty:this.selected.qty});
-            
+            console.log("Quantity selected in child VariantID:" + this.selected);
+            this.cart.push({ variant: this.selected.variant.id, qty: this.selected.qty });
+
             axios.post('/add-to-cart', {
                 variant: this.selected.variant.id,
                 qty: this.selected.qty
-              })
-              .then(function (response) {
-                console.log(response);
-                alert("product added to cart");
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+            })
+                .then(function (response) {
+                    console.log(response);
+                    alert("product added to cart");
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             // alert("hi");
         }
     },
-    mounted () {
+    mounted() {
         console.log(this.product);
-      },
+    },
     template: `
     <div class="col-lg-6 col-md-6">
         <div class="product_d_right">
@@ -566,18 +566,18 @@ Vue.component('product_info', {
 
 Vue.component('product_details', {
     props: ['images', 'product'],
-    data:function(){
+    data: function () {
         return {
-            variant:null,
+            variant: null,
         }
 
     },
-    mounted () {
+    mounted() {
         axios
-          .get('/get_variant/'+this.product.id)
-          .then(response => (this.variant = response.data
+            .get('/get_variant/' + this.product.id)
+            .then(response => (this.variant = response.data
             ));
-      },
+    },
     template: `
     <div class="product_details">
         <div class="row">
@@ -609,25 +609,25 @@ Vue.component('product_description', {
 
 
 Vue.component('size_variant', {
-    props:['sizeVariants'],
-    data: function(){
+    props: ['sizeVariants'],
+    data: function () {
         return {
-            listClass:"mr-2",
-            selected:{
-                size:{
-                    name:null,
-                    id:null,
+            listClass: "mr-2",
+            selected: {
+                size: {
+                    name: null,
+                    id: null,
                 },
-                variant:null
+                variant: null
             }
         }
     },
     methods: {
-        selectSize: function(index){
+        selectSize: function (index) {
             this.selected.variant = this.sizeVariants[index];
             this.$emit('variant-selected', this.selected.variant);
-            console.log("selected:sizeid: "+ this.sizeVariants[index].size_id);
-            console.log("selected:Variant: "+ this.sizeVariants[index].id);
+            console.log("selected:sizeid: " + this.sizeVariants[index].size_id);
+            console.log("selected:Variant: " + this.sizeVariants[index].id);
             this.selected.size.name = this.sizeVariants[index].size.name;
         }
     },
@@ -649,10 +649,16 @@ Vue.component('size_variant', {
 
 
 Vue.component('product_article', {
-    data: function() {
+    data: function () {
         return {
             link: "/singleProduct/",
-            src:'/front/assets/img/product/',
+            src: '/front/assets/img/product/',
+        }
+    },
+    methods:{
+        loadModal(index){
+            this.$emit('loadModal', index);
+            console.log("modal clicked"+ index);
         }
     },
     props: ['product', 'tab'],
@@ -672,7 +678,7 @@ Vue.component('product_article', {
                 <ul>
                     <li class="wishlist"><a @prevent href="#" title="" data-original-title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a></li>
                     <li class="compare"><a href="#" title="" data-original-title="Add to Compare"><i class="ion-ios-settings-strong"></i></a></li>
-                    <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="" class="inner-search-back" data-original-title="10 colors | quick view"><i class="ion-ios-search-strong"></i></a></li>
+                    <li class="quick_button" @click.prevent="loadModal(product)"><a href="#" data-toggle="modal" data-target="#modal_box" title="" class="inner-search-back" data-original-title="10 colors | quick view"><i class="ion-ios-search-strong"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -708,9 +714,129 @@ Vue.component('product_article', {
 
 
 
+Vue.component('modal', {
+
+    props:['product'],
+
+    template: `
+    <div  class="modal fade show" id="modal_box" tabindex="-1" role="dialog"  style="display:block">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal_body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5 col-sm-12">
+                                <div class="modal_tab">
+                                    <div class="tab-content product-details-large">
+                                        <div class="tab-pane fade show active" id="tab1" role="tabpanel">
+                                            <div class="modal_tab_img">
+                                                <a href="#"><img :src="'/front/assets/img/product/'+product.thumb1" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="tab2" role="tabpanel">
+                                            <div class="modal_tab_img">
+                                                <a href="#"><img src="<?=ASSETS?>/img/product/productbig3.jpg" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="tab3" role="tabpanel">
+                                            <div class="modal_tab_img">
+                                                <a href="#"><img src="<?=ASSETS?>/img/product/productbig4.jpg" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="tab4" role="tabpanel">
+                                            <div class="modal_tab_img">
+                                                <a href="#"><img src="<?=ASSETS?>/img/product/productbig5.jpg" alt=""></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal_tab_button">
+                                        <ul class="nav product_navactive owl-carousel" role="tablist">
+                                            <li>
+                                                <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false"><img src="<?=ASSETS?>/img/product/product1.jpg" alt=""></a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false"><img src="<?=ASSETS?>/img/product/product6.jpg" alt=""></a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link button_three" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false"><img src="<?=ASSETS?>/img/product/product9.jpg" alt=""></a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false"><img src="<?=ASSETS?>/img/product/product14.jpg" alt=""></a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-12">
+                                <div class="modal_right">
+                                    <div class="modal_title mb-10">
+                                        <h2>{{product.name}}</h2>
+                                    </div>
+                                    <div class="modal_price mb-10">
+                                        <span class="new_price">$64.99</span>
+                                        <span class="old_price">$78.99</span>
+                                    </div>
+                                    <div class="modal_description mb-15">
+                                        <p>asse </p>
+                                    </div>
+                                    <div class="variants_selects">
+                                        <div class="variants_size">
+                                            <h2>size</h2>
+                                            <select class="select_option">
+                                                <option selected value="1">s</option>
+                                                <option value="1">m</option>
+                                                <option value="1">l</option>
+                                                <option value="1">xl</option>
+                                                <option value="1">xxl</option>
+                                            </select>
+                                        </div>
+                                        <div class="variants_color">
+                                            <h2>color</h2>
+                                            <select class="select_option">
+                                                <option selected value="1">purple</option>
+                                                <option value="1">violet</option>
+                                                <option value="1">black</option>
+                                                <option value="1">pink</option>
+                                                <option value="1">orange</option>
+                                            </select>
+                                        </div>
+                                        <div class="modal_add_to_cart">
+                                            <form action="#">
+                                                <input min="1" max="100" step="2" value="1" type="number">
+                                                <button type="submit">add to cart</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="modal_social">
+                                        <h2>Share this product</h2>
+                                        <ul>
+                                            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                            <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                            <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                            <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    `
+});
+
+
 
 Vue.component('tab_products', {
-    data: function() {
+    data: function () {
         return {
             products: {
                 images: {
@@ -719,21 +845,29 @@ Vue.component('tab_products', {
                     all: ""
                 }
             },
-            tabProducts:null,
+            tabProducts: null,
             count: 1,
-            id:null,
+            id: null,
         }
     },
-    mounted(){
-        console.log( typeof this.tab);
+    mounted() {
+        console.log(typeof this.tab);
     },
-    watch: { 
-        tab: function(newVal, oldVal) { // watch it
-        console.log('Prop(tab) changed: ', newVal, ' | was: ', oldVal);
-        axios
-            .get('/api/get-product/'+this.tab.id)
-            .then(response => ((response.status==200)? (this.tabProducts=response.data)&&(this.count=2):null));
-      }},
+    watch: {
+        tab: function (newVal, oldVal) { // watch it
+            console.log('Prop(tab) changed: ', newVal, ' | was: ', oldVal);
+            axios
+                .get('/api/get-product/' + this.tab.id)
+                .then(response => ((response.status == 200) ? (this.tabProducts = response.data) && (this.count = 2) : null));
+        }
+    },
+    methods:{
+        loadModal(product){
+            this.$emit('modal', product);
+            // this.$emit('color-selected', index);
+            console.log("emited to tab_product" + product);
+        }
+    },
     props: ['tab'],
     template: `
     <div>
@@ -741,6 +875,7 @@ Vue.component('tab_products', {
                 <product_article   v-for="(product,index) in this.tabProducts" :key="index"
                     :product="product"
                     :tab="tab"
+                    @loadModal="loadModal"
                 ></product_article>    
            </section>   
         </div>
@@ -751,7 +886,7 @@ Vue.component('tab_products', {
 
 
 Vue.component('related_products', {
-    data: function() {
+    data: function () {
         return {
             products: {
                 images: {
@@ -786,20 +921,20 @@ Vue.component('related_products', {
 });
 
 Vue.component('single_product_section', {
-    
-    data: function(){
+
+    data: function () {
         return {
-            product:null,
+            product: null,
         }
     },
 
     props: ['images', 'id'],
-    mounted () {
+    mounted() {
         axios
-          .get('/get_product/'+this.id)
-          .then(response => (this.product = response.data
+            .get('/get_product/' + this.id)
+            .then(response => (this.product = response.data
             ));
-      },
+    },
     template: `
     <div>
         <product_details v-if="product" :product="product" :images="images"></product_details>
@@ -891,7 +1026,7 @@ Vue.component('header_top', {
 
     computed: {
         // a computed getter
-        user: function() {
+        user: function () {
             if (this.hasUser) {
                 return true;
             } else {
@@ -901,13 +1036,13 @@ Vue.component('header_top', {
     },
 
     method: {
-        logout: function() {
+        logout: function () {
             event.preventDefault();
             document.getElementById('logout-form-top').submit();
         }
     },
 
-    data: function() {
+    data: function () {
         return {
             hasUser: this.user_id,
             userName: this.user_name,
@@ -998,7 +1133,7 @@ Vue.component('sub_section_list', {
 
 
 Vue.component('cat_section_list', {
-    date: function() {
+    date: function () {
         return {
             catClassWithIcon: this.icon + " mr-10",
             link: "/catagory_products/" + this.id,
@@ -1047,27 +1182,27 @@ Vue.component('singin_and_cart', {
 
 Vue.component('miniCart', {
 
-    data: function() {
+    data: function () {
         return {
             products: [{
-                    name: "something",
-                    image: "/front/assets/img/s-product/product.jpg",
-                    qty: 5,
-                    price: 100,
-                },
-                {
-                    name: "something",
-                    image: "/front/assets/img/s-product/product.jpg",
-                    qty: 1,
-                    price: 200,
-                }
+                name: "something",
+                image: "/front/assets/img/s-product/product.jpg",
+                qty: 5,
+                price: 100,
+            },
+            {
+                name: "something",
+                image: "/front/assets/img/s-product/product.jpg",
+                qty: 1,
+                price: 200,
+            }
             ]
         }
     },
 
     computed: {
         // a computed getter
-        total: function() {
+        total: function () {
             // counting total
             let count = 0;
             let t = 0;
@@ -1148,11 +1283,12 @@ var eventBus = new Vue();
 new Vue({
     el: "#app",
     data: {
-        tabs:null,
-        selected:{
-            tab:'',
-            tabProducts:''
+        tabs: null,
+        selected: {
+            tab: '',
+            tabProducts: ''
         },
+        product:null,
         qty: 1,
         product: {
             qty: 5,
@@ -1169,12 +1305,12 @@ new Vue({
             },
         }
     },
-    mounted () {
+    mounted() {
         axios
-          .get('/api/get-product-tags')
-          .then(response => ((response.status==200)? (this.tabs=response.data)&&((this.selected.tab=this.tabs[0])):null));
+            .get('/api/get-product-tags')
+            .then(response => ((response.status == 200) ? (this.tabs = response.data) && ((this.selected.tab = this.tabs[0])) : null));
 
-      },
+    },
     methods: {
         increase() {
             this.qty = this.qty + 1;
@@ -1188,9 +1324,13 @@ new Vue({
         selectImage(index) {
             this.product.images["img-normal"] = this.product.images.thumb[index];
         },
-        updateTabProducts(tab){
+        updateTabProducts(tab) {
             console.log(tab);
-            this.selected.tab=tab;
+            this.selected.tab = tab;
+        },
+        loadModal(product){
+            console.log("emited to parent" + product);
+            this.product = product;
         }
     }
 

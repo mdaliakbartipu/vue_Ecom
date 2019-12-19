@@ -20,7 +20,7 @@
     <!--footer area end-->
 
     <!-- modal area start-->
-    <?php include("section/modelArea.php");?>
+    <modal></modal>
     <!-- modal area end-->
  
 

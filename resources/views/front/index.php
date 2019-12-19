@@ -42,7 +42,7 @@
     <!--footer area end-->
 
     <!-- modal area start-->
-    <?php include("section/modelArea.php");?>
+<modal :product="product"><modal>
     <!-- modal area end-->
  
 

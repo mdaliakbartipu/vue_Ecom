@@ -28,7 +28,7 @@
 
 
                 <div class="tabcontent">
-                            <tab_products :tab="this.selected.tab">
+                            <tab_products :tab="this.selected.tab" @modal="loadModal">
                             </tab_products>           
                 </div>
             
