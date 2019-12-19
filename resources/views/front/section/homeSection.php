@@ -12,26 +12,14 @@
                                 <h3 class="mb-2">YOUR COLLECTION</h3>
                                 <p class="text-center time-to">Trending Fashion</p>
                                 <ul class="nav text-center" role="tablist">
-                                    <li>
-                                        <a class="active" data-toggle="tab" href="#new" role="tab" aria-controls="Fashion" aria-selected="true">
-                                            New Arrivals
+                                 
+                                    <li v-for="(tab,index) in tabs">
+                                        <a :class="{ 'active': index === 0 }" data-toggle="tab" :href="'#'+tab.id" role="tab" aria-controls="tab.id" aria-selected="{ 'true': index === 0 }">
+                                            {{tab.name}}
                                         </a>
                                     </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#deals" role="tab" aria-controls="Games" aria-selected="false">
-                                            Deals Of The Month
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#featured" role="tab" aria-controls="Speaker" aria-selected="false">
-                                            Featured Products
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#best" role="tab" aria-controls="Mobile" aria-selected="false">
-                                            Best Selling Products
-                                        </a>
-                                    </li>
+                                
+
                                 </ul>
                             </div>
                         </div>
@@ -40,9 +28,7 @@
 
 
                 <div class="tabcontent">
-                            <tab_products 
-                            tab_id="deals"
-                            >
+                            <tab_products :tab="this.selected.tab">
                             </tab_products>           
                 </div>
             

@@ -90,6 +90,7 @@ class PagesController extends FrontController
         echo json_encode($product);
     }
 
+
     public function cart()
     {
         // dd("asa");

@@ -98,6 +98,9 @@ Route::get('/get-sub/ajax/{id}','ProductController@ajaxGetSub');
 Route::get('/get-sub/sub/ajax/{id}','ProductController@ajaxGetSubsub');	
 });
 
+Route::get('/api/get-product/{tag}','ProductController@getProductByTag');
+Route::get('/api/get-product-tags','ProductController@getProductTags');
+
 Route::post('add-to-cart','ProductController@addToCart');	
 
 

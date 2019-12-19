@@ -321,5 +321,37 @@ class ProductController extends Controller
                 //response
             }
    }
+
+   public function getProductByTag( Request $request, $tag)
+   {
+       $tag = (int)$tag;
+       $productTags = ProductTags::where('tag_id', $tag)->take(5)->get();
+       $products = array();
+
+       foreach($productTags as $tag){
+        //    dd($tag->product_id);
+           array_push($products, Product::find($tag->product_id));
+       }
+
+       
+       header('Content-Type: application/json');
+       echo json_encode($products);
+       
+   }
+
+   public function getProductTags()
+   {
+       $productTags = Tags::where('type', 'product')->get();
+       
+       header('Content-Type: application/json');
+       if($productTags){
+            echo json_encode($productTags);
+        } else {
+            echo json_encode(null);
+        }
+       
+
+       
+   }
     
 }

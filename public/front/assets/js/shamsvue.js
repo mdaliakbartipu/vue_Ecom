@@ -651,42 +651,42 @@ Vue.component('size_variant', {
 Vue.component('product_article', {
     data: function() {
         return {
-            link: "/singleProduct/22",
+            link: "/singleProduct/",
+            src:'/front/assets/img/product/',
         }
     },
-    props: ['thumb1', 'thumb2'],
-    template: `
-    <div class="">
+    props: ['product', 'tab'],
+    template: `<div class="" style="width: 241px;">
     <article class="single_product">
     <figure>
         <div class="product_thumb">
-            <a class="primary_img" :href="link"><img :src="thumb1" alt=""></a>
-            <a class="secondary_img" :href="link"><img :src="thumb2" alt=""></a>
+            <a class="primary_img" :href="this.link+product.id"><img :src="this.src+product.thumb1" alt=""></a>
+            <a class="secondary_img" :href="this.link+product.id"><img :src="this.src+product.thumb2" alt=""></a>
             <div class="label_product_left label_product">
                 <span class="label_sale_left">New</span>
             </div>
              <div class="label_product">
-                <span class="label_sale">29%</span>
+                <span class="label_sale">{{product.discount}}%</span>
             </div>
             <div class="action_links">
                 <ul>
-                    <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a></li>
-                    <li class="compare"><a href="#" title="Add to Compare"><i class="ion-ios-settings-strong"></i></a></li>
-                    <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="10 colors | quick view" class="inner-search-back"><i class="ion-ios-search-strong"></i></a></li>
+                    <li class="wishlist"><a @prevent href="#" title="" data-original-title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a></li>
+                    <li class="compare"><a href="#" title="" data-original-title="Add to Compare"><i class="ion-ios-settings-strong"></i></a></li>
+                    <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="" class="inner-search-back" data-original-title="10 colors | quick view"><i class="ion-ios-search-strong"></i></a></li>
                 </ul>
             </div>
         </div>
         <div class="product_content">
          <div class="product_timing">
-                    <div data-countdown="2020/02/16"></div>
+                    <div data-countdown="2020/02/16"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">58</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">29</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
                 </div>
             <div class="product_content_inner">
                 <h2 class="product_name_brand_name">Club</h2>
-                <h3 class="product_name"><a href="product-countdown.html">Men's Slim Fit Poplin Shart </a></h3>
-                <h4 class="product_name_h4"><a href="">New ArriVal</a></h4>
+                <h3 class="product_name"><a :href="this.link+product.id">{{product.name}}</a></h3>
+                <h4 class="product_name_h4"><a href="#">{{tab.name}}</a></h4>
                 <div class="price_box">
-                    <span class="old_price">Reg. $49</span><br />
-                    <span class="current_price">Sale $35</span>
+                    <span class="old_price">Reg. $ {{product.price}}</span><br>
+                    <span class="current_price">Sale $ {{product.price* (100-product.discount)/100}}</span>
                 </div>
                 <div class="countdown_text mb-3">
                    <!-- <a href="">Extra 15% off use:SUNDAY </a>-->
@@ -698,15 +698,11 @@ Vue.component('product_article', {
                 <i class="fa fa-star" aria-hidden="true"></i>
                 <i class="fa fa-star" aria-hidden="true"></i>
                 <i class="fa fa-star" aria-hidden="true"></i>
-
                </div>
             </div>
-           
-
         </div>
     </figure>
-</article>
-    </div>
+</article></div>
     `
 });
 
@@ -723,16 +719,28 @@ Vue.component('tab_products', {
                     all: ""
                 }
             },
-            count: 10,
+            tabProducts:null,
+            count: 1,
+            id:null,
         }
     },
-    props: ['tab_id'],
+    mounted(){
+        console.log( typeof this.tab);
+    },
+    watch: { 
+        tab: function(newVal, oldVal) { // watch it
+        console.log('Prop(tab) changed: ', newVal, ' | was: ', oldVal);
+        axios
+            .get('http://127.0.0.1:8000/api/get-product/'+this.tab.id)
+            .then(response => ((response.status==200)? (this.tabProducts=response.data)&&(this.count=2):null));
+      }},
+    props: ['tab'],
     template: `
-    <div class="tab-pane fade show" :id="tab_id" role="tabpanel">
-        <section class="customer-logos">
-                <product_article v-for="c in count" v-bind:key="c.text"
-                    :thumb1="products.images.thumb1"
-                    :thumb2="products.images.thumb2"
+    <div>
+        <section style="display:flex">
+                <product_article   v-for="(product,index) in this.tabProducts" :key="index"
+                    :product="product"
+                    :tab="tab"
                 ></product_article>    
            </section>   
         </div>
@@ -1140,6 +1148,11 @@ var eventBus = new Vue();
 new Vue({
     el: "#app",
     data: {
+        tabs:null,
+        selected:{
+            tab:'',
+            tabProducts:''
+        },
         qty: 1,
         product: {
             qty: 5,
@@ -1156,7 +1169,12 @@ new Vue({
             },
         }
     },
+    mounted () {
+        axios
+          .get('http://127.0.0.1:8000/api/get-product-tags')
+          .then(response => ((response.status==200)? (this.tabs=response.data)&&((this.selected.tab=this.tabs[0])):null));
 
+      },
     methods: {
         increase() {
             this.qty = this.qty + 1;
@@ -1169,7 +1187,7 @@ new Vue({
         },
         selectImage(index) {
             this.product.images["img-normal"] = this.product.images.thumb[index];
-        }
+        },
     }
 
 })

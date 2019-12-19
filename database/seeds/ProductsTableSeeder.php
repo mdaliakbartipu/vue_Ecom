@@ -17,6 +17,7 @@ class ProductsTableSeeder extends Seeder
         $fits = json_decode(json_encode(DB::table('fits')->get('id')), true);
         $sleeves = json_decode(json_encode(DB::table('sleeves')->get('id')), true);
         $leg_lengths = json_decode(json_encode(DB::table('leg_lengths')->get('id')), true);
+        $tags = json_decode(json_encode(DB::table('tags')->where('type','product')->get('id')), true);
         
 
         foreach($cats as $cat){
@@ -26,8 +27,8 @@ class ProductsTableSeeder extends Seeder
                     $subSubCats = DB::table('sub_sub_categories')->where('sub_category_id', $subcat->id)->get('id');
                     {
                         foreach($subSubCats as $subSubCat){
-                            for($start = 0 ; $start<1; $start++){
-                                DB::table('products')->insert([
+                            for($start = 0 ; $start<5; $start++){
+                                $id = DB::table('products')->insertGetId([
                                     'cat' => (int)$cat->id,
                                     'sub' => (int)$subcat->id,
                                     'super' => (int)$subSubCat->id,
@@ -43,6 +44,11 @@ class ProductsTableSeeder extends Seeder
                                     'thumb1'=> 'thumb1.jpg',
                                     'thumb2'=> 'thumb2.jpg'
                                 ]);
+
+                                DB::table('product_tags')->insert([
+                                    'product_id'=>$id,
+                                     'tag_id' => $tags[array_rand($tags)]['id'],
+                                 ]);
     
                             }
     
