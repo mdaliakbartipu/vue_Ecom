@@ -574,7 +574,7 @@ Vue.component('product_details', {
     },
     mounted () {
         axios
-          .get('http://127.0.0.1:8000/get_variant/'+this.product.id)
+          .get('/get_variant/'+this.product.id)
           .then(response => (this.variant = response.data
             ));
       },
@@ -731,7 +731,7 @@ Vue.component('tab_products', {
         tab: function(newVal, oldVal) { // watch it
         console.log('Prop(tab) changed: ', newVal, ' | was: ', oldVal);
         axios
-            .get(window.location.href.split('/').slice(0, 3).join('/')+'/api/get-product/'+this.tab.id)
+            .get('/api/get-product/'+this.tab.id)
             .then(response => ((response.status==200)? (this.tabProducts=response.data)&&(this.count=2):null));
       }},
     props: ['tab'],
@@ -796,7 +796,7 @@ Vue.component('single_product_section', {
     props: ['images', 'id'],
     mounted () {
         axios
-          .get('http://127.0.0.1:8000/get_product/'+this.id)
+          .get('/get_product/'+this.id)
           .then(response => (this.product = response.data
             ));
       },
@@ -1171,7 +1171,7 @@ new Vue({
     },
     mounted () {
         axios
-          .get('http://127.0.0.1:8000/api/get-product-tags')
+          .get('/api/get-product-tags')
           .then(response => ((response.status==200)? (this.tabs=response.data)&&((this.selected.tab=this.tabs[0])):null));
 
       },
@@ -1188,6 +1188,10 @@ new Vue({
         selectImage(index) {
             this.product.images["img-normal"] = this.product.images.thumb[index];
         },
+        updateTabProducts(tab){
+            console.log(tab);
+            this.selected.tab=tab;
+        }
     }
 
 })

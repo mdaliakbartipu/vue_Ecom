@@ -41,8 +41,8 @@ class ProductsTableSeeder extends Seeder
                                     'sleeve' => $sleeves[array_rand($sleeves)]['id'],
                                     'leglength' => $leg_lengths[array_rand($leg_lengths)]['id'],
                                     'fit' => $fits[array_rand($fits)]['id'],
-                                    'thumb1'=> 'thumb1.jpg',
-                                    'thumb2'=> 'thumb2.jpg'
+                                    'thumb1'=> rand(1,6).'a.jpg',
+                                    'thumb2'=> rand(1,6).'b.jpg'
                                 ]);
 
                                 DB::table('product_tags')->insert([

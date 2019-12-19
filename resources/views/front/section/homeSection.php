@@ -14,7 +14,7 @@
                                 <ul class="nav text-center" role="tablist">
                                  
                                     <li v-for="(tab,index) in tabs">
-                                        <a :class="{ 'active': index === 0 }" data-toggle="tab" :href="'#'+tab.id" role="tab" aria-controls="tab.id" aria-selected="{ 'true': index === 0 }">
+                                        <a @click.prevent="updateTabProducts(tab)"  :class="{ 'active': index === 0 }" data-toggle="tab" :href="'#'+tab.id" role="tab" aria-controls="tab.id" aria-selected="{ 'true': index === 0 }">
                                             {{tab.name}}
                                         </a>
                                     </li>
