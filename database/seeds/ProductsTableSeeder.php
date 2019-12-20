@@ -14,10 +14,9 @@ class ProductsTableSeeder extends Seeder
         $cats = DB::table('categories')->get('id');
         $colors = json_decode(json_encode(DB::table('colors')->get('id')), true);
         $sizes = json_decode(json_encode(DB::table('sizes')->get('id')), true);
-        $fits = json_decode(json_encode(DB::table('fits')->get('id')), true);
-        $sleeves = json_decode(json_encode(DB::table('sleeves')->get('id')), true);
-        $leg_lengths = json_decode(json_encode(DB::table('leg_lengths')->get('id')), true);
         $tags = json_decode(json_encode(DB::table('tags')->where('type','product')->get('id')), true);
+        $brands = json_decode(json_encode(DB::table('brands')->get('id')), true);
+        $attributes = json_decode(json_encode(DB::table('attributes')->get('id')), true);
         
 
         foreach($cats as $cat){
@@ -33,23 +32,39 @@ class ProductsTableSeeder extends Seeder
                                     'sub' => (int)$subcat->id,
                                     'super' => (int)$subSubCat->id,
                                     'name' => Str::random(10),
-                                    'code' => Str::random(5),
+                                    'code' => Str::random(6),
                                     'description' => Str::random(150),
-                                    'price' => rand(),
-                                    'discount' => rand(),
+                                    'buy_price' => rand(100,500),
+                                    'price' => rand(501,3000),
+                                    'brand' => $brands[array_rand($brands)]['id'],
+                                    'discount' => rand(1,99),
+                                    'views' => rand(1,1000),
+                                    'discount_till' => date('Y-m-d', strtotime( '+'.mt_rand(0,30).' days')),
+                                    'free_shipping' => rand(10,30),
+                                    'active' => true,
                                     'details' => Str::random(100),
-                                    'sleeve' => $sleeves[array_rand($sleeves)]['id'],
-                                    'leglength' => $leg_lengths[array_rand($leg_lengths)]['id'],
-                                    'fit' => $fits[array_rand($fits)]['id'],
                                     'thumb1'=> 'thumb1.jpg',
-                                    'thumb2'=> 'thumb2.jpg'
+                                    'thumb2'=> 'thumb2.jpg',
+                                    'created_at'=>date('Y-m-d H:i:s'),
+                                    'updated_at' => date('Y-m-d H:i:s')
                                 ]);
 
                                 DB::table('product_tags')->insert([
                                     'product_id'=>$id,
                                      'tag_id' => $tags[array_rand($tags)]['id'],
                                  ]);
-    
+                                 DB::table('product_attributes')->insert([
+                                    'product_id'=>$id,
+                                     'attribute_id' => $attributes[array_rand($attributes)]['id'],
+                                 ]);
+                                 for($i=0; $i < 10; $i++):
+                                 DB::table('product_variant')->insert([
+                                    'product_id'=>$id,
+                                     'color_id' => $colors[array_rand($colors)]['id'],
+                                     'size_id' => $sizes[array_rand($sizes)]['id'],
+                                     'qty' => rand(0,10),
+                                 ]);
+                                 endfor;    
                             }
     
                         }

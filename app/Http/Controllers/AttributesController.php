@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Attributes;
 use Illuminate\Http\Request;
 
 class AttributesController extends Controller
@@ -41,10 +40,10 @@ class AttributesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Attributes  $attributes
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Attributes $attributes)
+    public function show($id)
     {
         //
     }
@@ -52,10 +51,10 @@ class AttributesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Attributes  $attributes
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Attributes $attributes)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +63,10 @@ class AttributesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Attributes  $attributes
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Attributes $attributes)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +74,10 @@ class AttributesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Attributes  $attributes
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Attributes $attributes)
+    public function destroy($id)
     {
         //
     }

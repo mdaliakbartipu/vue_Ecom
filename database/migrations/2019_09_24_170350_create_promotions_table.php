@@ -17,7 +17,7 @@ class CreatePromotionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title')->nullable();
             $table->string('sub_title')->nullable();
-            $table->string('image')->default('noimage.png');
+            $table->string('image')->default("noimage.png");
             $table->string('slug')->default("#");
             $table->timestamps();
         });
