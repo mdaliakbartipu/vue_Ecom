@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 
 class SubSubCatagoryTableSeeder extends Seeder
 {
+    
     /**
      * Run the database seeds.
      *
@@ -19,7 +20,8 @@ class SubSubCatagoryTableSeeder extends Seeder
                 
                 DB::table('sub_sub_categories')->insert([
                     'sub_category_id' => (String)$subcat->id,
-                    'name' => Str::random(5)
+                    'name' => Str::random(5),
+                    'slug' => Str::random(10)
                 ]);
             }
 
