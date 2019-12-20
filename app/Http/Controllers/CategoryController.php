@@ -15,7 +15,7 @@ class CategoryController extends Controller
 
 
     protected $imagePath = 'front/assets/.uploads/category';
-
+    
     /**
      * Display a listing of the resource.
      *

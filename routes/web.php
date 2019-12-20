@@ -18,6 +18,13 @@ Route::get('register', function(){
 
 Route::get('/', 'Front\PagesController@index');
 Route::get('/store', 'Front\PagesController@index');
+Route::get('/cat', function(){return "not found";});
+Route::get('/super', function(){return "not found";});
+Route::get('/sub', function(){return "not found";});
+
+Route::get('/cat/{slug}', 'Front\PagesController@cat');
+Route::get('/super/{slug}', 'Front\PagesController@super');
+Route::get('/sub/{slug}', 'Front\PagesController@sub');
 
 Route::get('/cart', 'Front\PagesController@cart');
 Route::get('/checkout', 'Front\PagesController@checkout');

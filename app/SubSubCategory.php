@@ -17,4 +17,8 @@ class SubSubCategory extends Model
         $subSubCat = DB::table('sub_sub_categories')->where('sub_category_id', $subCatID)->get();
         return $subSubCat;
     }
+    public function Products()
+  {
+    return $this->hasMany('App\Product', 'super');
+  }
 }

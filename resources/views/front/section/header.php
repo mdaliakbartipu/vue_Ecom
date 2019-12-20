@@ -92,7 +92,7 @@
                                                     <a href="#" class="top-cat-option ml-5" style="font-size: 15px; font-weight: 400; margin-top: -11px;"><i class="fa fa-bars" aria-hidden="true"></i></a>
                                                     <ul id="top_bar_menu" style="width:150px">
                                                         <?php foreach ($cats as $cat) { ?>
-                                                            <top_bar_menu_item cat_id="<?= $cat->id ?>"></top_bar_menu_item>
+                                                            <top_bar_menu_item cat="<?= $cat?>"></top_bar_menu_item>
                                                         <?php } ?>
                                                     </ul>
                                                 </li>
@@ -218,11 +218,11 @@
                 <div class="row align-items-center">
                     <shop_by_categories>
                         <?php foreach ($cats as $cat) :  ?>
-                            <cat_section_list icon="<?= $cat->icon ?>" id="<?= $cat->id ?>" name="<?= $cat->name ?>">
+                            <cat_section_list slug="<?=$cat->slug?>" icon="<?= $cat->icon ?>" id="<?= $cat->id ?>" name="<?= $cat->name ?>">
                                 <?php foreach ($subCats[$cat->id] as $sub) : ?>
-                                    <sub_section_list link="/subcat_products/<?= $sub->id ?>" name="<?= $sub->name ?>">
+                                    <sub_section_list link="/sub/<?= $sub->slug ?>" name="<?= $sub->name ?>">
                                         <?php foreach ($subSubCats[$sub->id] as $subsub) : ?>
-                                            <super_section_list link="/subsubcat_products/<?= $subsub->id ?>" name="<?= $subsub->name ?>"></super_section_list>
+                                            <super_section_list link="/super/<?= $subsub->slug ?>" name="<?= $subsub->name ?>"></super_section_list>
                                         <?php endforeach; ?>
                                     </sub_section_list>
                                 <?php endforeach; ?>
