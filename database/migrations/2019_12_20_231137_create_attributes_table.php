@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBrandTable extends Migration
+class CreateAttributesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateBrandTable extends Migration
      */
     public function up()
     {
-        Schema::create('brands', function (Blueprint $table) {
+        Schema::create('attributes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('image');
-            $table->boolean('active');
+            $table->unsignedInteger('fits');
+            $table->unsignedInteger('sleeves');
+            $table->unsignedInteger('leg_lengths');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateBrandTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brands');
+        Schema::dropIfExists('attributes');
     }
 }
