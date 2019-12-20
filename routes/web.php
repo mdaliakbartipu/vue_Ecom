@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth'], function (){
 
 Route::get('/sadmin', 'HomeController@index')->name('home');
 Route::resource('group', 'GroupController');
+Route::resource('brand', 'BrandController');
 Route::resource('slider','SliderContoller');
 Route::resource('size','SizeController');
 Route::resource('page','PageController');

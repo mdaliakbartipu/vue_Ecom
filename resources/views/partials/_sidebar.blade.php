@@ -47,79 +47,6 @@
             <b class="arrow"></b>
         </li>
 
-{{--        <li class="">--}}
-{{--            <a href="#" class="dropdown-toggle">--}}
-{{--                <i class="menu-icon fa fa-desktop"></i>--}}
-{{--                <span class="menu-text">--}}
-{{--								UI &amp; Elements--}}
-{{--							</span>--}}
-{{--                <b class="arrow fa fa-angle-down"></b>--}}
-{{--            </a>--}}
-{{--            <b class="arrow"></b>--}}
-{{--            <ul class="submenu">--}}
-{{--                <li class="">--}}
-{{--                    <a href="#" class="dropdown-toggle">--}}
-{{--                        <i class="menu-icon fa fa-caret-right"></i>--}}
-{{--                        Layouts--}}
-{{--                        <b class="arrow fa fa-angle-down"></b>--}}
-{{--                    </a>--}}
-{{--                    <b class="arrow"></b>--}}
-{{--                    <ul class="submenu">--}}
-{{--                        <li class="">--}}
-{{--                            <a href="mobile-menu-3.html">--}}
-{{--                                <i class="menu-icon fa fa-caret-right"></i>--}}
-{{--                                Mobile Menu 3--}}
-{{--                            </a>--}}
-{{--                            <b class="arrow"></b>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-
-{{--                <li class="">--}}
-{{--                    <a href="#" class="dropdown-toggle">--}}
-{{--                        <i class="menu-icon fa fa-caret-right"></i>--}}
-{{--                        Three Level Menu--}}
-{{--                        <b class="arrow fa fa-angle-down"></b>--}}
-{{--                    </a>--}}
-{{--                    <b class="arrow"></b>--}}
-{{--                    <ul class="submenu">--}}
-{{--                        <li class="">--}}
-{{--                            <a href="#">--}}
-{{--                                <i class="menu-icon fa fa-leaf green"></i>--}}
-{{--                                Item #1--}}
-{{--                            </a>--}}
-{{--                            <b class="arrow"></b>--}}
-{{--                        </li>--}}
-{{--                        <li class="">--}}
-{{--                            <a href="#" class="dropdown-toggle">--}}
-{{--                                <i class="menu-icon fa fa-pencil orange"></i>--}}
-{{--                                4th level--}}
-{{--                                <b class="arrow fa fa-angle-down"></b>--}}
-{{--                            </a>--}}
-{{--                            <b class="arrow"></b>--}}
-{{--                            <ul class="submenu">--}}
-{{--                                <li class="">--}}
-{{--                                    <a href="#">--}}
-{{--                                        <i class="menu-icon fa fa-plus purple"></i>--}}
-{{--                                        Add Product--}}
-{{--                                    </a>--}}
-{{--                                    <b class="arrow"></b>--}}
-{{--                                </li>--}}
-{{--                                <li class="">--}}
-{{--                                    <a href="#">--}}
-{{--                                        <i class="menu-icon fa fa-eye pink"></i>--}}
-{{--                                        View Products--}}
-{{--                                    </a>--}}
-{{--                                    <b class="arrow"></b>--}}
-{{--                                </li>--}}
-{{--                            </ul>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
-{{--        </li>--}}
-
-
     
              
 
@@ -160,28 +87,33 @@
                 <li class="{{-- {{ request()->segment(1) == "group" ? 'open' : '' }} --}}">
                     <a href="{{ url('size') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Size
+                        Sizes
                     </a>
                 </li>
                 <li class="">
                     <a href="{{ url('color') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Color
+                        Colors
                     </a>
                 </li><li class="">
                     <a href="{{ url('sleeve') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Sleeve
+                        Sleeves
                     </a>
                 </li><li class="">
                     <a href="{{ url('leglength') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Leg length
+                        Leg lengths
                     </a>
                 </li><li class="">
                     <a href="{{ url('fit') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Fit
+                        Fits
+                    </a>
+                </li><li class="">
+                    <a href="{{ url('brand') }}">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Brands
                     </a>
                 </li>
 
