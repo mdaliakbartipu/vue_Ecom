@@ -11,7 +11,7 @@ use App\SubCategory;
 use App\SubSubCategory;
 use App\Page;
 use App\Tags;
-use View;
+// use View;
 
 class FrontController extends Controller
 {
@@ -28,17 +28,18 @@ class FrontController extends Controller
         foreach($this->cat as $this->category){
             $this->subCat[$this->category->id] = SubCategory::getAllsubcat($this->category->id);
                    
-            foreach($this->subCat[$this->category->id] as $this->subCategory){
-                $this->subSubCat[$this->subCategory->id] = SubSubCategory::getAllSubSubCat($this->subCategory->id);
-            }
+        foreach($this->subCat[$this->category->id] as $this->subCategory){
+            $this->subSubCat[$this->subCategory->id] = SubSubCategory::getAllSubSubCat($this->subCategory->id);
+        }
          }
 
-         View::share('company', $this->company );
-         View::share('cats', $this->cat );
-         View::share('subCats', $this->subCat );
-         View::share('subSubCats', $this->subSubCat );
-         View::share('tags', Tags::forPage() );
-         View::share('pages', Page::all() );
+         
+         \View::share('company'          , $this->company );
+         \View::share('cats'             , $this->cat );
+         \View::share('subCats'          , $this->subCat );
+         \View::share('subSubCats'       , $this->subSubCat );
+         \View::share('tags'             , Tags::forPage() );
+         \View::share('pages'            , Page::all() );
 
         //  Sharing User
         view()->share('signedIn', \Auth::check());
