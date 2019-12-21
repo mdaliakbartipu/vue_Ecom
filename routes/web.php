@@ -110,6 +110,7 @@ Route::get('/api/get-product/{tag}','ProductController@getProductByTag');
 Route::get('/api/get-product-tags','ProductController@getProductTags');
 
 Route::post('add-to-cart','ProductController@addToCart');	
+Route::get('add-to-cart','ProductController@addToCart');	
 
 
 

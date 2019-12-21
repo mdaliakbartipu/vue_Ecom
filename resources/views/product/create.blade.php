@@ -40,6 +40,7 @@
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="category" name="category">
+                            <option value="0">Select Category</option>
                                 @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
@@ -104,6 +105,19 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Search Brand</label>
+
+                        <div class="col-xs-12 col-sm-9">
+                            <select class="chosen-select form-control" id="brand" name="brand">
+                                <option value="0">Select Brand</option>
+                                @foreach($brand as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Product Code </label>
 
@@ -111,6 +125,7 @@
                             <input type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" name="pro_code" />
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Product Short Description </label>
 
@@ -148,9 +163,9 @@
 
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
-                                @foreach($sleeves as $key=>$sleeve)
+                                @foreach($attributes->where('sleeve',1) as $key=>$sleeve)
                                 <label>
-                                    <input type="checkbox" class="ace" name="sleeve" value="{{ $key+1 }}">
+                                    <input type="checkbox" class="ace" name="sleeve[]" value="{{ $sleeve->id }}">
                                     <span class="lbl"> {{ $sleeve->name }} </span>
                                 </label>
                                 @endforeach
@@ -161,9 +176,9 @@
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Leg Length</label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
-                                @foreach($leglenghts as $key=>$leglength)
+                                @foreach($attributes->where('leg_length',1) as $key=>$leglength)
                                 <label>
-                                    <input type="checkbox" class="ace" name="leglength" value="{{ $key+1 }}">
+                                    <input type="checkbox" class="ace" name="leglength[]" value="{{ $leglength->id }}">
                                     <span class="lbl"> {{ $leglength->name }} </span>
                                 </label>
                                 @endforeach
@@ -174,9 +189,9 @@
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Fit</label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
-                                @foreach($fits as $key=>$fit)
+                                @foreach($attributes->where('fit',1) as $key=>$fit)
                                 <label>
-                                    <input type="checkbox" class="ace" name="fit" value="{{ $key+1 }}">
+                                    <input type="checkbox" class="ace" name="fit[]" value="{{ $fit->id }}">
                                     <span class="lbl"> {{ $fit->name }}</span>
                                 </label>
                                 @endforeach

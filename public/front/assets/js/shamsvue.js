@@ -522,12 +522,23 @@ Vue.component('product_info', {
             this.cart.push({ variant: this.selected.variant.id, qty: this.selected.qty });
 
             axios.post('/add-to-cart', {
-                variant: this.selected.variant.id,
-                qty: this.selected.qty
+                product:{
+                    name: this.product.name,
+                    price:this.product.name,
+                    color:this.selected.variant.color.name,
+                    size:this.selected.variant.size.name,
+                    variant_id: this.selected.variant.id,
+                    qty: this.selected.qty,
+                    image: this.product.thumb1,
+    
+                }
             })
                 .then(function (response) {
-                    console.log(response);
-                    alert("product added to cart");
+                    console.log(response.data.cart.length);
+                    let cartQty = document.querySelector('#cart-qty');
+                    cartQty.innerText = parseInt(response.data.cart.length);
+                    swal("Great!", "Your Product is added to cart!", "success");
+
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -684,7 +695,7 @@ Vue.component('product_article', {
         </div>
         <div class="product_content">
          <div class="product_timing">
-                    <div data-countdown="2020/02/16"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">58</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">29</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
+                    <div :data-countdown="product.discount_till"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">2</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">30</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
                 </div>
             <div class="product_content_inner">
                 <h2 class="product_name_brand_name">Club</h2>
@@ -696,7 +707,7 @@ Vue.component('product_article', {
                 </div>
                 <div class="countdown_text mb-3">
                    <!-- <a href="">Extra 15% off use:SUNDAY </a>-->
-                    <a href="" class="chng-color">Free shipping at $45</a>
+                    <a href="" class="chng-color">Free shipping at $ {{product.free_shipping}}</a>
                 </div>
                <div class="star_icon">
                <i class="fa fa-star" aria-hidden="true"></i>
@@ -950,19 +961,10 @@ Vue.component('top_nav_bar', {
     template: `
     <nav>
         <ul>
-            <li><a href="/">home</a>
-                <ul class="sub_menu">
-                    <li><a href="/catagory_products">Catagory Page</a></li>
-                    <li><a href="/singleProduct/1">Product Single Page</a></li>
-                </ul>
-            </li>
-            <li class="mega_items"><a href="#">shop</a>
-            </li>
-            <li><a href="/blog">blog</a>
-            </li>
-            <li><a class="#" href="#">pages</a>
-            </li>
-
+            <li><a href="/">home</a></li>
+            <li class="mega_items"><a href="#">shop</a></li>
+            <li><a href="#">blog</a></li>
+            <li><a class="#" href="#">pages</a></li>
             <li><a href="/pages/about-us">About Us</a></li>
             <li><a href="/contact"> Contact Us</a></li>
         </ul>
@@ -1157,7 +1159,7 @@ Vue.component('cat_section_list', {
 
 
 Vue.component('singin_and_cart', {
-    props: ['cart_image'],
+    props: ['cart_image', 'count'],
     template: `
     <div class="column3 col-lg-3 col-md-6 hide col-sm-12 col-sm-d-none">
             <div class="row">
@@ -1173,7 +1175,7 @@ Vue.component('singin_and_cart', {
                 </div>
 
                 <div class="col-md-6">
-                    <miniCart></miniCart>
+                    <miniCart :count="count"></miniCart>
                 </div>
             </div>
         </div>
@@ -1213,21 +1215,22 @@ Vue.component('miniCart', {
             return t;
         }
     },
+    props:['count'],
 
     template: `
     <div class="header_configure_area">
             <div class="header_wishlist">
-                <a href="#">
-                    <span class="wishlist_count" style="padding-bottom:4em;padding-left:4em;">2</span>
+                <a href="/cart">
+                    <span id="cart-qty" class="wishlist_count" style="padding-bottom:4em;padding-left:4em;">{{count}}</span>
                 </a>
             </div>
             <div class="mini_cart_wrapper">
                 <a href="javascript:void(0)">
                         <div class="cart_img_page ">
-                        <a href=""><img src="/front/assets/img/logo/cart.png" alt="" /></a>
+                        <a href="/cart"><img src="/front/assets/img/logo/cart.png" alt="" /></a>
                         </div>
                 </a>
-                <!--mini cart-->
+                <!--mini cart
                 <div class="mini_cart">
                     <div class="mini_cart_inner">
                         
@@ -1269,7 +1272,7 @@ Vue.component('miniCart', {
 
                     </div>
                 </div>
-                <!--mini cart end-->
+                mini cart end-->
             </div>
         </div>
     `

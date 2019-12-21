@@ -7,12 +7,12 @@ use App\SubCategory;
 use App\SubSubCategory;
 use App\Color;
 use App\Size;
-use App\Sleeve;
-use App\LegLength;
-use App\Fit;
+use App\Attributes;
+use App\ProductAttribute;
 use App\Tags;
 use App\ProductTags;
 use App\Product;
+use App\Brand;
 use App\ProductImages;
 use App\ProductStorage;
 use App\ProductVariant;
@@ -59,12 +59,11 @@ class ProductController extends Controller
         $subsubcats =  SubSubCategory::all();
         $colors = Color::all();
         $sizes = Size::all();
-        $sleeves = Sleeve::all();
-        $leglenghts = LegLength::all();
-        $fits = Fit::all();
+        $attributes = Attributes::all();
         $tags = Tags::forProduct();
+        $brand = Brand::all();
 
-        return view('product.create',compact('categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits', 'tags'));
+        return view('product.create',compact('categories','subcategories','subsubcats','colors','sizes','attributes', 'tags', 'brand'));
     }
 
     /**
@@ -81,6 +80,7 @@ class ProductController extends Controller
            'pro_code' => 'required',
            'desc'     => 'required',
            'price'    => 'required',
+           'brand'    => 'required',
            'discount' => 'required',
            'details'  => 'required',
            'category'  => 'required',
@@ -88,6 +88,7 @@ class ProductController extends Controller
            'sub_sub_category'  => 'required'
         ]);
         
+        // dd($request);
     // saving product
         $product = new Product();
         $product->name = $request->name;
@@ -95,14 +96,34 @@ class ProductController extends Controller
         $product->sub = $request->sub_category;
         $product->super = $request->sub_sub_category;
         $product->code = $request->pro_code;
+        $product->brand = $request->brand;
         $product->description = $request->desc;
         $product->price = $request->price;
-        $product->discount = $request->discount;
         $product->details = $request->details;
-        $product->sleeve = (int)$request->sleeve;
-        $product->leglength = (int)$request->leglength;
-        $product->fit = (int)$request->fit;
         $product->save();
+
+
+    //Saving Attributes
+        foreach($request->sleeve as $sleeve){
+            ProductAttribute::create([
+                'product_id' => $product->id,
+                'attribute_id' => (int)$sleeve
+            ]);
+        }
+
+        foreach($request->fit as $item){
+            ProductAttribute::create([
+                'product_id' => $product->id,
+                'attribute_id' => (int)$item
+            ]);
+        }
+
+        foreach($request->leglength as $item){
+            ProductAttribute::create([
+                'product_id' => $product->id,
+                'attribute_id' => (int)$item
+            ]);
+        }
 
     // Saving Tags
         $tags = $request->tags;
@@ -187,15 +208,18 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::with('category','subcategory','subsubcats','sleeves','leglenghts','fits')->find($id);
+        $product = Product::with('category','subcategory','subsubcats')->find($id);
         $categories = Category::all();
+        $brand = Brand::all();
         $subcategories = SubCategory::all();
         $subsubcats =  SubSubCategory::all();
         $colors = Color::all();
         $sizes = Size::all();
-        $sleeves = Sleeve::all();
-        $leglenghts = LegLength::all();
-        $fits = Fit::all();
+        $attributes = Attributes::all();
+        $productAttributes = ProductAttribute::all();
+        $sleeves = $attributes->where('sleeve',1);
+        $leglenghts = $attributes->where('leg_length',1);
+        $fits = $attributes->where('fit',1);
         $tags = Tags::forProduct();
         $variant  = ProductVariant::where('product_id', $product->id)->get();
         // dd($variant);
@@ -203,7 +227,7 @@ class ProductController extends Controller
 
         $productTags = ProductTags::where('product_id', $product->id)->get();
 
-        return view('product.edit',compact('product','categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits', 'tags', 'productTags'));
+        return view('product.edit',compact('product','categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits', 'tags', 'productTags', 'brand','productAttributes'));
     }
 
     /**
@@ -232,16 +256,13 @@ class ProductController extends Controller
         $product->sub = $request->sub_category;
         $product->super = $request->sub_sub_category;
         $product->code = $request->pro_code;
+        $product->brand = $request->brand;
         $product->description = $request->desc;
         $product->price = $request->price;
-        $product->discount = $request->discount;
         $product->details = $request->details;
-        $product->sleeve = (int)$request->sleeve;
-        $product->leglength = (int)$request->leglength;
-        $product->fit = (int)$request->fit;
         $product->save();
 
-    // Updating Tags
+        // Updating Tags
         $tags = $request->tags;
         $update = ProductTags::updateTags($tags, $product->id);
         if(!$update):   
@@ -307,10 +328,28 @@ class ProductController extends Controller
 
    public function addToCart(Request $request)
    {
-            if(isset($request->variant) && isset($request->qty)){
-                echo json_encode(['response'=>"Thik ache", "qty", $request->qty]);
-            }
+
+    // dd(\Session::get('cart'));
+    $request->validate([
+        'product' => 'required'
+    ]);
+    
+    $cart = \Session::get('cart');
+    $newList = $request->product;
+
+    if(!$cart){
+        $cart = array();
+        array_push($cart, $newList);
+        \Session::put('cart', $cart);
+    } else {
+        array_push($cart, $newList);
+        \Session::put('cart', $cart);
+    }
+    
+    // header('Content-Type: application/json');
+        echo json_encode(['response'=>"200", 'cart' => $cart]);
    }
+
 
    public function getCart(Request $request)
    {

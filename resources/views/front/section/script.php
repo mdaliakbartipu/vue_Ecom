@@ -1,4 +1,5 @@
-    
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>    
     <script src="<?=ASSETS?>/js/vue.js"></script>
     <script src="<?=ASSETS?>/js/axios.min.js"></script>
     <script src="<?=ASSETS?>/js/shamsvue.js"></script>
@@ -11,6 +12,7 @@
     <script src="<?=ASSETS?>/js/main.js"></script>
     <script src="<?=ASSETS?>/js/wow.min.js"></script>
     <script src="<?=ASSETS?>/js/owl.carousel.min.js"></script>
+
 
 
     <script>

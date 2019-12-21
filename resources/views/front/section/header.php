@@ -246,8 +246,18 @@
                         </div>
 
                     </div>
+                    <?php
+                            $cart = \Session::get('cart')??null;
+                            if($cart){
+                                $cart = count($cart);
+                            } else {
+                                $cart = 0;
+                            }
+                            
+                    ?>
 
-                    <singin_and_cart cart_image="<?= ASSETS ?>/img/logo/cart.png"></singin_and_cart>
+                    <singin_and_cart count="<?=$cart?>" cart_image="<?= ASSETS ?>/img/logo/cart.png">
+                    </singin_and_cart>
 
 
                 </div>

@@ -34,7 +34,6 @@ class ProductsTableSeeder extends Seeder
                                     'name' => Str::random(10),
                                     'code' => Str::random(6),
                                     'description' => Str::random(150),
-
                                     'buy_price' => rand(100,500),
                                     'price' => rand(501,3000),
                                     'brand' => $brands[array_rand($brands)]['id'],
@@ -58,7 +57,7 @@ class ProductsTableSeeder extends Seeder
                                     'product_id'=>$id,
                                      'attribute_id' => $attributes[array_rand($attributes)]['id'],
                                  ]);
-                                 for($i=0; $i < 10; $i++):
+                                 for($i=0; $i < 5; $i++):
                                  DB::table('product_variant')->insert([
                                     'product_id'=>$id,
                                      'color_id' => $colors[array_rand($colors)]['id'],
