@@ -18,16 +18,9 @@ class DatabaseSeeder extends Seeder
          $this->call(SubSubCatagoryTableSeeder::class);
          $this->call(ColorTableSeeder::class);
          $this->call(SizeTableSeeder::class);
-<<<<<<< HEAD
-         $this->call(SleeveTableSeeder::class);
-         $this->call(FitTableSeeder::class);
-         $this->call(LegLengthTableSeeder::class);
-         $this->call(TagsTableSeeder::class);
-=======
          $this->call(TagsTableSeeder::class);
          $this->call(BrandTableSeeder::class);
          $this->call(AttributesTableSeeder::class);
->>>>>>> defae7d00f151b4aa9a4f8f1f5ec0d9319a42ab4
          $this->call(ProductsTableSeeder::class);
          $this->call(SliderTableSeeder::class);
          $this->call(BannersTableSeeder::class);

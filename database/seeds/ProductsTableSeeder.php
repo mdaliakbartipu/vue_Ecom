@@ -34,16 +34,7 @@ class ProductsTableSeeder extends Seeder
                                     'name' => Str::random(10),
                                     'code' => Str::random(6),
                                     'description' => Str::random(150),
-<<<<<<< HEAD
-                                    'price' => rand(600, 4000),
-                                    'discount' => rand(5,25),
-                                    'details' => Str::random(300),
-                                    'sleeve' => $sleeves[array_rand($sleeves)]['id'],
-                                    'leglength' => $leg_lengths[array_rand($leg_lengths)]['id'],
-                                    'fit' => $fits[array_rand($fits)]['id'],
-                                    'thumb1'=> rand(1,6).'a.jpg',
-                                    'thumb2'=> rand(1,6).'b.jpg'
-=======
+
                                     'buy_price' => rand(100,500),
                                     'price' => rand(501,3000),
                                     'brand' => $brands[array_rand($brands)]['id'],
@@ -57,7 +48,6 @@ class ProductsTableSeeder extends Seeder
                                     'thumb2'=> 'thumb2.jpg',
                                     'created_at'=>date('Y-m-d H:i:s'),
                                     'updated_at' => date('Y-m-d H:i:s')
->>>>>>> defae7d00f151b4aa9a4f8f1f5ec0d9319a42ab4
                                 ]);
 
                                 DB::table('product_tags')->insert([
