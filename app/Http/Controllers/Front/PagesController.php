@@ -109,8 +109,13 @@ class PagesController extends FrontController
 
     public function cart()
     {
-        // dd("asa");
-        return view('front.cart');
+        $carts = \Session::get('cart');
+            // dd($carts);
+        if(!$carts){
+            return redirect('/');
+        }
+       
+        return view('front.cart', ['cartProducts' => $carts]);
     }
     
     public function checkout()

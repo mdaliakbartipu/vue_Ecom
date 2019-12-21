@@ -56,8 +56,8 @@ Vue.component('cart_table', {
 
     data: function () {
         return {
-            products: [{
-                image: '/front/assets/img/s-product/product.jpg',
+            product: [{
+                image: '/front/assets/img/s-product/this.product.jpg',
                 name: "Test product",
                 price: "100",
                 qty: {
@@ -68,7 +68,7 @@ Vue.component('cart_table', {
                 total: 300
             },
             {
-                image: '/front/assets/img/s-product/product.jpg',
+                image: '/front/assets/img/s-product/this.product.jpg',
                 name: "Test product",
                 price: "100",
                 qty: {
@@ -82,6 +82,7 @@ Vue.component('cart_table', {
 
         }
     },
+    props:['items'],
     template: `
     <div class="row">
     <div class="col-12">
@@ -99,16 +100,7 @@ Vue.component('cart_table', {
                         </tr>
                     </thead>
                     <tbody>
-
-                        <tr v-for="product in products">
-                            <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                            <td class="product_thumb"><a href="#"><img :src="product.image" ></a></td>
-                            <td class="product_name"><a href="#">{{product.name}}</a></td>
-                            <td class="product-price">£{{product.price}}</td>
-                            <td class="product_quantity"><label>Quantity</label> <input :min="product.qty.min" :max="product.qty.max" :value="product.qty.selected" type="number"></td>
-                            <td class="product_total">£{{product.total}}</td>
-                        </tr>
-
+                            <slot></slot>
                     </tbody>
                 </table>
             </div>
@@ -121,6 +113,55 @@ Vue.component('cart_table', {
     `
 })
 
+Vue.component('cart_row', {
+    data: function(){
+        return {
+            product:{
+                name:this.name,
+                price:this.price,
+                size:this.size,
+                variantID:this.variant_id,
+                qty:this.qty,
+                image:this.image,
+                total:100
+            },
+            path:"/front/assets/img/product/"
+        }
+    },
+    props:['name','price','size','variant_id', 'qty','image'],
+    methods:{
+        remove: function(){
+            swal({
+                title: "Are you sure?",
+                
+                icon: "info",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+                  swal("Okey! Your cart item has been deleted!", {
+                    icon: "success",
+                  });
+                } else {
+                  swal("Have a nice day sir!");
+                }
+              });
+
+        }
+    },
+    template:`
+    <tr >
+    <td class="product_remove"><a @click.prevent="remove" href="#"><i class="fa fa-trash-o"></i></a></td>
+    <td class="product_thumb"><a href="#"><img :src="this.path+this.product.image" ></a></td>
+    <td class="product_name"><a href="#">{{this.product.name}}</a></td>
+    <td class="product-price">£ {{this.product.price}}</td>
+    <td class="product_quantity"><label>Quantity</label> <input  :value="this.product.qty" type="number"></td>
+    <td class="product_total">£ {{parseInt(this.product.price)*parseInt(this.product.qty)}}</td>
+</tr>
+    `
+})
+
 Vue.component('coupon', {
 
     template: `
@@ -128,8 +169,8 @@ Vue.component('coupon', {
             <h3>Coupon</h3>
             <div class="coupon_inner">
                 <p>Enter your coupon code if you have one.</p>
-                <input placeholder="Coupon code" type="text">
-                <button type="submit">Apply coupon</button>
+                <input disabled placeholder="Coupon code" type="text">
+                <button disabled type="submit">Apply coupon</button>
             </div>
     </div>
     `
@@ -141,7 +182,15 @@ Vue.component('cart_total', {
     data: function () {
         return {
             message: "",
+            subtotal:0,
+            shipping:0,
+            total:0
         }
+    },
+    mounted:function(){
+        axios
+            .get('/api/get-cart')
+            .then(response =>  response.data).then(data =>((this.subtotal=data.sub)&&(this.shipping=data.shipping))).then(console.log(this.subtotal));
     },
     template: `
     <div class="coupon_code right">
@@ -149,17 +198,16 @@ Vue.component('cart_total', {
             <div class="coupon_inner">
                     <div class="cart_subtotal">
                         <p>Subtotal</p>
-                        <p class="cart_amount">£215.00</p>
+                        <p class="cart_amount">£ {{this.subtotal}}</p>
                     </div>
                     <div class="cart_subtotal ">
                         <p>Shipping</p>
-                        <p class="cart_amount"><span>Flat Rate:</span> £255.00</p>
+                        <p class="cart_amount"><span>Flat Rate:</span> £ {{this.shipping}}</p>
                     </div>
-                    <a href="#">Calculate shipping</a>
 
                     <div class="cart_subtotal">
                         <p>Total</p>
-                        <p class="cart_amount">£215.00</p>
+                        <p class="cart_amount">£ {{this.subtotal*this.shipping}}</p>
                     </div>
                     <div class="checkout_btn">
                         <a href="/checkout">Proceed to Checkout</a>
@@ -176,7 +224,7 @@ Vue.component('cart', {
     <div class="container">
         <div class="shopping_cart_area">
             <form action="#">
-                <cart_table></cart_table>
+                <slot></slot>
                 <!--coupon code area start-->
                 <div class="coupon_area">
                     <div class="row">
@@ -523,13 +571,13 @@ Vue.component('product_info', {
 
             axios.post('/add-to-cart', {
                 product:{
-                    name: this.product.name,
-                    price:this.product.name,
+                    name: this.this.product.name,
+                    price:this.this.product.name,
                     color:this.selected.variant.color.name,
                     size:this.selected.variant.size.name,
                     variant_id: this.selected.variant.id,
                     qty: this.selected.qty,
-                    image: this.product.thumb1,
+                    image: this.this.product.thumb1,
     
                 }
             })
@@ -553,9 +601,9 @@ Vue.component('product_info', {
     <div class="col-lg-6 col-md-6">
         <div class="product_d_right">
             <form action="">
-                <product_name :name="product.name"></product_name>
+                <product_name :name="this.product.name"></product_name>
                 <product_price_notice></product_price_notice>
-                <product_price :price="product.price"></product_price>
+                <product_price :price="this.product.price"></product_price>
                 <product_description 
                     description_line_one="from 5 items: 9,40"
                     description_line_two="from 30 items: 8,21"
@@ -585,7 +633,7 @@ Vue.component('product_details', {
     },
     mounted() {
         axios
-            .get('/get_variant/' + this.product.id)
+            .get('/get_variant/' + this.this.product.id)
             .then(response => (this.variant = response.data
             ));
     },
@@ -677,13 +725,13 @@ Vue.component('product_article', {
     <article class="single_product">
     <figure>
         <div class="product_thumb">
-            <a class="primary_img" :href="this.link+product.id"><img :src="this.src+product.thumb1" alt=""></a>
-            <a class="secondary_img" :href="this.link+product.id"><img :src="this.src+product.thumb2" alt=""></a>
+            <a class="primary_img" :href="this.link+this.product.id"><img :src="this.src+this.product.thumb1" alt=""></a>
+            <a class="secondary_img" :href="this.link+this.product.id"><img :src="this.src+this.product.thumb2" alt=""></a>
             <div class="label_product_left label_product">
                 <span class="label_sale_left">New</span>
             </div>
              <div class="label_product">
-                <span class="label_sale">{{product.discount}}%</span>
+                <span class="label_sale">{{this.product.discount}}%</span>
             </div>
             <div class="action_links">
                 <ul>
@@ -695,19 +743,19 @@ Vue.component('product_article', {
         </div>
         <div class="product_content">
          <div class="product_timing">
-                    <div :data-countdown="product.discount_till"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">2</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">30</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
+                    <div :data-countdown="this.product.discount_till"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">2</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">30</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
                 </div>
             <div class="product_content_inner">
                 <h2 class="product_name_brand_name">Club</h2>
-                <h3 class="product_name"><a :href="this.link+product.id">{{product.name}}</a></h3>
+                <h3 class="product_name"><a :href="this.link+this.product.id">{{this.product.name}}</a></h3>
                 <h4 class="product_name_h4"><a href="#">{{tab.name}}</a></h4>
                 <div class="price_box">
-                    <span class="old_price">Reg. $ {{product.price}}</span><br>
-                    <span class="current_price">Sale $ {{product.price* (100-product.discount)/100}}</span>
+                    <span class="old_price">Reg. $ {{this.product.price}}</span><br>
+                    <span class="current_price">Sale $ {{this.product.price* (100-this.product.discount)/100}}</span>
                 </div>
                 <div class="countdown_text mb-3">
                    <!-- <a href="">Extra 15% off use:SUNDAY </a>-->
-                    <a href="" class="chng-color">Free shipping at $ {{product.free_shipping}}</a>
+                    <a href="" class="chng-color">Free shipping at $ {{this.product.free_shipping}}</a>
                 </div>
                <div class="star_icon">
                <i class="fa fa-star" aria-hidden="true"></i>
@@ -744,7 +792,7 @@ Vue.component('modal', {
                                     <div class="tab-content product-details-large">
                                         <div class="tab-pane fade show active" id="tab1" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img :src="'/front/assets/img/product/'+product.thumb1" alt=""></a>
+                                                <a href="#"><img :src="'/front/assets/img/product/'+this.product.thumb1" alt=""></a>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab2" role="tabpanel">
@@ -785,7 +833,7 @@ Vue.component('modal', {
                             <div class="col-lg-7 col-md-7 col-sm-12">
                                 <div class="modal_right">
                                     <div class="modal_title mb-10">
-                                        <h2>{{product.name}}</h2>
+                                        <h2>{{this.product.name}}</h2>
                                     </div>
                                     <div class="modal_price mb-10">
                                         <span class="new_price">$64.99</span>
@@ -949,7 +997,7 @@ Vue.component('single_product_section', {
     template: `
     <div>
         <product_details v-if="product" :product="product" :images="images"></product_details>
-        <product_extra_info v-if="product" :details="product.details"></product_extra_info>
+        <product_extra_info v-if="product" :details="this.product.details"></product_extra_info>
     </div>
     `
 });
@@ -1189,13 +1237,13 @@ Vue.component('miniCart', {
         return {
             products: [{
                 name: "something",
-                image: "/front/assets/img/s-product/product.jpg",
+                image: "/front/assets/img/s-product/this.product.jpg",
                 qty: 5,
                 price: 100,
             },
             {
                 name: "something",
-                image: "/front/assets/img/s-product/product.jpg",
+                image: "/front/assets/img/s-product/this.product.jpg",
                 qty: 1,
                 price: 200,
             }
@@ -1237,11 +1285,11 @@ Vue.component('miniCart', {
                     
                         <div class="cart_item" v-for="product in this.products">
                             <div class="cart_img">
-                                <a href="#"><img :src="product.image" alt=""></a>
+                                <a href="#"><img :src="this.product.image" alt=""></a>
                             </div>
                             <div class="cart_info">
                                 <a href="#">Sit voluptatem rhoncus sem lectus</a>
-                                <p>Qty: {{ product.qty}} X <span> $ {{product.price}} </span></p>
+                                <p>Qty: {{ this.product.qty}} X <span> $ {{this.product.price}} </span></p>
                             </div>
                             <div class="cart_remove">
                                 <a href="#"><i class="ion-android-close"></i></a>
@@ -1326,7 +1374,7 @@ new Vue({
 
         },
         selectImage(index) {
-            this.product.images["img-normal"] = this.product.images.thumb[index];
+            this.this.product.images["img-normal"] = this.this.product.images.thumb[index];
         },
         updateTabProducts(tab) {
             console.log(tab);

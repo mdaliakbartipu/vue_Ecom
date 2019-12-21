@@ -346,19 +346,28 @@ class ProductController extends Controller
         \Session::put('cart', $cart);
     }
     
-    // header('Content-Type: application/json');
+    header('Content-Type: application/json');
         echo json_encode(['response'=>"200", 'cart' => $cart]);
    }
 
 
    public function getCart(Request $request)
    {
-            if(isset($request->variant) && isset($request->qty)){
-                // get product info with thumb
-                //make cart like object
-                // save to session
-                //response
-            }
+    $cart = \Session::get('cart');
+
+
+    $subTotal = 0;
+    $shipping = 100;
+    header('Content-Type: application/json');
+
+    if($cart){
+        foreach($cart as $item){
+            $subTotal +=  (int)$item['price'] * (int)$item['qty'];
+        }
+        echo json_encode(['response'=>"200",'shipping'=>$shipping, 'cart' => $cart, 'sub'=> $subTotal]);
+    } else {
+        echo json_encode(['response'=>"404", 'cart' => null]);
+    }
    }
 
    public function getProductByTag( Request $request, $tag)
