@@ -17,7 +17,7 @@ class CreateColorsTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->string('name');
             $table->string('code');
-            $table->string('image')->default('default.png');
+            $table->string('image')->default('color.png');
             $table->timestamps();
         });
     }

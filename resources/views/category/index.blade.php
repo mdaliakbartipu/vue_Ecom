@@ -60,12 +60,12 @@
                             <td> {{ $category->name }} </td>
                          <td>  
                            
-                            <a href="{{ route('sub-category', $category->id) }}" class="badge badge-pill badge-secondary"> Sub Category </a> 
-                            {{ $category->subCategories->count() }} 
+                            <a href="{{ route('sub-category', $category->id) }}" class="badge badge-pill badge-secondary"> Add Sub Category </a> 
+                            ( {{ $category->subCategories->count() }} )
                          </td> 
 
                     <td> 
-                        <img class="img-responsive img-thumbnail" src="<?=$categoryImage.$category->image?>"  style="height: 50px; weight: 30px;" alt=""> 
+                        <img class="img-responsive img-thumbnail" src="<?=$categoryImage.$category->image?>"  style="height: 50px; width: 30px;" alt=""> 
                     </td>
                     <td>{{ $category->position=='1'?'Gallery':'No Position' }}</td>
                     <td><i class="{{ $category->icon }}"></i> {{ $category->icon }} </td>
@@ -169,7 +169,6 @@
                 // https://github.com/yajra/laravel-datatables
                 // processing: true,
                 // serverSide: true,
-                {{--ajax: '{{ url('') }}',--}}
                 // columns:[
                 //     {"data":"first_name"},
                 //     {"data":"last_name"},

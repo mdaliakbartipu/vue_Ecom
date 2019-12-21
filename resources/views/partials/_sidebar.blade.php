@@ -1,6 +1,8 @@
 <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
     <script type="text/javascript">
-        try{ace.settings.loadState('sidebar')}catch(e){}
+        try {
+            ace.settings.loadState('sidebar')
+        } catch (e) {}
     </script>
 
     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
@@ -39,7 +41,7 @@
                 <i class="menu-icon fa fa-tachometer"></i>
                 <span class="menu-text"> Dashboard </span>
             </a>
-            
+
             <a target="_blank" href="{{ url('/') }}" class="text-center" style="border:1px solid grey;padding:1em;margin:1em;background:rgb(140, 145, 152);color:rgb(170, 203, 255)">
                 <span class="menu-text text-center"><b>Visit Website </b> </span>
             </a>
@@ -47,43 +49,49 @@
             <b class="arrow"></b>
         </li>
 
-    
-             
-
-         <li class="{{ request()->is('slider') ? 'active' : '' }}">
-            <a href="{{ url('slider') }}">
-                <i class="menu-icon fa fa-sliders" ></i>
-                <span class="menu-text"> Slider </span>
+        <li class="{{ request()->is('company') ? 'active' : '' }}">
+            <a href="{{ url('company') }}">
+                <i class="menu-icon fa fa-building-o"></i>
+                <span class="menu-text"> Company </span>
             </a>
             <b class="arrow"></b>
-
-       
-
-
-
-{{-- Product Section --}}
+        </li>
 
         <li class="{{ request()->segment(1) == "group" ? 'open' : '' }}">
             <a href="#" class="dropdown-toggle">
-                <i class="menu-icon fa fa-gear"></i>
+                <i class="menu-icon fa fa-gear">
+
+                </i>
                 <span class="menu-text">
-                                Product Management
-                            </span>
+                    Product Management
+                </span>
                 <b class="arrow fa fa-angle-down"></b>
             </a>
 
-        <b class="arrow"></b>
+            <b class="arrow"></b>
 
-        
-         <ul class="submenu">
-                
+
+            <ul class="submenu">
+
                 <li class="{{-- {{ request()->segment(1) == "group" ? 'open' : '' }} --}}">
                     <a href="{{ url('product') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Products
                     </a>
                 </li>
-                
+                <li class="{{ request()->is('category') ? 'active' : '' }}">
+                    <a href="{{ url('category') }}">
+                        <i class="menu-icon fa fa-list-alt"></i>
+                        <span class="menu-text"> Category </span>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="">
+                    <a href="{{ url('brand') }}">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Brands
+                    </a>
+                </li>
                 <li class="{{-- {{ request()->segment(1) == "group" ? 'open' : '' }} --}}">
                     <a href="{{ url('size') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
@@ -95,35 +103,33 @@
                         <i class="menu-icon fa fa-caret-right"></i>
                         Colors
                     </a>
-                </li><li class="">
+                </li>
+                <li class="">
                     <a href="{{ url('sleeve') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Sleeves
                     </a>
-                </li><li class="">
+                </li>
+                <li class="">
                     <a href="{{ url('leglength') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Leg lengths
                     </a>
-                </li><li class="">
+                </li>
+                <li class="">
                     <a href="{{ url('fit') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Fits
                     </a>
-                </li><li class="">
-                    <a href="{{ url('brand') }}">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Brands
-                    </a>
                 </li>
+                
 
             </ul>
         </li>
-     </li>
 
-         <li class="{{ request()->is('page') ? 'active' : '' }}">
-             <a href="{{ url('page') }}">
-                 <i class="menu-icon fa fa-file"></i>
+        <li class="{{ request()->is('page') ? 'active' : '' }}">
+            <a href="{{ url('page') }}">
+                <i class="menu-icon fa fa-file"></i>
                 <span class="menu-text"> Pages </span>
             </a>
 
@@ -131,62 +137,45 @@
         </li>
 
 
-         <li class="{{ request()->is('user') ? 'active' : '' }}">
-             <a href="{{ url('user') }}">
-                <i class="menu-icon fa fa-user" ></i>
-                <span class="menu-text"> Users </span>
+
+        <li class="{{ request()->is('slider') ? 'active' : '' }}">
+            <a href="{{ url('slider') }}">
+                <i class="menu-icon fa fa-sliders"></i>
+                <span class="menu-text"> Slider </span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <li class="{{ request()->is('promotion') ? 'active' : '' }}">
+            <a href="{{ url('promotion') }}">
+                <i class="menu-icon fa fa-list-alt"></i>
+                {{-- <i class="menu-icon fa fa-accessible-icon"></i> --}}
+                <span class="menu-text"> Promotion </span>
             </a>
             <b class="arrow"></b>
         </li>
 
-         <li class="{{ request()->is('company') ? 'active' : '' }}">
-             <a href="{{ url('company') }}">
-               <i class="menu-icon fa fa-building-o" ></i>
-                <span class="menu-text"> Company </span>
-            </a>
-            <b class="arrow"></b>
-        </li>
-
-         <li class="{{ request()->is('category') ? 'active' : '' }}">
-             <a href="{{ url('category') }}">
-               <i class="menu-icon fa fa-list-alt" ></i>
-                <span class="menu-text"> Category </span>
-            </a>
-            <b class="arrow"></b>
-        </li>
-
-         <li class="{{ request()->is('testimonial') ? 'active' : '' }}">
-             <a href="{{ url('testimonial') }}">
-               <i class="menu-icon fa fa-quote-left"></i>
+        <li class="{{ request()->is('testimonial') ? 'active' : '' }}">
+            <a href="{{ url('testimonial') }}">
+                <i class="menu-icon fa fa-quote-left"></i>
                 <span class="menu-text"> Testimonial </span>
             </a>
             <b class="arrow"></b>
         </li>
         <li class="{{ request()->is('blog') ? 'active' : '' }}">
-             <a href="{{ url('blog') }}">
-             <i class="menu-icon fa fa-sliders" ></i>
+            <a href="{{ url('blog') }}">
+                <i class="menu-icon fa fa-sliders"></i>
                 <span class="menu-text"> Blog </span>
             </a>
             <b class="arrow"></b>
         </li>
-         <li class="{{ request()->is('promotion') ? 'active' : '' }}">
-             <a href="{{ url('promotion') }}">
-               <i class="menu-icon fa fa-list-alt" ></i>
-              {{--  <i class="menu-icon fa fa-accessible-icon"></i> --}}
-                <span class="menu-text"> Promotion </span>
-            </a>
-            <b class="arrow"></b>
-        </li>
-{{--         
-        <li class="{{ request()->is('product') ? 'active' : '' }}">
-             <a href="{{ url('product') }}">
-               <i class="menu-icon fa fa-list-alt" ></i>
-                <span class="menu-text"> Product </span>
-            </a>
-            <b class="arrow"></b>
-        </li>
-           --}}
 
+        <li class="{{ request()->is('user') ? 'active' : '' }}">
+            <a href="{{ url('user') }}">
+                <i class="menu-icon fa fa-user"></i>
+                <span class="menu-text"> Users </span>
+            </a>
+            <b class="arrow"></b>
+        </li>
 
 
 

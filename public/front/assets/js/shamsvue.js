@@ -105,7 +105,7 @@ Vue.component('cart_table', {
                 </table>
             </div>
             <div class="cart_submit">
-                <button type="submit">update cart</button>
+                <a href="/cart" class="btn btn-sm btn-info">update cart</a>
             </div>
         </div>
     </div>
@@ -212,7 +212,7 @@ Vue.component('cart_total', {
 
                     <div class="cart_subtotal">
                         <p>Total</p>
-                        <p class="cart_amount">£ {{this.subtotal*this.shipping}}</p>
+                        <p class="cart_amount">£ {{this.subtotal+this.shipping}}</p>
                     </div>
                     <div class="checkout_btn">
                         <a href="/checkout">Proceed to Checkout</a>
@@ -576,13 +576,13 @@ Vue.component('product_info', {
 
             axios.post('/add-to-cart', {
                 product:{
-                    name: this.this.product.name,
-                    price:this.this.product.name,
+                    name: this.product.name,
+                    price:this.product.price,
                     color:this.selected.variant.color.name,
                     size:this.selected.variant.size.name,
                     variant_id: this.selected.variant.id,
                     qty: this.selected.qty,
-                    image: this.this.product.thumb1,
+                    image: this.product.thumb1,
     
                 }
             })
@@ -590,7 +590,7 @@ Vue.component('product_info', {
                     console.log(response.data.cart.length);
                     let cartQty = document.querySelector('#cart-qty');
                     cartQty.innerText = parseInt(response.data.cart.length);
-                    swal("Great!", "Your Product is added to cart!", "success");
+                    swal("Great!", "This Product is added to cart! Buy more !", "success");
 
                 })
                 .catch(function (error) {
@@ -638,7 +638,7 @@ Vue.component('product_details', {
     },
     mounted() {
         axios
-            .get('/get_variant/' + this.this.product.id)
+            .get('/get_variant/' + this.product.id)
             .then(response => (this.variant = response.data
             ));
     },
@@ -751,7 +751,7 @@ Vue.component('product_article', {
                     <div :data-countdown="this.product.discount_till"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">2</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">30</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
                 </div>
             <div class="product_content_inner">
-                <h2 class="product_name_brand_name">Club</h2>
+                <h2 class="product_name_brand_name">{{product.brand}}</h2>
                 <h3 class="product_name"><a :href="this.link+this.product.id">{{this.product.name}}</a></h3>
                 <h4 class="product_name_h4"><a href="#">{{tab.name}}</a></h4>
                 <div class="price_box">
@@ -959,7 +959,7 @@ Vue.component('related_products', {
                     all: ""
                 }
             },
-            count: 10,
+            count: 5,
         }
     },
     props: ['tab_id'],
@@ -974,10 +974,7 @@ Vue.component('related_products', {
             </div>
 
             <section class="customer-logos">
-                    <product_article v-for="c in count" v-bind:key="c.text"
-                        :thumb1="products.images.thumb1"
-                        :thumb2="products.images.thumb2"
-                    ></product_article>    
+                    <div v-for="c in this.count" class="" style="width: 241px;"><article class="single_product"><figure><div class="product_thumb"><a href="/singleProduct/21" class="primary_img"><img src="/front/assets/img/product/thumb1.jpg" alt=""></a> <a href="/singleProduct/21" class="secondary_img"><img src="/front/assets/img/product/thumb2.jpg" alt=""></a> <div class="label_product_left label_product"><span class="label_sale_left">New</span></div> <div class="label_product"><span class="label_sale">10%</span></div> <div class="action_links"><ul><li class="wishlist"><a href="wishlist.html" title="" data-original-title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a></li> <li class="compare"><a href="#" title="" data-original-title="Add to Compare"><i class="ion-ios-settings-strong"></i></a></li> <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="" class="inner-search-back" data-original-title="10 colors | quick view"><i class="ion-ios-search-strong"></i></a></li></ul></div></div> <div class="product_content"><div class="product_timing"><div data-countdown="2019-12-31 00:00:00"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">09</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">06</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">14</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">18</div><div class="countdown_title">secs</div></div></div></div></div> <div class="product_content_inner"><h2 class="product_name_brand_name">Club</h2> <h3 class="product_name"><a href="product-countdown.html">Men's Slim Fit Poplin Shart </a></h3> <h4 class="product_name_h4"><a href="">New ArriVal</a></h4> <div class="price_box"><span class="old_price">Reg. $773</span><br> <span class="current_price">Sale $695</span></div> <div class="countdown_text mb-3"><a href="" class="chng-color">Free shipping at $21</a></div> <div class="star_icon"><i aria-hidden="true" class="fa fa-star"></i> <i aria-hidden="true" class="fa fa-star"></i> <i aria-hidden="true" class="fa fa-star"></i> <i aria-hidden="true" class="fa fa-star"></i> <i aria-hidden="true" class="fa fa-star"></i></div></div></div></figure></article></div>  
             </section> 
 
     </section>
@@ -1351,13 +1348,13 @@ new Vue({
             qty: 5,
 
             images: {
-                big: "/front/assets/img/product/productbig5.jpg",
+                big: "/front/assets/img/product/thumb1.jpg",
                 thumb: {
-                    img1: "/front/assets/img/product/productbig1.jpg",
-                    img2: "/front/assets/img/product/productbig2.jpg",
-                    img3: "/front/assets/img/product/productbig3.jpg",
-                    img4: "/front/assets/img/product/productbig4.jpg",
-                    img5: "/front/assets/img/product/productbig5.jpg"
+                    img1: "/front/assets/img/product/thumb1.jpg",
+                    img2: "/front/assets/img/product/thumb2.jpg",
+                    img3: "/front/assets/img/product/2a.jpg",
+                    img4: "/front/assets/img/product/2b.jpg",
+                    img5: "/front/assets/img/product/3a.jpg"
                 }
             },
         }

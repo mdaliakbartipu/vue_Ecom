@@ -54,7 +54,7 @@ class CategoryController extends Controller
          ]);
 
      $image = $request->file('image');
-     $slug = str_slug($request->title);
+     $slug = str_slug($request->name);
         if(null!==($image)){
             $currentDate = Carbon::now()->toDateString();
             $imageName = $slug .'-'. $currentDate .'-'. uniqid() .'.'. $image->getClientOriginalExtension();
@@ -70,6 +70,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->image = $imageName;
         $category->icon = $request->icon??null;
+        $category->slug = $slug;
         $category->save();
         return redirect()->route('category.index')->with('successMsg','Category Successfully Added');
     }
@@ -114,7 +115,7 @@ class CategoryController extends Controller
 
 
         $image = $request->file('image');
-        $slug = str_slug($request->title);
+        $slug = str_slug($request->name);
         $category = category::find($id);
 
          if(null!==($image)){
@@ -131,6 +132,7 @@ class CategoryController extends Controller
 
         $category->image = $imageName;  
         $category->name = $request->name;
+        $category->slug = $slug;
         $category->position = $request->position;
         $category->icon = $request->icon??null;
       
@@ -164,7 +166,9 @@ class CategoryController extends Controller
                'category_id' => 'required'
             ]);
 
+            $slug = str_slug($request->name);
         $subCategory = new SubCategory();
+        $subCategory->slug = $slug;
         $subCategory->category_id = $request->category_id;
         $subCategory->name = $request->name;
         
@@ -191,11 +195,12 @@ class CategoryController extends Controller
                'name'  =>  'required',
                'sub_category_id' => 'required'
             ]);
-
+            $slug = str_slug($request->name);
         $subSubCategory = new subSubCategory();
+        $subSubCategory->slug = $slug;
         $subSubCategory->sub_category_id = $request->id;
         $subSubCategory->name = $request->name;
-        
+
         $subSubCategory->save();  
        
         return redirect()->back()->with('successMsg','SubCategory Successfully Added');
@@ -215,9 +220,11 @@ class CategoryController extends Controller
                'name'  =>  'required',
                'category_id' => 'required'
             ]);
+            $slug = str_slug($request->name);
           $subCategory = SubCategory::find($id);
           $subCategory->category_id = $request->category_id;
           $subCategory->name = $request->name;
+          $subCategory->slug = $slug = str_slug($request->name);
           $subCategory->save();
          return redirect()->back()->with('successMsg','Sub Category Successfully Updated');
      }
@@ -246,9 +253,11 @@ class CategoryController extends Controller
                'name'  =>  'required',
                'sub_category_id' => 'required'
             ]);
+            $slug = str_slug($request->name);
           $subSubCategory = subSubCategory::find($id);
           $subSubCategory->sub_category_id = $request->sub_category_id;
           $subSubCategory->name = $request->name;
+          $subSubCategory->slug = $slug;
           $subSubCategory->save();
          return redirect()-> route('sub-sub-cat',$subSubCategory->sub_category_id)->with('successMsg','Sub Sub Category Successfully Updated');
 

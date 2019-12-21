@@ -14,9 +14,6 @@
     <!--header area end-->
     </div>
 
-    <?php
-// dd($cartProducts);
-    ?>
 
     <?php include("section/cart.php");?>
 

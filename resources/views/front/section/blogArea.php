@@ -15,7 +15,7 @@
               <div class="gif_text">
                     <p class=" text-justify pt-3 pb-3 pl-4 pr-4 "><?=$testimonial->message?></p>
                     <div class="profile_img float-left" style="margin-bottom: 1em">
-                      <img src="<?=file_exists(ASSETS.'/.uploads/testimonials/'.$testimonial->image)?ASSETS.'/.uploads/testimonials/'.$testimonial->image:ASSETS.'/img/testimonials/'.$testimonial->image?>" alt="" />
+                      <img src="<?=file_exists(ltrim(ASSETS, '/').'/.uploads/testimonials/'.$testimonial->image)?ASSETS.'/.uploads/testimonials/'.$testimonial->image:ASSETS.'/img/testimonials/'.$testimonial->image?>" alt="" />
                     </div>
                     <div class="author_item" >
                       <span><?=$testimonial->name?>

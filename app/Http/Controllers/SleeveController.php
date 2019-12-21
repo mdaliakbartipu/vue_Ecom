@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Sleeve;
+use App\Attributes;
 use Illuminate\Http\Request;
 
 class SleeveController extends Controller
@@ -14,7 +14,7 @@ class SleeveController extends Controller
      */
     public function index()
     {
-        $sleeves = Sleeve::all();
+        $sleeves = Attributes::where('sleeve', true)->get();
         return view('sleeve.index',compact('sleeves'));
     }
 
@@ -41,9 +41,10 @@ class SleeveController extends Controller
           
        ]);
     
-        $sleeve = new Sleeve();
-        $sleeve->name = $request->name;
-        $sleeve->save();
+       Attributes::create([
+        'name'        => $request->name,
+        'sleeve'  => true
+    ]);
         return redirect()->route('sleeve.index')->with('successMsg','Sleeve Successfully Added');
     }
 
@@ -66,7 +67,7 @@ class SleeveController extends Controller
      */
     public function edit($id)
     {
-        $sleeve = Sleeve::findOrFail($id);
+        $sleeve = Attributes::findOrFail($id);
         return view('sleeve.edit',compact('sleeve'));
     }
 
@@ -83,9 +84,10 @@ class SleeveController extends Controller
            'name'     => 'required',
            ]);
      
-         $sleeve = Sleeve::find($id); 
-        $sleeve->name = $request->name;
-        $sleeve->save();
+           $item = Attributes::find($id);
+           $item->name = $request->name;
+           $item->save(); 
+           
         return redirect()->route('sleeve.index')->with('successMsg','Sleeve Successfully Updated');
     }
 

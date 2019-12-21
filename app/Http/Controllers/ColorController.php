@@ -41,7 +41,7 @@ class ColorController extends Controller
          $this->validate($request,[
            'name'     => 'required',
            'code' => 'required',
-           'image'     => 'required|mimes:jpeg,jpg,png,gif'
+           'image'     => 'nullable|mimes:jpeg,jpg,png,gif'
        ]);
 
        $path = "front/assets/.uploads/color";

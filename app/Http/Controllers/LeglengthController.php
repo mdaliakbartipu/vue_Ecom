@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\LegLength;
+use App\Attributes;
 use Illuminate\Http\Request;
 
 class LeglengthController extends Controller
@@ -14,7 +14,7 @@ class LeglengthController extends Controller
      */
     public function index()
     {
-        $leglengths = Leglength::all();
+        $leglengths = Attributes::where('leg_length', true)->get();
         return view('leglength.index',compact('leglengths'));
     }
 
@@ -41,10 +41,11 @@ class LeglengthController extends Controller
           
        ]);
     
-        $leglength = new Leglength();
-        $leglength->name = $request->name;
-        $leglength->save();
-        return redirect()->route('leglength.index')->with('successMsg','Leg length Successfully Added');
+        Attributes::create([
+            'name'        => $request->name,
+            'leg_length'  => true
+        ]);
+       return redirect()->route('leglength.index')->with('successMsg','Leg length Successfully Added');
     }
 
     /**
@@ -66,7 +67,7 @@ class LeglengthController extends Controller
      */
     public function edit($id)
     {
-        $leglength = Leglength::findOrFail($id);
+        $leglength = Attributes::findOrFail($id);
         return view('leglength.edit',compact('leglength'));
     }
 
@@ -82,10 +83,11 @@ class LeglengthController extends Controller
          $this->validate($request,[
            'name'     => 'required',
            ]);
-     
-         $leglength = Leglength::find($id); 
-        $leglength->name = $request->name;
-        $leglength->save();
+        $item = Attributes::find($id);
+        $item->name = $request->name;
+        $item->save(); 
+
+
         return redirect()->route('leglength.index')->with('successMsg','Leglength Successfully Updated');
     }
 
@@ -97,8 +99,10 @@ class LeglengthController extends Controller
      */
     public function destroy($id)
     {
-         $leglength = Leglength::find($id);
-        $leglength->delete();
+        return redirect()->back()->with('successMsg','Deleting is disabled'); 
+        $leglength = Attributes::find($id);
+         @$leglength->delete();
+
          return redirect()->back()->with('successMsg','Leg length Deleted successfully');
     }
 }

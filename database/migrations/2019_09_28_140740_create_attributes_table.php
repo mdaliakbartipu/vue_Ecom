@@ -16,9 +16,9 @@ class CreateAttributesTable extends Migration
         Schema::create('attributes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->boolean('fit');
-            $table->boolean('leg_length');
-            $table->boolean('sleeve');
+            $table->boolean('fit')->nullable()->default(0);
+            $table->boolean('leg_length')->nullable()->default(0);
+            $table->boolean('sleeve')->nullable()->default(0);
             $table->timestamps();
         });
     }

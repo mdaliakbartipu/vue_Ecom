@@ -74,8 +74,8 @@
                           <td> {{ $key +1 }} </td>
                          <td>{{ $sub->name }}</td>
                        <td>  
-                          <a href="{{ route('sub-sub-cat',$sub->id) }}" class="badge badge-pill badge-secondary"> Sub sub Category </a> 
-                    {{ $sub->sub_sub_categories->count() }}
+                          <a href="{{ route('sub-sub-cat',$sub->id) }}" class="badge badge-pill badge-secondary"> Add Sub sub Category </a> 
+                   ( {{ $sub->sub_sub_categories->count() }} )
                         </td> 
 
          
@@ -182,7 +182,6 @@
                 // https://github.com/yajra/laravel-datatables
                 // processing: true,
                 // serverSide: true,
-                {{--ajax: '{{ url('') }}',--}}
                 // columns:[
                 //     {"data":"first_name"},
                 //     {"data":"last_name"},

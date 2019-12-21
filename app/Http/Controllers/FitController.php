@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Fit;
+use App\Attributes;
 use Illuminate\Http\Request;
 
 class FitController extends Controller
@@ -14,7 +14,7 @@ class FitController extends Controller
      */
     public function index()
     {
-         $fits = Fit::all();
+         $fits = Attributes::where('fit', true)->get();
         return view('fit.index',compact('fits'));
     }
 
@@ -41,9 +41,10 @@ class FitController extends Controller
           
        ]);
     
-        $fit = new Fit();
-        $fit->name = $request->name;
-        $fit->save();
+       Attributes::create([
+        'name'        => $request->name,
+        'fit'  => true
+    ]);
         return redirect()->route('fit.index')->with('successMsg','Fit Successfully Added');
     }
 
@@ -66,7 +67,7 @@ class FitController extends Controller
      */
     public function edit($id)
     {
-        $fit = Fit::findOrFail($id);
+        $fit = Attributes::findOrFail($id);
         return view('fit.edit',compact('fit'));
     }
 
@@ -83,9 +84,9 @@ class FitController extends Controller
            'name'     => 'required',
            ]);
      
-         $fit = Fit::find($id); 
-        $fit->name = $request->name;
-        $fit->save();
+           $item = Attributes::find($id);
+           $item->name = $request->name;
+           $item->save(); 
         return redirect()->route('fit.index')->with('successMsg','Fit Successfully Updated');
     }
 

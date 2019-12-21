@@ -86,7 +86,6 @@ class PagesController extends FrontController
 
     public function singleProduct($id)
     {
-
         return view('front.singleProduct',
         [
             'productID'=>$id
