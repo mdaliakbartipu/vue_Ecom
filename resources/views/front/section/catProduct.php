@@ -15,12 +15,12 @@ ASSETS.'/img/category/'.$cat->image;
                 <catproduct
                     catname="<?=$cat->name?>" 
                     styletext = "background: url('<?=$image?>'); background-size:cover;"
-                    catlink = "/cat/<?=$cat->id?>"
+                    catlink = "/cat/<?=$cat->slug?>"
                     subcatlist = ""
                 >
                 <?php foreach($subCats[$cat->id] as $subcat): ?>
                     <vuelist  
-                        listlink ="/subcat_products/<?=$subcat->id?>"
+                        listlink ="/sub/<?=$subcat->slug?>"
                         listdata ="<?=$subcat->name?>"
                     ></vuelist>
                 <?php endforeach; ?>

@@ -14,13 +14,10 @@
         <span class=" label label-info arrowed-right arrowed-in" style="height:100px;width:90%;font-size:5em">D7Brigus Admin Panel</span>
 </div>
 
-
-
 @endsection
 
 @section('js')
     <script src="{{ asset('assets/js/excanvas.min.js') }}"></script>
-    <![endif]-->
     <script src="{{ asset('assets/js/jquery-ui.custom.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.ui.touch-punch.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.easypiechart.min.js') }}"></script>

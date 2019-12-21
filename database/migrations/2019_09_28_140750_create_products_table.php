@@ -14,7 +14,7 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned();
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('cat');
             $table->foreign('cat')->references('id')->on('categories');
             $table->unsignedBigInteger('sub');
@@ -22,14 +22,18 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('super');
             $table->foreign('super')->references('id')->on('sub_sub_categories');
             $table->string('name');
+            $table->unsignedBigInteger('brand')->nullable();
+            $table->foreign('brand')->references('id')->on('brands');
             $table->string('code');
             $table->text('description');
-            $table->string('price');
-            $table->string('discount');
+            $table->unsignedInteger('views')->nullable()->dafault(0);
+            $table->unsignedInteger('buy_price')->nullable();
+            $table->unsignedInteger('price');
+            $table->unsignedInteger('discount')->nullable()->default(0);
+            $table->dateTime('discount_till')->nullable();
+            $table->unsignedInteger('free_shipping')->nullable();
             $table->text('details');
-            $table->integer('sleeve');
-            $table->integer('leglength');
-            $table->integer('fit');
+            $table->boolean('active')->nullable()->default(0);
             $table->string('thumb1')->nullable()->default('thumb1.jpg');
             $table->string('thumb2')->nullable()->default('thumb2.jpg');
             $table->timestamps();

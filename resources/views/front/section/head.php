@@ -11,7 +11,8 @@
 
     <!-- CSS 
     ========================= -->
- <!-- owl  CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <!-- owl  CSS -->
    <link rel="stylesheet" href="<?=ASSETS?>/css/owl.carousel.min.css">
      <link rel="stylesheet" href="<?=ASSETS?>/css/owl.theme.default.min.css">
      

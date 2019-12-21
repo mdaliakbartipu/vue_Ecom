@@ -9,6 +9,13 @@ use App\Page;
 use App\ProductTags;
 use App\Product;
 use App\ProductVariant;
+use App\Category;
+use App\SubCategory;
+use App\SubSubCategory;
+use App\Color;
+use App\Size;
+use App\Brand;
+
 
 class PagesController extends FrontController
 {
@@ -41,31 +48,40 @@ class PagesController extends FrontController
     }
 
 
-    public function catagoryProducts( $id = null)
+    public function cat( $slug = null)
     {
-        return view('front.catagoryProducts',
-        [
-
-       ]);
+        $section = Category::where('slug', (string)$slug)->with('products')->first();
+    
+        return view('front.catagoryProducts',[
+            'section' => $section,
+            'colors'   => Color::get(),
+            'sizes'     => Size::get(),
+            'brands'     => Brand::get()
+            ]);
     }
 
-    public function subcatProducts( $id = null)
+    public function sub( $slug = null)
     {
-
-        return view('front.catagoryProducts',
-        [
-            
-            
-        ]);
+        $section = SubCategory::where('slug', (string)$slug)->with('products')->first();
+    
+        return view('front.catagoryProducts',[
+            'section' => $section,
+            'colors'   => Color::get(),
+            'sizes'     => Size::get(),
+            'brands'     => Brand::get()
+            ]);
     }
 
-    public function subsubcatProducts( $id = null)
+    public function super( $slug = null)
     {
-
-        return view('front.catagoryProducts',
-        [
-            
-        ]);
+        $section = SubSubCategory::where('slug', (string)$slug)->with('products')->first();
+    
+        return view('front.catagoryProducts',[
+            'section' => $section,
+            'colors'   => Color::get(),
+            'sizes'     => Size::get(),
+            'brands'   =>Brand::get()
+            ]);
     }
 
     public function singleProduct($id)

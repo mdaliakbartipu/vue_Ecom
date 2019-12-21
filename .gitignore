@@ -18,3 +18,8 @@ yarn-error.log
 .env
 .phpunit.result.cache
 .htaccess
+.styleci.yml
+phpunit.xml
+composer.lock
+package-lock.json
+.editorconfig

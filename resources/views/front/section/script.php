@@ -1,30 +1,24 @@
+    
+    <script src="<?=ASSETS?>/js/vue.js"></script>
+    <script src="<?=ASSETS?>/js/axios.min.js"></script>
+    <script src="<?=ASSETS?>/js/shamsvue.js"></script>
+
+
+
     <!-- Plugins JS -->
     <script src="<?=ASSETS?>/js/plugins.js"></script>
-
     <!-- Main JS -->
     <script src="<?=ASSETS?>/js/main.js"></script>
     <script src="<?=ASSETS?>/js/wow.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
-    <script src="<?=ASSETS?>/js/shamsvue.js"></script>
+    <script src="<?=ASSETS?>/js/owl.carousel.min.js"></script>
+
+
     <script>
               new WOW().init();
               </script> 
-              <!--owlcarusol-->
-              
+              <!--owlcarusol-->       
 </script>
 
-
-  
-
-
-     
-	
-	
-	
-	
-
-	<script src="<?=ASSETS?>/js/owl.carousel.min.js"></script>
 <script>
             $(document).ready(function() {
               var owl = $('.owl-carousel');

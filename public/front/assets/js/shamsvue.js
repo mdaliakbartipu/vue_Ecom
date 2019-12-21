@@ -984,9 +984,10 @@ Vue.component('company_logo', {
 Vue.component('top_bar_menu_item', {
     props: ['cat'],
     template: `<li class="top_bar_menu_item" style="width:150px">
-                    <a href="/category_products/<?=$cat->id?>" class="dropbtn">
-                            {{cat}}
-                            <!--  <i class="fa fa-caret-down"></i> -->
+                    <a href="/cat/<?=$cat->slug?>" class="dropbtn">
+                            {{cat->name}}
+                            <!--  
+                            <i class="fa fa-caret-down"></i> -->
                     </a>
             </li>
     `
@@ -1115,7 +1116,7 @@ Vue.component('shop_by_categories', {
 Vue.component('super_section_list', {
     props: ['link', 'name'],
     template: `
-    <li><a href="link">{{name}}</a></li>
+    <li><a :href="link">{{name}}</a></li>
 `
 });
 
@@ -1136,14 +1137,14 @@ Vue.component('cat_section_list', {
     date: function () {
         return {
             catClassWithIcon: this.icon + " mr-10",
-            link: "/catagory_products/" + this.id,
+            link: '/cat/' + this.slug,
         }
     },
-    props: ['icon', 'id', 'name'],
+    props: ['icon', 'id', 'name', 'slug'],
     template: `
-    <li class="menu_item_children"><a :href="this.link">
+    <li class="menu_item_children"><a :href="'/cat/'+slug">
             <i :class="this.catClassWithIcon" aria-hidden="true"></i>
-                {{name}} <i class="fa fa-angle-right"></i></a>
+               {{name}} <i class="fa fa-angle-right"></i></a>
             <ul class="categories_mega_menu">
                     <slot></slot>
             </ul>
@@ -1217,7 +1218,7 @@ Vue.component('miniCart', {
     <div class="header_configure_area">
             <div class="header_wishlist">
                 <a href="#">
-                    <span class="wishlist_count" style="padding-bottom:4em;padding-left:4em;">3</span>
+                    <span class="wishlist_count" style="padding-bottom:4em;padding-left:4em;">2</span>
                 </a>
             </div>
             <div class="mini_cart_wrapper">
