@@ -116,6 +116,7 @@ Vue.component('cart_table', {
 Vue.component('cart_row', {
     data: function(){
         return {
+            active:true,
             product:{
                 name:this.name,
                 price:this.price,
@@ -130,7 +131,8 @@ Vue.component('cart_row', {
     },
     props:['name','price','size','variant_id', 'qty','image'],
     methods:{
-        remove: function(){
+        remove: function(variant){
+    
             swal({
                 title: "Are you sure?",
                 
@@ -143,6 +145,10 @@ Vue.component('cart_row', {
                   swal("Okey! Your cart item has been deleted!", {
                     icon: "success",
                   });
+                  axios
+            .get('/api/remove-from-cart/'+variant)
+            .then(response =>  response.data).then(data =>(data.response!=200)).then(status=>this.active = status);
+                  console.log(variant);
                 } else {
                   swal("Have a nice day sir!");
                 }
@@ -151,8 +157,8 @@ Vue.component('cart_row', {
         }
     },
     template:`
-    <tr >
-    <td class="product_remove"><a @click.prevent="remove" href="#"><i class="fa fa-trash-o"></i></a></td>
+    <tr v-if="this.active">
+    <td class="product_remove"><a @click.prevent="remove(variant_id)" href="#"><i class="fa fa-trash-o"></i></a></td>
     <td class="product_thumb"><a href="#"><img :src="this.path+this.product.image" ></a></td>
     <td class="product_name"><a href="#">{{this.product.name}}</a></td>
     <td class="product-price">£ {{this.product.price}}</td>
@@ -175,7 +181,6 @@ Vue.component('coupon', {
     </div>
     `
 });
-
 
 Vue.component('cart_total', {
 

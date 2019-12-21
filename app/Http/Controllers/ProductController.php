@@ -346,8 +346,39 @@ class ProductController extends Controller
         \Session::put('cart', $cart);
     }
     
-    header('Content-Type: application/json');
+        header('Content-Type: application/json');
         echo json_encode(['response'=>"200", 'cart' => $cart]);
+   }
+
+   public function removeFromCart($param=null)
+   {
+
+    header('Content-Type: application/json');
+    $cart = \Session::get('cart');
+    
+    if(empty($cart)){
+        //error
+        return  json_encode(['response'=>"404", 'msg'=>"no cart data"]);
+    }
+    $keys = array();
+    foreach($cart as $key=>$item){
+        if((int)$item['variant_id'] == (int)$param){
+            array_push($keys, $key);
+        }
+    }
+
+    if(empty($keys)){
+        //error no data
+        return json_encode(['response'=>"404", 'msg'=>"no matching item in cart"]);
+    } else {
+        foreach($keys as $key){
+            unset($cart[$key]);
+        }
+    }
+    \Session::put('cart', $cart);
+
+    return json_encode(['response'=>"200", 'msg'=>"Success"]);
+
    }
 
 
