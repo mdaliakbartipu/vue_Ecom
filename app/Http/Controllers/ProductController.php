@@ -164,20 +164,18 @@ class ProductController extends Controller
                 // first level array size will be the same as COLORS
                 // and first level keys will be same as COLORS,Size and Quantities
                 // So foreach COLORS we get $image(s)
-                foreach($images as $image):
                     // each color got these images
-                    foreach($image as $img):
+                    foreach($images[$key] as $img):
                          // Uploading to server
-                        $imageName = "pimg".'-'.time().'-'.uniqid().'.'.$img->getClientOriginalExtension();
-                        
+                        $imageName = "pimg".'-'.time()*rand(10000,99999).'-'.uniqid().'.'.$img->getClientOriginalExtension();
+                        // var_dump($imageName)."<br/>";
+                        // continue;
                         try {
                             if(!$img->move(public_path($imagePath), $imageName))
-                            throw new Exception('Not saved');
-                        } catch (FileException $e) {
+                            throw new \Exception('Not saved');
+                        } catch (\FileException $e) {
                             echo 'Not saved image'.var_dump($img);
                         }
-                        
-                        
                         // saving to database
                         $im = new ProductImages;
                         $im->product_id = $product->id;
@@ -186,15 +184,13 @@ class ProductController extends Controller
                         $im->image = $imageName;
                         $im->timestamps = false;
                         $im->save();
-
                     endforeach;
-                endforeach;
 
 
                 // managing product storage
                 $storage = new ProductStorage;
                 $storage->product_id = $product->id;
-                $storage->variant_id = $variant->id;
+                $storage->variant_id = $colors[$key];
                 $storage->sell       = 0;
                 $storage->order      = 0;
                 $storage->save();
