@@ -94,6 +94,8 @@ Vue.component('cart_table', {
                             <th class="product_remove">Delete</th>
                             <th class="product_thumb">Image</th>
                             <th class="product_name">Product</th>
+                            <th class="product_color">Color</th>
+                            <th class="product_size">Size</th>
                             <th class="product-price">Price</th>
                             <th class="product_quantity">Quantity</th>
                             <th class="product_total">Total</th>
@@ -121,6 +123,7 @@ Vue.component('cart_row', {
                 name:this.name,
                 price:this.price,
                 size:this.size,
+                color:this.color,
                 variantID:this.variant_id,
                 qty:this.qty,
                 image:this.image,
@@ -129,7 +132,7 @@ Vue.component('cart_row', {
             path:"/front/assets/.uploads/products/thumbs/"
         }
     },
-    props:['name','price','size','variant_id', 'qty','image'],
+    props:['name','price','size','color','variant_id', 'qty','image'],
     methods:{
         remove: function(variant){
     
@@ -161,6 +164,8 @@ Vue.component('cart_row', {
     <td class="product_remove"><a @click.prevent="remove(variant_id)" href="#"><i class="fa fa-trash-o"></i></a></td>
     <td class="product_thumb"><a href="#"><img loading="lazy" :src="this.path+this.product.image" ></a></td>
     <td class="product_name"><a href="#">{{this.product.name}}</a></td>
+    <td class="product_color"><a href="#">{{this.product.color}}</a></td>
+    <td class="product_size"><a href="#">{{this.product.size}}</a></td>
     <td class="product-price">£ {{this.product.price}}</td>
     <td class="product_quantity"><label>Quantity</label> <input  :value="this.product.qty" type="number"></td>
     <td class="product_total">£ {{parseInt(this.product.price)*parseInt(this.product.qty)}}</td>
@@ -340,22 +345,30 @@ Vue.component('productbigimage', {
 Vue.component('imagescolumn', {
     data:function(){
         return {
-            thumbs:this.images.thumb,
-            big:this.images.big
+            thumbs:this.images,
+            big:this.bigImage
         }
     },
     mounted() {
         axios
             .get('/api/get-images/?product=' + this.variant[Object.keys(this.variant)[0]][0].product_id+"&color="+Object.keys(this.variant)[0])
             .then(response => (this.thumbs = response.data.images
-            )).then(images => this.big = images[0].image);
+            )).then(images => this.big = images[0]?images[0].image:null);
     },
     methods:{
         showBig(image){
             this.big = image;
         }
     },
-    props: ['images', 'variant', 'product'],
+    watch: {
+        images: function (newVal, oldVal) { // watch it
+            this.thumbs = newVal;
+        },
+        bigImage: function (newVal, oldVal) { // watch it
+            this.big = newVal;
+        }
+    },
+    props: ['images','bigImage', 'variant'],
     template: `
     <div class="col-lg-6 col-md-6">
         <div class="product-details-tab">
@@ -390,16 +403,16 @@ Vue.component('product_options', {
 
 Vue.component('colors_variant', {
     props: ['colors', 'variants'],
-    methods: {
-        selected: function (index) {
-            this.$emit('color-selected', index);
-            this.colorName = this.variants[index][0].color.name
-        }
-    },
     data: function () {
         return {
             imageUrl: "/front/assets/img/color/",
             colorName: null,
+        }
+    },
+    methods: {
+        selected: function (index) {
+            this.$emit('color-selected', index);
+            this.colorName = this.variants[index][0].color.name
         }
     },
     template: `
@@ -407,9 +420,9 @@ Vue.component('colors_variant', {
     <h4 v-if="!colorName">Select Color</h4>
     <ul>
         <li v-for="(color,index) in variants"  :key="index" class="color1">
-            <button data-toggle="tooltip" :title="color[0].color.name" @click.prevent="selected(index)">
-            <img  loading="lazy" width="20px" :src="imageUrl + color[0].color.image">
-            </button>
+        <div :style="'background:'+color[0].color.code" class="ml-2 btn btn-sm" data-toggle="tooltip" :title="color[0].color.name" @click.prevent="selected(index)">
+        <div style="height:20px;width:20px;"></div> 
+        </div>
         </li>
     </ul>
     <p v-if="colorName" style="font-weight:.5em">Selected color: {{this.colorName}}
@@ -591,6 +604,7 @@ Vue.component('product_info', {
         selectColor: function (id) {
             console.log("Color selected in child VariantID:" + id);
             this.selected.color = id;
+            this.$emit('colorChanged', id);
             this.selected.variant = null;
         },
         selectVariant: function (id) {
@@ -664,6 +678,8 @@ Vue.component('product_details', {
     data: function () {
         return {
             variant: null,
+            thumbs:null,
+            big:null
         }
 
     },
@@ -673,11 +689,19 @@ Vue.component('product_details', {
             .then(response => (this.variant = response.data
             ));
     },
+    methods:{
+        requestNewImages(color){
+            axios
+            .get('/api/get-images/?product=' + this.product.id+"&color="+color)
+            .then(response => (this.thumbs = response.data.images
+            )).then(images => this.big = images[0].image);
+        }
+    },
     template: `
     <div class="product_details">
         <div class="row">
-            <imagescolumn v-if="this.variant" :images="images" :variant="this.variant" :product="product.id"></imagescolumn>
-            <product_info v-if="this.variant" :variants="this.variant" :product="product"> </product_info>
+            <imagescolumn v-if="this.variant" :images="this.thumbs" :bigImage="this.big" :variant="this.variant" ></imagescolumn>
+            <product_info @colorChanged="requestNewImages" v-if="this.variant" :variants="this.variant" :product="product"> </product_info>
         </div>
     </div>  
     `

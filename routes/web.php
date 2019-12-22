@@ -41,6 +41,7 @@ Route::get('/singleProduct/{id}', 'Front\PagesController@singleProduct');
 Route::get('/get_product/{id}', 'Front\PagesController@get_product');
 Route::get('/get_variant/{id}', 'Front\PagesController@get_variant');
 
+
 Route::get('/pages/{slug}', 'Front\PagesController@pages');
 
 

@@ -8,6 +8,7 @@ use App\Models\Front\UI;
 use App\Page;
 use App\ProductTags;
 use App\Product;
+use App\ProductImages;
 use App\ProductVariant;
 use App\Category;
 use App\SubCategory;
@@ -15,6 +16,8 @@ use App\SubSubCategory;
 use App\Color;
 use App\Size;
 use App\Brand;
+use Illuminate\Http\Request;
+use Session;
 
 
 class PagesController extends FrontController
@@ -95,11 +98,12 @@ class PagesController extends FrontController
         echo json_encode($product);
     }
 
+   
 
     public function cart()
     {
         $carts = \Session::get('cart');
-            // dd($carts);
+        
         if(!$carts){
             return redirect('/');
         }
