@@ -87,8 +87,8 @@ class ProductController extends Controller
            'sub_category'  => 'required',
            'sub_sub_category'  => 'required'
         ]);
-        
-        // dd($request);
+    
+
     // saving product
         $product = new Product();
         $product->name = $request->name;
@@ -155,24 +155,41 @@ class ProductController extends Controller
                 $variant->save();
 
             // saving product image for that variant
-
                 //cheacking if image folder is there
-                $imagePath = "uploads/product";
+                $imagePath = "front/assets/.uploads/products";
                 if(!file_exists($imagePath)){
                     mkdir($imagePath,0777,true);
                 };
 
-                // Uploading to server
-                $imageName = "pimage".time().'-'.uniqid();
-                $images[$key]->move($imagePath, $imageName);
-       
-                // saving to database
-                $image = new ProductImages;
-                $image->product_id = $product->id;
-                $image->variant_id =  $variant->id;
-                $image->image = $imageName;
-                $image->timestamps = false;
-                $image->save();
+                // first level array size will be the same as COLORS
+                // and first level keys will be same as COLORS,Size and Quantities
+                // So foreach COLORS we get $image(s)
+                foreach($images as $image):
+                    // each color got these images
+                    foreach($image as $img):
+                         // Uploading to server
+                        $imageName = "pimg".'-'.time().'-'.uniqid().'.'.$img->getClientOriginalExtension();
+                        
+                        try {
+                            if(!$img->move(public_path($imagePath), $imageName))
+                            throw new Exception('Not saved');
+                        } catch (FileException $e) {
+                            echo 'Not saved image'.var_dump($img);
+                        }
+                        
+                        
+                        // saving to database
+                        $im = new ProductImages;
+                        $im->product_id = $product->id;
+                        // it will be the color id 
+                        $im->variant_id =  $colors[$key];
+                        $im->image = $imageName;
+                        $im->timestamps = false;
+                        $im->save();
+
+                    endforeach;
+                endforeach;
+
 
                 // managing product storage
                 $storage = new ProductStorage;

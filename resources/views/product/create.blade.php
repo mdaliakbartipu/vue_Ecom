@@ -254,7 +254,7 @@
                                         </td>
                                         <td>
                                             <div class="col-xs-12 col-sm-12">
-                                                <input multiple="" type="file" id="id-input-file-3" name="image[]" />
+                                                <input multiple="" type="file" id="id-input-file-3" name="image[0][]" />
                                             </div>
                                         </td>
                                     </tr>
@@ -296,7 +296,7 @@
 
 
 <script type="text/javascript">
-    let rowIndex = 1;
+    var rowIndex = 1;
     //  will start by naming name from adding 2 as postfix
 
 
@@ -320,7 +320,7 @@
                <input type="text" class="form-control" placeholder="Product Quantity" name="quantity[]" /> 
           </div > </td>
       <td> <div class="col-xs-12 col-sm-12">
-                 <input multiple="" type="file" id="id-input-file-3" name="image[]" />
+                 <input multiple="" type="file" id="id-input-file-3" name="image[${rowIndex++}][]" />
      </div> </td>
      <td>
      <a href="#" type="submit" class="btn btn-danger delete"> X
