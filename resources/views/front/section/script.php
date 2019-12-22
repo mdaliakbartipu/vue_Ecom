@@ -1,6 +1,6 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>    
-    <script src="<?=ASSETS?>/js/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
     <script src="<?=ASSETS?>/js/axios.min.js"></script>
     <script src="<?=ASSETS?>/js/shamsvue.js"></script>
 

@@ -373,9 +373,9 @@ Vue.component('imagescolumn', {
     <div class="col-lg-6 col-md-6">
         <div class="product-details-tab">
             <div class="row">
-            
+            <transition name="fade">
                 <productthubslist @changeBig="showBig" v-if="this.thumbs" :thumbimages="this.thumbs"></productthubslist>
-            
+                </transition>
                 <productbigimage v-if="this.big"                             
                     idtext="zoom1" 
                     :src = "this.big"
@@ -651,6 +651,7 @@ Vue.component('product_info', {
     <div class="col-lg-6 col-md-6">
         <div class="product_d_right">
             <form action="">
+
                 <product_name :name="this.product.name"></product_name>
                 <product_price_notice></product_price_notice>
                 <product_price :price="this.product.price"></product_price>
