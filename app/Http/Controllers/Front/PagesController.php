@@ -26,16 +26,6 @@ class PagesController extends FrontController
 
     public function index()
     {   
-        $productTags = ProductTags::all();
-        $products = array();
-
-        if($productTags):
-            foreach($productTags as $ptag):
-                // dd($ptag);
-                $products[] = Product::find($ptag->product_id);
-            endforeach;
-        endif;
-            
         return view('front.index',
         [   
             'sliders'              => UI::getAll(),
@@ -43,7 +33,7 @@ class PagesController extends FrontController
             'promotions'           => UI::getAllPromotions(),
             'blogs'                => UI::getThreeBlogs(),
             'testimonials'         => UI::getTestimonials(),
-            'products'             => $products,
+            
         ]);
     }
 

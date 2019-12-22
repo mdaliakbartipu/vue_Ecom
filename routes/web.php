@@ -110,7 +110,7 @@ Route::get('/api/get-product/{tag}','ProductController@getProductByTag');
 Route::get('/api/get-product-tags','ProductController@getProductTags');
 Route::get('/api/get-cart','ProductController@getCart');
 Route::get('/api/remove-from-cart/{variant}','ProductController@removeFromCart');
-
+Route::get('/api/get-images','ProductController@getImagesByColor');
 Route::post('add-to-cart','ProductController@addToCart');	
 Route::get('add-to-cart','ProductController@addToCart');	
 

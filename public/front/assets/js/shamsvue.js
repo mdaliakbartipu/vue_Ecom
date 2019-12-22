@@ -28,7 +28,7 @@ Vue.component('addvertise', {
     <figure class="single_banner">
         <div class="banner_thumb mb-2 para-one">
                 <a :href="slug">
-                    <img :src="image">
+                    <img loading="lazy" :src="image">
                 </a>
         </div>
     </figure>
@@ -39,8 +39,8 @@ Vue.component('slider-image', {
     props: ['imgleft', 'imgright', 'title', 'subtitle', 'slug', 'discount'],
     template: `
     <li class="slide">
-        <div class="slide-partial slide-left"><img :src="imgleft"/></div>
-        <div class="slide-partial slide-right"><img :src="imgright"></div>
+        <div class="slide-partial slide-left"><img loading="lazy" :src="imgleft"/></div>
+        <div class="slide-partial slide-right"><img loading="lazy" :src="imgright"></div>
         <h3 class="title1 title"><span class="title-text">{{title}}</span></h3><br>
         <h1 class="title"><span class="title-text">{{subtitle}}</span></h1>
         <p class="title3 title "><span class="title-text">discount <b style="color:red;">{{discount}}%</b> off this week </span></p>
@@ -57,7 +57,7 @@ Vue.component('cart_table', {
     data: function () {
         return {
             product: [{
-                image: '/front/assets/img/s-product/this.product.jpg',
+                image: '/front/assets/.uploads/s-product/this.product.jpg',
                 name: "Test product",
                 price: "100",
                 qty: {
@@ -126,7 +126,7 @@ Vue.component('cart_row', {
                 image:this.image,
                 total:100
             },
-            path:"/front/assets/img/product/"
+            path:"/front/assets/.uploads/products/thumbs/"
         }
     },
     props:['name','price','size','variant_id', 'qty','image'],
@@ -159,7 +159,7 @@ Vue.component('cart_row', {
     template:`
     <tr v-if="this.active">
     <td class="product_remove"><a @click.prevent="remove(variant_id)" href="#"><i class="fa fa-trash-o"></i></a></td>
-    <td class="product_thumb"><a href="#"><img :src="this.path+this.product.image" ></a></td>
+    <td class="product_thumb"><a href="#"><img loading="lazy" :src="this.path+this.product.image" ></a></td>
     <td class="product_name"><a href="#">{{this.product.name}}</a></td>
     <td class="product-price">£ {{this.product.price}}</td>
     <td class="product_quantity"><label>Quantity</label> <input  :value="this.product.qty" type="number"></td>
@@ -296,15 +296,24 @@ Vue.component('catproduct', {
 
 
 Vue.component('productthubslist', {
-
+    data:function(){
+        return{
+            path: "/front/assets/.uploads/products/thumbs/",
+        }
+    },
+    methods:{
+        showBig(image){
+            this.$emit('changeBig', image);
+        }
+    },
     props: ['thumbimages'],
     template: `
     <div class=" col-md-2 single-zoom-thumb">
        <ul class="s-tab-zoom" id="gallery_01">
                              
-            <li v-for="thumb in thumbimages">
+            <li  v-for="(thumb,index) in thumbimages" :key="index">
                 <a href="#" class="elevatezoom-gallery">
-                    <img v-bind:src="thumb" alt="zo-th-1">
+                    <img @click="showBig(thumb.image)" loading="lazy" :src="path+thumb.image" alt="zo-th-1">
                 </a>
             </li>
         </ul>
@@ -313,29 +322,51 @@ Vue.component('productthubslist', {
 });
 
 Vue.component('productbigimage', {
-    props: ['idtext', 'srclink', 'datazoom'],
+    data: function(){
+        return {
+            path:"/front/assets/.uploads/products/"
+        }
+    },
+    props: ['idtext', 'src', 'datazoom'],
     template: `
     <div id="img-1" class="col-md-10 zoomWrapper single-zoom">
         <a href="#">
-            <img :id="idtext" :src="srclink"  :data-zoom-image="datazoom" alt="big-1">
+            <img loading="lazy" :id="idtext" :src="path+src"  :data-zoom-image="datazoom" alt="big-1">
         </a>
     </div>
     `
 });
 
 Vue.component('imagescolumn', {
-    props: ['images'],
+    data:function(){
+        return {
+            thumbs:this.images.thumb,
+            big:this.images.big
+        }
+    },
+    mounted() {
+        axios
+            .get('/api/get-images/?product=' + this.variant[Object.keys(this.variant)[0]][0].product_id+"&color="+Object.keys(this.variant)[0])
+            .then(response => (this.thumbs = response.data.images
+            )).then(images => this.big = images[0].image);
+    },
+    methods:{
+        showBig(image){
+            this.big = image;
+        }
+    },
+    props: ['images', 'variant', 'product'],
     template: `
     <div class="col-lg-6 col-md-6">
         <div class="product-details-tab">
             <div class="row">
             
-                <productthubslist :thumbimages="images.thumb"></productthubslist>
+                <productthubslist @changeBig="showBig" v-if="this.thumbs" :thumbimages="this.thumbs"></productthubslist>
             
-                <productbigimage                              
+                <productbigimage v-if="this.big"                             
                     idtext="zoom1" 
-                    :srclink = "images.big"
-                    :datazoom = "images.big"
+                    :src = "this.big"
+                    :datazoom = "this.big"
                 ></productbigimage> 
                 
                 <product_options></product_options>
@@ -377,7 +408,7 @@ Vue.component('colors_variant', {
     <ul>
         <li v-for="(color,index) in variants"  :key="index" class="color1">
             <button data-toggle="tooltip" :title="color[0].color.name" @click.prevent="selected(index)">
-            <img width="20px" :src="imageUrl + color[0].color.image">
+            <img  loading="lazy" width="20px" :src="imageUrl + color[0].color.image">
             </button>
         </li>
     </ul>
@@ -645,7 +676,7 @@ Vue.component('product_details', {
     template: `
     <div class="product_details">
         <div class="row">
-            <imagescolumn :images="images" :variant="this.variant"></imagescolumn>
+            <imagescolumn v-if="this.variant" :images="images" :variant="this.variant" :product="product.id"></imagescolumn>
             <product_info v-if="this.variant" :variants="this.variant" :product="product"> </product_info>
         </div>
     </div>  
@@ -716,7 +747,7 @@ Vue.component('product_article', {
     data: function () {
         return {
             link: "/singleProduct/",
-            src: '/front/assets/img/product/',
+            src: '/front/assets/.uploads/products/thumbs/',
         }
     },
     methods:{
@@ -730,8 +761,8 @@ Vue.component('product_article', {
     <article class="single_product">
     <figure>
         <div class="product_thumb">
-            <a class="primary_img" :href="this.link+this.product.id"><img :src="this.src+this.product.thumb1" alt=""></a>
-            <a class="secondary_img" :href="this.link+this.product.id"><img :src="this.src+this.product.thumb2" alt=""></a>
+            <a class="primary_img" :href="this.link+this.product.id"><img loading="lazy" :src="this.src+this.product.thumb1" alt=""></a>
+            <a class="secondary_img" :href="this.link+this.product.id"><img loading="lazy" :src="this.src+this.product.thumb2" alt=""></a>
             <div class="label_product_left label_product">
                 <span class="label_sale_left">New</span>
             </div>
@@ -760,7 +791,7 @@ Vue.component('product_article', {
                 </div>
                 <div class="countdown_text mb-3">
                    <!-- <a href="">Extra 15% off use:SUNDAY </a>-->
-                    <a href="" class="chng-color">Free shipping at $ {{this.product.free_shipping}}</a>
+                    <a href="" v-if="this.product.free_shipping" class="chng-color">Free shipping at $ {{this.product.free_shipping}}</a>
                 </div>
                <div class="star_icon">
                <i class="fa fa-star" aria-hidden="true"></i>
@@ -797,38 +828,38 @@ Vue.component('modal', {
                                     <div class="tab-content product-details-large">
                                         <div class="tab-pane fade show active" id="tab1" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img :src="'/front/assets/img/product/'+this.product.thumb1" alt=""></a>
+                                                <a href="#"><img loading="lazy" :src="'/front/assets/img/product/'+this.product.thumb1" alt=""></a>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab2" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="<?=ASSETS?>/img/product/productbig3.jpg" alt=""></a>
+                                                <a href="#"><img loading="lazy" src="<?=ASSETS?>/img/product/productbig3.jpg" alt=""></a>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab3" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="<?=ASSETS?>/img/product/productbig4.jpg" alt=""></a>
+                                                <a href="#"><img loading="lazy" src="<?=ASSETS?>/img/product/productbig4.jpg" alt=""></a>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab4" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="<?=ASSETS?>/img/product/productbig5.jpg" alt=""></a>
+                                                <a href="#"><img loading="lazy" src="<?=ASSETS?>/img/product/productbig5.jpg" alt=""></a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal_tab_button">
                                         <ul class="nav product_navactive owl-carousel" role="tablist">
                                             <li>
-                                                <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false"><img src="<?=ASSETS?>/img/product/product1.jpg" alt=""></a>
+                                                <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false"><img loading="lazy" src="<?=ASSETS?>/img/product/product1.jpg" alt=""></a>
                                             </li>
                                             <li>
-                                                <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false"><img src="<?=ASSETS?>/img/product/product6.jpg" alt=""></a>
+                                                <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false"><img loading="lazy" src="<?=ASSETS?>/img/product/product6.jpg" alt=""></a>
                                             </li>
                                             <li>
-                                                <a class="nav-link button_three" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false"><img src="<?=ASSETS?>/img/product/product9.jpg" alt=""></a>
+                                                <a class="nav-link button_three" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false"><img loading="lazy" src="<?=ASSETS?>/img/product/product9.jpg" alt=""></a>
                                             </li>
                                             <li>
-                                                <a class="nav-link" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false"><img src="<?=ASSETS?>/img/product/product14.jpg" alt=""></a>
+                                                <a class="nav-link" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false"><img loading="lazy" src="<?=ASSETS?>/img/product/product14.jpg" alt=""></a>
                                             </li>
 
                                         </ul>
@@ -974,7 +1005,7 @@ Vue.component('related_products', {
             </div>
 
             <section class="customer-logos">
-                    <div v-for="c in this.count" class="" style="width: 241px;"><article class="single_product"><figure><div class="product_thumb"><a href="/singleProduct/21" class="primary_img"><img src="/front/assets/img/product/thumb1.jpg" alt=""></a> <a href="/singleProduct/21" class="secondary_img"><img src="/front/assets/img/product/thumb2.jpg" alt=""></a> <div class="label_product_left label_product"><span class="label_sale_left">New</span></div> <div class="label_product"><span class="label_sale">10%</span></div> <div class="action_links"><ul><li class="wishlist"><a href="wishlist.html" title="" data-original-title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a></li> <li class="compare"><a href="#" title="" data-original-title="Add to Compare"><i class="ion-ios-settings-strong"></i></a></li> <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="" class="inner-search-back" data-original-title="10 colors | quick view"><i class="ion-ios-search-strong"></i></a></li></ul></div></div> <div class="product_content"><div class="product_timing"><div data-countdown="2019-12-31 00:00:00"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">09</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">06</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">14</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">18</div><div class="countdown_title">secs</div></div></div></div></div> <div class="product_content_inner"><h2 class="product_name_brand_name">Club</h2> <h3 class="product_name"><a href="product-countdown.html">Men's Slim Fit Poplin Shart </a></h3> <h4 class="product_name_h4"><a href="">New ArriVal</a></h4> <div class="price_box"><span class="old_price">Reg. $773</span><br> <span class="current_price">Sale $695</span></div> <div class="countdown_text mb-3"><a href="" class="chng-color">Free shipping at $21</a></div> <div class="star_icon"><i aria-hidden="true" class="fa fa-star"></i> <i aria-hidden="true" class="fa fa-star"></i> <i aria-hidden="true" class="fa fa-star"></i> <i aria-hidden="true" class="fa fa-star"></i> <i aria-hidden="true" class="fa fa-star"></i></div></div></div></figure></article></div>  
+                    <div v-for="c in this.count" class="" style="width: 241px;"><article class="single_product"><figure><div class="product_thumb"><a href="/singleProduct/21" class="primary_img"><img loading="lazy" src="/front/assets/img/product/thumb1.jpg" alt=""></a> <a href="/singleProduct/21" class="secondary_img"><img loading="lazy" src="/front/assets/img/product/thumb2.jpg" alt=""></a> <div class="label_product_left label_product"><span class="label_sale_left">New</span></div> <div class="label_product"><span class="label_sale">10%</span></div> <div class="action_links"><ul><li class="wishlist"><a href="wishlist.html" title="" data-original-title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a></li> <li class="compare"><a href="#" title="" data-original-title="Add to Compare"><i class="ion-ios-settings-strong"></i></a></li> <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="" class="inner-search-back" data-original-title="10 colors | quick view"><i class="ion-ios-search-strong"></i></a></li></ul></div></div> <div class="product_content"><div class="product_timing"><div data-countdown="2019-12-31 00:00:00"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">09</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">06</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">14</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">18</div><div class="countdown_title">secs</div></div></div></div></div> <div class="product_content_inner"><h2 class="product_name_brand_name">Club</h2> <h3 class="product_name"><a href="product-countdown.html">Men's Slim Fit Poplin Shart </a></h3> <h4 class="product_name_h4"><a href="">New ArriVal</a></h4> <div class="price_box"><span class="old_price">Reg. $773</span><br> <span class="current_price">Sale $695</span></div> <div class="countdown_text mb-3"><a href="" class="chng-color">Free shipping at $21</a></div> <div class="star_icon"><i aria-hidden="true" class="fa fa-star"></i> <i aria-hidden="true" class="fa fa-star"></i> <i aria-hidden="true" class="fa fa-star"></i> <i aria-hidden="true" class="fa fa-star"></i> <i aria-hidden="true" class="fa fa-star"></i></div></div></div></figure></article></div>  
             </section> 
 
     </section>
@@ -1027,7 +1058,7 @@ Vue.component('company_logo', {
     props: ['logo'],
     template: `
     <div class="logo">
-            <a href="/"><img :src="logo" alt="" style="max-width:120%;"></a>
+            <a href="/"><img loading="lazy" :src="logo" alt="" style="max-width:120%;"></a>
     </div>
     `
 });
@@ -1277,7 +1308,7 @@ Vue.component('miniCart', {
             <div class="mini_cart_wrapper">
                 <a href="javascript:void(0)">
                         <div class="cart_img_page ">
-                        <a href="/cart"><img src="/front/assets/img/logo/cart.png" alt="" /></a>
+                        <a href="/cart"><img loading="lazy" src="/front/assets/img/logo/cart.png" alt="" /></a>
                         </div>
                 </a>
                 <!--mini cart
@@ -1287,7 +1318,7 @@ Vue.component('miniCart', {
                     
                         <div class="cart_item" v-for="product in this.products">
                             <div class="cart_img">
-                                <a href="#"><img :src="this.product.image" alt=""></a>
+                                <a href="#"><img loading="lazy" :src="this.product.image" alt=""></a>
                             </div>
                             <div class="cart_info">
                                 <a href="#">Sit voluptatem rhoncus sem lectus</a>

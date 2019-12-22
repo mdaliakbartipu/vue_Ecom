@@ -1,6 +1,10 @@
 <?php
 
+
 namespace App\Http\Controllers;
+
+use App\Help\Imagelib\ImageResize;
+use App\Help\Imagelib\ImageResizeException;
 
 use App\Category;
 use App\SubCategory;
@@ -16,6 +20,7 @@ use App\Brand;
 use App\ProductImages;
 use App\ProductStorage;
 use App\ProductVariant;
+
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Input;
@@ -137,8 +142,8 @@ class ProductController extends Controller
         $colors     = $request->color;
         $quantities = $request->quantity;
         $images     = $request->image;
-        $quantity   = $request->quantity;
-
+        // Useses for locate first two thumbs
+        $thumbs = array();
         foreach($quantities as $key => $qty){
             if(
                 $qty??null &&
@@ -153,28 +158,40 @@ class ProductController extends Controller
                 $variant->qty        = $qty;
                 $variant->timestamps = false;
                 $variant->save();
-
             // saving product image for that variant
                 //cheacking if image folder is there
                 $imagePath = "front/assets/.uploads/products";
+                $thumbPath = "front/assets/.uploads/products/thumbs";
+
                 if(!file_exists($imagePath)){
                     mkdir($imagePath,0777,true);
                 };
-
+                if(!file_exists($thumbPath)){
+                    mkdir($thumbPath,0777,true);
+                };
                 // first level array size will be the same as COLORS
                 // and first level keys will be same as COLORS,Size and Quantities
-                // So foreach COLORS we get $image(s)
-                    // each color got these images
+                // So foreach COLORS we get $image(s) 
+                    // / each color got these images
                     foreach($images[$key] as $img):
                          // Uploading to server
                         $imageName = "pimg".'-'.time()*rand(10000,99999).'-'.uniqid().'.'.$img->getClientOriginalExtension();
-                        // var_dump($imageName)."<br/>";
                         // continue;
                         try {
                             if(!$img->move(public_path($imagePath), $imageName))
                             throw new \Exception('Not saved');
-                        } catch (\FileException $e) {
+                        } catch (\Exception $e) {
                             echo 'Not saved image'.var_dump($img);
+                        }
+                        $image  = public_path($imagePath).'/'.$imageName;
+                        $thumbImage = public_path($thumbPath).'/'.$imageName;
+                        // converting small images
+                        $thumb = new ImageResize($image);
+                        $thumb->resize(213, 260);
+                        $thumb->save($thumbImage);
+                        // pushing first two thumbs to thumbs array
+                        if(count($thumbs) < 2){
+                            array_push($thumbs, $imageName);
                         }
                         // saving to database
                         $im = new ProductImages;
@@ -185,8 +202,10 @@ class ProductController extends Controller
                         $im->timestamps = false;
                         $im->save();
                     endforeach;
-
-
+                // saving first two thumbs to product table
+                $product->thumb1 = $thumbs[0];
+                $product->thumb2 = $thumbs[1];
+                $product->save();
                 // managing product storage
                 $storage = new ProductStorage;
                 $storage->product_id = $product->id;
@@ -417,7 +436,7 @@ class ProductController extends Controller
    public function getProductByTag( Request $request, $tag)
    {
        $tag = (int)$tag;
-       $productTags = ProductTags::where('tag_id', $tag)->take(5)->get();
+       $productTags = ProductTags::where('tag_id', $tag)->orderBy('id', 'desc')->take(5)->get();
        $products = array();
 
        foreach($productTags as $tag){
@@ -431,6 +450,21 @@ class ProductController extends Controller
        
    }
 
+   public function getImagesByColor(Request $request)
+   {
+    //    $request->validate([
+    //        'product' => 'require',
+    //        'color'   => 'required'
+    //    ]);
+    
+       $images = ProductImages::where('product_id',$request->product)
+                            ->where('variant_id', $request->color)->get();
+        if(!empty($images)):
+            return json_encode(['status'=>200, 'images'=>$images]);
+        else:
+            return json_encode(['status'=>404, 'msg'=> 'No images found']);
+        endif;
+   }
    public function getProductTags()
    {
        $productTags = Tags::where('type', 'product')->get();
