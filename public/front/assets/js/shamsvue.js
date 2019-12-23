@@ -376,13 +376,16 @@ Vue.component('imagescolumn', {
             <transition name="fade">
                 <productthubslist @changeBig="showBig" v-if="this.thumbs" :thumbimages="this.thumbs"></productthubslist>
                 </transition>
+                <transition name="fade">
                 <productbigimage v-if="this.big"                             
                     idtext="zoom1" 
                     :src = "this.big"
                     :datazoom = "this.big"
                 ></productbigimage> 
-                
+                </transition>
+                <transition name="fade">
                 <product_options></product_options>
+                </transition>
                 
             </div>
         </div>
@@ -563,7 +566,9 @@ Vue.component('product_extra_info', {
         <div @click="up" class="plus fa fa-plus-circle"></div>
         <div @click="down" class="minus fa fa-minus-circle"></div>
     </div>
+    <transition name="fade">
     <add_to_cart v-if="this.count > 0" @addToCart="addToCart"></add_to_cart>
+    </transition>
 </div>
     `
     });
@@ -661,12 +666,17 @@ Vue.component('product_info', {
                 ></product_description>
                
                 <colors_variant :variants="variants" @color-selected="selectColor"></colors_variant>
-                
+                <transition name="fade">
                 <size_variant v-if="variants[this.selected.color]"  :sizeVariants="variants[this.selected.color]" @variant-selected="selectVariant"></size_variant>
+                </transition>
                 <br>
+                <transition name="fade">
                 <product_availability v-if="this.selected.variant" :qty="this.selected.variant.qty"></product_availability>
+                </transition>
                 <br/>
+                <transition name="fade">
                 <product_quantity v-if="this.selected.variant"  :variant="this.selected.variant" @setQty="selectQuantity"  @addToCart="addToCart"></product_quantity>
+                </transition>
             </form>
         </div>
     </div>      
@@ -755,13 +765,17 @@ Vue.component('size_variant', {
     <div class="product_size">
     <p style="float:right">SizeTable</p><br>
     <hr>
+    <transition name="fade">
     <h4 v-if="!this.selected.size.name">Select Size</h4>
+    </transition>
     <ul id="product_size">
         <li v-for="(variant, $index) in sizeVariants" :key="$index" class="mr-3">
             <button @click.prevent="selectSize($index)" :title="variant.size.name" class="btn btn-info">{{variant.size.name}}</button>
         </li>
     </ul>
+    <transition name="fade">
     <p v-if="this.selected.size.name" style="color:grey;font-weight:.8em;margin-top:1em">Selected size : {{this.selected.size.name}}
+    </transition>
     </p>
 </div>
     `
