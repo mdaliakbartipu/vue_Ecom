@@ -321,6 +321,7 @@
         event.preventDefault();
         alert("Image deletion not yet implemented");
     });
+    
     $("#addrows").click(function() {
         event.preventDefault();
         console.log(rowIndex);
