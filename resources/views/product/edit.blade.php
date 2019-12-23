@@ -228,57 +228,59 @@
                     </div>
 
 
-                    <!-- <div class="card-body"> -->
-                    <!-- <div class="table-responsive"> -->
-                    <!-- <table id="table" class="table" style="width:100%">
-                      <thead class=" text-primary">
-                        <th> Select Color </th>
-                        <th> Select Size </th>
-                        <th> Quantity </th>
-                        <th> Image </th>
-                      </thead>
+                    <h2>Variants</h2>
+                    <div class="" style="width:150%">
+                        <div class="table-responsive">
+                            <table id="table" class="table" style="width:100%">
+                                
+                                <tbody>
 
-                      <tbody>
-                         <tr>
-                             <td >  
-                               
-                                <div class="col-sm-20">
-                                    <select class="chosen-select form-control" id="form-field-select-3"  name="color[]">
-                                      @foreach ($colors as $color)
-                                        <option value="{{ $color->id }}" {{ ($color->id == $product->color)? 'selected':'' }}> {{ $color->name }} </option>
-                                      @endforeach
-                                      </select>
-                                </div> 
-                             </td>
-                            <td> 
-                               
-                                <div class="col-md-20">    
-                                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Size..." name="size[]">
-                                      @foreach($sizes as $size)  
-                                         <option value="{{ $size->id }}" {{ ($size->id == $product->size)?'selected':'' }}> {{ $size->name }} </option>
-                                      @endforeach 
-                                    </select>
-                                </div>
-                             </td>
-                          <td>
-                              <div class="col-sm-9">
-                                    <input type="text" id="form-field-1-1" placeholder="Product quantity" class="form-control" name="quantity[]" value="{{ $product->quantity }}" />
-                                </div>
-                          </td>
-                          <td>
-                              <div class="col-xs-12 col-sm-12">
-                                 <input multiple="" type="file" id="image" name="image[]" />
-                            </div>
-                          </td>
-                         </tr>
-                           
-                    </tbody>
-                 </table> -->
-                    <!-- <a href="#" class="btn btn-info btn-sm col-lg-2 pull-right" id="addrows">
-                            <span class="glyphicon glyphicon-plus"></span> Add 
-                    </a>
-                  </div> -->
-                    <!-- </div> -->
+                                <?php foreach($variants as $variant): ?>
+                                    <tr class="row">
+                                        <td class="col-md-2">
+                                            <div>
+                                                <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Color..." name="color[]">
+                                                    @foreach ($colors as $color)
+                                                    <option value="{{ $color->id }}" {{$color->id==$variant->color_id?'selected':''}}>{{ $color->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="col-md-2">
+                                            <div >
+                                                <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Size..." name="size[]">
+                                                    @foreach($sizes as $size)
+                                                    <option value="{{ $size->id }}" {{$size->id==$variant->size_id?'selected':''}}>{{ $size->name }} </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="col-md-2">
+                                            <div>
+                                                <input type="text" id="form-field-1-1" placeholder="Product quantity" class="form-control" name="quantity[]" value="{{$variant->qty}}"/>
+                                            </div>
+                                        </td>
+                                        <td class="col-md-6">
+                                            <img height="40px" width="40px" src="http://127.0.0.1:8000/front/assets/.uploads/products/thumbs/thumb2.jpg" alt=""> <button class="btn btn-sm btn-danger">*</button>
+                                            <img height="40px" width="40px" src="http://127.0.0.1:8000/front/assets/.uploads/products/thumbs/thumb2.jpg" alt=""> <button class="btn btn-sm btn-danger">*</button>
+                                            <img height="40px" width="40px" src="http://127.0.0.1:8000/front/assets/.uploads/products/thumbs/thumb2.jpg" alt=""> <button class="btn btn-sm btn-danger">*</button>
+                                            <img height="40px" width="40px" src="http://127.0.0.1:8000/front/assets/.uploads/products/thumbs/thumb2.jpg" alt=""> <button class="btn btn-sm btn-danger">*</button>
+                                            <img height="40px" width="40px" src="http://127.0.0.1:8000/front/assets/.uploads/products/thumbs/thumb2.jpg" alt=""> <button class="btn btn-sm btn-danger">*</button>
+                                            <div style="margin-top:1em">
+                                                <input multiple="" type="file" id="id-input-file-3" name="image[0][]" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                    
+
+                                </tbody>
+                            </table>
+                            <a href="" class="btn btn-info btn-sm col-lg-2 pull-right" id="addrows">
+                                <span class="glyphicon glyphicon-plus"></span> Add
+                            </a>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"></label>
@@ -286,8 +288,7 @@
                         <div class="col-xs-12 col-sm-6">
 
                             <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> Save</button>
-                            <button class="btn btn-gray" type="Reset"> <i class="fa fa-refresh"></i> Reset</button>
-                            <a href="" class="btn btn-info"> <i class="fa fa-list"></i> List</a>
+                            <a href="" class="btn btn-info"> <i class="fa fa-list"></i> Edit Variants </a>
 
                         </div>
 

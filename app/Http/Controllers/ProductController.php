@@ -254,13 +254,14 @@ class ProductController extends Controller
         $leglenghts = $attributes->where('leg_length',1);
         $fits = $attributes->where('fit',1);
         $tags = Tags::forProduct();
-        $variant  = ProductVariant::where('product_id', $product->id)->get();
-        // dd($variant);
+        $variants  = ProductVariant::where('product_id', $product->id)->get();
+        // dd($variants);
+        // foreach()
 
 
         $productTags = ProductTags::where('product_id', $product->id)->get();
 
-        return view('product.edit',compact('product','categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits', 'tags', 'productTags', 'brand','productAttributes'));
+        return view('product.edit',compact('variants','product','categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits', 'tags', 'productTags', 'brand','productAttributes'));
     }
 
     /**
