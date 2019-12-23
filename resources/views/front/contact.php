@@ -10,7 +10,9 @@
      <?php include("section/header.php");?>
     </div>
 
-    <contact-us></contact-us>
+    <contact-us>
+        <contact-form token="<?=csrf_token()?>"></contact-form>
+    </contact-us>
     <!--footer area start-->
     <?php include("section/footer.php");?>
     <!--footer area end-->

@@ -1130,7 +1130,7 @@ mounted(){
                         <contact-info :info="this.company"></contact-info>
                     </div>
                     <div class="col-lg-6 col-md-12">
-                        <contact-form></contact-form>
+                        <slot></slot>
                     </div>
                 </div>
             </div>
@@ -1173,24 +1173,56 @@ Vue.component('contact-info', {
 });
 
 Vue.component('contact-form', {
+    props:['token'],
+    data: function(){
+        return {
+            name:null,
+            email:null,
+            subject:null,
+            message:null,
+        }
+    },
+    methods:{
+        sendMe(){
+            if(!this.name ||!this.name ||!this.name||!this.name ){
+                swal("Please Fill all the fields");
+            } else{
+                swal("Please wait...");
+                axios
+                .post('/api/submit-form', {
+                    name: this.name,
+                    email: this.email,
+                    subject: this.subject,
+                    message: this.message,
+                    _token:this.token,
+                  })
+                  .then(function (response) {
+                    console.log(response.data);
+                    swal("Thank you for your feedback!");
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                    swal("Sorry! Something went wrong!");
+                  });
+        
+            }
+        }
+    },
     template: `
     <div class="contact_message form">
-                            <h3>Tell us your choose</h3>
-                            <form id="contact-form" method="POST" action="https://demo.hasthemes.com/antomi-preview/antomi/assets/mail.php">
-                             
-                                    <input name="name" placeholder="Name *" type="text">
-                              
-                                    <input name="email" placeholder="Email *" type="email">
-
-                                    <input name="subject" placeholder="Subject *" type="text">
-                                
-                                <div class="contact_textarea">
-                                    <textarea placeholder="Message *" name="message" class="form-control2"></textarea>
-                                </div>
-                                <button type="submit"> Send</button>
-                                <p class="form-messege"></p>
-                            </form>
-                        </div>
+        <h3>Tell us your choose</h3>
+        <form id="contact-form" method="POST" action="/">
+                <input v-model="name" name="name" placeholder="Name *" type="text" required>
+                <input v-model="email" name="email" type="email" placeholder="Email *" required>
+                <input v-model="subject" name="subject" placeholder="Subject *" type="text" required >
+                <div class="contact_textarea">
+                <textarea v-model="message" placeholder="Message *" name="message" class="form-control2" required ></textarea>
+                <input type="hidden" name="_token" :value="token">
+            </div>
+            <button type="submit" @click.prevent="sendMe"> Send</button>
+            <p class="form-messege"></p>
+        </form>
+    </div>
     `
 });
 
