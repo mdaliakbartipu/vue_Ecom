@@ -142,7 +142,7 @@ class ProductController extends Controller
         $colors     = $request->color;
         $quantities = $request->quantity;
         $images     = $request->image;
-        dd($request->all());
+        // dd($request->all());
         // Useses for locate first two thumbs
         $thumbs = array();
         foreach($quantities as $key => $qty){
@@ -254,8 +254,15 @@ class ProductController extends Controller
         $leglenghts = $attributes->where('leg_length',1);
         $fits = $attributes->where('fit',1);
         $tags = Tags::forProduct();
-        $variants  = ProductVariant::where('product_id', $product->id)->get();
-        // dd($variants);
+        phpinfo();
+        $images = ProductImages::where('product_id', $product->id)->get()->groupBy('variant_id');
+        dd($images);
+        $variants  = ProductVariant::where('product_id', $product->id)->get()->groupBy('color_id');
+        foreach($variants as $variant){
+            foreach($variant as $item){
+                dd($item->color_id);
+            }
+        }
         // foreach()
 
 

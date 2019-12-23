@@ -107,7 +107,13 @@ class PagesController extends FrontController
     public function cart()
     {
         $carts = \Session::get('cart');
-        
+        foreach($carts as &$item){
+            // dd($item);
+            $imageInfo = ProductImages::where('variant_id',$item['color_id'])->first();
+            if($imageInfo){
+                $item['image'] = $imageInfo->image;
+            }
+        }
         if(!$carts){
             return redirect('/');
         }

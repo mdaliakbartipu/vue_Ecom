@@ -627,7 +627,7 @@ Vue.component('product_info', {
                     size:this.selected.variant.size.name,
                     variant_id: this.selected.variant.id,
                     qty: this.selected.qty,
-                    image: this.product.thumb1,
+                    color_id: this.selected.variant.color_id
     
                 }
             })
