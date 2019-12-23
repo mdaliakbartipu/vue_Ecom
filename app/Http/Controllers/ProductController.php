@@ -109,39 +109,44 @@ class ProductController extends Controller
 
 
     //Saving Attributes
+    if($request->sleeve):
         foreach($request->sleeve as $sleeve){
             ProductAttribute::create([
                 'product_id' => $product->id,
                 'attribute_id' => (int)$sleeve
             ]);
         }
-
+    endif;
+    if($request->fit):
         foreach($request->fit as $item){
             ProductAttribute::create([
                 'product_id' => $product->id,
                 'attribute_id' => (int)$item
             ]);
         }
-
+    endif;
+    if($request->leglength):
         foreach($request->leglength as $item){
             ProductAttribute::create([
                 'product_id' => $product->id,
                 'attribute_id' => (int)$item
             ]);
         }
-
+    endif;
+    if($request->tags):
     // Saving Tags
         $tags = $request->tags;
         $save = ProductTags::saveTags($tags, $product->id);
         if(!$save): 
             return redirect()->back()->with('error','Product tags not saved correctly');
         endif;
-
+    endif;
     // saving product variant
         $sizes      = $request->size;
         $colors     = $request->color;
         $quantities = $request->quantity;
         $images     = $request->image;
+        // dd($request->all());
         // Useses for locate first two thumbs
         $thumbs = array();
         foreach($quantities as $key => $qty){
@@ -253,13 +258,14 @@ class ProductController extends Controller
         $leglenghts = $attributes->where('leg_length',1);
         $fits = $attributes->where('fit',1);
         $tags = Tags::forProduct();
-        $variant  = ProductVariant::where('product_id', $product->id)->get();
-        // dd($variant);
-
-
+        // phpinfo();
+        $images = ProductImages::where('product_id', $product->id)->get()->groupBy('variant_id');
+        // dd($images);
+        $variants  = ProductVariant::where('product_id', $product->id)->get()->groupBy('color_id');
         $productTags = ProductTags::where('product_id', $product->id)->get();
+        // dd("ssd");
 
-        return view('product.edit',compact('product','categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits', 'tags', 'productTags', 'brand','productAttributes'));
+        return view('product.edit',compact('images','variants','product','categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits', 'tags', 'productTags', 'brand','productAttributes'));
     }
 
     /**
@@ -441,7 +447,13 @@ class ProductController extends Controller
 
        foreach($productTags as $tag){
         //    dd($tag->product_id);
-           array_push($products, Product::find($tag->product_id));
+        $pro = Product::where('id',$tag->product_id)->first();
+        if($pro->brandName()){
+            $pro->brand = $pro->brandName()->name;
+        } else {
+            $pro->brand = 'Classified';
+        }
+           array_push($products, $pro);
        }
 
        

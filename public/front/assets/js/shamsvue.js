@@ -82,7 +82,7 @@ Vue.component('cart_table', {
 
         }
     },
-    props:['items'],
+    props: ['items'],
     template: `
     <div class="row">
     <div class="col-12">
@@ -116,50 +116,50 @@ Vue.component('cart_table', {
 })
 
 Vue.component('cart_row', {
-    data: function(){
+    data: function () {
         return {
-            active:true,
-            product:{
-                name:this.name,
-                price:this.price,
-                size:this.size,
-                color:this.color,
-                variantID:this.variant_id,
-                qty:this.qty,
-                image:this.image,
-                total:100
+            active: true,
+            product: {
+                name: this.name,
+                price: this.price,
+                size: this.size,
+                color: this.color,
+                variantID: this.variant_id,
+                qty: this.qty,
+                image: this.image,
+                total: 100
             },
-            path:"/front/assets/.uploads/products/thumbs/"
+            path: "/front/assets/.uploads/products/thumbs/"
         }
     },
-    props:['name','price','size','color','variant_id', 'qty','image'],
-    methods:{
-        remove: function(variant){
-    
+    props: ['name', 'price', 'size', 'color', 'variant_id', 'qty', 'image'],
+    methods: {
+        remove: function (variant) {
+
             swal({
                 title: "Are you sure?",
-                
+
                 icon: "info",
                 buttons: true,
                 dangerMode: true,
-              })
-              .then((willDelete) => {
-                if (willDelete) {
-                  swal("Okey! Your cart item has been deleted!", {
-                    icon: "success",
-                  });
-                  axios
-            .get('/api/remove-from-cart/'+variant)
-            .then(response =>  response.data).then(data =>(data.response!=200)).then(status=>this.active = status);
-                  console.log(variant);
-                } else {
-                  swal("Have a nice day sir!");
-                }
-              });
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Okey! Your cart item has been deleted!", {
+                            icon: "success",
+                        });
+                        axios
+                            .get('/api/remove-from-cart/' + variant)
+                            .then(response => response.data).then(data => (data.response != 200)).then(status => this.active = status);
+                        console.log(variant);
+                    } else {
+                        swal("Have a nice day sir!");
+                    }
+                });
 
         }
     },
-    template:`
+    template: `
     <tr v-if="this.active">
     <td class="product_remove"><a @click.prevent="remove(variant_id)" href="#"><i class="fa fa-trash-o"></i></a></td>
     <td class="product_thumb"><a href="#"><img loading="lazy" :src="this.path+this.product.image" ></a></td>
@@ -192,15 +192,15 @@ Vue.component('cart_total', {
     data: function () {
         return {
             message: "",
-            subtotal:0,
-            shipping:0,
-            total:0
+            subtotal: 0,
+            shipping: 0,
+            total: 0
         }
     },
-    mounted:function(){
+    mounted: function () {
         axios
             .get('/api/get-cart')
-            .then(response =>  response.data).then(data =>((this.subtotal=data.sub)&&(this.shipping=data.shipping))).then(console.log(this.subtotal));
+            .then(response => response.data).then(data => ((this.subtotal = data.sub) && (this.shipping = data.shipping))).then(console.log(this.subtotal));
     },
     template: `
     <div class="coupon_code right">
@@ -301,13 +301,13 @@ Vue.component('catproduct', {
 
 
 Vue.component('productthubslist', {
-    data:function(){
-        return{
+    data: function () {
+        return {
             path: "/front/assets/.uploads/products/thumbs/",
         }
     },
-    methods:{
-        showBig(image){
+    methods: {
+        showBig(image) {
             this.$emit('changeBig', image);
         }
     },
@@ -327,9 +327,9 @@ Vue.component('productthubslist', {
 });
 
 Vue.component('productbigimage', {
-    data: function(){
+    data: function () {
         return {
-            path:"/front/assets/.uploads/products/"
+            path: "/front/assets/.uploads/products/"
         }
     },
     props: ['idtext', 'src', 'datazoom'],
@@ -343,20 +343,20 @@ Vue.component('productbigimage', {
 });
 
 Vue.component('imagescolumn', {
-    data:function(){
+    data: function () {
         return {
-            thumbs:this.images,
-            big:this.bigImage
+            thumbs: this.images,
+            big: this.bigImage
         }
     },
     mounted() {
         axios
-            .get('/api/get-images/?product=' + this.variant[Object.keys(this.variant)[0]][0].product_id+"&color="+Object.keys(this.variant)[0])
+            .get('/api/get-images/?product=' + this.variant[Object.keys(this.variant)[0]][0].product_id + "&color=" + Object.keys(this.variant)[0])
             .then(response => (this.thumbs = response.data.images
-            )).then(images => this.big = images[0]?images[0].image:null);
+            )).then(images => this.big = images[0] ? images[0].image : null);
     },
-    methods:{
-        showBig(image){
+    methods: {
+        showBig(image) {
             this.big = image;
         }
     },
@@ -368,7 +368,7 @@ Vue.component('imagescolumn', {
             this.big = newVal;
         }
     },
-    props: ['images','bigImage', 'variant'],
+    props: ['images', 'bigImage', 'variant'],
     template: `
     <div class="col-lg-6 col-md-6">
         <div class="product-details-tab">
@@ -625,15 +625,15 @@ Vue.component('product_info', {
             this.cart.push({ variant: this.selected.variant.id, qty: this.selected.qty });
 
             axios.post('/add-to-cart', {
-                product:{
+                product: {
                     name: this.product.name,
-                    price:this.product.price,
-                    color:this.selected.variant.color.name,
-                    size:this.selected.variant.size.name,
+                    price: this.product.price,
+                    color: this.selected.variant.color.name,
+                    size: this.selected.variant.size.name,
                     variant_id: this.selected.variant.id,
                     qty: this.selected.qty,
-                    image: this.product.thumb1,
-    
+                    color_id: this.selected.variant.color_id
+
                 }
             })
                 .then(function (response) {
@@ -689,8 +689,8 @@ Vue.component('product_details', {
     data: function () {
         return {
             variant: null,
-            thumbs:null,
-            big:null
+            thumbs: null,
+            big: null
         }
 
     },
@@ -700,12 +700,12 @@ Vue.component('product_details', {
             .then(response => (this.variant = response.data
             ));
     },
-    methods:{
-        requestNewImages(color){
+    methods: {
+        requestNewImages(color) {
             axios
-            .get('/api/get-images/?product=' + this.product.id+"&color="+color)
-            .then(response => (this.thumbs = response.data.images
-            )).then(images => this.big = images[0].image);
+                .get('/api/get-images/?product=' + this.product.id + "&color=" + color)
+                .then(response => (this.thumbs = response.data.images
+                )).then(images => this.big = images[0].image);
         }
     },
     template: `
@@ -789,10 +789,10 @@ Vue.component('product_article', {
             src: '/front/assets/.uploads/products/thumbs/',
         }
     },
-    methods:{
-        loadModal(index){
+    methods: {
+        loadModal(index) {
             this.$emit('loadModal', index);
-            console.log("modal clicked"+ index);
+            console.log("modal clicked" + index);
         }
     },
     props: ['product', 'tab'],
@@ -821,7 +821,7 @@ Vue.component('product_article', {
                     <div :data-countdown="this.product.discount_till"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">2</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">30</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
                 </div>
             <div class="product_content_inner">
-                <h2 class="product_name_brand_name">{{product.brand}}</h2>
+                <h2 class="product_name_brand_name">{{this.product.brand}}</h2>
                 <h3 class="product_name"><a :href="this.link+this.product.id">{{this.product.name}}</a></h3>
                 <h4 class="product_name_h4"><a href="#">{{tab.name}}</a></h4>
                 <div class="price_box">
@@ -850,7 +850,7 @@ Vue.component('product_article', {
 
 Vue.component('modal', {
 
-    props:['product'],
+    props: ['product'],
 
     template: `
     <div  class="modal fade show" id="modal_box" tabindex="-1" role="dialog"  style="display:block">
@@ -995,8 +995,8 @@ Vue.component('tab_products', {
                 .then(response => ((response.status == 200) ? (this.tabProducts = response.data) && (this.count = 2) : null));
         }
     },
-    methods:{
-        loadModal(product){
+    methods: {
+        loadModal(product) {
             this.$emit('modal', product);
             // this.$emit('color-selected', index);
             console.log("emited to tab_product" + product);
@@ -1090,6 +1090,179 @@ Vue.component('top_nav_bar', {
         </ul>
     </nav>
     `
+});
+
+Vue.component('contact-us', {
+
+    data: function () {
+        return {
+            company: {
+                address: "9 Revere Drive, Maple Shade, New Jersey 08052, USA.",
+                phone1: "133323",
+                phone2: null,
+                fax: "123233",
+                email: "adas@sfdf.com",
+                socials: {
+                    facebook: "asdsds",
+                    twitter: "asdsdd",
+                    instagram: "adsdsad",
+                    linkedin: "adssd"
+                },
+                map: null,
+            }
+        }
+    },
+    mounted() {
+        axios
+            .get('/api/get-contact-info')
+            .then(response => (info = (response.status == 200) ? response.data : response.msg)).
+            then(info => ((this.company.email = info.data.email) &&
+                (this.company.phone1 = info.data.phone1) &&
+                (this.company.phone2 = info.data.phone2) &&
+                (this.company.address = info.data.address) &&
+                (this.company.socials.facebook = info.data.facebook) &&
+                (this.company.socials.twitter = info.data.twitter) &&
+                (this.company.socials.instagram = info.data.instagram) &&
+                (this.company.socials.linkedin = info.data.linkedin) &&
+                (this.company.map = info.data.map)
+            ));
+    },
+    template: `
+    <div class="">
+         <div class="contact_page_bg">
+        <!--contact map start-->
+        <div class="contact_map">
+        <transition name="fade">
+            <div v-if="this.company.map" v-html="this.company.map" class="map-area"></div>
+        </transition>
+        </div>
+        <!--contact map end-->
+        <div class="container">
+            <!--contact area start-->
+            <div class="contact_area">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <contact-info :info="this.company"></contact-info>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <slot></slot>
+                    </div>
+                </div>
+            </div>
+            <!--contact area end-->
+        </div>
+    </div>  </div>
+    `
+});
+
+Vue.component('contact-info', {
+    props: ['info'],
+    data: function () {
+        return {
+            company: this.info,
+            style: 'background:grey;color:white;font-size:1.4em;border-radius:5px;padding:5px'
+        }
+    },
+    template: `
+    <div class="contact_message content">
+        <h3>contact us</h3>
+        <ul>
+            <li v-if="this.company.address"><i class="fa fa-fax"></i>{{this.company.address}}</li>
+            <li v-if="this.company.phone1"><i class="fa fa-phone"></i>{{this.company.phone1}}</li>
+            <li v-if="this.company.phone2"><i class="fa fa-phone"></i>{{this.company.phone2}}</li>
+            <li v-if="this.company.fax"><i class="fa fa-fax"></i>{{this.company.fax}}</li>
+            <li v-if="this.company.email" ><i class="fa fa-envelope-o"></i> <a href="#">{{this.company.email}}</a></li>
+            <li v-if="this.company.socials">
+            <a :style="this.style" target="_blank" :href="this.company.socials.facebook" class="facebook">
+                <i class="fa fa-facebook" style=""></i></a>
+            <a :style="this.style" target="_blank" :href="this.company.socials.twitter" class="twitter">
+                <i class="fa fa-twitter"></i></a>
+            <a :style="this.style" target="_blank" :href="this.company.socials.instagram" class="instagram">
+                <i class="fa fa-instagram"></i></a>
+            <a :style="this.style" target="_blank" :href="this.company.socials.linkedin" class="linkedin">
+            <i class="fa fa-linkedin"></i></a>
+            </li>
+        </ul>
+    </div>
+    `
+});
+
+Vue.component('contact-form', {
+    props: ['token'],
+    data: function () {
+        return {
+            name: null,
+            email: null,
+            subject: null,
+            message: null,
+        }
+    },
+    methods: {
+        sendMe() {
+            if (!this.name || !this.name || !this.name || !this.name) {
+                swal("Please Fill all the fields");
+            } else {
+                swal("Your message is sending.Please wait...");
+                axios
+                    .post('/api/submit-form', {
+                        name: this.name,
+                        email: this.email,
+                        subject: this.subject,
+                        message: this.message,
+                        _token: this.token,
+                    })
+                    .then(function (response) {
+                        console.log(response.data);
+                        swal("Thank you for your feedback!");
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        swal("Sorry! Something went wrong!");
+                    });
+
+            }
+        }
+    },
+    template: `
+    <div class="contact_message form">
+        <h3>Tell us your choose</h3>
+        <form id="contact-form" method="POST" action="/">
+                <input v-model="name" name="name" placeholder="Name *" type="text" required>
+                <input v-model="email" name="email" type="email" placeholder="Email *" required>
+                <input v-model="subject" name="subject" placeholder="Subject *" type="text" required >
+                <div class="contact_textarea">
+                <textarea v-model="message" placeholder="Message *" name="message" class="form-control2" required ></textarea>
+                <input type="hidden" name="_token" :value="token">
+            </div>
+            <button type="submit" @click.prevent="sendMe"> Send</button>
+            <p class="form-messege"></p>
+        </form>
+    </div>
+    `
+});
+
+
+
+Vue.component('instagram', {
+    template: `
+        <div class="widgets_container">
+        <h3>Instagram</h3>
+        <div class="footer_contact">
+            <div class="footer_contact_inner">
+                <div class="contact_icone text-left mr-4">
+                    <div class="EmbedBrokenMedia">
+                    <a href=""><img src="/front/assets/img/about/testimonial1.jpg" alt=""></a>
+                    <a href=""><img src="/front/assets/img/about/testimonial2.jpg" alt=""></a>
+                    <a href=""><img src="/front/assets/img/about/testimonial3.jpg" alt=""></a>
+                    <a href=""><img src="/front/assets/img/about/testimonial1.jpg" alt=""></a>
+                    <a href=""><img src="/front/assets/img/about/testimonial2.jpg" alt=""></a>
+                    <a href=""><img src="/front/assets/img/about/testimonial3.jpg" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+`
 });
 
 
@@ -1335,7 +1508,7 @@ Vue.component('miniCart', {
             return t;
         }
     },
-    props:['count'],
+    props: ['count'],
 
     template: `
     <div class="header_configure_area">
@@ -1412,7 +1585,7 @@ new Vue({
             tab: '',
             tabProducts: ''
         },
-        product:null,
+        product: null,
         qty: 1,
         product: {
             qty: 5,
@@ -1452,7 +1625,7 @@ new Vue({
             console.log(tab);
             this.selected.tab = tab;
         },
-        loadModal(product){
+        loadModal(product) {
             console.log("emited to parent" + product);
             this.product = product;
         }

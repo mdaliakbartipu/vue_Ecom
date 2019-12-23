@@ -26,7 +26,7 @@ class ProductsTableSeeder extends Seeder
                     $subSubCats = DB::table('sub_sub_categories')->where('sub_category_id', $subcat->id)->get('id');
                     {
                         foreach($subSubCats as $subSubCat){
-                            for($start = 0 ; $start<5; $start++){
+                            for($start = 0 ; $start<1; $start++){
                                 $id = DB::table('products')->insertGetId([
                                     'cat' => (int)$cat->id,
                                     'sub' => (int)$subcat->id,
@@ -57,7 +57,7 @@ class ProductsTableSeeder extends Seeder
                                     'product_id'=>$id,
                                      'attribute_id' => $attributes[array_rand($attributes)]['id'],
                                  ]);
-                                 for($i=0; $i < 5; $i++):
+                                 for($i=0; $i < 1; $i++):
                                  DB::table('product_variant')->insert([
                                     'product_id'=>$id,
                                      'color_id' => $colors[array_rand($colors)]['id'],

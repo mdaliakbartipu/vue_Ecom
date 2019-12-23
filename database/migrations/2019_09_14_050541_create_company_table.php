@@ -18,13 +18,16 @@ class CreateCompanyTable extends Migration
             $table->string('name');
             $table->text('title')->nullable();
             $table->string('logo');
-            $table->string('phone')->nullable();
+            $table->string('phone1')->nullable();
+            $table->string('phone2')->nullable();
+            $table->string('address')->nullable();
             $table->string('fax')->nullable();
             $table->string('email')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('instagram')->nullable();
+            $table->text('map')->nullable();
             $table->timestamps();
         });
     }

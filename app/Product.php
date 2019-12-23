@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Brand;
 
 class Product extends Model
 {
@@ -33,5 +34,10 @@ class Product extends Model
     }
     public function fits(){
     	 return  $this->belongsTo(Fit::class);
+    }
+
+    public function brandName()
+    {
+        return  Brand::where('id', $this->brand)->first();
     }
 }

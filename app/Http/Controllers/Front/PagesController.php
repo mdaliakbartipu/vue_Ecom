@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Front;
-
-
 use App\Http\Controllers\Front\FrontController;
 use App\Models\Front\UI;
 use App\Page;
@@ -16,6 +14,7 @@ use App\SubSubCategory;
 use App\Color;
 use App\Size;
 use App\Brand;
+use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use Session;
 
@@ -29,6 +28,10 @@ class PagesController extends FrontController
 
     public function index()
     {   
+        // $p = Product::with('brandName')->get();
+        // foreach($p as $a){
+        //     dd($a->brandName->name);
+        // }
         return view('front.index',
         [   
             'sliders'              => UI::getAll(),
@@ -103,7 +106,13 @@ class PagesController extends FrontController
     public function cart()
     {
         $carts = \Session::get('cart');
-        
+        foreach($carts as &$item){
+            // dd($item);
+            $imageInfo = ProductImages::where('variant_id',$item['color_id'])->first();
+            if($imageInfo){
+                $item['image'] = $imageInfo->image;
+            }
+        }
         if(!$carts){
             return redirect('/');
         }
@@ -148,6 +157,55 @@ class PagesController extends FrontController
 
     }
 
+
+    // api section
+    // to be seperated to seperated file
+    public function getContactInfo()
+    {
+        $info = \DB::table('company')->first();
+        if( $info){
+            return json_encode(['status'=>200, 'data'=>$info]);
+        } else {
+            return json_encode(['status'=>404, 'msg'=>"No data found"]);
+        }
+    }
+
+    public function submitForm(Request $request)    
+    {   
+
+        $request->validate([
+            'name' =>'required',
+            'email' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+
+
+        $mail = new MailController();   
+
+        $send = $mail->contactMail($request);
+
+        return json_encode("hello");
+        if($send){
+            return json_encode(['status'=>200, 'msg'=>'Your message is sent']);
+        } else {
+            return json_encode(['status'=>502, 'msg'=> 'Something wnet wrong and message wasn\'t sent']);
+        }
+    }
+
+    public function test(Request $request)    
+    {   
+
+        $mail = new MailController();   
+        $send = $mail->contactMail($request);
+        
+        if($send){
+            return json_encode(['status'=>200, 'msg'=>'Your message is sent']);
+        } else {
+            return json_encode(['status'=>502, 'msg'=> 'Something wnet wrong and message wasn\'t sent']);
+        }
+        
+    }
 
 
 }
