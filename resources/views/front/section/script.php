@@ -12,7 +12,7 @@
     <script src="<?=ASSETS?>/js/main.js"></script>
     <script src="<?=ASSETS?>/js/wow.min.js"></script>
     <script src="<?=ASSETS?>/js/owl.carousel.min.js"></script>
-
+    
 
 
     <script>
@@ -20,7 +20,6 @@
               </script> 
               <!--owlcarusol-->       
 </script>
-
 <script>
             $(document).ready(function() {
               var owl = $('.owl-carousel');

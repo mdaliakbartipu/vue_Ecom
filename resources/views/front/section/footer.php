@@ -55,24 +55,12 @@
                 </div>
 
 
+
+
+                
+
                 <div class="col-lg-3 col-md-7 col-sm-12">
-                    <div class="widgets_container">
-                        <h3>Instagram</h3>
-                        <div class="footer_contact">
-                            <div class="footer_contact_inner">
-                                <div class="contact_icone text-left mr-4">
-                                    <div class="EmbedBrokenMedia">
-                                       <a href=""> <img src="<?=ASSETS?>/img/about/testimonial1.jpg" alt=""></a>
-                                       <a href=""><img src="<?=ASSETS?>/img/about/testimonial2.jpg" alt=""></a> 
-                                        <a href=""><img src="<?=ASSETS?>/img/about/testimonial3.jpg" alt=""></a>
-                                        <a href=""><img src="<?=ASSETS?>/img/about/testimonial1.jpg" alt=""></a>
-                                        <a href=""><img src="<?=ASSETS?>/img/about/testimonial2.jpg" alt=""></a>
-                                        <a href=""><img src="<?=ASSETS?>/img/about/testimonial3.jpg" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <instagram></instagram>
                 </div>
             </div>
             <div class="footer_social">

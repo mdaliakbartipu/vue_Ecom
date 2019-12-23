@@ -1079,39 +1079,39 @@ Vue.component('top_nav_bar', {
 
 Vue.component('contact-us', {
 
-    data: function(){
+    data: function () {
         return {
-            company : {
-                address:"9 Revere Drive, Maple Shade, New Jersey 08052, USA.",
-                phone1:"133323",
-                phone2:null,
-                fax:"123233",
-                email:"adas@sfdf.com",
-                socials:{
-                    facebook:"asdsds",
-                    twitter:"asdsdd",
-                    instagram:"adsdsad",
-                    linkedin:"adssd"
+            company: {
+                address: "9 Revere Drive, Maple Shade, New Jersey 08052, USA.",
+                phone1: "133323",
+                phone2: null,
+                fax: "123233",
+                email: "adas@sfdf.com",
+                socials: {
+                    facebook: "asdsds",
+                    twitter: "asdsdd",
+                    instagram: "adsdsad",
+                    linkedin: "adssd"
                 },
-                map : null,
+                map: null,
             }
         }
-},
-mounted(){
-    axios
-        .get('/api/get-contact-info')
-        .then(response => ( info = (response.status==200)?response.data:response.msg)).
-        then(info => ((this.company.email=info.data.email)&&
-            (this.company.phone1=info.data.phone1)&&
-            (this.company.phone2=info.data.phone2)&&
-            (this.company.address=info.data.address)&&
-            (this.company.socials.facebook=info.data.facebook)&&
-            (this.company.socials.twitter = info.data.twitter)&&
-            (this.company.socials.instagram = info.data.instagram)&&
-            (this.company.socials.linkedin = info.data.linkedin)&&
-            (this.company.map = info.data.map)
-        ));
-},
+    },
+    mounted() {
+        axios
+            .get('/api/get-contact-info')
+            .then(response => (info = (response.status == 200) ? response.data : response.msg)).
+            then(info => ((this.company.email = info.data.email) &&
+                (this.company.phone1 = info.data.phone1) &&
+                (this.company.phone2 = info.data.phone2) &&
+                (this.company.address = info.data.address) &&
+                (this.company.socials.facebook = info.data.facebook) &&
+                (this.company.socials.twitter = info.data.twitter) &&
+                (this.company.socials.instagram = info.data.instagram) &&
+                (this.company.socials.linkedin = info.data.linkedin) &&
+                (this.company.map = info.data.map)
+            ));
+    },
     template: `
     <div class="">
          <div class="contact_page_bg">
@@ -1141,10 +1141,10 @@ mounted(){
 });
 
 Vue.component('contact-info', {
-    props:['info'],
-    data:function() {
+    props: ['info'],
+    data: function () {
         return {
-            company:this.info,
+            company: this.info,
             style: 'background:grey;color:white;font-size:1.4em;border-radius:5px;padding:5px'
         }
     },
@@ -1173,38 +1173,38 @@ Vue.component('contact-info', {
 });
 
 Vue.component('contact-form', {
-    props:['token'],
-    data: function(){
+    props: ['token'],
+    data: function () {
         return {
-            name:null,
-            email:null,
-            subject:null,
-            message:null,
+            name: null,
+            email: null,
+            subject: null,
+            message: null,
         }
     },
-    methods:{
-        sendMe(){
-            if(!this.name ||!this.name ||!this.name||!this.name ){
+    methods: {
+        sendMe() {
+            if (!this.name || !this.name || !this.name || !this.name) {
                 swal("Please Fill all the fields");
-            } else{
-                swal("Please wait...");
+            } else {
+                swal("Your message is sending.Please wait...");
                 axios
-                .post('/api/submit-form', {
-                    name: this.name,
-                    email: this.email,
-                    subject: this.subject,
-                    message: this.message,
-                    _token:this.token,
-                  })
-                  .then(function (response) {
-                    console.log(response.data);
-                    swal("Thank you for your feedback!");
-                  })
-                  .catch(function (error) {
-                    console.log(error);
-                    swal("Sorry! Something went wrong!");
-                  });
-        
+                    .post('/api/submit-form', {
+                        name: this.name,
+                        email: this.email,
+                        subject: this.subject,
+                        message: this.message,
+                        _token: this.token,
+                    })
+                    .then(function (response) {
+                        console.log(response.data);
+                        swal("Thank you for your feedback!");
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        swal("Sorry! Something went wrong!");
+                    });
+
             }
         }
     },
@@ -1225,6 +1225,31 @@ Vue.component('contact-form', {
     </div>
     `
 });
+
+
+
+Vue.component('instagram', {
+    template: `
+        <div class="widgets_container">
+        <h3>Instagram</h3>
+        <div class="footer_contact">
+            <div class="footer_contact_inner">
+                <div class="contact_icone text-left mr-4">
+                    <div class="EmbedBrokenMedia">
+                    <a href=""><img src="/front/assets/img/about/testimonial1.jpg" alt=""></a>
+                    <a href=""><img src="/front/assets/img/about/testimonial2.jpg" alt=""></a>
+                    <a href=""><img src="/front/assets/img/about/testimonial3.jpg" alt=""></a>
+                    <a href=""><img src="/front/assets/img/about/testimonial1.jpg" alt=""></a>
+                    <a href=""><img src="/front/assets/img/about/testimonial2.jpg" alt=""></a>
+                    <a href=""><img src="/front/assets/img/about/testimonial3.jpg" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+`
+});
+
 
 Vue.component('company_logo', {
     props: ['logo'],

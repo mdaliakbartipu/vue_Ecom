@@ -109,34 +109,38 @@ class ProductController extends Controller
 
 
     //Saving Attributes
+    if($request->sleeve):
         foreach($request->sleeve as $sleeve){
             ProductAttribute::create([
                 'product_id' => $product->id,
                 'attribute_id' => (int)$sleeve
             ]);
         }
-
+    endif;
+    if($request->fit):
         foreach($request->fit as $item){
             ProductAttribute::create([
                 'product_id' => $product->id,
                 'attribute_id' => (int)$item
             ]);
         }
-
+    endif;
+    if($request->leglength):
         foreach($request->leglength as $item){
             ProductAttribute::create([
                 'product_id' => $product->id,
                 'attribute_id' => (int)$item
             ]);
         }
-
+    endif;
+    if($request->tags):
     // Saving Tags
         $tags = $request->tags;
         $save = ProductTags::saveTags($tags, $product->id);
         if(!$save): 
             return redirect()->back()->with('error','Product tags not saved correctly');
         endif;
-
+    endif;
     // saving product variant
         $sizes      = $request->size;
         $colors     = $request->color;
@@ -254,21 +258,14 @@ class ProductController extends Controller
         $leglenghts = $attributes->where('leg_length',1);
         $fits = $attributes->where('fit',1);
         $tags = Tags::forProduct();
-        phpinfo();
+        // phpinfo();
         $images = ProductImages::where('product_id', $product->id)->get()->groupBy('variant_id');
-        dd($images);
+        // dd($images);
         $variants  = ProductVariant::where('product_id', $product->id)->get()->groupBy('color_id');
-        foreach($variants as $variant){
-            foreach($variant as $item){
-                dd($item->color_id);
-            }
-        }
-        // foreach()
-
-
         $productTags = ProductTags::where('product_id', $product->id)->get();
+        // dd("ssd");
 
-        return view('product.edit',compact('variants','product','categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits', 'tags', 'productTags', 'brand','productAttributes'));
+        return view('product.edit',compact('images','variants','product','categories','subcategories','subsubcats','colors','sizes','sleeves','leglenghts','fits', 'tags', 'productTags', 'brand','productAttributes'));
     }
 
     /**
