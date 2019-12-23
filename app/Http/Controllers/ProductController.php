@@ -142,6 +142,7 @@ class ProductController extends Controller
         $colors     = $request->color;
         $quantities = $request->quantity;
         $images     = $request->image;
+        dd($request->all());
         // Useses for locate first two thumbs
         $thumbs = array();
         foreach($quantities as $key => $qty){
@@ -441,7 +442,13 @@ class ProductController extends Controller
 
        foreach($productTags as $tag){
         //    dd($tag->product_id);
-           array_push($products, Product::find($tag->product_id));
+        $pro = Product::where('id',$tag->product_id)->first();
+        if($pro->brandName()){
+            $pro->brand = $pro->brandName()->name;
+        } else {
+            $pro->brand = 'Classified';
+        }
+           array_push($products, $pro);
        }
 
        

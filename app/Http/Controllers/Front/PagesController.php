@@ -29,6 +29,10 @@ class PagesController extends FrontController
 
     public function index()
     {   
+        // $p = Product::with('brandName')->get();
+        // foreach($p as $a){
+        //     dd($a->brandName->name);
+        // }
         return view('front.index',
         [   
             'sliders'              => UI::getAll(),

@@ -806,7 +806,7 @@ Vue.component('product_article', {
                     <div :data-countdown="this.product.discount_till"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">2</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">30</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
                 </div>
             <div class="product_content_inner">
-                <h2 class="product_name_brand_name">{{product.brand}}</h2>
+                <h2 class="product_name_brand_name">{{this.product.brand}}</h2>
                 <h3 class="product_name"><a :href="this.link+this.product.id">{{this.product.name}}</a></h3>
                 <h4 class="product_name_h4"><a href="#">{{tab.name}}</a></h4>
                 <div class="price_box">
