@@ -159,5 +159,18 @@ class PagesController extends FrontController
     }
 
 
+    // api section
+    // to be seperated to seperated file
+    public function getContactInfo()
+    {
+        $info = \DB::table('company')->first();
+        if( $info){
+            return json_encode(['status'=>200, 'data'=>$info]);
+        } else {
+            return json_encode(['status'=>404, 'msg'=>"No data found"]);
+        }
+        
+    }
+
 
 }

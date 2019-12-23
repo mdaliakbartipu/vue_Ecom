@@ -115,6 +115,8 @@ Route::get('/api/get-images','ProductController@getImagesByColor');
 Route::post('add-to-cart','ProductController@addToCart');	
 Route::get('add-to-cart','ProductController@addToCart');	
 
+Route::get('/api/get-contact-info','Front\PagesController@getContactInfo');
+
 
 
 

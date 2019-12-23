@@ -10,7 +10,7 @@
      <?php include("section/header.php");?>
     </div>
 
-    <?php include("section/contact-us.php");?>
+    <contact-us></contact-us>
     <!--footer area start-->
     <?php include("section/footer.php");?>
     <!--footer area end-->
