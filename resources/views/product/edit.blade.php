@@ -359,13 +359,7 @@
                             timer: 1500
                             })&&(document.getElementById(e.id).innerText ='')): null));
 
-        // notify
         console.log(e.id);
-        // alert("Image deletion not yet implemented");
-
-        // send request ti api to delete with imageName
-
-        // get response and notify user
     };
 
 function showBig(e){

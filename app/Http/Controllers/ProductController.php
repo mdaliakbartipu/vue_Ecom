@@ -309,6 +309,7 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->details = $request->details;
         $product->save();
+        // dd($product->id);
 
         // Updating Tags
         $tags = $request->tags;
@@ -371,7 +372,7 @@ class ProductController extends Controller
 
 
 
-        if(empty($this->image)) return redirect()->back()->with('message', 'Product Updated');
+        if(empty($request->image)) return redirect()->back()->with('message', 'Product Updated.but not images...');
 
 
         // Images related things
@@ -384,6 +385,8 @@ class ProductController extends Controller
         if (!file_exists($thumbPath)) {
             mkdir($thumbPath, 0777, true);
         };
+
+        $thumbs = array();
 
         foreach ($request->image as $key => $image) {
             $color_id = $key;
@@ -407,10 +410,14 @@ class ProductController extends Controller
                 $thumb = new ImageResize($image);
                 $thumb->resize(213, 260);
                 $thumb->save($thumbImage);
+                
+                if (count($thumbs) < 2) {
+                    array_push($thumbs, $imageName);
+                }
 
                 // saving to database
                 $im = new ProductImages;
-                $im->product_id = (int) $id;
+                $im->product_id = $id;
                 // it will be the color id 
                 $im->variant_id =  $color_id;
                 $im->image = $imageName;
@@ -419,33 +426,13 @@ class ProductController extends Controller
             }
         }
 
-        // // updating product variant
-        //     $sizes      = $request->size;
-        //     $colors     = $request->color;
-        //     $quantities = $request->quantity;
-        //     $images     = $request->image;
-
-        // // saving storage,images, variants
-        //     foreach($quantities as $key=>$qty):  
-        //         // Checking if variant is already there or isn't
-        //         $variant = ProductVariant::getVariant(
-        //             $product->id,
-        //             $sizes[$key],
-        //             $colors[$key]
-        //         );
-        //         if($variant):  
-        //             // updating qty to product storage
-        //             // updating images
-        //         else:
-        //             // create variant
-        //             // creating qty to product storage
-        //             // creating images
-        //         endif;
-        //     endforeach;
-
-
-
-
+        // saving new thumbs
+        if(count($thumbs)==2){
+            $product->thumb1 = $thumbs[0];
+            $product->thumb2 = $thumbs[1];
+            $product->save();    
+        }
+ 
         return redirect()->back()->with('message', 'Product Updated');
     }
 
@@ -459,8 +446,8 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         if (file_exists('uploads/product' . $product->image)) {
-            file_delete($product->image);
-            //unlink('uploads/product/'.$product->image);
+            // file_delete($product->image);
+            unlink($product->image);
         }
         $product->delete();
         return redirect()->back()->with('successMsg', 'Product Deleted successfully');
