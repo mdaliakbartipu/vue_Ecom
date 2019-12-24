@@ -292,7 +292,7 @@
                                             </td>
                                             <td class="col-md-6">
                                             @foreach($images[$key] as $image)
-                                                <img style="margin-top:5px" height="60px" width="60px" src="/front/assets/.uploads/products/thumbs/<?=$image->image?>" alt=""> <button class="delete-image btn btn-sm btn-danger" style="font-size:.5em"><i class="fa fa-close"></i></button>
+                                                <img onclick="showBig(this)" style="margin-top:5px" height="60px" width="60px" src="/front/assets/.uploads/products/thumbs/<?=$image->image?>" alt=""> <button class="delete-image btn btn-sm btn-danger" style="font-size:.5em"><i class="fa fa-close"></i></button>
                                             @endforeach
                                                 <div style="margin-top:1em">
                                                     <input multiple="" type="file" id="id-input-file-3" name="image[{{$variant[0]->color_id}}][]" />
@@ -350,16 +350,19 @@
         alert("Image deletion not yet implemented");
     });
 
+function showBig(e){
+    console.log(e.src);
+    Swal.fire({
+    imageUrl: e.src,
+    imageWidth: 600,
+    imageHeight: 300,
+    imageAlt: 'Custom image',
+})
+}
+
 
 // If clicked on imaages
-// Swal.fire({
-//   title: 'Sweet!',
-//   text: 'Modal with a custom image.',
-//   imageUrl: 'https://unsplash.it/400/200',
-//   imageWidth: 400,
-//   imageHeight: 200,
-//   imageAlt: 'Custom image',
-// })
+
 // Swal.fire({
 //       title: `${result.value.login}'s avatar`,
 //       imageUrl: result.value.avatar_url
@@ -431,20 +434,11 @@
                     };
                     
                 }
-
-
-                        console.log(colorObject); 
-                }  
-
-
-                
+                console.log(colorObject); 
+                }                  
             });
 
-
 // purchase end
-
-
-
     
     $("#addrows").click(function() {
         event.preventDefault();
