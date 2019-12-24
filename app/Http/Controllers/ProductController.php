@@ -255,8 +255,10 @@ class ProductController extends Controller
         $colors = Color::all();
         $sizes = Size::all();
         $attributes = Attributes::all();
-        $productAttributes = ProductAttribute::all();
+        $productAttributes = ProductAttribute::where('product_id', $product->id)->get();
+        // dd($productAttributes);
         $sleeves = $attributes->where('sleeve',1);
+        
         $leglenghts = $attributes->where('leg_length',1);
         $fits = $attributes->where('fit',1);
         $tags = Tags::forProduct();
@@ -277,17 +279,20 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
+
         $this->validate($request,[
-           'name'     => 'required',
-           'pro_code' => 'required',
-           'desc'     => 'required',
+           'name'     => 'required|max:190',
+        //    what was that! changing unique keys often create problems
+        //    'code'     => 'required|unique:products|max:190',
+           'desc'     => 'required|max:190',
            'price'    => 'required',
            'discount' => 'required',
            'details'  => 'required',
           // 'image'    => 'required|mimes:jpeg,jpg,png',
        ]);
+
 
         $product = Product::find($id);
         // saving product
@@ -295,7 +300,8 @@ class ProductController extends Controller
         $product->cat = $request->category;
         $product->sub = $request->sub_category;
         $product->super = $request->sub_sub_category;
-        $product->code = $request->pro_code;
+        // each time updating new key are needed problem
+        // $product->code = $request->code;
         $product->brand = $request->brand;
         $product->description = $request->desc;
         $product->price = $request->price;
@@ -308,6 +314,63 @@ class ProductController extends Controller
         if(!$update):   
             redirect()->back()->with('error','Product tags not updated.Old tags may be deleted too');  
         endif;
+
+        // saving new attributes    
+        
+        // legs
+            // getting previous attributes saving ids
+            $oldAttributes = ProductAttribute::where('product_id', $id)->get();
+            $attributesError = false;
+            // saving legs
+            if(!empty($request->leglength)):
+                // saving new leg lenghths
+                foreach($request->leglength as $leg):
+                    $newAttribute = new ProductAttribute;
+                    $newAttribute->product_id = $id;
+                    $newAttribute->attribute_id = (int)$leg;
+                    if(!$newAttribute->save()):
+                        $attributesError = true;
+                    endif;
+                endforeach;
+            endif;
+
+            // saving fit
+            if(!empty($request->fit)):
+                // saving new leg lenghths
+                foreach($request->fit as $fit):
+                    $newAttribute = new ProductAttribute;
+                    $newAttribute->product_id = $id;
+                    $newAttribute->attribute_id = (int)$fit;
+                    if(!$newAttribute->save()):
+                        $attributesError = true;
+                    endif;
+                endforeach;
+            endif;
+
+            // saving sleeve
+            if(!empty($request->sleeve)):
+                // saving new leg lenghths
+                foreach($request->sleeve as $sleeve):
+                    $newAttribute = new ProductAttribute;
+                    $newAttribute->product_id = $id;
+                    $newAttribute->attribute_id = (int)$sleeve;
+                    if(!$newAttribute->save()):
+                        $attributesError = true;
+                    endif;
+                endforeach;
+            endif;
+
+            if(!$attributesError):
+                // delete all olds!
+                foreach($oldAttributes as $old):
+                    $old->delete();
+                endforeach;
+            endif;
+
+
+
+
+
 
     // // updating product variant
     //     $sizes      = $request->size;

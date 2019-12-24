@@ -129,7 +129,7 @@
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Product Code </label>
 
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" name="pro_code" value="{{ $product->code }}" />
+                            <input disabled type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" name="code" value="{{ $product->code }}" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -170,8 +170,15 @@
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($sleeves as $key=>$sleeve)
+                                <?php
+                                    $selected = false;
+                                    foreach ($productAttributes as $item) :
+                                        if ($item->attribute_id == $sleeve->id)
+                                            $selected = true;
+                                    endforeach;
+                                ?>
                                 <label>
-                                    <input type="checkbox" class="ace " name="sleeve" value="{{ $sleeve->id }}" <?= ($product->sleeve == ($key + 1)) ? "checked='checked'" : ''; ?>>
+                                    <input type="checkbox" class="ace " name="sleeve[]" value="{{ $sleeve->id }}" <?= $selected ? 'checked' : '' ?>>
 
                                     <span class="lbl"> {{ $sleeve->name }} </span>
                                 </label>
@@ -184,8 +191,15 @@
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($leglenghts as $key=>$leglength)
+                                <?php
+                                    $selected = false;
+                                    foreach ($productAttributes as $item) :
+                                        if ($item->attribute_id == $leglength->id)
+                                            $selected = true;
+                                    endforeach;
+                                ?>
                                 <label>
-                                    <input type="checkbox" class="ace" name="leglength" value="{{ $leglength->id }}" <?= ($product->leglength == ($key + 1)) ? "checked='checked'" : ''; ?>>
+                                    <input type="checkbox" class="ace" name="leglength[]" value="{{ $leglength->id }}" <?= $selected ? 'checked' : '' ?>>
                                     <span class="lbl"> {{ $leglength->name }} </span>
                                 </label>
                                 @endforeach
@@ -197,8 +211,15 @@
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($fits as $key=>$fit)
+                                <?php
+                                    $selected = false;
+                                    foreach ($productAttributes as $item) :
+                                        if ($item->attribute_id == $fit->id)
+                                            $selected = true;
+                                    endforeach;
+                                ?>
                                 <label>
-                                    <input type="checkbox" class="ace" name="fit" value="{{ $fit->id }}" <?= ($product->fit == ($key + 1)) ? "checked='checked'" : ''; ?>>
+                                    <input type="checkbox" class="ace" name="fit[]" value="{{ $fit->id }}" <?= $selected ? 'checked' : '' ?>>
                                     <span class="lbl"> {{ $fit->name }}</span>
                                 </label>
                                 @endforeach
@@ -239,7 +260,7 @@
                                         <tr class="row">
                                             <td class="col-md-2">
                                                 <div>
-                                                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Color..." name="color[]">
+                                                    <select disabled class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Color..." name="color[]">
                                                         @foreach ($colors as $color)
                                                         <option value="{{ $color->id }}" {{$color->id==$variant[0]->color_id?'selected':''}}>{{ $color->name }}</option>
                                                         @endforeach
@@ -249,7 +270,7 @@
                                             <td class="col-md-2">
                                             @foreach($variant as $item)
                                                 <div>
-                                                    <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Size..." name="size[]">
+                                                    <select disabled class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Size..." name="size[]">
                                                         @foreach($sizes as $size)
                                                         <option value="{{ $size->id }}" {{$size->id==$item->size_id?'selected':''}}>{{ $size->name }} </option>
                                                         @endforeach
@@ -266,7 +287,7 @@
                                             </td>
                                             <td class="col-md-6">
                                             @foreach($images[$key] as $image)
-                                                <img height="40px" width="40px" src="/front/assets/.uploads/products/thumbs/<?=$image->image?>" alt=""> <button class="delete-image btn btn-sm btn-danger" style="font-size:.5em"><i class="fa fa-close"></i></button>
+                                                <img style="margin-top:5px" height="60px" width="60px" src="/front/assets/.uploads/products/thumbs/<?=$image->image?>" alt=""> <button class="delete-image btn btn-sm btn-danger" style="font-size:.5em"><i class="fa fa-close"></i></button>
                                             @endforeach
                                                 <div style="margin-top:1em">
                                                     <input multiple="" type="file" id="id-input-file-3" name="image[0][]" />
