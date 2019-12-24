@@ -371,6 +371,8 @@ class ProductController extends Controller
 
 
 
+        if(empty($this->image)) return redirect()->back()->with('message', 'Product Updated');
+
 
         // Images related things
         $imagePath = "front/assets/.uploads/products";

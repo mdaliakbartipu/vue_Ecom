@@ -136,7 +136,7 @@
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Product Short Description </label>
 
                         <div class="col-sm-9">
-                            <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control summernote" name="desc">{{ $product->description }}</textarea>
+                            <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control" name="desc">{{ $product->description }}</textarea>
 
                         </div>
                     </div>
@@ -247,7 +247,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> Save</button>
                     <div style="width:150%">
                         <h2>Variants</h2><p class="text-warning">You can Update imges here. But You shouldn't changes color or sizes or quantity.It shows that what you have right now.
                             <br>If you have purchased new product then Add it with new parameters</p>
@@ -292,7 +292,7 @@
                                             </td>
                                             <td class="col-md-6">
                                             @foreach($images[$key] as $image)
-                                                <img onclick="showBig(this)" style="margin-top:5px" height="60px" width="60px" src="/front/assets/.uploads/products/thumbs/<?=$image->image?>" alt=""> <button class="delete-image btn btn-sm btn-danger" style="font-size:.5em"><i class="fa fa-close"></i></button>
+                                                <img onclick="showBig(this)" style="margin-top:5px" height="60px" width="60px" src="/front/assets/.uploads/products/thumbs/<?=$image->image?>" alt=""> <button class="btn btn-sm btn-danger"  onClick="deleteImage(this)" style="font-size:.5em" id="<?=$image->image?>"><i class="fa fa-close"></i></button>
                                             @endforeach
                                                 <div style="margin-top:1em">
                                                     <input multiple="" type="file" id="id-input-file-3" name="image[{{$variant[0]->color_id}}][]" />
@@ -343,12 +343,17 @@
     let rowIndex = 1;
     //  will start by naming name from adding 2 as postfix
 
-    $('.delete-image').click(function(){
+    function deleteImage(e){
         event.preventDefault();
         // axios call and remove
         // notify
+        console.log(e.id);
         alert("Image deletion not yet implemented");
-    });
+
+        // send request ti api to delete with imageName
+
+        // get response and notify user
+    };
 
 function showBig(e){
     console.log(e.src);
@@ -428,7 +433,7 @@ function showBig(e){
                         });
                     if(qty){
                         // swal.fire(`you selected ${color} ${size} ${qty}`);
-                        swal.fire("Real Purchase is forbidden for now.It will open soon after testing");
+                        swal.fire("Real Purchase is forbidden for now.It will open soon after testing (Need to talk about it)");
 
                     }                        
                     };
