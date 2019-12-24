@@ -248,8 +248,10 @@
                         </div>
                     </div>
 
-
-                    <h2>Variants</h2>
+                    <div style="width:150%">
+                        <h2>Variants</h2><p class="text-warning">You can Update imges here. But You shouldn't changes color or sizes or quantity.It shows that what you have right now.
+                            <br>If you have parchased new product then Add it with new parameters</p>
+                    </div>
                     <div class="" style="width:150%">
                         <div class="table-responsive">
                             <table id="table" class="table" style="width:100%">
@@ -265,6 +267,9 @@
                                                         <option value="{{ $color->id }}" {{$color->id==$variant[0]->color_id?'selected':''}}>{{ $color->name }}</option>
                                                         @endforeach
                                                     </select>
+                                                </div>
+                                                <div>
+                                                    <button style="width:100%;margin-top:10px" class="parchase btn btn-warning">Parchase</button>
                                                 </div>
                                             </td>
                                             <td class="col-md-2">
@@ -290,7 +295,7 @@
                                                 <img style="margin-top:5px" height="60px" width="60px" src="/front/assets/.uploads/products/thumbs/<?=$image->image?>" alt=""> <button class="delete-image btn btn-sm btn-danger" style="font-size:.5em"><i class="fa fa-close"></i></button>
                                             @endforeach
                                                 <div style="margin-top:1em">
-                                                    <input multiple="" type="file" id="id-input-file-3" name="image[0][]" />
+                                                    <input multiple="" type="file" id="id-input-file-3" name="image[{{$variant[0]->color_id}}][]" />
                                                 </div>
                                                 
                                             </td>
@@ -340,8 +345,74 @@
 
     $('.delete-image').click(function(){
         event.preventDefault();
+        // axios call and remove
+        // notify
         alert("Image deletion not yet implemented");
     });
+
+
+// If clicked on imaages
+// Swal.fire({
+//   title: 'Sweet!',
+//   text: 'Modal with a custom image.',
+//   imageUrl: 'https://unsplash.it/400/200',
+//   imageWidth: 400,
+//   imageHeight: 200,
+//   imageAlt: 'Custom image',
+// })
+// Swal.fire({
+//       title: `${result.value.login}'s avatar`,
+//       imageUrl: result.value.avatar_url
+//     })
+
+
+// Images end click
+
+
+
+// parchase
+
+    $('.parchase').click(async function(){
+        event.preventDefault();
+                    const { value: fruit } = await Swal.fire({
+                    title: 'Select Product Colors',
+                    input: 'select',
+                    inputOptions: {
+                        apples: 'Apples',
+                        bananas: 'Bananas',
+                        grapes: 'Grapes',
+                        oranges: 'Oranges'
+                    },
+                    inputPlaceholder: 'Select a Color',
+                    showCancelButton: true,
+                    });
+
+
+                if (fruit) {
+                    const { value: size } = await Swal.fire({
+                    title: 'Select Product Sizes',
+                    input: 'select',
+                    inputOptions: {
+                        apples: 'A',
+                        bananas: 'B',
+                        grapes: 'G',
+                        oranges: 'O'
+                    },
+                    inputPlaceholder: 'Select a Color',
+                    showCancelButton: true,
+                    });
+                    if(size){
+                        Swal.fire(`You selected: ${size}`)
+                    }
+                    Swal.fire(`You selected: ${fruit}`)
+                }
+            });
+
+
+// parchase end
+
+
+
     
     $("#addrows").click(function() {
         event.preventDefault();
