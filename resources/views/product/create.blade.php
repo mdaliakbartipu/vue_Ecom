@@ -5,7 +5,6 @@
 @stop
 @section('css')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 @stop
 
 
@@ -31,7 +30,7 @@
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Product Name </label>
 
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product Name" class="form-control" name="name" />
+                            <input type="text" id="form-field-1-1" placeholder="Product Name" class="form-control" name="name" value="{{old('name')}}"/>
                         </div>
                     </div>
 
@@ -42,7 +41,7 @@
                             <select class="chosen-select form-control" id="category" name="category">
                             <option value="0">Select Category</option>
                                 @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" >{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -122,7 +121,7 @@
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Product Code </label>
 
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" name="pro_code" />
+                            <input type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" name="code" value="{{old('code')}}" />
                         </div>
                     </div>
 
@@ -130,7 +129,7 @@
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Product Short Description </label>
 
                         <div class="col-sm-9">
-                            <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="summernote" name="desc"></textarea>
+                            <textarea type="text" id="form-field-1-1" placeholder="Product short Description" rows="4" cols="63" name="desc">{{old('desc')}}</textarea>
 
                         </div>
                     </div>
@@ -138,22 +137,21 @@
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Product Price </label>
 
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product price" class="form-control" name="price" />
+                            <input type="text" id="form-field-1-1" placeholder="Product price" class="form-control" name="price" value="{{old('price')}}" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Product Discount </label>
 
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product Discount" class="form-control" name="discount" />
+                            <input type="text" id="form-field-1-1" placeholder="Product Discount" class="form-control" name="discount" value="{{old('discount')}}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Product Details </label>
 
                         <div class="col-sm-9">
-                            <textarea type="text" placeholder="Product Details" class="form-control summernote" name="details"></textarea>
-
+                            <textarea type="text" placeholder="Product Details" class="form-control summernote" name="details">{{old('details')}}</textarea>
                         </div>
                     </div>
 
@@ -165,7 +163,7 @@
                             <div class="checkbox">
                                 @foreach($attributes->where('sleeve',1) as $key=>$sleeve)
                                 <label>
-                                    <input type="checkbox" class="ace" name="sleeve[]" value="{{ $sleeve->id }}">
+                                    <input type="checkbox" class="ace" name="sleeve[]" value="{{ $sleeve->id }}" >
                                     <span class="lbl"> {{ $sleeve->name }} </span>
                                 </label>
                                 @endforeach

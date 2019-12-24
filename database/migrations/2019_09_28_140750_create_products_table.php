@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('super');
             $table->foreign('super')->references('id')->on('sub_sub_categories');
             $table->string('name');
+            $table->string('slug');
             $table->unsignedBigInteger('brand')->nullable();
             $table->foreign('brand')->references('id')->on('brands');
             $table->string('code');
@@ -37,6 +38,7 @@ class CreateProductsTable extends Migration
             $table->string('thumb1')->nullable()->default('thumb1.jpg');
             $table->string('thumb2')->nullable()->default('thumb2.jpg');
             $table->timestamps();
+            $table->unique(['code', 'slug']);
         });
     }
 

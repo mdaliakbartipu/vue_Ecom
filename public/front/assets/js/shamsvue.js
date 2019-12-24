@@ -136,7 +136,7 @@ Vue.component('cart_row', {
     methods: {
         remove: function (variant) {
 
-            swal({
+            swal.fire({
                 title: "Are you sure?",
 
                 icon: "info",
@@ -145,15 +145,26 @@ Vue.component('cart_row', {
             })
                 .then((willDelete) => {
                     if (willDelete) {
-                        swal("Okey! Your cart item has been deleted!", {
-                            icon: "success",
-                        });
+
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Your cart item has been deleted!',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
                         axios
                             .get('/api/remove-from-cart/' + variant)
                             .then(response => response.data).then(data => (data.response != 200)).then(status => this.active = status);
                         console.log(variant);
                     } else {
-                        swal("Have a nice day sir!");
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Have a nice day!',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
                     }
                 });
 
@@ -640,7 +651,14 @@ Vue.component('product_info', {
                     console.log(response.data.cart.length);
                     let cartQty = document.querySelector('#cart-qty');
                     cartQty.innerText = parseInt(response.data.cart.length);
-                    swal("Great!", "This Product is added to cart! Buy more !", "success");
+                    
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'This Product is added to cart! Buy more !',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
 
                 })
                 .catch(function (error) {
@@ -1201,8 +1219,13 @@ Vue.component('contact-form', {
         sendMe() {
             if (!this.name || !this.name || !this.name || !this.name) {
                 swal("Please Fill all the fields");
+                Swal.fire(
+                    'Are you missing something?',
+                    'Please fill all the fields',
+                    'question'
+                  )
             } else {
-                swal("Your message is sending.Please wait...");
+                swal.fire("Your message is sending.Please wait...");
                 axios
                     .post('/api/submit-form', {
                         name: this.name,
@@ -1213,11 +1236,17 @@ Vue.component('contact-form', {
                     })
                     .then(function (response) {
                         console.log(response.data);
-                        swal("Thank you for your feedback!");
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Thank you for your feedback',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
                     })
                     .catch(function (error) {
                         console.log(error);
-                        swal("Sorry! Something went wrong!");
+                        swal.fire("Sorry! Something went wrong!");
                     });
 
             }

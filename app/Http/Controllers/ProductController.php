@@ -81,9 +81,9 @@ class ProductController extends Controller
     {
           //print_r($request->color);die();
           $this->validate($request,[
-           'name'     => 'required',
-           'pro_code' => 'required',
-           'desc'     => 'required',
+           'name'     => 'required|max:190',
+           'code' => 'required|unique:products|max:190',
+           'desc'     => 'required|max:190',
            'price'    => 'required',
            'brand'    => 'required',
            'discount' => 'required',
@@ -97,14 +97,16 @@ class ProductController extends Controller
     // saving product
         $product = new Product();
         $product->name = $request->name;
+        $product->slug = str_slug($product->name);
         $product->cat = $request->category;
         $product->sub = $request->sub_category;
         $product->super = $request->sub_sub_category;
-        $product->code = $request->pro_code;
+        $product->code = $request->code;
         $product->brand = $request->brand;
         $product->description = $request->desc;
         $product->price = $request->price;
         $product->details = $request->details;
+        $product->discount = $request->discount??0;
         $product->save();
 
 
