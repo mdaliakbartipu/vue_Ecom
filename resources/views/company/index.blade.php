@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title','Table')
 @section('page-header')
-    <i class="fa fa-list"></i> Table
+    <i class="fa fa-list"></i>Company Information showing on web
 @stop
 @section('css')
 
@@ -42,13 +42,13 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Company Name</label>
-                          <input type="text" class="form-control" name="name" value="{{ $company->name }}">
+                          <input type="text" class="form-control" name="name" value="{{ $company->name??null }}">
                         </div>
                        </div>
                        <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Title</label>
-                          <input type="text" class="form-control" name="title" value="{{ $company->title }}">
+                          <input type="text" class="form-control" name="title" value="{{ $company->title??null }}">
                         </div>
                        </div>
                       </div>
@@ -62,13 +62,13 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Phone</label>
-                          <input type="text" class="form-control" name="phone" value="{{ $company->phone }}">
+                          <input type="text" class="form-control" name="phone1" value="{{ $company->phone1??null }}">
                         </div>
                        </div>
                        <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Fax</label>
-                          <input type="text" class="form-control" name="fax" value="{{ $company->fax }}">
+                          <input type="text" class="form-control" name="fax" value="{{ $company->fax??null }}">
                         </div>
                        </div>
                       </div>
@@ -79,40 +79,51 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Email</label>
-                          <input type="text" class="form-control" name="email" value="{{ $company->email }}">
+                          <input type="text" class="form-control" name="email" value="{{ $company->email??null }}">
                         </div>
                        </div>
                        <div class="col-md-2">
                          <label class="control-label">Company Logo</label>
                           <input type="file" name="logo" class="input-file">
                        </div>
-                       
+                      </div>
+                      <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Address</label>
+                          <textarea  rows="5" type="text" class="form-control" name="address">{{ $company->address??'' }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary"> Save </button>
+                       </div>
+                       <div class="col-md-6">
+                         <label class="control-label">Google map (iFrame)</label>
+                         <p style="color:brown">Go to <a target="_blank" href="https://www.google.com/maps/"> Google Map</a> >> Find your location >> click and select 'Share' from sidebar >> Select 'Embed a map' >> Copy and past here </p>
+                         <p style="color:brown">Make sure you edited "width="100%" to this embeded HTML"</p>
+                         <textarea  rows="5" type="text" class="form-control" name="map">{{ $company->map??''}}</textarea>
+                       </div>
                       </div>
                      
                     
-                       <div class="row">
-                     
-                      </div>
 
                       <h3>Social links</h3>
                       <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Facebook</label>
-                          <input type="text" class="form-control" name="facebook" value="{{ $company->facebook }}">
+                          <input type="text" class="form-control" name="facebook" value="{{ $company->facebook??null }}">
                         </div>
                        </div>
                        <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Twitter</label>
-                          <input type="text" class="form-control" name="twitter" value="{{ $company->twitter }}">
+                          <input type="text" class="form-control" name="twitter" value="{{ $company->twitter??null }}">
                         </div>
                        </div>
 
                        <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Instagram</label>
-                          <input type="text" class="form-control" name="instagram" value="{{ $company->instagram }}">
+                          <input type="text" class="form-control" name="instagram" value="{{ $company->instagram??null }}">
                         </div>
                        </div>
 

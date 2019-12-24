@@ -107,15 +107,15 @@ class CompanyController extends Controller
     {
         // dd($request);
        $this->validate($request,[
-           'name'     => 'required',
-           'title'     => 'required',
-           'phone'     => 'nullable',
-           'fax'     => 'nullable',
-           'email'     => 'required',
-           'facebook'     => 'nullable',
-           'twitter'     => 'nullable',
-           'linkedin'     => 'nullable',
-           'instagram'     => 'nullable',
+           'name'     => 'required|max:190',
+           'title'     => 'required|max:190',
+           'phone1'     => 'nullable|max:190',
+           'fax'     => 'nullable|max:190',
+           'email'     => 'required|max:190',
+           'facebook'     => 'nullable|max:190',
+           'twitter'     => 'nullable|max:190',
+           'linkedin'     => 'nullable|max:190',
+           'instagram'     => 'nullable|max:190',
             'logo'     => 'nullable'
            
        ]);
@@ -144,9 +144,11 @@ class CompanyController extends Controller
 
           $company->name                = $request->name;
           $company->title                   = $request->title;
-          $company->phone               = $request->phone;
+          $company->phone1               = $request->phone1;
           $company->fax                     = $request->fax;
           $company->email                 = $request->email;
+          $company->address                 = $request->address;
+          $company->map                 = $request->map;
 
           $request->logo?$company->logo= $imageName:null;
 
