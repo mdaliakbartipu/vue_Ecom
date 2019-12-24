@@ -315,6 +315,7 @@ Vue.component('productthubslist', {
     data: function () {
         return {
             path: "/front/assets/.uploads/products/thumbs/",
+            count:5
         }
     },
     methods: {
@@ -326,8 +327,7 @@ Vue.component('productthubslist', {
     template: `
     <div class=" col-md-2 single-zoom-thumb">
        <ul class="s-tab-zoom" id="gallery_01">
-                             
-            <li  v-for="(thumb,index) in thumbimages" :key="index">
+            <li  v-for="(thumb,index) in thumbimages" v-if="index <5" >
                 <a href="#" class="elevatezoom-gallery">
                     <img @click="showBig(thumb.image)" loading="lazy" :src="path+thumb.image" alt="zo-th-1">
                 </a>
@@ -345,10 +345,8 @@ Vue.component('productbigimage', {
     },
     props: ['idtext', 'src', 'datazoom'],
     template: `
-    <div id="img-1" class="col-md-10 zoomWrapper single-zoom">
-        <a href="#">
-            <img loading="lazy" :id="idtext" :src="path+src"  :data-zoom-image="datazoom" alt="big-1">
-        </a>
+    <div id="img-1" class="bigImage col-md-10 zoomWrapper single-zoom">
+        <img loading="lazy" :id="idtext" :src="path+src"  :data-zoom-image="datazoom" alt="big-1">
     </div>
     `
 });

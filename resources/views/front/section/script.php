@@ -1,6 +1,6 @@
 
     <script src="<?=ASSETS?>/js/sweetalert2@9.js"></script>
-    <script src="<?=ASSETS?>/js/vue.min.js"></script>
+    <script src="<?=ASSETS?>/js/vue.js"></script>
     <script src="<?=ASSETS?>/js/axios.min.js"></script>
     <script src="<?=ASSETS?>/js/shamsvue.js"></script>
 
