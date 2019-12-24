@@ -15,6 +15,7 @@ use App\Color;
 use App\Size;
 use App\Brand;
 use App\Http\Controllers\MailController;
+use App\ProductAttribute;
 use Illuminate\Http\Request;
 use Session;
 
@@ -193,8 +194,18 @@ class PagesController extends FrontController
         }
     }
 
-    public function test(Request $request)    
+    public function test(Request $request, $id)    
     {   
+
+        $colors = Color::all();
+        $sizes = Size::all();
+
+        if(!empty($colors) && !empty($sizes)){
+            return json_encode(['status'=>200, 'msg'=>'Your query is completed', 'colors'=>$colors, 'sizes'=>$sizes]);
+        } else {
+            return json_encode(['status'=>404, 'msg'=>'No attributes found']);
+        }
+        
 
         $mail = new MailController();   
         $send = $mail->contactMail($request);

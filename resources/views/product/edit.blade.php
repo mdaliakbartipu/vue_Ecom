@@ -35,7 +35,7 @@
                     {{ method_field('PUT') }}
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Product Name </label>
-
+                        <input type="hidden" id="product" name="product" value="{{$product->id}}">
                         <div class="col-sm-9">
                             <input type="text" id="form-field-1-1" class="form-control" name="name" value="{{ $product->name }}" />
                         </div>
@@ -250,7 +250,7 @@
 
                     <div style="width:150%">
                         <h2>Variants</h2><p class="text-warning">You can Update imges here. But You shouldn't changes color or sizes or quantity.It shows that what you have right now.
-                            <br>If you have parchased new product then Add it with new parameters</p>
+                            <br>If you have purchased new product then Add it with new parameters</p>
                     </div>
                     <div class="" style="width:150%">
                         <div class="table-responsive">
@@ -269,7 +269,7 @@
                                                     </select>
                                                 </div>
                                                 <div>
-                                                    <button style="width:100%;margin-top:10px" class="parchase btn btn-warning">Parchase</button>
+                                                    <button style="width:100%;margin-top:10px" class="purchase btn btn-warning">purchase</button>
                                                 </div>
                                             </td>
                                             <td class="col-md-2">
@@ -370,46 +370,78 @@
 
 
 
-// parchase
+// purchase
 
-    $('.parchase').click(async function(){
+    $('.purchase').click(async function(){
         event.preventDefault();
-                    const { value: fruit } = await Swal.fire({
-                    title: 'Select Product Colors',
-                    input: 'select',
-                    inputOptions: {
-                        apples: 'Apples',
-                        bananas: 'Bananas',
-                        grapes: 'Grapes',
-                        oranges: 'Oranges'
-                    },
-                    inputPlaceholder: 'Select a Color',
-                    showCancelButton: true,
-                    });
 
+                const productID = document.getElementById('product').value;
 
-                if (fruit) {
+                const attributesAPI = '/api/get-attributes/'+productID
+                var adata = null;
+                const attributes = fetch(attributesAPI)
+                .then(response => response.json())
+                .then(data=>doAsk(data));
+
+                async function doAsk(data){
+                    // console.log(data.colors)
+                    colors = data.colors
+                    sizes = data.sizes 
+                    colorObject = {}
+                    sizeObject = {}
+                    colors.forEach((color,key) =>
+                        // color will be data
+                        colorObject[color.id] = color.name
+                        )
+                        sizes.forEach((size,key) =>
+                        // color will be data
+                        sizeObject[size.id] = size.name
+                        )
+
+                        // asking for model
+
+                        const { value: color } = await Swal.fire({
+                        title: 'Select Product Colors',
+                        input: 'select',
+                        inputOptions: colorObject,
+                        inputPlaceholder: 'Select a Color',
+                        showCancelButton: true,
+                        });
+
+                        if (color) {
                     const { value: size } = await Swal.fire({
                     title: 'Select Product Sizes',
                     input: 'select',
-                    inputOptions: {
-                        apples: 'A',
-                        bananas: 'B',
-                        grapes: 'G',
-                        oranges: 'O'
-                    },
-                    inputPlaceholder: 'Select a Color',
+                    inputOptions: sizeObject,
+                    inputPlaceholder: 'Select a Size',
                     showCancelButton: true,
                     });
+
                     if(size){
-                        Swal.fire(`You selected: ${size}`)
-                    }
-                    Swal.fire(`You selected: ${fruit}`)
+                        const { value: qty } = await Swal.fire({
+                        title: 'Enter Quantity',
+                        input: 'text',
+                        showCancelButton: true
+                        });
+                    if(qty){
+                        // swal.fire(`you selected ${color} ${size} ${qty}`);
+                        swal.fire("Real Purchase is forbidden for now.It will open soon after testing");
+
+                    }                        
+                    };
+                    
                 }
+
+
+                        console.log(colorObject); 
+                }  
+
+
+                
             });
 
 
-// parchase end
+// purchase end
 
 
 
