@@ -339,16 +339,29 @@
 
 @endsection
 @section('js')
+
+
 <script type="text/javascript">
+
     let rowIndex = 1;
     //  will start by naming name from adding 2 as postfix
 
     function deleteImage(e){
         event.preventDefault();
         // axios call and remove
+        axios
+            .get('/api/delete-image/?image='+e.id)
+            .then(response => ((response.status == 200) ? (Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Image deleted',
+                            showConfirmButton: false,
+                            timer: 1500
+                            })&&(document.getElementById(e.id).innerText ='')): null));
+
         // notify
         console.log(e.id);
-        alert("Image deletion not yet implemented");
+        // alert("Image deletion not yet implemented");
 
         // send request ti api to delete with imageName
 

@@ -194,9 +194,8 @@ class PagesController extends FrontController
         }
     }
 
-    public function test(Request $request, $id)    
-    {   
-
+    public function getAttributes(Request $request)
+    {
         $colors = Color::all();
         $sizes = Size::all();
 
@@ -205,16 +204,64 @@ class PagesController extends FrontController
         } else {
             return json_encode(['status'=>404, 'msg'=>'No attributes found']);
         }
-        
+    }
 
-        $mail = new MailController();   
-        $send = $mail->contactMail($request);
-        
-        if($send){
-            return json_encode(['status'=>200, 'msg'=>'Your message is sent']);
-        } else {
-            return json_encode(['status'=>502, 'msg'=> 'Something wnet wrong and message wasn\'t sent']);
+    
+    public function test(Request $request)    
+    {   
+
+        if(!isset($request->image)){
+            return json_encode(['status'=>502, 'msg'=> 'I got no image!!!']); 
         }
+
+        // dd($request->all());
+        $image = (string)$request->image;
+        $bigPath = 'front/assets/.uploads/products/';
+        $smallPath = 'front/assets/.uploads/products/thumbs/';
+        
+        if(file_exists($bigPath.$image)){
+            echo "yeah i got it!<br/>";
+            if(!unlink($bigPath.$image)){
+                // something went wrong when i tried to remove file
+                return json_encode(['status'=>502, 'msg'=> 'something went wrong when i tried to remove file!']); 
+            }
+        } else {
+            return json_encode(['status'=>502, 'msg'=> 'Believe me! I have no image(big) stored like that!!!']); 
+        }
+
+        if(file_exists($smallPath.$image)){
+            echo "yeah i got it!<br/>";
+            if(!unlink($smallPath.$image)){
+                // something went wrong when i tried to remove file
+                return json_encode(['status'=>502, 'msg'=> 'something went wrong when i tried to remove file!']); 
+            }
+        } else {
+            return json_encode(['status'=>502, 'msg'=> 'Believe me! I have no image(small) stored like that!!!']); 
+        }
+
+        // remove from databse entry
+
+        $imgDB = ProductImages::where('image', $image)->first();
+        if($imgDB){
+            
+            if($imgDB->delete()){
+                return json_encode(['status'=>200, 'msg'=> 'Congratz! Image deleted!']); 
+            }
+
+        } else {
+            return json_encode(['status'=>502, 'msg'=> 'Believe me! Databse hasno image like that']); 
+        }
+
+        echo "working! Chill";        
+
+        // $mail = new MailController();   
+        // $send = $mail->contactMail($request);
+        
+        // if($send){
+        //     return json_encode(['status'=>200, 'msg'=>'Your message is sent']);
+        // } else {
+        //     return json_encode(['status'=>502, 'msg'=> 'Something wnet wrong and message wasn\'t sent']);
+        // }
         
     }
 

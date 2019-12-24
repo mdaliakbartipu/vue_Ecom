@@ -82,6 +82,8 @@
 
 
 <script src="{{ asset('assets/js/jquery-2.1.4.min.js') }}"></script>
+<script src="/front/assets/js/axios.min.js"></script>
+
 <![endif]-->
 <script type="text/javascript">
     if('ontouchstart' in document.documentElement) document.write("<script src='{{ asset('assets/js/jquery.mobile.custom.min.js') }}'>"+"<"+"/script>");
