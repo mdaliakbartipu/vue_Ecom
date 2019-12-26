@@ -152,7 +152,7 @@ Vue.component('cart_row', {
                             title: 'Your cart item has been deleted!',
                             showConfirmButton: false,
                             timer: 1500
-                          })
+                        })
                         axios
                             .get('/api/remove-from-cart/' + variant)
                             .then(response => response.data).then(data => (data.response != 200)).then(status => this.active = status);
@@ -164,7 +164,7 @@ Vue.component('cart_row', {
                             title: 'Have a nice day!',
                             showConfirmButton: false,
                             timer: 1500
-                          })
+                        })
                     }
                 });
 
@@ -315,7 +315,7 @@ Vue.component('productthubslist', {
     data: function () {
         return {
             path: "/front/assets/.uploads/products/thumbs/",
-            count:5
+            count: 5
         }
     },
     methods: {
@@ -649,14 +649,14 @@ Vue.component('product_info', {
                     console.log(response.data.cart.length);
                     let cartQty = document.querySelector('#cart-qty');
                     cartQty.innerText = parseInt(response.data.cart.length);
-                    
+
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
                         title: 'This Product is added to cart! Buy more !',
                         showConfirmButton: false,
                         timer: 1500
-                      })
+                    })
 
                 })
                 .catch(function (error) {
@@ -799,42 +799,52 @@ Vue.component('size_variant', {
 
 
 Vue.component('category-page', {
-    data:function(){
+    data: function () {
         return {
             // cat section            
             // type:null, //type will be cat,sub or super to make dynamic axios call
 
-            id:null,
-            name:null,
-            image:null,
+            id: null,
+            name: null,
+            image: null,
 
             // product section
-            productCount : 100,
-            products:null,
-            productClass:'col-md-4',
+            productCount: 100,
+            products: null,
+            productClass: 'col-md-4',
         }
     },
-    props:['slug', 'type'],
-    methods:{
+    props: ['slug', 'type'],
+    methods: {
         // Methods for sorting to be applied
 
         // set values
-        setValues(cat){
+        setValues(cat) {
             console.log(cat);
             this.id = cat.id;
             this.name = cat.name;
             this.image = cat.image;
             this.products = cat.products;
+        },
+        makeLarge() {
+            this.productClass = 'col-md-3';
+        },
+        makeSmall() {
+            this.productClass = 'col-md-4';
         }
     },
-    mounted(){
+    mounted() {
         axios
-        .get('/api/'+this.type+'-products/' + this.slug)
-        .then(response => ((response.status == 200) ? (
-            this.setValues(response.data.cat)
+            .get('/api/' + this.type + '-products/' + this.slug)
+            .then(response => ((response.status == 200) ? (
+                this.setValues(response.data.cat)
             ) : null));
     },
-    template:` 
+
+    template: ` 
+
+    <cat-sidebar> </cat-sidebar>
+
     <div class="col-lg-9 col-md-12 col-12">
     <div class="item-200">
         <span style="color:red">{{this.products?this.products.length:0}}</span> items in <span style="text-decoration: bold;color:red;font-size:.5em">{{this.name}}</span>
@@ -850,8 +860,8 @@ Vue.component('category-page', {
         </div>
 
         <div class="grid-list float-right">
-            <a href=""><i class="fa fa-th-large" aria-hidden="true"></i></a>
-            <a href=""><i class="fa fa-list" aria-hidden="true"></i>
+            <a @click.prevent="makeLarge" href=""><i class="fa fa-th-large" aria-hidden="true"></i></a>
+            <a @click.prevent="makeSmall" href=""><i class="fa fa-list" aria-hidden="true"></i>
             </a>
         </div>
     </div>
@@ -872,6 +882,109 @@ Vue.component('category-page', {
     `
 });
 
+Vue.component('cat-sidebar', {
+    data:function(){
+        return {
+            sizes:[
+                {
+                    name:'sl',
+                    id:12
+                },
+                {
+                    name:'M',
+                    id:19
+                },
+            ],
+            colors:[
+                {
+                    name:'red',
+                    code:'#FF0000'
+                },
+                {
+                    name:'palevioletred',
+                    code:'#DB7093'
+                },
+            ],
+            brands:null,
+            priceRange:null
+          }
+    },
+    mounted:{
+        // pick size
+
+        // pick colors
+
+        // pick brands
+
+        // pick price limit
+    },
+    template: `
+<div class="col-lg-3 col-md-12 col-12">
+<!--sidebar widget start-->
+<aside class="sidebar_widget">
+    <div class="widget_list widget_categories">
+        <h3>Filter By</h3>
+        <ul>
+            <li class="widget_sub_categories"><a href="javascript:void(0)">Offers</a>
+                <ul class="widget_dropdown_categories">
+                    <li><a href="#">Offer Code FOURTH (38)</a></li>
+
+                    <li><a href="#">Clearance/Closeout (102)</a></li>
+                    <li><a href="#">Last Act (42)</a></li>
+                </ul>
+            </li>
+
+            <li class=""><a href="">Size</a>
+                <ul class="">
+                        <li v-for="(size,index) in this.sizes">
+                        <a :href="size.id">{{size.name}}</a>
+                        </li>
+                </ul>
+            </li>
+
+            <div class="product_variant color cat_color">
+                <h4>color</h4>
+                <ul>
+                    <li v-for="(color,index) in this.colors" :style="'background:'+color.code+';margin-left:5px'"><a href="#" :title="color.name"></a></li>                    
+                </ul>
+            </div>
+
+            <li><a href="#">Brand</a>
+                <br>
+                <div class="custom-control custom-checkbox">
+                        <div class="checkbox" v-for="(color,index) in colors">
+                            <label><input type="checkbox" value=""><?= $brand->name ?></label>
+                        </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+
+    <div class="widget_list widget_filter">
+        <h3>Filter by price</h3>
+        <form action="#">
+            <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+                <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
+            </div>
+            <button type="submit">Filter</button>
+            <input type="text" name="text" id="amount">
+
+        </form>
+    </div>
+    <div class="widget_list widget_categories" style="font-weight: 600">
+        <ul>
+            <li><a href="#">Customers' Top Rated </a></li>
+            <li><a href="#">Discount Range </a></li>
+
+        </ul>
+    </div>
+</aside>
+<!--sidebar widget end-->
+</div>
+`
+});
 
 Vue.component('product_article', {
     data: function () {
@@ -887,18 +1000,18 @@ Vue.component('product_article', {
             console.log("modal clicked" + index);
         }
     },
-    created(){
+    created() {
         $('.counter_number').counterUp({
             delay: 10,
             time: 1000
         });
-        
-        $('[data-countdown]').each(function() {
+
+        $('[data-countdown]').each(function () {
             var $this = $(this),
-                 finalDate = $(this).data('countdown');
-            $this.countdown(finalDate, function(event) {
+                finalDate = $(this).data('countdown');
+            $this.countdown(finalDate, function (event) {
                 $this.html(event.strftime('<div class="countdown_area"><div class="single_countdown"><div class="countdown_number">%D</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">%H</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">%M</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">%S</div><div class="countdown_title">secs</div></div></div>'));
-    
+
             });
         });
     },
@@ -909,18 +1022,18 @@ Vue.component('product_article', {
             delay: 10,
             time: 1000
         });
-        
-        $('[data-countdown]').each(function() {
+
+        $('[data-countdown]').each(function () {
             var $this = $(this),
-            finalDate = $(this).data('countdown');
-            $this.countdown(finalDate, function(event) {
+                finalDate = $(this).data('countdown');
+            $this.countdown(finalDate, function (event) {
                 $this.html(event.strftime('<div class="countdown_area"><div class="single_countdown"><div class="countdown_number">%D</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">%H</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">%M</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">%S</div><div class="countdown_title">secs</div></div></div>'));
-    
+
             });
         });
-        
-      },
-    created(){
+
+    },
+    created() {
         // alert(this.product.discount_till)
         this.dateCount = this.product.discount_till;
 
@@ -1336,7 +1449,7 @@ Vue.component('contact-form', {
                     'Are you missing something?',
                     'Please fill all the fields',
                     'question'
-                  )
+                )
             } else {
                 swal.fire("Your message is sending.Please wait...");
                 axios
@@ -1355,7 +1468,7 @@ Vue.component('contact-form', {
                             title: 'Thank you for your feedback',
                             showConfirmButton: false,
                             timer: 1500
-                          })
+                        })
                     })
                     .catch(function (error) {
                         console.log(error);
