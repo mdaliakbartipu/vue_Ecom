@@ -124,6 +124,7 @@ Route::get('/api/cat-products/{slug}','ProductController@apiCatProducts');
 Route::get('/api/get-colors','ProductController@apiGetColors');
 Route::get('/api/get-sizes','ProductController@apiGetSizes');
 Route::get('/api/get-brands','ProductController@apiGetBrands');
+Route::get('/api/check-if-size','ProductController@apiCheckIfSize');
 
 
 

@@ -811,6 +811,7 @@ Vue.component('category-page', {
             // product section
             productCount: 100,
             products: null,
+            productsSaved:null,
             productClass: 'col-md-4',
         }
     },
@@ -825,12 +826,32 @@ Vue.component('category-page', {
             this.name = cat.name;
             this.image = cat.image;
             this.products = cat.products;
+            this.productsSaved = cat.products;
         },
         makeLarge() {
             this.productClass = 'col-md-3';
         },
         makeSmall() {
             this.productClass = 'col-md-4';
+        },
+
+        addSorted(index, size){
+            if(size==true){
+                this.products.push(this.productsSaved[index]);  
+            }
+        },
+        sortBySize(id){
+            this.products = [];
+            // alert('got it!');
+            for(let index = 0 ; index < this.productsSaved.length; index++){
+                axios
+            .get('/api/check-if-size/?size=' + id + '&product='+this.productsSaved[index].id)
+            .then(response => ((response.status == 200) ? (
+                this.addSorted(index, response.data.size)
+            ) : null));
+            }
+            // make axios call for products
+            // with: cat_id size_id
         }
     },
     mounted() {
@@ -843,7 +864,9 @@ Vue.component('category-page', {
 
     template: ` 
     <div class="row">
-    <cat-sidebar> </cat-sidebar>
+    <cat-sidebar
+    @sortBySize="sortBySize"
+    > </cat-sidebar>
 
     <div class="col-lg-9 col-md-12 col-12">
         <div class="item-200">
@@ -883,48 +906,9 @@ Vue.component('category-page', {
 Vue.component('cat-sidebar', {
     data: function () {
         return {
-            sizes: [
-                {
-                    name: 'sl',
-                    id: 12
-                },
-                {
-                    name: 'M',
-                    id: 19
-                },
-            ],
-            colors: [
-                {
-                    name: 'red',
-                    code: '#FF0000'
-                },
-                {
-                    name: 'palevioletred',
-                    code: '#DB7093'
-                },
-            ],
-            brands: [
-                {
-                    id: 1,
-                    name: 'Apollo'
-                },
-                {
-                    id: 2,
-                    name: 'Nike'
-                },
-                {
-                    id: 2,
-                    name: 'Nike'
-                },
-                {
-                    id: 2,
-                    name: 'Nike'
-                },
-                {
-                    id: 2,
-                    name: 'Nike'
-                },
-            ],
+            sizes: null,
+            colors: null,
+            brands:null,
             priceRange: null
         }
     },
@@ -942,6 +926,13 @@ Vue.component('cat-sidebar', {
         .then(response => ((response.status == 200) ? (this.brands = response.data.brands): null));
     },
     methods: {
+        selectSize(id) {
+            // alert(id);
+            return this.$emit('sortBySize', id);
+        },
+        selectColor(id) {
+            alert(id);
+        },
         selectBrand(id) {
             alert(id);
         }
@@ -962,26 +953,29 @@ Vue.component('cat-sidebar', {
                 </ul>
             </li>
 
-            <li class=""><a href="">Size</a>
-                <ul class="">
-                        <li v-for="(size,index) in this.sizes">
-                        <a :href="size.id">{{size.name}}</a>
-                        </li>
-                </ul>
+            <div class="product_variant color mt-3">
+            <h4>Size</h4>
+            <ul class="tags is-medium">
+            <li class="tag" v-for="(size,index) in this.sizes">
+            <a  @click.prevent="selectSize(size.id)" :href="size.id">{{size.name}}</a>
             </li>
+            </ul>
+            </div>
 
             <div class="product_variant color cat_color">
                 <h4>color</h4>
                 <ul>
-                    <li v-for="(color,index) in this.colors" :style="'background:'+color.code+';margin-left:5px'"><a href="#" :title="color.name"></a></li>                    
+                    <li v-for="(color,index) in this.colors" :style="'background:'+color.code+';margin-left:5px'" >
+                    <a @click.prevent="selectColor(color.id)" href="#" :title="color.name"></a>
+                    </li>                    
                 </ul>
             </div>
 
             <li><a href="#">Brand</a>
                 <br>
                 <div class="tags are-medium">
-                        <div class="tag" v-for="(brand,index) in this.brands">
-                            <span  @click.prevent="selectBrand(brand.id)">{{brand.name}}</span>
+                        <div class="tag" v-for="(brand,index) in this.brands" style="cursor:pointer">
+                            <span @click.prevent="selectBrand(brand.id)">{{brand.name}}</span>
                         </div>
                 </div>
             </li>
