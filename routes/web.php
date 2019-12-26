@@ -121,6 +121,9 @@ Route::get('/api/test','Front\PagesController@test');
 Route::get('/api/get-attributes/{id}','Front\PagesController@getAttributes');
 Route::get('/api/delete-image','Front\PagesController@test');
 Route::get('/api/cat-products/{slug}','ProductController@apiCatProducts');
+Route::get('/api/get-colors','ProductController@apiGetColors');
+Route::get('/api/get-sizes','ProductController@apiGetSizes');
+Route::get('/api/get-brands','ProductController@apiGetBrands');
 
 
 

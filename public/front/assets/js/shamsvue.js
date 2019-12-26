@@ -928,7 +928,19 @@ Vue.component('cat-sidebar', {
             priceRange: null
         }
     },
-  
+    mounted(){
+        axios
+        .get('/api/get-colors/')
+        .then(response => ((response.status == 200) ? (this.colors = response.data.colors): null));
+
+        axios
+        .get('/api/get-sizes/')
+        .then(response => ((response.status == 200) ? (this.sizes = response.data.sizes): null));
+
+        axios
+        .get('/api/get-brands/')
+        .then(response => ((response.status == 200) ? (this.brands = response.data.brands): null));
+    },
     methods: {
         selectBrand(id) {
             alert(id);

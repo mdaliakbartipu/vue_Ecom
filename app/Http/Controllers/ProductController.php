@@ -593,4 +593,33 @@ class ProductController extends Controller
             return json_encode(['status'=>404, 'msg'=>'No products']);
         }
     }
+
+    public function apiGetColors()
+    {
+        $colors = Color::all();
+        if($colors){
+            return json_encode(['status'=>200, 'colors'=>$colors]);
+        } else {
+            return json_encode(['status'=>200, 'msg'=>'No color found']);
+        } 
+    }
+
+    public function apiGetSizes()
+    {
+        $sizes = Size::all();
+        if($sizes){
+            return json_encode(['status'=>200, 'sizes'=>$sizes]);
+        } else {
+            return json_encode(['status'=>200, 'msg'=>'No color found']);
+        } 
+    }
+    public function apiGetBrands()
+    {
+        $brands = Brand::all();
+        if($brands){
+            return json_encode(['status'=>200, 'brands'=>$brands]);
+        } else {
+            return json_encode(['status'=>200, 'msg'=>'No color found']);
+        } 
+    }
 }
