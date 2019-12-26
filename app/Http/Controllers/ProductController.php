@@ -586,7 +586,7 @@ class ProductController extends Controller
 
     public function apiCatProducts($slug)
     {
-        $products = Category::where('slug', (string)$slug)->with('products')->groupBy('id')->first();
+        $products = Category::where('slug', (string)$slug)->with('products')->first();
         if($products){
             return json_encode(['status'=>200, 'cat' => $products]);
         } else {
@@ -625,6 +625,40 @@ class ProductController extends Controller
 
 
     public function apiCheckIfSize(Request $request)
+    {
+        // dd($request->all());
+        $pro = $request->product?(int)$request->product:null;
+        $size = $request->size?(int)$request->size:null;
+
+        if($pro && $size){
+            $found = ProductVariant::where('product_id',$pro)->where('size_id', $size)->first();
+            if($found){
+                return json_encode(['status'=>200, 'size'=> true]);
+            } else {
+                return json_encode(['status'=>200, 'size'=>false]);
+            }
+        } else {
+            return json_encode(['status'=>404, 'msg'=>'wrong parameters']);
+        }
+    }
+    public function apiCheckIfColor(Request $request)
+    {
+        // dd($request->all());
+        $pro = $request->product?(int)$request->product:null;
+        $color = $request->color?(int)$request->color:null;
+
+        if($pro && $color){
+            $found = ProductVariant::where('product_id',$pro)->where('color_id', $color)->first();
+            if($found){
+                return json_encode(['status'=>200, 'color'=> true]);
+            } else {
+                return json_encode(['status'=>200, 'color'=>false]);
+            }
+        } else {
+            return json_encode(['status'=>404, 'msg'=>'wrong parameters']);
+        }
+    }
+    public function apiCheckIfBrand(Request $request)
     {
         // dd($request->all());
         $pro = $request->product?(int)$request->product:null;

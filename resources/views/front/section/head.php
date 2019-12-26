@@ -23,8 +23,7 @@
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="<?=ASSETS?>/css/style.css">
     <link rel="stylesheet" href="<?=ASSETS?>/css/animate.css">
-    <link rel="stylesheet" href="<?=ASSETS?>/css/zoomOnHover.css">
-    <link rel="stylesheet" href="<?=ASSETS?>/css/hover.css">
+
     
 <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
 </head>

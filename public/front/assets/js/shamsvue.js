@@ -813,6 +813,13 @@ Vue.component('category-page', {
             products: null,
             productsSaved:null,
             productClass: 'col-md-4',
+
+            // selected
+            selected:{
+                color:null,
+                size:null,
+                brand:null
+            }
         }
     },
     props: ['slug', 'type'],
@@ -852,6 +859,32 @@ Vue.component('category-page', {
             }
             // make axios call for products
             // with: cat_id size_id
+        },
+        sortByColor(id){
+            this.products = [];
+            // alert('got it!');
+            for(let index = 0 ; index < this.productsSaved.length; index++){
+                axios
+            .get('/api/check-if-color/?color=' + id + '&product='+this.productsSaved[index].id)
+            .then(response => ((response.status == 200) ? (
+                this.addSorted(index, response.data.color)
+            ) : null));
+            }
+            // make axios call for products
+            // with: cat_id size_id
+        },
+        sortByBrand(id){
+            this.products = [];
+            // alert('got it!');
+            for(let index = 0 ; index < this.productsSaved.length; index++){
+                axios
+            .get('/api/check-if-size/?brand=' + id + '&product='+this.productsSaved[index].id)
+            .then(response => ((response.status == 200) ? (
+                this.addSorted(index, response.data.size)
+            ) : null));
+            }
+            // make axios call for products
+            // with: cat_id size_id
         }
     },
     mounted() {
@@ -865,8 +898,10 @@ Vue.component('category-page', {
     template: ` 
     <div class="row">
     <cat-sidebar
-    @sortBySize="sortBySize"
-    > </cat-sidebar>
+        @sortBySize="sortBySize"
+        @sortByColor="sortByColor"
+        @sortByBrand="sortByBrand"
+        > </cat-sidebar>
 
     <div class="col-lg-9 col-md-12 col-12">
         <div class="item-200">
@@ -909,7 +944,10 @@ Vue.component('cat-sidebar', {
             sizes: null,
             colors: null,
             brands:null,
-            priceRange: null
+            priceRange: null,
+            topPadding:'pb-5',
+            makeLarge:'is-large',
+
         }
     },
     mounted(){
@@ -928,13 +966,23 @@ Vue.component('cat-sidebar', {
     methods: {
         selectSize(id) {
             // alert(id);
+            var found = document.querySelectorAll('.sizes');
+            for(let count=0;count<found.length;count++){
+                found[count].classList.remove(this.makeLarge);
+            }
+            document.querySelector('#size'+id).classList.add(this.makeLarge);
             return this.$emit('sortBySize', id);
         },
         selectColor(id) {
-            alert(id);
+            var found = document.querySelectorAll('.colors');
+            for(let count=0;count<found.length;count++){
+                found[count].classList.remove(this.topPadding);
+            }
+            document.querySelector('#color'+id).classList.add(this.topPadding);
+            return this.$emit('sortByColor', id);
         },
         selectBrand(id) {
-            alert(id);
+            return this.$emit('sortByBrand', id);
         }
     },
     template: `
@@ -956,8 +1004,8 @@ Vue.component('cat-sidebar', {
             <div class="product_variant color mt-3">
             <h4>Size</h4>
             <ul class="tags is-medium">
-            <li class="tag" v-for="(size,index) in this.sizes">
-            <a  @click.prevent="selectSize(size.id)" :href="size.id">{{size.name}}</a>
+            <li class="tag sizes" v-for="(size,index) in this.sizes" :id="'size'+size.id">
+            <a  @click.prevent="selectSize(size.id)"  :href="size.id">{{size.name}}</a>
             </li>
             </ul>
             </div>
@@ -965,8 +1013,8 @@ Vue.component('cat-sidebar', {
             <div class="product_variant color cat_color">
                 <h4>color</h4>
                 <ul>
-                    <li v-for="(color,index) in this.colors" :style="'background:'+color.code+';margin-left:5px'" >
-                    <a @click.prevent="selectColor(color.id)" href="#" :title="color.name"></a>
+                    <li :id="'color'+color.id" v-for="(color,index) in this.colors" :style="'background:'+color.code+';margin-left:5px'" class="colors">
+                    <a  @click.prevent="selectColor(color.id)" href="#" :title="color.name"></a>
                     </li>                    
                 </ul>
             </div>

@@ -1,27 +1,12 @@
 <script src="<?=ASSETS?>/js/plugins.js"></script>
     <!-- Main JS -->
-
-
-    <script src="<?=ASSETS?>/js/sweetalert2@9.js"></script>
-    <script src="<?=ASSETS?>/js/vue.js"></script>
     <script src="<?=ASSETS?>/js/axios.min.js"></script>
+    <script src="<?=ASSETS?>/js/vue.js"></script>
     <script src="<?=ASSETS?>/js/shamsvue.js"></script>
-
     <script src="<?=ASSETS?>/js/main.js"></script>
-
-
     <!-- Plugins JS -->
     <script src="<?=ASSETS?>/js/owl.carousel.min.js"></script>
     <script src="<?=ASSETS?>/js/wow.min.js"></script>
-
-    
-
-
-    <script>
-            //   new WOW().init();
-              </script> 
-              <!--owlcarusol-->       
-</script>
 <script>
             $(document).ready(function() {
               var owl = $('.owl-carousel');
@@ -79,83 +64,6 @@
     return outputArray;
 }
 
-function setcss(cls, item, item_inner) {
-    var a = [];
-    var b = ['', '', '', '', '', ''];
-    var c = d = f = g = 0;
-    var e = ['xl', 'lg', 'md', 'sm', 'xs'];
-    var h = [1200, 992, 768, 567, 0];
-    var i = '';
-    var l = [];
-    for (var i = 0; i < cls.length; i++) {
-        var temp = cls[i].split('-');
-        if (temp.length == 3) {
-          switch (temp[1]) {
-            case 'xl':
-                d = 0; break;
-            case 'lg':
-                d = 1; break;
-            case 'md':
-                d = 2; break;
-            case 'sm':
-                d = 3; break;
-            case 'xs':
-                d = 4; 
-          }
-          b[d] = temp[2]; 
-        }
-    }
-    for (var j = 0; j < b.length; j++) {
-        if (b[j] != '') {
-            if (c == 0) {
-                c = (12 / b[j]);
-            }
-            f = 12 / b[j];
-            g = 100 / f;
-            i = item_inner + " > .carousel-item.active.carousel-item-right," + item_inner + " > .carousel-item.carousel-item-next {-webkit-transform: translate3d(" + g + "%, 0, 0);transform: translate3d(" + g + ", 0, 0);left: 0;}" + item_inner + " > .carousel-item.active.carousel-item-left," + item_inner + " > .carousel-item.carousel-item-prev {-webkit-transform: translate3d(-" + g + "%, 0, 0);transform: translate3d(-" + g + "%, 0, 0);left: 0;}" + item_inner + " > .carousel-item.carousel-item-left, " + item_inner + " > .carousel-item.carousel-item-prev.carousel-item-right, " + item_inner + " > .carousel-item.active {-webkit-transform: translate3d(0, 0, 0);transform: translate3d(0, 0, 0);left: 0;}";
-            if (f > 1) {
-                for (k = 0; k < (f - 1); k++) {
-                    l.push(item + " .cloneditem-" + k);
-                }
-                if (l.length) {
-                    i = i + l.join(',') + "{display: block;}";
-                }
-                l = [];
-            }
-            if (h[j] != 0) {
-                i = "@media all and (min-width: " + h[j] + "px) and (transform-3d), all and (min-width:" + h[j] + "px) and (-webkit-transform-3d) {" + i + "}";
-            }
-            $('#slider-css').prepend(i);
-        }
-    }
-    $(item).each(function() {
-        var itemToClone = $(this);
-        for (var i = 0; i < (c - 1); i++) {
-            itemToClone = itemToClone.next();
-            if (!itemToClone.length) {
-                itemToClone = $(this).siblings(':first');
-            }
-            itemToClone.children(':first-child').clone()
-                .addClass("cloneditem-" + (i))
-                .appendTo($(this));
-        }
-    });
-}
-
-
-//Use Different Slider IDs for multiple slider
-$(document).ready(function() {
-    var item = '#slider-1 .carousel-item';
-    var item_inner = "#slider-1 .carousel-inner";
-    classes = GetUnique(item);
-    setcss(classes, item, item_inner);
-    
-    
-    var item_1 = '#slider-2 .carousel-item';
-    var item_inner_1 = "#slider-2 .carousel-inner";
-    classes = GetUnique(item_1);
-    setcss(classes, item_1, item_inner_1);
-});
 </script>
 
 
