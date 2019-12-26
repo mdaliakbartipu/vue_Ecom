@@ -48,7 +48,7 @@ class PagesController extends FrontController
     public function cat( $slug = null)
     {
         $section = Category::where('slug', (string)$slug)->with('products')->first();
-    
+
         return view('front.catagoryProducts',[
             'section' => $section,
             'colors'   => Color::get(),

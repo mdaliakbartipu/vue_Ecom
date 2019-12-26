@@ -798,6 +798,81 @@ Vue.component('size_variant', {
 });
 
 
+Vue.component('category-page', {
+    data:function(){
+        return {
+            // cat section            
+            // type:null, //type will be cat,sub or super to make dynamic axios call
+
+            id:null,
+            name:null,
+            image:null,
+
+            // product section
+            productCount : 100,
+            products:null,
+            productClass:'col-md-4',
+        }
+    },
+    props:['slug', 'type'],
+    methods:{
+        // Methods for sorting to be applied
+
+        // set values
+        setValues(cat){
+            console.log(cat);
+            this.id = cat.id;
+            this.name = cat.name;
+            this.image = cat.image;
+            this.products = cat.products;
+        }
+    },
+    mounted(){
+        axios
+        .get('/api/'+this.type+'-products/' + this.slug)
+        .then(response => ((response.status == 200) ? (
+            this.setValues(response.data.cat)
+            ) : null));
+    },
+    template:` 
+    <div class="col-lg-9 col-md-12 col-12">
+    <div class="item-200">
+        <span style="color:red">{{this.products?this.products.length:0}}</span> items in <span style="text-decoration: bold;color:red;font-size:.5em">{{this.name}}</span>
+        <div style="font-size:.5em;margin-top: .5em;">Sort by
+            <select class="aml-5" id="sortBy" title="sortBy">
+                <option value="ORIGINAL" selected="selected">Featured Items</option>
+                <option value="PRICE_LOW_TO_HIGH">Price: Low to High</option>
+                <option value="PRICE_HIGH_TO_LOW">Price: High to Low</option>
+                <option value="TOP_RATED">Customers' Top Rated</option>
+                <option value="BEST_SELLERS">Best Sellers</option>
+                <option value="NEW_ITEMS">New Arrivals</option>
+            </select>
+        </div>
+
+        <div class="grid-list float-right">
+            <a href=""><i class="fa fa-th-large" aria-hidden="true"></i></a>
+            <a href=""><i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="row no-gutters shop_wrapper">
+    <div :class="productClass" v-for="(product,index) in this.products" :key="index"> 
+        <product_article 
+            :product="product"
+            :tab="name"
+        ></product_article>
+
+    </div>
+    </div>
+
+
+</div>
+    
+    `
+});
+
+
 Vue.component('product_article', {
     data: function () {
         return {

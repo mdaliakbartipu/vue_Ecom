@@ -664,7 +664,7 @@ $(() => {
 
     $('[data-countdown]').each(function() {
         var $this = $(this),
-            finalDate = $(this).data('countdown');
+             finalDate = $(this).data('countdown');
         $this.countdown(finalDate, function(event) {
             $this.html(event.strftime('<div class="countdown_area"><div class="single_countdown"><div class="countdown_number">%D</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">%H</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">%M</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">%S</div><div class="countdown_title">secs</div></div></div>'));
 

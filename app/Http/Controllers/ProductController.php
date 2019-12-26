@@ -583,4 +583,14 @@ class ProductController extends Controller
             echo json_encode(null);
         }
     }
+
+    public function apiCatProducts($slug)
+    {
+        $products = Category::where('slug', (string)$slug)->with('products')->first();
+        if($products){
+            return json_encode(['status'=>200, 'cat' => $products]);
+        } else {
+            return json_encode(['status'=>404, 'msg'=>'No products']);
+        }
+    }
 }
