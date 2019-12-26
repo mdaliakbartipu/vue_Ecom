@@ -842,85 +842,101 @@ Vue.component('category-page', {
     },
 
     template: ` 
-
+    <div class="row">
     <cat-sidebar> </cat-sidebar>
 
     <div class="col-lg-9 col-md-12 col-12">
-    <div class="item-200">
-        <span style="color:red">{{this.products?this.products.length:0}}</span> items in <span style="text-decoration: bold;color:red;font-size:.5em">{{this.name}}</span>
-        <div style="font-size:.5em;margin-top: .5em;">Sort by
-            <select class="aml-5" id="sortBy" title="sortBy">
-                <option value="ORIGINAL" selected="selected">Featured Items</option>
-                <option value="PRICE_LOW_TO_HIGH">Price: Low to High</option>
-                <option value="PRICE_HIGH_TO_LOW">Price: High to Low</option>
-                <option value="TOP_RATED">Customers' Top Rated</option>
-                <option value="BEST_SELLERS">Best Sellers</option>
-                <option value="NEW_ITEMS">New Arrivals</option>
-            </select>
+        <div class="item-200">
+            <span style="color:red">{{this.products?this.products.length:0}}</span> items in <span style="text-decoration: bold;color:red;font-size:.5em">{{this.name}}</span>
+            <div style="font-size:.5em;margin-top: .5em;">Sort by
+                <select class="aml-5" id="sortBy" title="sortBy">
+                    <option value="ORIGINAL" selected="selected">Featured Items</option>
+                    <option value="PRICE_LOW_TO_HIGH">Price: Low to High</option>
+                    <option value="PRICE_HIGH_TO_LOW">Price: High to Low</option>
+                    <option value="TOP_RATED">Customers' Top Rated</option>
+                    <option value="BEST_SELLERS">Best Sellers</option>
+                    <option value="NEW_ITEMS">New Arrivals</option>
+                </select>
+            </div>
+
+            <div class="grid-list float-right">
+                <a @click.prevent="makeLarge" href=""><i class="fa fa-th-large" aria-hidden="true"></i></a>
+                <a @click.prevent="makeSmall" href=""><i class="fa fa-list" aria-hidden="true"></i>
+                </a>
+            </div>
         </div>
 
-        <div class="grid-list float-right">
-            <a @click.prevent="makeLarge" href=""><i class="fa fa-th-large" aria-hidden="true"></i></a>
-            <a @click.prevent="makeSmall" href=""><i class="fa fa-list" aria-hidden="true"></i>
-            </a>
+        <div class="row no-gutters shop_wrapper">
+            <div :class="productClass" v-for="(product,index) in this.products" :key="index"> 
+                <product_article 
+                    :product="product"
+                    :tab="name"
+                ></product_article>
+            </div>
         </div>
     </div>
-
-    <div class="row no-gutters shop_wrapper">
-    <div :class="productClass" v-for="(product,index) in this.products" :key="index"> 
-        <product_article 
-            :product="product"
-            :tab="name"
-        ></product_article>
-
-    </div>
-    </div>
-
-
 </div>
     
     `
 });
 
 Vue.component('cat-sidebar', {
-    data:function(){
+    data: function () {
         return {
-            sizes:[
+            sizes: [
                 {
-                    name:'sl',
-                    id:12
+                    name: 'sl',
+                    id: 12
                 },
                 {
-                    name:'M',
-                    id:19
-                },
-            ],
-            colors:[
-                {
-                    name:'red',
-                    code:'#FF0000'
-                },
-                {
-                    name:'palevioletred',
-                    code:'#DB7093'
+                    name: 'M',
+                    id: 19
                 },
             ],
-            brands:null,
-            priceRange:null
-          }
+            colors: [
+                {
+                    name: 'red',
+                    code: '#FF0000'
+                },
+                {
+                    name: 'palevioletred',
+                    code: '#DB7093'
+                },
+            ],
+            brands: [
+                {
+                    id: 1,
+                    name: 'Apollo'
+                },
+                {
+                    id: 2,
+                    name: 'Nike'
+                },
+                {
+                    id: 2,
+                    name: 'Nike'
+                },
+                {
+                    id: 2,
+                    name: 'Nike'
+                },
+                {
+                    id: 2,
+                    name: 'Nike'
+                },
+            ],
+            priceRange: null
+        }
     },
-    mounted:{
-        // pick size
-
-        // pick colors
-
-        // pick brands
-
-        // pick price limit
+  
+    methods: {
+        selectBrand(id) {
+            alert(id);
+        }
     },
     template: `
 <div class="col-lg-3 col-md-12 col-12">
-<!--sidebar widget start-->
+
 <aside class="sidebar_widget">
     <div class="widget_list widget_categories">
         <h3>Filter By</h3>
@@ -951,9 +967,9 @@ Vue.component('cat-sidebar', {
 
             <li><a href="#">Brand</a>
                 <br>
-                <div class="custom-control custom-checkbox">
-                        <div class="checkbox" v-for="(color,index) in colors">
-                            <label><input type="checkbox" value=""><?= $brand->name ?></label>
+                <div class="tags are-medium">
+                        <div class="tag" v-for="(brand,index) in this.brands">
+                            <span  @click.prevent="selectBrand(brand.id)">{{brand.name}}</span>
                         </div>
                 </div>
             </li>
@@ -981,7 +997,7 @@ Vue.component('cat-sidebar', {
         </ul>
     </div>
 </aside>
-<!--sidebar widget end-->
+
 </div>
 `
 });
