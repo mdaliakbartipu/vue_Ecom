@@ -1,22 +1,24 @@
+<script src="<?=ASSETS?>/js/plugins.js"></script>
+    <!-- Main JS -->
+
 
     <script src="<?=ASSETS?>/js/sweetalert2@9.js"></script>
     <script src="<?=ASSETS?>/js/vue.js"></script>
     <script src="<?=ASSETS?>/js/axios.min.js"></script>
     <script src="<?=ASSETS?>/js/shamsvue.js"></script>
 
+    <script src="<?=ASSETS?>/js/main.js"></script>
 
 
     <!-- Plugins JS -->
-    <script src="<?=ASSETS?>/js/plugins.js"></script>
-    <!-- Main JS -->
-    <script src="<?=ASSETS?>/js/main.js"></script>
-    <script src="<?=ASSETS?>/js/wow.min.js"></script>
     <script src="<?=ASSETS?>/js/owl.carousel.min.js"></script>
+    <script src="<?=ASSETS?>/js/wow.min.js"></script>
+
     
 
 
     <script>
-              new WOW().init();
+            //   new WOW().init();
               </script> 
               <!--owlcarusol-->       
 </script>

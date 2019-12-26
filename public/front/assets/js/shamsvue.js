@@ -345,7 +345,7 @@ Vue.component('productbigimage', {
     },
     props: ['idtext', 'src', 'datazoom'],
     template: `
-    <div id="img-1" class="bigImage col-md-10 zoomWrapper single-zoom">
+    <div id="img-1" class="W col-md-10 zoomWrapper single-zoom big-image">
         <img loading="lazy" :id="idtext" :src="path+src"  :data-zoom-image="datazoom" alt="big-1">
     </div>
     `
@@ -803,6 +803,7 @@ Vue.component('product_article', {
         return {
             link: "/singleProduct/",
             src: '/front/assets/.uploads/products/thumbs/',
+            dateCount: null,
         }
     },
     methods: {
@@ -811,6 +812,45 @@ Vue.component('product_article', {
             console.log("modal clicked" + index);
         }
     },
+    created(){
+        $('.counter_number').counterUp({
+            delay: 10,
+            time: 1000
+        });
+        
+        $('[data-countdown]').each(function() {
+            var $this = $(this),
+                 finalDate = $(this).data('countdown');
+            $this.countdown(finalDate, function(event) {
+                $this.html(event.strftime('<div class="countdown_area"><div class="single_countdown"><div class="countdown_number">%D</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">%H</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">%M</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">%S</div><div class="countdown_title">secs</div></div></div>'));
+    
+            });
+        });
+    },
+    mounted() {
+        // alert("mounted"); // I'm text inside the component.
+        // alert(this.dateCount);
+        $('.counter_number').counterUp({
+            delay: 10,
+            time: 1000
+        });
+        
+        $('[data-countdown]').each(function() {
+            var $this = $(this),
+            finalDate = $(this).data('countdown');
+            $this.countdown(finalDate, function(event) {
+                $this.html(event.strftime('<div class="countdown_area"><div class="single_countdown"><div class="countdown_number">%D</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">%H</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">%M</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">%S</div><div class="countdown_title">secs</div></div></div>'));
+    
+            });
+        });
+        
+      },
+    created(){
+        // alert(this.product.discount_till)
+        this.dateCount = this.product.discount_till;
+
+    },
+
     props: ['product', 'tab'],
     template: `<div class="" style="width: 241px;">
     <article class="single_product">
@@ -834,7 +874,7 @@ Vue.component('product_article', {
         </div>
         <div class="product_content">
          <div class="product_timing">
-                    <div :data-countdown="this.product.discount_till"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">2</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">30</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
+                    <div v-if="dateCount" :data-countdown="dateCount"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">2</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">30</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
                 </div>
             <div class="product_content_inner">
                 <h2 class="product_name_brand_name">{{this.product.brand}}</h2>

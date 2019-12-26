@@ -14485,3 +14485,9 @@ $MISC
                           border: 1px solid #008f95;
                           padding: 25px;
                       }
+
+
+                    }
+                    .big-image img{
+                        height: 100%;
+                    }
