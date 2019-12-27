@@ -37,7 +37,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        die("This option is deactivated for security reasons. It will open soon <a style='color:white; background:green;padding:5px'  href='/'>Go Back</a>");
+        // die("This option is deactivated for security reasons. It will open soon <a style='color:white; background:green;padding:5px'  href='/'>Go Back</a>");
         $this->middleware('guest');
     }
 

@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
         [
             'name' => 'Mr. Saheen',
             'email' => 'ceo@smartsoftware.com.bd',
+            'role' => 1,
             'email_verified_at' => today(),
             'password' => bcrypt('1234567'),
         ]);

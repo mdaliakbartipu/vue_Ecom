@@ -14,6 +14,14 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    
+        $this->middleware(function ($request, $next) {
+            if(\Auth::user()->role != 1 ){
+                return redirect('/');
+            }
+            return $next($request);
+        });
+
     }
 
     /**
@@ -21,8 +29,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $user)
     {
+        // 
+        // dd($user->user());
+        // check if admin or redirect 
         return view('home.home');
     }
 }
