@@ -750,8 +750,8 @@ $MISC
                   }
                   
                   img {
-                      max-width: 100%;
-                      height: auto;
+                      /* max-width: 100%; */
+                      /* height: auto; */
                       /* position: absolute; */
                   }
                   
@@ -5273,7 +5273,8 @@ $MISC
                       margin-left: 17px;
                       background: #fff;
                       margin-top: 30px;
-                      margin-right: 8px;
+                      /* margin-right: 8px; */
+                      width:217px;
                   }
                   
                   .single_product:hover {
@@ -5297,6 +5298,8 @@ $MISC
                   
                   .product_thumb {
                       position: relative;
+                      height: 264px;
+                      /* width: 217px; */
                   }
                   
                   .product_thumb a.secondary_img {
@@ -5333,6 +5336,7 @@ $MISC
                       text-align: center;
                       margin-top: -2px;
                       margin-left: 1px;
+                      height: 250px;
                   }
                   
                   .product_content h4 {
@@ -5434,7 +5438,10 @@ $MISC
                   /*.product_timing {
   margin-top: 5px;
 }*/
-                  
+                  .product_timing{
+                      height: 70px;
+                      /* width: 217px; */
+                  }
                   .single_countdown {
                       display: inline-block;
                       margin-right: 6px;

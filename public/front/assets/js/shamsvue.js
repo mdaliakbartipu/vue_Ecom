@@ -1319,7 +1319,7 @@ Vue.component('tab_products', {
     props: ['tab'],
     template: `
     <div>
-        <section style="display:flex">
+        <section style="display:flex;justify-content: space-around;flex-wrap:nowrap">
                 <product_article   v-for="(product,index) in this.tabProducts" :key="index"
                     :product="product"
                     :tab="tab"

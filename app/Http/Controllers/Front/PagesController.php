@@ -107,15 +107,17 @@ class PagesController extends FrontController
     public function cart()
     {
         $carts = \Session::get('cart');
+
+        if(!$carts){
+            return redirect('/');
+        }
+
         foreach($carts as &$item){
             // dd($item);
             $imageInfo = ProductImages::where('variant_id',$item['color_id'])->first();
             if($imageInfo){
                 $item['image'] = $imageInfo->image;
             }
-        }
-        if(!$carts){
-            return redirect('/');
         }
        
         return view('front.cart', ['cartProducts' => $carts]);
@@ -174,19 +176,13 @@ class PagesController extends FrontController
     public function submitForm(Request $request)    
     {   
 
-        $request->validate([
-            'name' =>'required',
-            'email' => 'required',
-            'subject' => 'required',
-            'message' => 'required',
-        ]);
+  
 
 
         $mail = new MailController();   
 
         $send = $mail->contactMail($request);
 
-        return json_encode("hello");
         if($send){
             return json_encode(['status'=>200, 'msg'=>'Your message is sent']);
         } else {
