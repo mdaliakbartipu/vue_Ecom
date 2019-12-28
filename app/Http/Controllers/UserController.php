@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+use App\UserProfile;
+
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -105,5 +107,41 @@ class UserController extends Controller
     {
         $user = User::find($id)->delete();
         return redirect(route('user.index'))->with('successMsg','User Deleted Successfully');
+    }
+
+    // Front user dashboard
+
+    public function saveUserInfo(Request $request)
+    {
+        // dd($request->all());
+        // validation
+
+
+        $userID = \Auth::user()->id;
+        $profile = UserProfile::find($userID);
+        if($profile){
+            $profile->first_name = $request->first_name;
+            $profile->last_name = $request->last_name;
+            $profile->email = $request->email;
+            $profile->phone = $request->phone;
+            // $profile->dob = $request->dob;
+            $profile->gender = $request->id_gender;
+            $profile->save();
+            return redirect('/dashboard')->with('success', 'Profile updated');
+        } else{
+            $profile  = new UserProfile;
+            $profile->user_id = $userID;
+            $profile->first_name = $request->first_name;
+            $profile->last_name = $request->last_name;
+            $profile->email = $request->email;
+            $profile->phone = $request->phone;
+            // $profile->dob = $request->dob;
+            $profile->gender = $request->id_gender;
+            $profile->save();
+            return redirect('/dashboard')->with('success', 'New Profile Created');
+        }
+
+        return redirect('/dashboard')->with('error', 'Profile Not Updated');
+        
     }
 }

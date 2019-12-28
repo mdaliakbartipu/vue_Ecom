@@ -15,10 +15,11 @@ class CreateUserProfileTable extends Migration
     {
         Schema::create('user_profile', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
-            $table->string('phone');
+            $table->bigInteger('user_id')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
@@ -26,7 +27,7 @@ class CreateUserProfileTable extends Migration
             $table->string('address')->nullable();
             $table->string('shipping_address')->nullable();
             $table->dateTime('dob')->nullable();
-            $table->string('gender')->nullable();
+            $table->string('gender')->nullable()->comment('1=male;2=female');
             $table->timestamps();
         });
     }
