@@ -308,7 +308,7 @@
 
             <ul class="submenu">
 
-                <li class="{{-- {{ request()->segment(1) == "group" ? 'open' : '' }} --}}">
+                <!-- <li class="{{-- {{ request()->segment(1) == "group" ? 'open' : '' }} --}}">
 
                     <a href="{{ url('banner') }}" class="dropdown-toggle">
                         </i>
@@ -334,7 +334,7 @@
                             <b class="arrow"></b>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
                 <li class="{{ request()->is('slider') ? 'active' : '' }}">
 
