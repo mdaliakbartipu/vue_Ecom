@@ -877,15 +877,14 @@ Vue.component('category-page', {
             this.products = [];
             // alert('got it!');
             for(let index = 0 ; index < this.productsSaved.length; index++){
-                axios
-            .get('/api/check-if-size/?brand=' + id + '&product='+this.productsSaved[index].id)
-            .then(response => ((response.status == 200) ? (
-                this.addSorted(index, response.data.size)
-            ) : null));
-            }
+                  if(this.productsSaved[index].brand==id){
+                    this.products.push(this.productsSaved[index]);
+                    console.log("got it");
+                }
+        }
+    }
             // make axios call for products
             // with: cat_id size_id
-        }
     },
     mounted() {
         axios
