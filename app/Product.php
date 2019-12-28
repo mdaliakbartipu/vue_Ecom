@@ -40,4 +40,9 @@ class Product extends Model
     {
         return  Brand::where('id', $this->brand)->first();
     }
+
+    public function variants()
+    {
+        return  $this->hasMany(ProductVariant::class);
+    }
 }

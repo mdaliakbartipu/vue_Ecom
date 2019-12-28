@@ -23,7 +23,7 @@ class CreateUserProfileTable extends Migration
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
-            $table->string('street_address')->nullable();
+            $table->string('street')->nullable();
             $table->string('address')->nullable();
             $table->string('shipping_address')->nullable();
             $table->dateTime('dob')->nullable();

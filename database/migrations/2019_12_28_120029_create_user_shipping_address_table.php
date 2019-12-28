@@ -15,15 +15,15 @@ class CreateUserShippingAddressTable extends Migration
     {
         Schema::create('user_shipping_address', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
-            $table->string('phone');
+            $table->bigInteger('user_id')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
-            $table->string('street_address')->nullable();
+            $table->string('street')->nullable();
             $table->string('address')->nullable();
             $table->timestamps();
         });

@@ -129,5 +129,5 @@ Route::get('/api/check-if-color','ProductController@apiCheckIfColor');
 Route::post('/save-user-info','UserController@saveUserInfo');
 
 // order
-Route::post('/order','ProductController@order');
+Route::post('/order','OrderController@gotNewOrder');
 

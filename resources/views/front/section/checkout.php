@@ -76,7 +76,7 @@ include("partials/breadcumb.php"); ?>
                                         </div>
                                     </div>
                                     <div class="col-12 mb-20">
-                                        <input id="address" type="checkbox" data-target="createp_account">
+                                        <input id="address" type="checkbox" data-target="createp_account" name="shipping">
                                         <label class="righ_0" for="address" data-toggle="collapse" data-target="#collapsetwo" aria-controls="collapseOne">Ship to a different address?</label>
 
                                         <div id="collapsetwo" class="collapse one" data-parent="#accordion">

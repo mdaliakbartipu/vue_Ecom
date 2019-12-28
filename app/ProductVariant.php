@@ -58,4 +58,8 @@ class ProductVariant extends Model
     {
         return $this->belongsTo('App\Size');
     }
+    public function product()
+    {
+        return $this->belongsTo('App\Product');
+    }
 }
