@@ -125,7 +125,12 @@ class PagesController extends FrontController
     
     public function checkout()
     {
-        return view('front.checkout');
+        $carts = \Session::get('cart');
+        if(!$carts){
+            return redirect('/');
+        }
+
+        return view('front.checkout',['cartProducts' => $carts]);
     }
 
     public function about()

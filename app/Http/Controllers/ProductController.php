@@ -675,4 +675,9 @@ class ProductController extends Controller
             return json_encode(['status'=>404, 'msg'=>'wrong parameters']);
         }
     }
+
+    public function order(Request $request)
+    {
+        dd($request->all());
+    }
 }

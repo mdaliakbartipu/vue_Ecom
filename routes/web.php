@@ -128,4 +128,6 @@ Route::get('/api/check-if-size','ProductController@apiCheckIfSize');
 Route::get('/api/check-if-color','ProductController@apiCheckIfColor');
 Route::post('/save-user-info','UserController@saveUserInfo');
 
+// order
+Route::post('/order','ProductController@order');
 
