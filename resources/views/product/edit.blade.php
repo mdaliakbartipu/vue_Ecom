@@ -340,7 +340,8 @@
 @endsection
 @section('js')
 
-
+<script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
+    <script src="{{ asset('assets/js/ace.min.js') }}"></script>
 <script type="text/javascript">
 
     let rowIndex = 1;

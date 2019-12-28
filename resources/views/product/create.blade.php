@@ -4,7 +4,8 @@
 <i class="fa fa-plus-circle"></i> Product
 @stop
 @section('css')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 @stop
 
 
@@ -291,8 +292,8 @@
 @endsection
 
 @section('js')
-
-
+<script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
+    <script src="{{ asset('assets/js/ace.min.js') }}"></script>
 <script type="text/javascript">
     var rowIndex = 1;
     //  will start by naming name from adding 2 as postfix

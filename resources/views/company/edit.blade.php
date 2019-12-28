@@ -141,6 +141,7 @@
 @endsection
 
 @push('scripts')
-
+<script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
+    <script src="{{ asset('assets/js/ace.min.js') }}"></script>
 @endpush
 

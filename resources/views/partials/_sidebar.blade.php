@@ -1,4 +1,4 @@
-<div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+<div id="sidebar" class="sidebar responsive  ace-save-state">
     <script type="text/javascript">
         try {
             ace.settings.loadState('sidebar')
@@ -49,18 +49,11 @@
             <b class="arrow"></b>
         </li>
 
-        <li class="{{ request()->is('company') ? 'active' : '' }}">
-            <a href="{{ url('company') }}">
-                <i class="menu-icon fa fa-building-o"></i>
-                <span class="menu-text"> Company </span>
-            </a>
-            <b class="arrow"></b>
-        </li>
+
 
         <li class="{{ request()->segment(1) == "group" ? 'open' : '' }}">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-gear">
-
                 </i>
                 <span class="menu-text">
                     Product Management
@@ -74,107 +67,584 @@
             <ul class="submenu">
 
                 <li class="{{-- {{ request()->segment(1) == "group" ? 'open' : '' }} --}}">
-                    <a href="{{ url('product') }}">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Products
-                    </a>
+
+                    <a href="{{ url('product') }}" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Product
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('product/create') ? 'active' : '' }}">
+                            <a href="{{ url('product/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('product') ? 'active' : '' }}">
+                            <a href="{{ url('product') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
                 </li>
+
                 <li class="{{ request()->is('category') ? 'active' : '' }}">
-                    <a href="{{ url('category') }}">
-                        <i class="menu-icon fa fa-list-alt"></i>
-                        <span class="menu-text"> Category </span>
-                    </a>
-                    <b class="arrow"></b>
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Category
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('category/create') ? 'active' : '' }}">
+                            <a href="{{ url('category/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('category') ? 'active' : '' }}">
+                            <a href="{{ url('category') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
                 </li>
-                <li class="">
-                    <a href="{{ url('brand') }}">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Brands
-                    </a>
+
+                <li class="{{ request()->is('brand')||request()->is('brand/create') ? 'active' : '' }}">
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Brands
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('brand/create') ? 'active' : '' }}">
+                            <a href="{{ url('brand/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('brand') ? 'active' : '' }}">
+                            <a href="{{ url('brand') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
                 </li>
-                <li class="{{-- {{ request()->segment(1) == "group" ? 'open' : '' }} --}}">
-                    <a href="{{ url('size') }}">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Sizes
-                    </a>
+
+                <li class="{{ request()->is('size')||request()->is('size/create') ? 'active' : '' }}">
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Sizes
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('size/create') ? 'active' : '' }}">
+                            <a href="{{ url('size/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('size') ? 'active' : '' }}">
+                            <a href="{{ url('size') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
                 </li>
-                <li class="">
-                    <a href="{{ url('color') }}">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Colors
-                    </a>
+
+                <li class="{{ request()->is('color')||request()->is('color/create') ? 'active' : '' }}">
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Colors
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('color/create') ? 'active' : '' }}">
+                            <a href="{{ url('color/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('color') ? 'active' : '' }}">
+                            <a href="{{ url('color') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
                 </li>
-                <li class="">
-                    <a href="{{ url('sleeve') }}">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Sleeves
-                    </a>
+
+                <li class="{{ request()->is('sleeve')||request()->is('sleeve/create') ? 'active' : '' }}">
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Sleeves
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('sleeve/create') ? 'active' : '' }}">
+                            <a href="{{ url('sleeve/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('sleeve') ? 'active' : '' }}">
+                            <a href="{{ url('sleeve') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
                 </li>
-                <li class="">
-                    <a href="{{ url('leglength') }}">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Leg lengths
-                    </a>
+
+                <li class="{{ request()->is('leglength')||request()->is('leglength/create') ? 'active' : '' }}">
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Leglengths
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('leglength/create') ? 'active' : '' }}">
+                            <a href="{{ url('leglength/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('leglength') ? 'active' : '' }}">
+                            <a href="{{ url('leglength') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
                 </li>
-                <li class="">
-                    <a href="{{ url('fit') }}">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Fits
-                    </a>
+
+                <li class="{{ request()->is('fit')||request()->is('fit/create') ? 'active' : '' }}">
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Fits
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('fit/create') ? 'active' : '' }}">
+                            <a href="{{ url('fit/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('fit') ? 'active' : '' }}">
+                            <a href="{{ url('fit') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
                 </li>
-                
 
             </ul>
         </li>
 
-        <li class="{{ request()->is('page') ? 'active' : '' }}">
-            <a href="{{ url('page') }}">
-                <i class="menu-icon fa fa-file"></i>
-                <span class="menu-text"> Pages </span>
+        <li class="{{ request()->segment(1) == "group" ? 'open' : '' }}">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-gear">
+                </i>
+                <span class="menu-text">
+                    Web Management
+                </span>
+                <b class="arrow fa fa-angle-down"></b>
             </a>
 
             <b class="arrow"></b>
+
+
+            <ul class="submenu">
+
+                <li class="{{-- {{ request()->segment(1) == "group" ? 'open' : '' }} --}}">
+
+                    <a href="{{ url('banner') }}" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            TopLeft Banners
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('banner/create') ? 'active' : '' }}">
+                            <a href="{{ url('banner/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('banner') ? 'active' : '' }}">
+                            <a href="{{ url('banner') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('slider') ? 'active' : '' }}">
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Sliders
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('slider/create') ? 'active' : '' }}">
+                            <a href="{{ url('slider/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('slider') ? 'active' : '' }}">
+                            <a href="{{ url('slider') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('promotion')||request()->is('promotion/create') ? 'active' : '' }}">
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Promotions
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('promotion/create') ? 'active' : '' }}">
+                            <a href="{{ url('promotion/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('promotion') ? 'active' : '' }}">
+                            <a href="{{ url('promotion') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('testimonial')||request()->is('testimonial/create') ? 'active' : '' }}">
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                        Testimonials
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('testimonial/create') ? 'active' : '' }}">
+                            <a href="{{ url('testimonial/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('testimonial') ? 'active' : '' }}">
+                            <a href="{{ url('testimonial') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('blog')||request()->is('blog/create') ? 'active' : '' }}">
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Blogs
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('blog/create') ? 'active' : '' }}">
+                            <a href="{{ url('blog/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('blog') ? 'active' : '' }}">
+                            <a href="{{ url('blog') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('company') ? 'active' : '' }}">
+                            <a href="{{ url('company') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Company Info </span>
+                            </a>
+                </li>
+
+
+
+                <li class="{{ request()->is('page') ? 'active' : '' }}">
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Pages
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('page/create') ? 'active' : '' }}">
+                            <a href="{{ url('page/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('page') ? 'active' : '' }}">
+                            <a href="{{ url('page') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </li>
+
+        <li class="{{ request()->segment(1) == "group" ? 'open' : '' }}">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-gear">
+                </i>
+                <span class="menu-text">
+                    Orders
+                </span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+
+            <ul class="submenu">
+
+
+                <li class="{{ request()->is('order/new/list') ? 'active' : '' }}">
+                            <a href="{{ url('order/new/list') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> New Orders </span>
+                            </a>
+                            <b class="arrow"></b>
+                </li>
+                <li class="{{ request()->is('order/accepted/list') ? 'active' : '' }}">
+                            <a href="{{ url('order/accepted/list') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Accepted Orders </span>
+                            </a>
+                            <b class="arrow"></b>
+                </li>
+                <li class="{{ request()->is('order/delivered/list') ? 'active' : '' }}">
+                            <a href="{{ url('order/delivered/list') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Delivered Orders </span>
+                            </a>
+                            <b class="arrow"></b>
+                </li>
+               
+
+            </ul>
+        </li>
+
+        <li class="{{ request()->segment(1) == "group" ? 'open' : '' }}">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-gear">
+                </i>
+                <span class="menu-text">
+                    Inventory
+                </span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+
+            <ul class="submenu">
+
+                <li class="{{-- {{ request()->segment(1) == "group" ? 'open' : '' }} --}}">
+
+                        <li class="{{ request()->is('product/create') ? 'active' : '' }}">
+                            <a href="{{ url('product/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add Quantity </span>
+                            </a>
+                        </li>
+
+                        <li class="{{ request()->is('product/create') ? 'active' : '' }}">
+                            <a href="{{ url('product/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Products In Hand </span>
+                            </a>
+                        </li>
+
+                        <li class="{{ request()->is('product/create') ? 'active' : '' }}">
+                            <a href="{{ url('product/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Product Sold Out </span>
+                            </a>
+                        </li>
+
+                </li>
+            </ul>
         </li>
 
 
+        <li class="{{ request()->segment(1) == "group" ? 'open' : '' }}">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-gear">
+                </i>
+                <span class="menu-text">
+                    User Management
+                </span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
 
-        <li class="{{ request()->is('slider') ? 'active' : '' }}">
-            <a href="{{ url('slider') }}">
-                <i class="menu-icon fa fa-sliders"></i>
-                <span class="menu-text"> Slider </span>
-            </a>
             <b class="arrow"></b>
-        </li>
-        <li class="{{ request()->is('promotion') ? 'active' : '' }}">
-            <a href="{{ url('promotion') }}">
-                <i class="menu-icon fa fa-list-alt"></i>
-                {{-- <i class="menu-icon fa fa-accessible-icon"></i> --}}
-                <span class="menu-text"> Promotion </span>
-            </a>
-            <b class="arrow"></b>
-        </li>
 
-        <li class="{{ request()->is('testimonial') ? 'active' : '' }}">
-            <a href="{{ url('testimonial') }}">
-                <i class="menu-icon fa fa-quote-left"></i>
-                <span class="menu-text"> Testimonial </span>
-            </a>
-            <b class="arrow"></b>
-        </li>
-        <li class="{{ request()->is('blog') ? 'active' : '' }}">
-            <a href="{{ url('blog') }}">
-                <i class="menu-icon fa fa-sliders"></i>
-                <span class="menu-text"> Blog </span>
-            </a>
-            <b class="arrow"></b>
-        </li>
 
-        <li class="{{ request()->is('user') ? 'active' : '' }}">
-            <a href="{{ url('user') }}">
-                <i class="menu-icon fa fa-user"></i>
-                <span class="menu-text"> Users </span>
-            </a>
-            <b class="arrow"></b>
+            <ul class="submenu">
+
+                <li class="{{-- {{ request()->segment(1) == "group" ? 'open' : '' }} --}}">
+
+                    <a href="{{ url('product') }}" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Admin
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('product/create') ? 'active' : '' }}">
+                            <a href="{{ url('product/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('product') ? 'active' : '' }}">
+                            <a href="{{ url('product') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('category') ? 'active' : '' }}">
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            User
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('category/create') ? 'active' : '' }}">
+                            <a href="{{ url('category/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('category') ? 'active' : '' }}">
+                            <a href="{{ url('category') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
         </li>
 
 

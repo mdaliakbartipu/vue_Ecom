@@ -138,7 +138,7 @@
                 // https://github.com/yajra/laravel-datatables
                 // processing: true,
                 // serverSide: true,
-                {{--ajax: '{{ url('') }}',--}}
+               
                 // columns:[
                 //     {"data":"first_name"},
                 //     {"data":"last_name"},

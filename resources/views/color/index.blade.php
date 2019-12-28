@@ -52,7 +52,7 @@
                         <tr>
                             <td> {{ $key +1 }} </td>
                             <td> {{ $color->name }} </td>
-                            <td class="text-center" style="padding-top:1em;background:{{$color->code}} ">
+                            <td class="text-center" style='padding-top:1em;background:"{{$color->code}}"'>
                                  {{ $color->code }} 
                             </td>
          

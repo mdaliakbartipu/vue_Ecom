@@ -82,6 +82,7 @@ style="width: 50%; height: 200px; font-size: 14px; line-height: 18px; border: 1p
 
 
 @push('scripts')
-
+<script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
+    <script src="{{ asset('assets/js/ace.min.js') }}"></script>
 @endpush
 
