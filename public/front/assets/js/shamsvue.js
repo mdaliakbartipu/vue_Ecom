@@ -92,7 +92,7 @@ Vue.component('cart_table', {
                     <thead>
                         <tr>
                             <th class="product_remove">Delete</th>
-                            <th class="product_thumb">Image</th>
+                            <th>Image</th>
                             <th class="product_name">Product</th>
                             <th class="product_color">Color</th>
                             <th class="product_size">Size</th>
@@ -173,7 +173,7 @@ Vue.component('cart_row', {
     template: `
     <tr v-if="this.active">
     <td class="product_remove"><a @click.prevent="remove(variant_id)" href="#"><i class="fa fa-trash-o"></i></a></td>
-    <td class="product_thumb"><a href="#"><img loading="lazy" :src="this.path+this.product.image" ></a></td>
+    <td><a href="#"><img loading="lazy" :src="this.path+this.product.image" ></a></td>
     <td class="product_name"><a href="#">{{this.product.name}}</a></td>
     <td class="product_color"><a href="#">{{this.product.color}}</a></td>
     <td class="product_size"><a href="#">{{this.product.size}}</a></td>
