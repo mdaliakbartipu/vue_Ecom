@@ -126,7 +126,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Code </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"> Web ID </label>
 
                         <div class="col-sm-9">
                             <input disabled type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" name="code" value="{{ $product->code }}" />

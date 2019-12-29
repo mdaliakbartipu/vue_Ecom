@@ -36,8 +36,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-
+        $products = Product::with('brandInfo','category')->get();
         return view('product.index', compact('products'));
     }
 
@@ -83,18 +82,22 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //print_r($request->color);die();
+
+        // dd($request->all());
         $this->validate($request, [
-            'name'     => 'required|max:190',
-            'code' => 'required|unique:products|max:190',
-            'desc'     => 'required|max:190',
-            'price'    => 'required',
-            'brand'    => 'required',
-            'discount' => 'required',
-            'details'  => 'required',
-            'category'  => 'required',
-            'sub_category'  => 'required',
+            'name'              => 'required|max:190',
+            'code'              => 'required|unique:products|max:190',
+            'desc'              => 'required|max:190',
+            'price'             => 'required',
+            'brand'             => 'required',
+            'discount'          => 'required',
+            'discount_days'     => 'required',
+            'details'           => 'required',
+            'category'          => 'required',
+            'sub_category'      => 'required',
             'sub_sub_category'  => 'required'
         ]);
+
 
 
         // saving product
@@ -110,6 +113,17 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->details = $request->details;
         $product->discount = $request->discount ?? 0;
+        
+        // calculating discount days with date
+        $days = (int)$request->discount_days??0;
+        $date = new \DateTime(now());
+        // adding days
+        $newDate = $date->add(new \DateInterval('P'.$days.'D'));
+
+        $product->discount_till = $newDate;
+
+        $product->rating_default = $request->rating_default;
+        $product->rating = 0;
         $product->save();
 
 
@@ -183,6 +197,7 @@ class ProductController extends Controller
                 // and first level keys will be same as COLORS,Size and Quantities
                 // So foreach COLORS we get $image(s) 
                 // / each color got these images
+                if(isset($images[$key])):
                 foreach ($images[$key] as $img) :
                     // Uploading to server
                     $imageName = "pimg" . '-' . time() * rand(10000, 99999) . '-' . uniqid() . '.' . $img->getClientOriginalExtension();
@@ -216,6 +231,7 @@ class ProductController extends Controller
                 $product->thumb1 = $thumbs[0];
                 $product->thumb2 = $thumbs[1];
                 $product->save();
+            endif;
                 // managing product storage
                 $storage = new ProductStorage;
                 $storage->product_id = $product->id;

@@ -30,6 +30,8 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('views')->nullable()->dafault(0);
             $table->unsignedInteger('buy_price')->nullable();
             $table->unsignedInteger('price');
+            $table->unsignedInteger('rating');
+            $table->unsignedInteger('rating_default');
             $table->unsignedInteger('discount')->nullable()->default(0);
             $table->dateTime('discount_till')->nullable();
             $table->unsignedInteger('free_shipping')->nullable();

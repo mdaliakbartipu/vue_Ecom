@@ -39,20 +39,29 @@
               </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table id="table" class="table table-striped table-bordered" style="width:100%">
-                      <thead class=" text-primary">
-                        <th> ID </th>
-                        <th> Name </th>
-                        <th> Category of Product </th>
+                    <table id="table" class="table table-striped table-bordered text-center" style="width:100%">
+                      <thead class="text-center">
+                        <th class="text-center"> ID </th>
+                        <th class="text-center"> Name </th>
+                        <th class="text-center"> Web ID </th>
+                        <th class="text-center"> Brand </th>
+                        <th class="text-center"> Thumb1/Thumb2 </th>
+                        <th class="text-center"> Category </th>
                       
-                        <th> Action </th>
+                        <th class="text-center"> Action </th>
                       </thead>
                       <tbody>
                        @foreach($products as $key=>$product)
-                        <tr>
+                        <tr class="text-center">
                             <td> {{ $key +1 }} </td>
                             <td> {{ $product->name }} </td>
-                            <td> {{ $product->category['name'] }} </td>
+                            <td> {{ $product->code }} </td>
+                            <td> {{ $product->brandInfo->name }} </td>
+                            <td>
+                                <img height="40px" width="40px" src="/front/assets/.uploads/products/thumbs/{{ $product->thumb1 }}" alt="">
+                                <img height="40px" width="40px" src="/front/assets/.uploads/products/thumbs/{{ $product->thumb2 }}" alt="">
+                            </td>
+                            <td> {{ $product->category->name }} </td>
                            
                  <td> <a href="{{route('product.edit',$product->id)}} "  style="margin-right:10px"><span class="glyphicon glyphicon-edit"></span>  </a>
                 

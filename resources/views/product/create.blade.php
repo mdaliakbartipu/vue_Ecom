@@ -6,6 +6,7 @@
 @section('css')
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 @stop
 
 
@@ -119,7 +120,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Code </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"> Web ID </label>
 
                         <div class="col-sm-9">
                             <input type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" name="code" value="{{old('code')}}" />
@@ -139,13 +140,6 @@
 
                         <div class="col-sm-9">
                             <input type="text" id="form-field-1-1" placeholder="Product price" class="form-control" name="price" value="{{old('price')}}" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Discount </label>
-
-                        <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product Discount" class="form-control" name="discount" value="{{old('discount')}}"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -212,6 +206,39 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Rating</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" class="ace" name="rating">
+                                    <span class="lbl"> Set </span>
+                                </label>
+                                <input type="text" name="rating_default" value="4.6" placeholder="(If not auto) Default Rating">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Discount</label>
+                        <div class="col-xs-12 col-sm-9 col-md-4">
+                            <div class="checkbox">
+                                <label>    
+                                    <span class="lbl"> Amount</span>
+                                </label>
+                                <input type="text" name="discount" placeholder="Discount per 100" value="0"> %
+                            </div>
+                            <div class="checkbox">
+                                <label>    
+                                    <span class="lbl"> Duration</span>
+                                </label>
+                                <input type="text" name="discount_days" placeholder="Discount per 100" value="0"> Days
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Product Variant Section -->
 
                     <div class="card-body" style="margin-left:10em;width:100%">
                         <div class="table-responsive">
