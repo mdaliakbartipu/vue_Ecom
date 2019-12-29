@@ -89,7 +89,11 @@ Route::get('/sadmin', 'HomeController@index')->name('home');
 Route::resource('group', 'GroupController');
 Route::resource('brand', 'BrandController');
 Route::resource('slider','SliderContoller');
+
+Route::get('size/chart','SizeController@chart');
+
 Route::resource('size','SizeController');
+
 Route::resource('page','PageController');
 Route::resource('user','UserController');
 Route::resource('company','CompanyController');
@@ -131,3 +135,9 @@ Route::post('/save-user-info','UserController@saveUserInfo');
 // order
 Route::post('/order','OrderController@gotNewOrder');
 
+
+
+// Common info
+Route::post('size/chart/save','CommonInfoController@sizeChart')->name('save-size-chart');
+Route::get('commoninfo','CommonInfoController@index');
+Route::post('commoninfo','CommonInfoController@store')->name('commoninfo');

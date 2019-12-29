@@ -164,14 +164,21 @@
                         <li class="{{ request()->is('size/create') ? 'active' : '' }}">
                             <a href="{{ url('size/create') }}">
                                 <i class="menu-icon fa fa-list-alt"></i>
-                                <span class="menu-text"> Add </span>
+                                <span class="menu-text"> Add Size </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('size/chart') ? 'active' : '' }}">
+                            <a href="{{ url('size/chart') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Chart</span>
                             </a>
                             <b class="arrow"></b>
                         </li>
                         <li class="{{ request()->is('size') ? 'active' : '' }}">
                             <a href="{{ url('size') }}">
                                 <i class="menu-icon fa fa-list-alt"></i>
-                                <span class="menu-text"> List </span>
+                                <span class="menu-text"> Size List </span>
                             </a>
                             <b class="arrow"></b>
                         </li>
@@ -288,6 +295,16 @@
                             <b class="arrow"></b>
                         </li>
                     </ul>
+                </li>
+
+                <li class="{{ request()->is('commoninfo')||request()->is('commoninfo') ? 'active' : '' }}">
+
+                    <a href="{{ url('commoninfo') }}">
+                        <span class="menu-text">
+                            Common info
+                        </span>
+                    </a>
+                    
                 </li>
 
             </ul>
