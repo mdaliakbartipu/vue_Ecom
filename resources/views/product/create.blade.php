@@ -193,6 +193,24 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Feature </label>
+                        <div class="col-xs-12 col-sm-9">
+                            <div class="checkbox">
+
+                                <label>
+                                    <input type="radio" class="ace" name="new" value="1" checked>
+                                    <span class="lbl"> New </span>
+                                </label>
+                                <label>
+                                    <input type="radio" class="ace" name="new" value="0">
+                                    <span class="lbl"> Repeat </span>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Tags</label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
@@ -218,6 +236,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Discount</label>
                         <div class="col-xs-12 col-sm-9 col-md-4">
@@ -233,6 +252,22 @@
                                 </label>
                                 <input type="text" name="discount_days" placeholder="Discount per 100" value="0"> Days
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="form-field-1-1"> Embroidery & Print</label>
+
+                        <div class="col-sm-9">
+                            <input type="file" name="embroidery">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="form-field-1-1"> Video link</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" name="video" placeholder="Associate video link">
                         </div>
                     </div>
 

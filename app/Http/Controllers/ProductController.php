@@ -93,9 +93,10 @@ class ProductController extends Controller
             'discount'          => 'required',
             'discount_days'     => 'required',
             'details'           => 'required',
+            'new'               => 'required',
             'category'          => 'required',
             'sub_category'      => 'required',
-            'sub_sub_category'  => 'required'
+            'sub_sub_category'  => 'required',
         ]);
 
 
@@ -105,6 +106,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->slug = str_slug($product->name);
         $product->cat = $request->category;
+        $product->new = $request->new;
         $product->sub = $request->sub_category;
         $product->super = $request->sub_sub_category;
         $product->code = $request->code;
@@ -113,6 +115,8 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->details = $request->details;
         $product->discount = $request->discount ?? 0;
+        $product->embroidery = $request->embroidery ?? '';
+        $product->video_link = $request->video ?? '';
         
         // calculating discount days with date
         $days = (int)$request->discount_days??0;
