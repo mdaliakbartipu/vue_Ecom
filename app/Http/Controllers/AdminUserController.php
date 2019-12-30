@@ -115,7 +115,15 @@ class AdminUserController extends Controller
 
             $user = User::find((int)$id);
             $user->name     = $request->name;
-            $user->email    = $request->email;
+
+            if( $user->email   != $request->email):
+                $oldUser = User::where('email',$request->email)->first();
+                if($oldUser):
+                    return redirect()->route('admin-user.edit', $user->id)->with('error',"Email is associated with another account.Try different email.");    
+                endif;
+            endif;
+
+            $user->email   = $request->email;
             $user->active   = $request->active;
             $user->role     = $request->role;
             $user->save();
@@ -128,6 +136,7 @@ class AdminUserController extends Controller
         endif;
 
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -159,5 +168,17 @@ class AdminUserController extends Controller
                 return redirect()->back()->with('error', 'User not found so that i could not delete it');
             endif;
         endif;
+    }
+
+    public function blocked()
+    {
+        $users = User::where(['role'=>1,'active'=> 0])->get();
+        return view('user.index', compact('users'));
+    }
+
+    public function all()
+    {
+        $users = User::all();
+        return view('user.index', compact('users'));
     }
 }

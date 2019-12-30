@@ -174,4 +174,11 @@ class UserController extends Controller
         return redirect('/dashboard')->with('error', 'Profile Not Updated');
         
     }
+
+    public function blocked()
+    {
+        $users = User::where('role','!=',1)
+                        ->where('active', 0)->get();
+        return view('user.index', compact('users'));
+    }
 }

@@ -32,6 +32,9 @@
                     <h4 class="card-title "> Update User</h4>
 
                 </div>
+                <?php if(session('error')):?>
+                    <div class="alert alert-danger"><?=session('error')?></div>
+                <?php endif;?>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin-user.update',$user->id) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}

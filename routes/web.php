@@ -95,7 +95,10 @@ Route::get('size/chart','SizeController@chart');
 Route::resource('size','SizeController');
 
 Route::resource('page','PageController');
+Route::get('user/blocked','UserController@blocked');
 Route::resource('user','UserController');
+Route::get('admin-user/blocked','AdminUserController@blocked');
+Route::get('admin-user/all','AdminUserController@all');
 Route::resource('admin-user','AdminUserController');
 Route::resource('company','CompanyController');
 Route::resource('category','CategoryController');
