@@ -138,6 +138,7 @@ Route::post('/save-user-info','UserController@saveUserInfo');
 
 // order
 Route::post('/order','OrderController@gotNewOrder');
+Route::get('/order/new/list','OrderController@list');
 
 
 

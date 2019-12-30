@@ -122,4 +122,10 @@ class OrderController extends Controller
              return false;
 
     }
+
+    public function list()
+    {
+        $orders = NewOrder::all();
+        return view('order.index', compact('orders'));
+    }
 }
