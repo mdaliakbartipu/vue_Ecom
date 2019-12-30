@@ -29,7 +29,6 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
-                <a href="{{route('product.create')}}" class="btn btn-primary">Add new</a>
               <div class="card">
                 <div class="card-header card-header-primary">
                 <h4 class="card-title ">Orders</h4>
@@ -42,6 +41,7 @@
                     <table id="table" class="table table-striped table-bordered text-center" style="width:100%">
                       <thead class="text-center">
                         <th class="text-center"> ID </th>
+                        <th class="text-center"> Client </th>
                         <th class="text-center"> Price </th>
                         <th class="text-center"> qty </th>
                         <th class="text-center"> Vat </th>
@@ -52,6 +52,7 @@
                        @foreach($orders as $key=>$order)
                         <tr class="text-center">
                             <td> {{ $key +1 }} </td>
+                            <td> {{ $order->client->first_name}} </td>
                             <td> {{ $order->unit_price}} </td>
                             <td> {{ $order->qty }} </td>
                             <td> {{ $order->vat }} </td>

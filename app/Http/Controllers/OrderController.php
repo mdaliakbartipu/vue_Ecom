@@ -125,7 +125,8 @@ class OrderController extends Controller
 
     public function list()
     {
-        $orders = NewOrder::all();
+        $orders = NewOrder::with('client')->get();
+        // dd($orders);
         return view('order.index', compact('orders'));
     }
 }
