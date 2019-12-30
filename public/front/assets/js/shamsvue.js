@@ -490,8 +490,7 @@ Vue.component('product_extra_info', {
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                     <div class="card-body">
-                        <div v-html="commoninfo.special_offer">
-                        </div>
+                        <div v-html="commoninfo.shipping_and_return"></div>
                     </div>
                 </div>
             </div>
@@ -505,7 +504,7 @@ Vue.component('product_extra_info', {
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                     <div class="card-body">
-                    <div v-html="commoninfo.shipping_and_return">
+                    <div v-if="commoninfo" v-html="commoninfo.shipping_and_return"></div>
                     </div>
                 </div>
             </div>
@@ -1354,7 +1353,11 @@ Vue.component('single_product_section', {
             commonInfo: null,
         }
     },
-
+    methods:{
+        setCommonInfo(data){
+            this.commonInfo = data;
+        }
+    },
     props: ['images', 'id'],
     mounted() {
         axios
@@ -1363,13 +1366,13 @@ Vue.component('single_product_section', {
             ));
         axios
         .get('/api/commoninfo')
-        .then(response => (this.commonInfo = response.data.info
+        .then(response => (this.setCommonInfo(response.data.info)
         ));
     },
     template: `
     <div>
         <product_details v-if="product" :product="product" :images="images"></product_details>
-        <product_extra_info v-if="this.commonInfo" :commoninfo="this.commoninfo" :details="this.product.details"></product_extra_info>
+        <product_extra_info v-if="commonInfo" :commoninfo="this.commonInfo" :details="this.product.details"></product_extra_info>
     </div>
     `
 });
