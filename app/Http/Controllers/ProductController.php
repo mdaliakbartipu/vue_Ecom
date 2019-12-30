@@ -126,7 +126,7 @@ class ProductController extends Controller
 
         $product->discount_till = $newDate;
 
-        $product->rating_default = $request->rating_default;
+        $product->rating_default = $request->rating_default??0;
         $product->rating = 0;
         $product->save();
 
@@ -306,29 +306,46 @@ class ProductController extends Controller
     {
 
         $this->validate($request, [
-            'name'     => 'required|max:190',
-            //    what was that! changing unique keys often create problems
-            //    'code'     => 'required|unique:products|max:190',
-            'desc'     => 'required|max:190',
-            'price'    => 'required',
-            'discount' => 'required',
-            'details'  => 'required',
-            // 'image'    => 'required|mimes:jpeg,jpg,png',
+            'name'              => 'required|max:190',
+            'code'              => 'required|max:190',
+            'desc'              => 'required|max:190',
+            'price'             => 'required',
+            'brand'             => 'required',
+            'discount'          => 'required',
+            'discount_days'     => 'required',
+            'details'           => 'required',
+            'new'               => 'required',
+            'category'          => 'required',
+            'sub_category'      => 'required',
+            'sub_sub_category'  => 'required',
         ]);
 
         $product = Product::find($id);
-        // saving product
         $product->name = $request->name;
+        $product->slug = str_slug($product->name);
         $product->cat = $request->category;
+        $product->new = $request->new;
         $product->sub = $request->sub_category;
         $product->super = $request->sub_sub_category;
-        // each time updating new key are needed problem
-        // $product->code = $request->code;
+        $product->code = $request->code;
         $product->brand = $request->brand;
         $product->description = $request->desc;
         $product->price = $request->price;
         $product->details = $request->details;
+        $product->discount = $request->discount ?? 0;
+        $product->embroidery = $request->embroidery ?? '';
+        $product->video_link = $request->video ?? '';
+        
+        // calculating discount days with date
+        $days = (int)$request->discount_days??0;
+        $date = new \DateTime(now());
+        // adding days
+        $newDate = $date->add(new \DateInterval('P'.$days.'D'));
+
+        $product->discount_till = $newDate;
+        $product->rating_default = $request->rating?$request->rating_default:0;
         $product->save();
+
         // dd($product->id);
 
         // Updating Tags

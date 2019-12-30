@@ -211,6 +211,19 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Rating</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" class="ace" name="rating">
+                                    <span class="lbl"> Set </span>
+                                </label>
+                                <input type="text" name="rating_default" value="4.6" placeholder="(If not auto) Default Rating">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Tags</label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
@@ -224,18 +237,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Rating</label>
-                        <div class="col-xs-12 col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" class="ace" name="rating">
-                                    <span class="lbl"> Set </span>
-                                </label>
-                                <input type="text" name="rating_default" value="4.6" placeholder="(If not auto) Default Rating">
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Discount</label>

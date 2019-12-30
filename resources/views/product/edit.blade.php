@@ -129,7 +129,8 @@
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Web ID </label>
 
                         <div class="col-sm-9">
-                            <input disabled type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" name="code" value="{{ $product->code }}" />
+                        <input type="hidden" id="form-field-1-1" placeholder="Product Code" class="form-control" name="code" value="{{ $product->code }}" />    
+                        <input disabled type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" value="{{ $product->code }}" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -227,6 +228,37 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Feature </label>
+                        <div class="col-xs-12 col-sm-9">
+                            <div class="checkbox">
+
+                                <label>
+                                    <input type="radio" class="ace" name="new" value="1" <?=$product->new?'checked':''?>>
+                                    <span class="lbl"> New </span>
+                                </label>
+                                <label>
+                                    <input type="radio" class="ace" name="new" value="0" <?=$product->new?'':'checked'?>>
+                                    <span class="lbl"> Repeat </span>
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Rating</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" class="ace" name="rating" <?=$product->rating_default?'checked':''?>>
+                                    <span class="lbl"> Set </span>
+                                </label>
+                                <input type="text" name="rating_default" value="<?=$product->rating_default??0?>" placeholder="(If not auto) Default Rating">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group" style="width:100%">
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Tags</label>
                         <div class="col-xs-12 col-sm-9">
@@ -247,6 +279,57 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Discount</label>
+                        <div class="col-xs-12 col-sm-9 col-md-4">
+                            <div class="checkbox">
+                                <label>    
+                                    <span class="lbl"> Amount</span>
+                                </label>
+                                <input type="text" name="discount" placeholder="Discount per 100" value="<?=$product->discount??0?>"> %
+                            </div>
+                            <div class="checkbox">
+                                <label>    
+                                    <span class="lbl"> Duration</span>
+                                </label>
+
+                                <?php
+
+                                    //getting how many days left for that discount
+
+                                    // get date from database
+                                    $discount_till = new DateTime($product->discount_till)??0;
+                                    //difference
+                                    $diff = $discount_till->diff(new DateTime(now()));
+                                ?>
+                                <input type="text" name="discount_days" placeholder="Discount per 100" value="<?=$diff->days??0?>"> Days
+                                <span> <?=$diff->h??0?> Hours <?=$diff->i??0?> Minutes <?=$diff->s??0?> Seconds left </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="form-field-1-1"> Embroidery & Print</label>
+
+                        <div class="col-sm-9">
+                            <input type="file" name="embroidery">
+                            <a class="btn btn-sm btn-secondary" target="_blank" href="/front/assets/.uploads/products/pdf/<?=$product->embroidery?>">View</a>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="form-field-1-1"> Video link</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" name="video" placeholder="Associate video link" value="<?=$product->video_link?>"> 
+                            <a class="btn btn-sm btn-secondary" target="_blank" href="<?=$product->video_link?>">Play</a>
+                        </div>
+                    </div>
+
+
+
+
                     <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> Save</button>
                     <div style="width:150%">
                         <h2>Variants</h2><p class="text-warning">You can Update imges here. But You shouldn't changes color or sizes or quantity.It shows that what you have right now.
