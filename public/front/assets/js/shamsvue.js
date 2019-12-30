@@ -583,7 +583,7 @@ Vue.component('product_price', {
 Vue.component('product_info', {
     // Variant will be sorted by Color
     //  so loop will provide simple integration
-    props: ['product', 'variants'],
+    props: ['product', 'variants','commoninfo'],
     data: function () {
         return {
             selected: {
@@ -664,7 +664,7 @@ Vue.component('product_info', {
                
                 <colors_variant :variants="variants" @color-selected="selectColor"></colors_variant>
                 <transition name="fade">
-                <size_variant v-if="variants[this.selected.color]"  :sizeVariants="variants[this.selected.color]" @variant-selected="selectVariant"></size_variant>
+                <size_variant v-if="variants[this.selected.color]"  :sizeVariants="variants[this.selected.color]" @variant-selected="selectVariant" :commoninfo="commoninfo"></size_variant>
                 </transition>
                 <br>
                 <transition name="fade">
@@ -682,7 +682,7 @@ Vue.component('product_info', {
 
 
 Vue.component('product_details', {
-    props: ['images', 'product'],
+    props: ['images', 'product','commoninfo'],
     data: function () {
         return {
             variant: null,
@@ -709,7 +709,7 @@ Vue.component('product_details', {
     <div class="product_details">
         <div class="row">
             <imagescolumn v-if="this.variant" :images="this.thumbs" :bigImage="this.big" :variant="this.variant" ></imagescolumn>
-            <product_info @colorChanged="requestNewImages" v-if="this.variant" :variants="this.variant" :product="product"> </product_info>
+            <product_info :commoninfo="this.commoninfo" @colorChanged="requestNewImages" v-if="this.variant" :variants="this.variant" :product="product"> </product_info>
         </div>
     </div>  
     `
@@ -736,7 +736,7 @@ Vue.component('product_description', {
 
 
 Vue.component('size_variant', {
-    props: ['sizeVariants'],
+    props: ['sizeVariants', 'commoninfo'],
     data: function () {
         return {
             listClass: "mr-2",
@@ -756,14 +756,21 @@ Vue.component('size_variant', {
             console.log("selected:sizeid: " + this.sizeVariants[index].size_id);
             console.log("selected:Variant: " + this.sizeVariants[index].id);
             this.selected.size.name = this.sizeVariants[index].size.name;
+        },
+
+        showSizeTable(){
+            Swal.fire({
+                title: '<strong> Size Table </strong>',
+                html:this.commoninfo.size_chart,
+            })
         }
     },
     template: `
     <div class="product_size">
-    <p style="float:right">SizeTable</p><br>
+    <p style="float:right" class="btn btn-secondary" @click="showSizeTable">SizeTable</p><br>
     <hr>
     <transition name="fade">
-    <h4 v-if="!this.selected.size.name">Select Size</h4>
+    <h4 v-if="!this.selected.size.name" >Select Size</h4>
     </transition>
     <ul id="product_size">
         <li v-for="(variant, $index) in sizeVariants" :key="$index" class="mr-3">
@@ -772,8 +779,9 @@ Vue.component('size_variant', {
     </ul>
     <transition name="fade">
     <p v-if="this.selected.size.name" style="color:grey;font-weight:.8em;margin-top:1em">Selected size : {{this.selected.size.name}}
-    </transition>
     </p>
+    </transition>
+    
 </div>
     `
 });
@@ -1371,7 +1379,7 @@ Vue.component('single_product_section', {
     },
     template: `
     <div>
-        <product_details v-if="product" :product="product" :images="images"></product_details>
+        <product_details v-if="product" :product="product" :images="images" :commoninfo="this.commonInfo"></product_details>
         <product_extra_info v-if="commonInfo" :commoninfo="this.commonInfo" :details="this.product.details"></product_extra_info>
     </div>
     `

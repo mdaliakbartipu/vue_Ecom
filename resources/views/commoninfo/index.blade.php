@@ -57,7 +57,7 @@
                             <div class="box-body pad">
 
                             <textarea name="shippingandreturn" class="summernote">
-                            {{$info->shipping_and_return}}
+                            {{$info->shipping_and_return??null}}
                             </textarea>
 
                             </div>
@@ -74,7 +74,7 @@
                             <div class="box-body pad">
 
                             <textarea name="specialoffer" class="summernote">
-                            {{$info->special_offer}}
+                            {{$info->special_offer??null}}
                             </textarea>
 
                             </div>

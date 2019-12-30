@@ -35,7 +35,6 @@ class SizeController extends Controller
         if(!$info){
             $info = new \App\CommonInfo;
         }
-        7
         return view('size.chart', compact('info'));
     }
 
