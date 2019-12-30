@@ -607,7 +607,7 @@
 
                 <li class="{{-- {{ request()->segment(1) == "group" ? 'open' : '' }} --}}">
 
-                    <a href="{{ url('product') }}" class="dropdown-toggle">
+                    <a href="{{ url('dmin-user') }}" class="dropdown-toggle">
                         </i>
                         <span class="menu-text">
                             Admin
@@ -616,15 +616,15 @@
                     </a><b class="arrow"></b>
 
                     <ul class="submenu">
-                        <li class="{{ request()->is('product/create') ? 'active' : '' }}">
-                            <a href="{{ url('product/create') }}">
+                        <li class="{{ request()->is('admin-user/create') ? 'active' : '' }}">
+                            <a href="{{ url('admin-user/create') }}">
                                 <i class="menu-icon fa fa-list-alt"></i>
                                 <span class="menu-text"> Add </span>
                             </a>
                             <b class="arrow"></b>
                         </li>
-                        <li class="{{ request()->is('product') ? 'active' : '' }}">
-                            <a href="{{ url('product') }}">
+                        <li class="{{ request()->is('admin-user') ? 'active' : '' }}">
+                            <a href="{{ url('admin-user') }}">
                                 <i class="menu-icon fa fa-list-alt"></i>
                                 <span class="menu-text"> List </span>
                             </a>
@@ -644,15 +644,15 @@
                     </a><b class="arrow"></b>
 
                     <ul class="submenu">
-                        <li class="{{ request()->is('category/create') ? 'active' : '' }}">
-                            <a href="{{ url('category/create') }}">
+                        <li class="{{ request()->is('user/create') ? 'active' : '' }}">
+                            <a href="{{ url('user/create') }}">
                                 <i class="menu-icon fa fa-list-alt"></i>
                                 <span class="menu-text"> Add </span>
                             </a>
                             <b class="arrow"></b>
                         </li>
-                        <li class="{{ request()->is('category') ? 'active' : '' }}">
-                            <a href="{{ url('category') }}">
+                        <li class="{{ request()->is('user') ? 'active' : '' }}">
+                            <a href="{{ url('user') }}">
                                 <i class="menu-icon fa fa-list-alt"></i>
                                 <span class="menu-text"> List </span>
                             </a>

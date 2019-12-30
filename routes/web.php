@@ -96,6 +96,7 @@ Route::resource('size','SizeController');
 
 Route::resource('page','PageController');
 Route::resource('user','UserController');
+Route::resource('admin-user','AdminUserController');
 Route::resource('company','CompanyController');
 Route::resource('category','CategoryController');
 Route::resource('testimonial','TestimonialController');
