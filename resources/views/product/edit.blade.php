@@ -299,12 +299,18 @@
                                     //getting how many days left for that discount
 
                                     // get date from database
-                                    $discount_till = new DateTime($product->discount_till)??0;
+                                    $nowTime = new DateTime(now());
+                                    $discount_till = new DateTime($product->discount_till??$nowTime);
                                     //difference
-                                    $diff = $discount_till->diff(new DateTime(now()));
+                                    $diff = $discount_till->diff($nowTime);
                                 ?>
                                 <input type="text" name="discount_days" placeholder="Discount per 100" value="<?=$diff->days??0?>"> Days
-                                <span> <?=$diff->h??0?> Hours <?=$diff->i??0?> Minutes <?=$diff->s??0?> Seconds left </span>
+                                <?php
+                                if($nowTime < $discount_till): ?>
+                                    <span> <?=$diff->h??0?> Hours <?=$diff->i??0?> Minutes <?=$diff->s??0?> Seconds left </span> 
+                                <?php endif;?>
+                                
+
                             </div>
                         </div>
                     </div>

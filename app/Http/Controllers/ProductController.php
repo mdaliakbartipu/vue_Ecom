@@ -115,7 +115,33 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->details = $request->details;
         $product->discount = $request->discount ?? 0;
-        $product->embroidery = $request->embroidery ?? '';
+
+        // Embroiddery PDF 
+        if($request->embroidery):
+            $pdf = $request->embroidery;
+            $pdfPath = 'front/assets/.uploads/products/pdf';
+            // creating folder if not available
+            if (!file_exists($pdfPath)) {
+                mkdir($pdfPath, 0777, true);
+            };
+            // saving pdf
+            $pdfName = "ppdf" . '-' . time() * rand(10000, 99999) . '-' . uniqid() . '.' . $pdf->getClientOriginalExtension();
+                    // continue;
+                    try {
+                        if (!$pdf->move(public_path($pdfPath), $pdfName))
+                            throw new \Exception('Not saved');
+                    } catch (\Exception $e) {
+                        echo 'Not saved image' . var_dump($pdf);
+                    }
+            $product->embroidery = $pdfName;
+                else:
+                    $product->embroidery = '$pdfName';
+        endif;
+
+        
+        
+        
+        
         $product->video_link = $request->video ?? '';
         
         // calculating discount days with date
@@ -333,7 +359,28 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->details = $request->details;
         $product->discount = $request->discount ?? 0;
-        $product->embroidery = $request->embroidery ?? '';
+        // Embroiddery PDF 
+        if($request->embroidery):
+            $pdf = $request->embroidery;
+            $pdfPath = 'front/assets/.uploads/products/pdf';
+            // creating folder if not available
+            if (!file_exists($pdfPath)) {
+                mkdir($pdfPath, 0777, true);
+            };
+            // saving pdf
+            $pdfName = "ppdf" . '-' . time() * rand(10000, 99999) . '-' . uniqid() . '.' . $pdf->getClientOriginalExtension();
+                    // continue;
+                    try {
+                        if (!$pdf->move(public_path($pdfPath), $pdfName))
+                            throw new \Exception('Not saved');
+                    } catch (\Exception $e) {
+                        echo 'Not saved image' . var_dump($pdf);
+                    }
+            $product->embroidery = $pdfName;
+        endif;
+
+
+
         $product->video_link = $request->video ?? '';
         
         // calculating discount days with date
