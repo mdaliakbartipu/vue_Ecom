@@ -377,7 +377,7 @@ Vue.component('imagescolumn', {
             this.big = newVal;
         }
     },
-    props: ['images', 'bigImage', 'variant'],
+    props: ['images', 'bigImage', 'variant', 'product'],
     template: `
     <div class="col-lg-6 col-md-6">
         <div class="product-details-tab">
@@ -393,7 +393,7 @@ Vue.component('imagescolumn', {
                 ></productbigimage> 
                 </transition>
                 <transition name="fade">
-                <product_options></product_options>
+                <product_options :product="product"></product_options>
                 </transition>
                 
             </div>
@@ -403,11 +403,12 @@ Vue.component('imagescolumn', {
 });
 
 Vue.component('product_options', {
+    props:['product'],
     template: `
     <div class="product_options mt-5 ml-5">
-        <span class="btn last-day2" style="width:30%"><i class="fa fa-puzzle-piece"></i> Embroidery &amp; Print</span>
-        <span class="btn" style="width:15%"><i class="fa fa-play"></i> Video</span>
-        <span class="btn" style="width:35%"><i class="fa fa-thumb-tack"></i> Article recommendation</span>
+        <a target="_blank" :href="'/front/assets/.uploads/products/pdf/' + product.embroidery" class="btn btn-light" style="width:30%"><i class="fa fa-puzzle-piece"></i> Embroidery &amp; Print</a>
+        <a target="_blank" :href="product.video_link" class="btn btn-light" style="width:15%"><i class="fa fa-play"></i> Video</a>
+        <a class="btn btn-light" style="width:35%"><i class="fa fa-thumb-tack"></i> Article recommendation</a>
     </div>
     `
 });
@@ -708,8 +709,8 @@ Vue.component('product_details', {
     template: `
     <div class="product_details">
         <div class="row">
-            <imagescolumn v-if="this.variant" :images="this.thumbs" :bigImage="this.big" :variant="this.variant" ></imagescolumn>
-            <product_info :commoninfo="this.commoninfo" @colorChanged="requestNewImages" v-if="this.variant" :variants="this.variant" :product="product"> </product_info>
+            <imagescolumn v-if="this.variant" :images="this.thumbs" :bigImage="this.big" :variant="this.variant" :product="product"></imagescolumn>
+            <product_info v-if="this.variant" :commoninfo="this.commoninfo" @colorChanged="requestNewImages"  :variants="this.variant" :product="product"> </product_info>
         </div>
     </div>  
     `
