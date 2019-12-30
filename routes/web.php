@@ -142,6 +142,14 @@ Route::post('/order','OrderController@gotNewOrder');
 
 
 // Common info
-Route::post('size/chart/save','CommonInfoController@sizeChart')->name('save-size-chart');
-Route::get('commoninfo','CommonInfoController@index');
-Route::post('commoninfo','CommonInfoController@store')->name('commoninfo');
+Route::post('/size/chart/save','CommonInfoController@sizeChart')->name('save-size-chart');
+Route::get('/commoninfo','CommonInfoController@index');
+Route::post('/commoninfo','CommonInfoController@store')->name('commoninfo');
+
+Route::get('/api/commoninfo','CommonInfoController@apiGetCommonInfo');
+
+
+
+
+// API section
+// new controller for all api

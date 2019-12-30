@@ -29,6 +29,18 @@ class CommonInfoController extends Controller
         return view('commoninfo.index',compact('info'));
     }
 
+    public function apiGetCommonInfo()
+    {
+        $info = CommonInfo::first();
+
+        if($info):
+            return json_encode(['status'=>200, 'info'=>$info]);
+        else:
+            return json_encode(['status'=>404, 'msg'=>"no info found"]);
+        endif;
+
+    }
+
     public function store(Request $request)
     {
         $request->validate([

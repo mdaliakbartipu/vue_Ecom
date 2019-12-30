@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Category;
+use App\CommonInfo;
 use App\SubCategory;
 use App\SubSubCategory;
 use App\Page;
@@ -27,9 +28,14 @@ class FrontController extends Controller
 
         foreach($this->cat as $this->category){
             $this->subCat[$this->category->id] = SubCategory::getAllsubcat($this->category->id);
-                   
+            if(!$this->subCat){
+                die("Please configure your Database");
+            }          
         foreach($this->subCat[$this->category->id] as $this->subCategory){
             $this->subSubCat[$this->subCategory->id] = SubSubCategory::getAllSubSubCat($this->subCategory->id);
+            if(!$this->subSubCat){
+                die("Please configure your Database");
+            }
         }
          }
 
@@ -40,6 +46,7 @@ class FrontController extends Controller
          \View::share('subSubCats'       , $this->subSubCat );
          \View::share('tags'             , Tags::forPage() );
          \View::share('pages'            , Page::all() );
+         \View::share('commonInfo'       , CommonInfo::all() );
 
         //  Sharing User
         view()->share('signedIn', \Auth::check());
