@@ -120,6 +120,7 @@ Vue.component('cart_row', {
         return {
             active: true,
             product: {
+                id:this.id,
                 name: this.name,
                 price: this.price,
                 size: this.size,
@@ -132,7 +133,7 @@ Vue.component('cart_row', {
             path: "/front/assets/.uploads/products/thumbs/"
         }
     },
-    props: ['name', 'price', 'size', 'color', 'variant_id', 'qty', 'image'],
+    props: ['id','name', 'price', 'size', 'color', 'variant_id', 'qty', 'image'],
     methods: {
         remove: function (variant) {
 
@@ -173,7 +174,7 @@ Vue.component('cart_row', {
     template: `
     <tr v-if="this.active">
     <td class="product_remove"><a @click.prevent="remove(variant_id)" href="#"><i class="fa fa-trash-o"></i></a></td>
-    <td><a href="#"><img loading="lazy" :src="this.path+this.product.image" ></a></td>
+    <td><a :href="'/singleProduct/'+product.id"><img width="50px" loading="lazy" :src="this.path+this.product.image" ></a></td>
     <td class="product_name"><a href="#">{{this.product.name}}</a></td>
     <td class="product_color"><a href="#">{{this.product.color}}</a></td>
     <td class="product_size"><a href="#">{{this.product.size}}</a></td>
@@ -1106,9 +1107,9 @@ Vue.component('product_article', {
             <a class="primary_img" :href="this.link+this.product.id"><img loading="lazy" :src="this.src+this.product.thumb1" alt=""></a>
             <a class="secondary_img" :href="this.link+this.product.id"><img loading="lazy" :src="this.src+this.product.thumb2" alt=""></a>
             <div class="label_product_left label_product">
-                <span class="label_sale_left">New</span>
+                <span v-if="this.product.new" class="label_sale_left">New</span>
             </div>
-             <div class="label_product">
+             <div class="label_product" v-if="this.product.discount">
                 <span class="label_sale">{{this.product.discount}}%</span>
             </div>
             <div class="action_links">
@@ -1121,7 +1122,7 @@ Vue.component('product_article', {
         </div>
         <div class="product_content">
          <div class="product_timing">
-                    <div v-if="dateCount" :data-countdown="dateCount"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">2</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">30</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
+                    <div v-if="this.product.discount" :data-countdown="dateCount"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">2</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">30</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
                 </div>
             <div class="product_content_inner">
                 <h2 class="product_name_brand_name">{{this.product.brand}}</h2>

@@ -47,6 +47,7 @@
                         <th class="text-center"> Vat </th>
                         <th class="text-center"> shipping_cost </th>
                         <th class="text-center"> payment_type </th>
+                        <th class="text-center">Action</th>
                       </thead>
                       <tbody>
                        @foreach($orders as $key=>$order)
@@ -58,6 +59,11 @@
                             <td> {{ $order->vat }} </td>
                             <td> {{ $order->shipping_cost }} </td>
                             <td> {{ $order->payment_type }} </td>
+                            <td> 
+                                <a href="{{route('neworder-view', $order->id)}}" class="btn btn-sm btn-info fa fa-eye"></a>
+                                <a href="" class="btn btn-sm btn-warning fa fa-pencil"></a>    
+                                <a onclick="alert('Are you sure to delete ?')" href="#" class="btn btn-sm btn-danger fa fa-times"></a>
+                            </td>
             
 </tr>
                        @endforeach

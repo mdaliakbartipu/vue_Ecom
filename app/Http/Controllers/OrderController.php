@@ -129,4 +129,12 @@ class OrderController extends Controller
         // dd($orders);
         return view('order.index', compact('orders'));
     }
+
+
+    public function newOrderView(NewOrder $order)
+    {
+        $orders = $order;
+
+        return view('order.new-view', compact('orders'));
+    }
 }

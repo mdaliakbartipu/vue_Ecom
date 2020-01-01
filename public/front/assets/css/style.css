@@ -5298,7 +5298,7 @@ $MISC
                   
                   .product_thumb {
                       position: relative;
-                      height: 264px;
+                      height: 222px;
                       /* width: 217px; */
                   }
                   
@@ -5446,8 +5446,10 @@ $MISC
                       display: inline-block;
                       margin-right: 6px;
                       margin-top: 5px;
-                      color: #008f95;
+
                       padding: 1px;
+                      background:rgba(18, 28, 29, 0.4);
+                      color:white;
                   }
                   
                   .single_countdown:last-child {
@@ -13550,13 +13552,13 @@ $MISC
                   }
                   
                   .single_product:hover .single_countdown {
-                      background: rgba(0, 143, 149, .4)!important;
+                      background: rgba(60, 158, 161, 0.4)!important;
                       color: white!important;
                   }
                   
                   .countdown_area .single_countdown {
                       margin-left: -4px;
-                      background: #ebebeb;
+                      /* background: #ebebeb; */
                   }
                   
                   .timeSeparator {
