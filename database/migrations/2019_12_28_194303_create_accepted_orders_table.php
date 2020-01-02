@@ -15,7 +15,7 @@ class CreateAcceptedOrdersTable extends Migration
     {
         Schema::create('accepted_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->bigInteger('billing_id');
             $table->bigInteger('shipping_id')->nullable();
             $table->bigInteger('product_id');
@@ -28,6 +28,7 @@ class CreateAcceptedOrdersTable extends Migration
             $table->string('payment_type');
             $table->boolean('payment_status')->default(false);
             $table->string('trans_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

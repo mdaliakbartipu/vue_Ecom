@@ -42,8 +42,8 @@
                       <thead class="text-center">
                         <th class="text-center"> ID </th>
                         <th class="text-center"> Client </th>
-                        <th class="text-center"> Price </th>
-                        <th class="text-center"> qty </th>
+                        <th class="text-center"> Date </th>
+                        <th class="text-center"> Order ID </th>
                         <th class="text-center"> Vat </th>
                         <th class="text-center"> shipping_cost </th>
                         <th class="text-center"> payment_type </th>
@@ -54,8 +54,11 @@
                         <tr class="text-center">
                             <td> {{ $key +1 }} </td>
                             <td> {{ $order->client->first_name}} </td>
-                            <td> {{ $order->unit_price}} </td>
-                            <td> {{ $order->qty }} </td>
+                            <?php
+                                $date = new DateTime($order->created_at);
+                            ?>
+                            <td> {{ $date->format('d M Y')}} </td>
+                            <td> {{ $order->id }} </td>
                             <td> {{ $order->vat }} </td>
                             <td> {{ $order->shipping_cost }} </td>
                             <td> {{ $order->payment_type }} </td>

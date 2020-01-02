@@ -31,7 +31,11 @@
     .product-info {
         width: 39%;
         background:whitesmoke;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
     }
+
 
     .cost-info {
         padding: 5px;
@@ -46,6 +50,19 @@
         justify-content: space-around;
     }
 
+    .info{
+        font-size: 1.1em;
+        height: 200px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .note{
+        height: 200px;
+    }
+
     .order-action{
     height: 100px;
     }
@@ -54,6 +71,17 @@
     }
     .shipping{
         height: 200px;
+    }
+
+    .text{
+        width: 60%;
+    }
+
+    .image{
+        width: 40%;
+    }
+    .image img{
+        height: 70%;
     }
 
 </style>
@@ -71,12 +99,15 @@
                 <div class="billing">
                     <h3>Billing Info</h3>
                     <p>
-                    Name: Hasan mahmud <br/>
-                    Email: something@gamail.com <br/>
-                    Phone: +8801717 56 56 56 <br/>
+                    @php($billing = $newOrder->billingAddress)
+                    Name: <?=$billing->first_name.' '.$billing->last_name?> <br/>
+                    Email: <?=$billing->email?> <br/>
+                    Phone: <?=$billing->phone?> <br/>
                     <Address>
-                        Something asdnasdkasnd abdasbdkas <br/>
-                        adsdasd
+                    <?=$billing->address?><br/>
+                    <?=$billing->street?><br/>
+                    <?=$billing->city?>,
+                    <?=$billing->country?><br/>
                     </Address>
                     </p>
                     
@@ -84,36 +115,66 @@
                 <div class="shipping">
                     <h3>Shipping Info</h3>
                     <p>
-                    Name: Hasan mahmud <br/>
-                    Email: something@gamail.com <br/>
-                    Phone: +8801717 56 56 56 <br/>
+                    @php($shipping = $newOrder->shippingAddress??$newOrder->billingAddress)
+                    Name: <?=$shipping->first_name.' '.$shipping->last_name?> <br/>
+                    Email: <?=$shipping->email?> <br/>
+                    Phone: <?=$shipping->phone?> <br/>
                     <Address>
-                        Something asdnasdkasnd abdasbdkas <br/>
-                        adsdasd
+                    <?=$shipping->address?><br/>
+                    <?=$shipping->street?><br/>
+                    <?=$shipping->city?>,
+                    <?=$shipping->country?><br/>
                     </Address>
                     </p>
                 </div>
             </div>
             
             <div class="product-info">
+                <div class="info">
+                    <div class="text">
+                        @php($variant = $newOrder->variant)
+                        @php($product = $newOrder->variant->product??null)
+                        @if($product)
                         <h2>Product Info</h2>
+                        <p>
+                        Name: <?=$product->name?> <br/>
+                        Web ID: <?=$product->code?> <br/>
+                        Color: <?=$variant->color->name?> <br/>
+                        Size: <?=$variant->size->name?> <br/>
+                        Quantity: <?=$variant->qty?> <br/>
+                        Price: <?=$product->price?> <br/>
+                        </p>
+                        @endif
+                    </div>
+                    <div class="image">
+                        <img src="/front/assets/.uploads/products/thumbs/<?=$product->thumb1??null?>" alt="">
+                    </div>
+                </div>
+                <div class="note">
+                <h2>Client Additional note:</h2>
+                <p>
+                    not yet
+                </p>
+                </div>
+            
             </div>
 
             <div class="cost-info">
                 <dl style="margin-top:2em;">
-                    <dd> <h6>Sub Total:</h6> <input class="form-control" disabled type="text" value="$ {{$orders->unit_price*$orders->qty}}"></dd>
-                    <dd> <h6>Vat Total:</h6> <input class="form-control" disabled type="text" value="$ {{$orders->vat}}"></dd>
+                @php($order = $newOrder)
+                    <dd> <h6>Sub Total:</h6> <input class="form-control" disabled type="text" value="$ {{$order->unit_price*$order->qty}}"></dd>
+                    <dd> <h6>Vat Total:</h6> <input class="form-control" disabled type="text" value="$ {{$order->vat}}"></dd>
                     <dd><h6>
                         Discount Total:
-                    </h6><input class="form-control" disabled type="text" value="$ {{$orders->discount}}"></dd>
+                    </h6><input class="form-control" disabled type="text" value="$ {{$order->discount}}"></dd>
                     <dd><h6>
                         Shipping Cost:
-                    </h6><input class="form-control" disabled type="text" value="$ {{$orders->shipping_cost}}"></dd>
+                    </h6><input class="form-control" disabled type="text" value="$ {{$order->shipping_cost}}"></dd>
                     <dd><h6>
                         Total Payable:
                     </h6>
                     <input class="form-control" disabled type="text"
-                     value="$ {{ ($orders->unit_price * $orders->qty) - $orders->discount + $orders->vat + $orders->shipping_cost }}">
+                     value="$ {{ ($order->unit_price * $order->qty) - $order->discount + $order->vat + $order->shipping_cost }}">
                 </dd>
                 </dl>
 

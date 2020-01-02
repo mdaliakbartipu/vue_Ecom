@@ -5298,9 +5298,14 @@ $MISC
                   
                   .product_thumb {
                       position: relative;
-                      height: 222px;
+                      height: 233px;
                       /* width: 217px; */
                   }
+
+                  .product_thumb img {
+                
+                    width: 100%;
+                }
                   
                   .product_thumb a.secondary_img {
                       position: absolute;

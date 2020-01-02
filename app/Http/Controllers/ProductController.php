@@ -528,12 +528,28 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
-        if (file_exists('uploads/product' . $product->image)) {
-            // file_delete($product->image);
-            unlink($product->image);
+        $product = Product::where('id', $id)->with('images')->first();
+
+        // deleting thumbs
+        $thumbPath = 'front/assets/.uploads/products/thumbs/';
+        $imagePath = 'front/assets/.uploads/products/';
+        if (file_exists($thumbPath.$product->thumb1)) {
+            unlink($thumbPath.$product->thumb1);
         }
-        $product->delete();
+        if (file_exists($thumbPath.$product->thumb2)) {
+            unlink($thumbPath.$product->thumb2);
+        }
+
+        // deleting all images
+        foreach($product->images as $img){
+            if(file_exists($imagePath.$img->image))
+            unlink($imagePath.$img->image);
+        }
+        // deleting product images entry
+        ProductImages::where('product_id', $product->id)->delete();
+        // deleting product attributes
+        
+         $product->delete();
         return redirect()->back()->with('successMsg', 'Product Deleted successfully');
     }
 

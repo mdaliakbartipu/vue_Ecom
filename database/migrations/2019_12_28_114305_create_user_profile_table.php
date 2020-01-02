@@ -15,7 +15,7 @@ class CreateUserProfileTable extends Migration
     {
         Schema::create('user_profile', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email')->nullable();
@@ -28,6 +28,7 @@ class CreateUserProfileTable extends Migration
             $table->string('shipping_address')->nullable();
             $table->dateTime('dob')->nullable();
             $table->string('gender')->nullable()->comment('1=male;2=female');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

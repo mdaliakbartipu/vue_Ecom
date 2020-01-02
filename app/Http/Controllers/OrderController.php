@@ -133,8 +133,13 @@ class OrderController extends Controller
 
     public function newOrderView(NewOrder $order)
     {
-        $orders = $order;
-
-        return view('order.new-view', compact('orders'));
+        $newOrder = $order->with(
+            ['client',
+            'billingAddress',
+            'shippingAddress',
+            'variant'
+            ])->first();
+        // dd($newOrder);
+        return view('order.new-view', compact('newOrder'));
     }
 }

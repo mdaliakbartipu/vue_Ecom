@@ -17,6 +17,8 @@ class CreateProductTagsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('tag_id');
             $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -24,6 +24,8 @@ class CreateNewOrdersTable extends Migration
             $table->integer('shipping_cost');
             $table->integer('vat');
             $table->integer('discount');
+            $table->integer('status')->comment('0=new,1=recieved,2=delivered,3=canceled,4=returned')->default(0);
+            $table->text('note')->nullable();
             $table->string('payment_type');
             $table->boolean('payment_status')->default(false);
             $table->string('trans_id')->nullable();
