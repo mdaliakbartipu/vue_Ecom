@@ -528,15 +528,15 @@
                     </a>
                     <b class="arrow"></b>
                 </li>
-                <li class="{{ request()->is('order/accepted/list') ? 'active' : '' }}">
-                    <a href="{{ url('order/accepted/list') }}">
+                <li class="{{ request()->is('accepted-order') ? 'active' : '' }}">
+                    <a href="{{ url('accepted-order') }}">
                         <i class="menu-icon fa fa-list-alt"></i>
                         <span class="menu-text"> Accepted Orders </span>
                     </a>
                     <b class="arrow"></b>
                 </li>
-                <li class="{{ request()->is('order/delivered/list') ? 'active' : '' }}">
-                    <a href="{{ url('order/delivered/list') }}">
+                <li class="{{ request()->is('delivered-order') ? 'active' : '' }}">
+                    <a href="{{ url('delivered-order') }}">
                         <i class="menu-icon fa fa-list-alt"></i>
                         <span class="menu-text"> Delivered Orders </span>
                     </a>

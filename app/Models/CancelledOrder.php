@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-class NewOrder extends Order
+class CancelledOrder extends Order
 {
     protected $table = "new_orders";
 
-        // status 0 for new
+        // status 3 for cancelled
 
         public function newQuery($excludeDeleted = true)
         {
             return parent::newQuery($excludeDeleted)
-                ->where('status', '=', 0);
+                ->where('status', '=', 3);
         }
 
 }

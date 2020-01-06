@@ -3,17 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\NewOrder;
 use App\Models\AcceptedOrder;
 use App\Models\DeliveredOrder;
+use App\Models\CancelledOrder;
+use App\Models\ReturnedOrder;
+
 use App\Product;
 use App\ProductVariant;
 use App\UserProfile;
 use App\UserShippingAddress;
 
 
+// orders type
+define("NEW",           0);
+define("ACCEPTED",      1);
+define("DELIVERED",     2);
+define("CANCELLED",     3);
+define("RETURNED",      4);
+
+    
+
 class OrderController extends Controller
 {
+
+    
     public function gotNewOrder(Request $request)
     {
         // dd($request->all());
@@ -156,6 +171,17 @@ class OrderController extends Controller
         return view('order.delivered-view', compact('order'));
     }
 
+    public function cancelOrder(NewOrder $order)
+    {
+        if($order){
+            $order->status = 3;
+            $order->save();
+        }
+        return view('order.recieved-view', compact('order'));
+    }
+
+
+
     public function returnedOrder(NewOrder $order)
     {
         if($order){
@@ -165,4 +191,18 @@ class OrderController extends Controller
         }
         return view('order.returned-view', compact('order'));
     }
+
+    // List
+    public function acceptedOrderList()
+    {
+        $orders = \App\Models\AcceptedOrder::with('client')->get();
+
+        return view('order.index-accepted', compact('orders'));
+    }
+
+    public function acceptedOrder(AcceptedOrder $order)
+    {
+        dd($order);
+    }
+    
 }

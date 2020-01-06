@@ -138,10 +138,21 @@ Route::post('/save-user-info','UserController@saveUserInfo');
 
 // order
 Route::post('/order','OrderController@gotNewOrder');
-Route::get('/accept-order/{order}','OrderController@acceptOrder');
-Route::get('/deliver-order/{order}','OrderController@deliverOrder');
-Route::get('/returned-order/{order}','OrderController@returnedOrder');
 Route::get('/order/new/list','OrderController@list');
+
+Route::get('/accepted-order','OrderController@acceptedOrderList')->name('accepted-order');
+Route::get('/accept-order/{order}','OrderController@acceptOrder');
+Route::get('/accepted-order/{order}','OrderController@acceptedOrder');
+
+Route::get('/deliver-order','OrderController@deliverOrderList');
+Route::get('/deliver-order/{order}','OrderController@deliverOrder');
+
+Route::get('/returned-order/{order}','OrderController@returnedOrder');
+Route::get('/returned-order','OrderController@returnedOrder');
+
+Route::get('/deliver-order','OrderController@cancelledOrderList');
+Route::get('/deliver-order/{order}','OrderController@cancelledOrderList');
+
 Route::get('/new-order/view/{order}','OrderController@newOrderView')->name('neworder-view');
 
 
