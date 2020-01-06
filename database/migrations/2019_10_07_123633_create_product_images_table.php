@@ -18,8 +18,6 @@ class CreateProductImagesTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('variant_id')->comment('It is color ID');
             $table->string('image');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('variant_id')->references('id')->on('product_variant')->onDelete('cascade')->onUpdate('cascade');
 
             // $table->foreign('color_id')->references('id')->on('colors');
             // $table->foreign('size_id')->references('id')->on('sizes');

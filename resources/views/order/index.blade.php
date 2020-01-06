@@ -41,26 +41,31 @@
                     <table id="table" class="table table-striped table-bordered text-center" style="width:100%">
                       <thead class="text-center">
                         <th class="text-center"> ID </th>
-                        <th class="text-center"> Client </th>
-                        <th class="text-center"> Date </th>
                         <th class="text-center"> Order ID </th>
-                        <th class="text-center"> Vat </th>
-                        <th class="text-center"> shipping_cost </th>
-                        <th class="text-center"> payment_type </th>
+                        <th class="text-center"> Order Date </th>
+                        <th class="text-center"> Order By </th>
+                        <th class="text-center"> Quantity </th>
+                        <th class="text-center"> Subtotal </th>
+                        <th class="text-center"> Payment Type </th>
                         <th class="text-center">Action</th>
                       </thead>
                       <tbody>
                        @foreach($orders as $key=>$order)
                         <tr class="text-center">
                             <td> {{ $key +1 }} </td>
-                            <td> {{ $order->client->first_name}} </td>
+                            <td> {{ $order->id}} </td>
                             <?php
                                 $date = new DateTime($order->created_at);
                             ?>
                             <td> {{ $date->format('d M Y')}} </td>
-                            <td> {{ $order->id }} </td>
-                            <td> {{ $order->vat }} </td>
-                            <td> {{ $order->shipping_cost }} </td>
+                            <td> {{ $order->client->first_name }} </td>
+                            <?php
+                                $price = (int)$order->qty * (float)$order->unit_price;
+                                $discount = $price*$order->discount/100;
+                                $subtotal = $price + $order->shipping_cost + $order->vat - $discount;
+                            ?>
+                            <td> {{ $order->qty }}  </td>
+                            <td> {{ $subtotal }}</td>
                             <td> {{ $order->payment_type }} </td>
                             <td> 
                                 <a href="{{route('neworder-view', $order->id)}}" class="btn btn-sm btn-info fa fa-eye"></a>

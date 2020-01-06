@@ -1911,6 +1911,20 @@ new Vue({
         },
         product: null,
         qty: 1,
+        product: {
+            qty: 5,
+
+            images: {
+                big: "/front/assets/img/product/thumb1.jpg",
+                thumb: {
+                    img1: "/front/assets/img/product/thumb1.jpg",
+                    img2: "/front/assets/img/product/thumb2.jpg",
+                    img3: "/front/assets/img/product/2a.jpg",
+                    img4: "/front/assets/img/product/2b.jpg",
+                    img5: "/front/assets/img/product/3a.jpg"
+                }
+            },
+        }
     },
     mounted() {
         axios
