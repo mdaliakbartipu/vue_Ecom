@@ -59,7 +59,11 @@ class UserController extends Controller
         endif;
        endif;
 
-       $create = User::create($request->all());
+       $data = $request->all();
+    //    dd($data);
+       $data->password = bcrypt($data->password);
+       $create = User::create($data);
+
        if($create):
             if($create->role==1):
                 return redirect(route('admin-user.index'))->with('successMsg','User Added Successfully');         

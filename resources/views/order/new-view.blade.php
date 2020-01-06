@@ -141,8 +141,8 @@
                         Web ID: <?=$product->code?> <br/>
                         Color: <?=$variant->color->name?> <br/>
                         Size: <?=$variant->size->name?> <br/>
-                        Quantity: <?=$variant->qty?> <br/>
-                        Price: <?=$product->price?> <br/>
+                        Quantity: <?=$newOrder->qty?> <br/>
+                        Unit Price: <?=$product->price?> <br/>
                         </p>
                         @endif
                     </div>
@@ -162,11 +162,12 @@
             <div class="cost-info">
                 <dl style="margin-top:2em;">
                 @php($order = $newOrder)
-                    <dd> <h6>Sub Total:</h6> <input class="form-control" disabled type="text" value="$ {{$order->unit_price*$order->qty}}"></dd>
+                    <dd> <h6>Sub Total:</h6> <input class="form-control" disabled type="text" value="$ {{$order->unit_price * $order->qty}}"></dd>
                     <dd> <h6>Vat Total:</h6> <input class="form-control" disabled type="text" value="$ {{$order->vat}}"></dd>
                     <dd><h6>
-                        Discount Total:
-                    </h6><input class="form-control" disabled type="text" value="$ {{$order->discount}}"></dd>
+                        Discount Total({{$order->discount}}%):
+                        <?php $discount = $order->unit_price * $order->qty * $order->discount/100 ?>
+                    </h6><input class="form-control" disabled type="text" value="$ {{$discount}}"></dd>
                     <dd><h6>
                         Shipping Cost:
                     </h6><input class="form-control" disabled type="text" value="$ {{$order->shipping_cost}}"></dd>
@@ -174,14 +175,18 @@
                         Total Payable:
                     </h6>
                     <input class="form-control" disabled type="text"
-                     value="$ {{ ($order->unit_price * $order->qty) - $order->discount + $order->vat + $order->shipping_cost }}">
+                     value="$ {{ ($order->unit_price * $order->qty) - $discount + $order->vat + $order->shipping_cost }}">
                 </dd>
                 </dl>
 
             </div>
         </div>
-        <div class="order-action flex-item-main">
-                <h5>Actions</h5>
+        <div class="order-action flex-item-main" style="margin-top:2em">
+                <div>
+                <button class="btn btn-sm btn-success">Accept Order</button>
+                <button class="btn btn-sm btn-warning">Cancel Order</button>
+                <button class="btn btn-sm btn-info">Back</button>
+                </div>
         </div>
     </div>
 </div>

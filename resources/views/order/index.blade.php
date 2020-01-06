@@ -45,7 +45,7 @@
                         <th class="text-center"> Order Date </th>
                         <th class="text-center"> Order By </th>
                         <th class="text-center"> Quantity </th>
-                        <th class="text-center"> Subtotal </th>
+                        <th class="text-center"> Total </th>
                         <th class="text-center"> Payment Type </th>
                         <th class="text-center">Action</th>
                       </thead>

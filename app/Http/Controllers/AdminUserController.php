@@ -56,7 +56,11 @@ class AdminUserController extends Controller
          endif;
         endif;
 
-       $create = User::create($request->all());
+        $data = $request->all();
+        //    dd($data['password']);
+        $data['password'] = bcrypt($data['password']);
+        $create = User::create($data);
+       
        if($create):
             if($create->role==1):
                 return redirect(route('admin-user.index'))->with('successMsg','User Added Successfully');         
@@ -173,6 +177,12 @@ class AdminUserController extends Controller
     public function blocked()
     {
         $users = User::where(['role'=>1,'active'=> 0])->get();
+        return view('user.index', compact('users'));
+    }
+
+    public function active()
+    {
+        $users = User::where(['role'=>1,'active'=> 1])->get();
         return view('user.index', compact('users'));
     }
 
