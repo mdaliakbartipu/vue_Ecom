@@ -11,4 +11,9 @@ class User extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function profile()
+    {
+        return $this->hasOne('App\UserProfile', 'user_id');
+    }
 }

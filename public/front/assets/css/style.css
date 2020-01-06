@@ -10526,12 +10526,12 @@ $MISC
                   }
                   
                   .dashboard_tab_button ul li a:hover {
-                      background: #c40316;
+                      background: darkseagreen;
                       color: #ffffff;
                   }
                   
                   .dashboard_tab_button ul li a.active {
-                      background: #c40316;
+                      background: cadetblue;
                   }
                   
                   .dashboard_content h3 {

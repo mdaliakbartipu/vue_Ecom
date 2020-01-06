@@ -147,30 +147,49 @@ class UserController extends Controller
 
     public function saveUserInfo(Request $request)
     {
-        // dd($request->all());
         // validation
 
 
         $userID = \Auth::user()->id;
-        $profile = UserProfile::find($userID);
+
+        $profile = UserProfile::where('user_id',$userID)->first();
+        $user = User::find($userID);
+
         if($profile){
-            $profile->first_name = $request->first_name;
-            $profile->last_name = $request->last_name;
-            $profile->email = $request->email;
-            $profile->phone = $request->phone;
+            if($user){
+                $user->name = $request->name??'No';
+                if($request->email){
+                    $user->email = $request->email??'No';
+                }
+                $user->save();
+            }
+            $profile->user_id = \Auth::user()->id;
+            $profile->first_name = $request->first_name??'No';
+            $profile->last_name = $request->last_name??'Name';
+            $profile->email = $request->email??'';
+            $profile->phone = $request->phone??'';
             // $profile->dob = $request->dob;
-            $profile->gender = $request->id_gender;
+            $profile->gender = $request->id_gender??'';
             $profile->save();
             return redirect('/dashboard')->with('success', 'Profile updated');
         } else{
+            if($user){
+                $user->name = $request->name??'No';
+                if($request->email){
+                    $user->email = $request->email??'No';
+                }
+                $user->save();
+            }
+
             $profile  = new UserProfile;
+            $profile->user_id = \Auth::user()->id;
             $profile->user_id = $userID;
-            $profile->first_name = $request->first_name;
-            $profile->last_name = $request->last_name;
-            $profile->email = $request->email;
-            $profile->phone = $request->phone;
+            $profile->first_name = $request->first_name??'NO';
+            $profile->last_name = $request->last_name??'Name';
+            $profile->email = $request->email??'';
+            $profile->phone = $request->phone??'';
             // $profile->dob = $request->dob;
-            $profile->gender = $request->id_gender;
+            $profile->gender = $request->id_gender??'';
             $profile->save();
             return redirect('/dashboard')->with('success', 'New Profile Created');
         }

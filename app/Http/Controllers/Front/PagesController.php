@@ -150,8 +150,11 @@ class PagesController extends FrontController
 
     public function dashboard()
     {
+        $user = \App\User::where('id',\Auth::user()->id)->with('profile')->first();
+        $orders = \App\Models\NewOrder::where('user_id', $user->id)->get();
         return view('front.dashboard', [
-            
+            'user' => $user,
+            'orders' => $orders
         ]);
     }
 

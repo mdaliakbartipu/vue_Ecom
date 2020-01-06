@@ -16,9 +16,10 @@ include("partials/breadcumb.php"); ?>
                                 <ul role="tablist" class="nav flex-column dashboard-list">
                                     <li><a href="#dashboard" data-toggle="tab" class="nav-link active">Dashboard</a></li>
                                     <li> <a href="#orders" data-toggle="tab" class="nav-link">Orders</a></li>
-                                    <li><a href="#downloads" data-toggle="tab" class="nav-link">Downloads</a></li>
-                                    <li><a href="#address" data-toggle="tab" class="nav-link">Addresses</a></li>
+                                    <!-- <li><a href="#downloads" data-toggle="tab" class="nav-link">Downloads</a></li> -->
                                     <li><a href="#account-details" data-toggle="tab" class="nav-link">Account details</a></li>
+                                    <li><a href="#address" data-toggle="tab" class="nav-link">Addresses</a></li>
+                                    
                                     <li><a href="/logout" class="nav-link">logout</a></li>
                                 </ul>
                             </div>
@@ -27,8 +28,11 @@ include("partials/breadcumb.php"); ?>
                             <!-- Tab panes -->
                             <div class="tab-content dashboard_content">
                                 <div class="tab-pane fade show active" id="dashboard">
-                                    <h3>Dashboard </h3>
-                                    <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">Edit your password and account details.</a></p>
+                                    <h3><?=\Auth::user()->name?>'s Dashboard</h3>
+
+                                    <p>Welcome <?=\Auth::user()->name?> to your dashboard</p>
+                                    <p>From here you can change your account details, can change your address which will be automatically placed on your checkout page.<br/>You can see your orders and rewards points</p>
+                                    <p>Happy exploring</p>
                                 </div>
                                 <div class="tab-pane fade" id="orders">
                                     <h3>Orders</h3>
@@ -97,11 +101,11 @@ include("partials/breadcumb.php"); ?>
                                     <a href="#" class="view">Edit</a>
                                     <p><strong>Bobby Jackson</strong></p>
                                     <address>
-                                        House #15<br>
+                                        House #15, 
                                         Road #1<br>
-                                        Block #C <br>
+                                        Block #C ,
                                         Banasree <br>
-                                        Dhaka <br>
+                                        Dhaka, 
                                         1212
                                     </address>
                                         <p>Bangladesh</p>
@@ -113,18 +117,16 @@ include("partials/breadcumb.php"); ?>
                                             <div class="account_login_form">
                                                 <form action="/save-user-info" method="POST">
                                                 <input type="hidden" name="_token" value="<?=csrf_token()?>">
-                                                    <div class="input-radio">
+                                                    <!-- <div class="input-radio">
                                                         <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mr.</span>
                                                         <span class="custom-radio"><input type="radio" value="2" name="id_gender"> Mrs.</span>
-                                                    </div> <br>
-                                                    <label>First Name</label>
-                                                    <input type="text" name="first-name">
-                                                    <label>Last Name</label>
-                                                    <input type="text" name="last-name">
+                                                    </div> <br> -->
+                                                    <label>Name</label>
+                                                    <input type="text" name="name" value="<?=$user->name?>">
                                                     <label>Email</label>
-                                                    <input type="text" name="email">
+                                                    <input type="text" name="email" value="<?=$user->email?>">
                                                     <label>Phone</label>
-                                                    <input type="text" name="phone">
+                                                    <input type="text" name="phone" value="<?=$user->profile->phone?>">
                                                     <!-- <label>Birthdate</label>
                                                     <input type="text" placeholder="MM/DD/YYYY" value="" name="dob">
                                                     <span class="example">

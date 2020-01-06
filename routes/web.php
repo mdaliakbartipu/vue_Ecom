@@ -9,9 +9,6 @@ Route::get('/subsubcat_products/', 'Front\PagesController@subsubcatProducts');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Route::get('register', function(){
-   echo "Deactivated for security reasons. It will Open soon";
-});
 
 
 // UI Routes

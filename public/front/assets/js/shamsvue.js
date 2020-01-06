@@ -1692,6 +1692,10 @@ Vue.component('header_top', {
                                     <a  href="/register"><i class="fa fa-user" style="color:#008F95" ></i> Register</a>
                                 </li>
                                 <li v-if="user">
+                                    <i class="fa fa-pagelines" style="color:white" ></i> Welcome {{user_name}}
+                                </li>
+
+                                <li v-if="user">
                                     <a  href="/dashboard"><i class="fa fa-user" style="color:#008F95" ></i> My Account</a>
                                 </li>
                                 <li v-if="user">
