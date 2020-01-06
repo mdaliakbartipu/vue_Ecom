@@ -52,6 +52,7 @@ class OrderController extends Controller
             $user->id = $userProfile->id;
             $user->shipping = $shipping?$shipping->id:null;
             $user->billing = $userProfile?$userProfile->id:null;
+            
             $order = $this->saveOrder( 
                             $user ,
                             (int)$item['variant_id'],
@@ -133,13 +134,35 @@ class OrderController extends Controller
 
     public function newOrderView(NewOrder $order)
     {
-        $newOrder = $order->with(
-            ['client',
-            'billingAddress',
-            'shippingAddress',
-            'variant'
-            ])->first();
-        // dd($newOrder);
+        $newOrder = $order;
         return view('order.new-view', compact('newOrder'));
+    }
+
+    public function acceptOrder(NewOrder $order)
+    {
+        if($order){
+            $order->status = 1;
+            $order->save();
+        }
+        return view('order.recieved-view', compact('order'));
+    }
+
+    public function deliverOrder(NewOrder $order)
+    {
+        if($order){
+            $order->status = 2;
+            $order->save();
+        }
+        return view('order.delivered-view', compact('order'));
+    }
+
+    public function returnedOrder(NewOrder $order)
+    {
+        if($order){
+            // 4 is for returned
+            $order->status = 4;
+            $order->save();
+        }
+        return view('order.returned-view', compact('order'));
     }
 }

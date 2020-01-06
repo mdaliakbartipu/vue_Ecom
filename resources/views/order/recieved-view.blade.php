@@ -91,7 +91,7 @@
 
 @section('content')
 
-<h1>New Order</h1>
+<h1>Recieved Order</h1>
 <div class="container">
     <div class="flex" >
         <div class="order-info flex-item-main">
@@ -99,7 +99,7 @@
                 <div class="billing">
                     <h3>Billing Info</h3>
                     <p>
-                    @php($billing = $newOrder->billingAddress)
+                    @php($billing = $order->billingAddress)
                     Name: <?=$billing->first_name.' '.$billing->last_name?> <br/>
                     Email: <?=$billing->email?> <br/>
                     Phone: <?=$billing->phone?> <br/>
@@ -115,7 +115,7 @@
                 <div class="shipping">
                     <h3>Shipping Info</h3>
                     <p>
-                    @php($shipping = $newOrder->shippingAddress??$newOrder->billingAddress)
+                    @php($shipping = $order->shippingAddress??$order->billingAddress)
                     Name: <?=$shipping->first_name.' '.$shipping->last_name?> <br/>
                     Email: <?=$shipping->email?> <br/>
                     Phone: <?=$shipping->phone?> <br/>
@@ -132,8 +132,8 @@
             <div class="product-info">
                 <div class="info">
                     <div class="text">
-                        @php($variant = $newOrder->variant)
-                        @php($product = $newOrder->variant->product??null)
+                        @php($variant = $order->variant)
+                        @php($product = $order->variant->product??null)
                         @if($product)
                         <h2>Product Info</h2>
                         <p>
@@ -141,7 +141,7 @@
                         Web ID: <?=$product->code?> <br/>
                         Color: <?=$variant->color->name?> <br/>
                         Size: <?=$variant->size->name?> <br/>
-                        Quantity: <?=$newOrder->qty?> <br/>
+                        Quantity: <?=$order->qty?> <br/>
                         Unit Price: <?=$product->price?> <br/>
                         </p>
                         @endif
@@ -161,7 +161,7 @@
 
             <div class="cost-info">
                 <dl style="margin-top:2em;">
-                @php($order = $newOrder)
+                @php($order = $order)
                     <dd> <h6>Sub Total:</h6> <input class="form-control" disabled type="text" value="$ {{$order->unit_price * $order->qty}}"></dd>
                     <dd> <h6>Vat Total:</h6> <input class="form-control" disabled type="text" value="$ {{$order->vat}}"></dd>
                     <dd><h6>
@@ -183,7 +183,7 @@
         </div>
         <div class="order-action flex-item-main" style="margin-top:2em">
                 <div>
-                <button id="acceptOrder" class="btn btn-sm btn-success">Accept Order</button>
+                <button id="acceptOrder" class="btn btn-sm btn-success">Mark as Delivered</button>
                 <button class="btn btn-sm btn-warning">Cancel Order</button>
                 <button class="btn btn-sm btn-info">Back</button>
                 </div>
@@ -191,7 +191,7 @@
     </div>
 </div>
 
-<input type="hidden" id="order" value="{{$newOrder->id}}">
+<input type="hidden" id="order" value="{{$order->id}}">
 
 @stop
 
@@ -203,7 +203,7 @@ accept.addEventListener('click', function(event){
         event.preventDefault;
         const order = document.getElementById('order').value;
         console.log(order)
-        window.location.replace('/accept-order/'+order);
+        window.location.replace('/deliver-order/'+order);
 
 })
 </script>

@@ -47,7 +47,7 @@
                         <th class="text-center"> Quantity </th>
                         <th class="text-center"> Total </th>
                         <th class="text-center"> Payment Type </th>
-                        <th class="text-center">Action</th>
+                        <th class="text-center">Details</th>
                       </thead>
                       <tbody>
                        @foreach($orders as $key=>$order)
@@ -69,8 +69,6 @@
                             <td> {{ $order->payment_type }} </td>
                             <td> 
                                 <a href="{{route('neworder-view', $order->id)}}" class="btn btn-sm btn-info fa fa-eye"></a>
-                                <a href="" class="btn btn-sm btn-warning fa fa-pencil"></a>    
-                                <a onclick="alert('Are you sure to delete ?')" href="#" class="btn btn-sm btn-danger fa fa-times"></a>
                             </td>
             
 </tr>

@@ -138,6 +138,9 @@ Route::post('/save-user-info','UserController@saveUserInfo');
 
 // order
 Route::post('/order','OrderController@gotNewOrder');
+Route::get('/accept-order/{order}','OrderController@acceptOrder');
+Route::get('/deliver-order/{order}','OrderController@deliverOrder');
+Route::get('/returned-order/{order}','OrderController@returnedOrder');
 Route::get('/order/new/list','OrderController@list');
 Route::get('/new-order/view/{order}','OrderController@newOrderView')->name('neworder-view');
 
