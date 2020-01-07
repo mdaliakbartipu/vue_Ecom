@@ -12,6 +12,7 @@ use App\Models\DeliveredOrder;
 class Order extends Model
 {
     protected $table = "new_orders";
+    
     protected $fillable = [
         'user_id',
         'billing_id',

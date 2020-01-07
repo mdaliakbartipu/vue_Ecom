@@ -39,23 +39,29 @@
                 <div class="card-body">
                   <div class="table-responsive">
                     <table id="table" class="table table-striped table-bordered text-center" style="width:100%">
-                      <thead class="text-center">
-                        <th class="text-center"> Entry Date </th>
-                        <th class="text-center"> Web ID </th>
-                        <th class="text-center"> Description </th>
-                        <th class="text-center"> Total Qty </th>
-                        <th class="text-center"> Sale Qty </th>
-                        <th class="text-center"> Stock Qty</th>
-                        <th class="text-center"> Buy Price </th>
-                        <th class="text-center"> Sale Price</th>
-                        <th class="text-center"> G.Total Buy </th>
-                        <th class="text-center"> A.Total Sale </th>
-                        
+                    <thead class="text-center">
+                        <th class="text-center"> Sales Date </th>
+                        <th class="text-center"> Order No </th>
+                        <th class="text-center"> Order Qty </th>
+                        <th class="text-center"> Total Buy(TK) </th>
+                        <th class="text-center"> Total Sale(TK)</th>
+                        <th class="text-center"> Profit</th>
+                        <th class="text-center"> Delivery Charge </th>
+                        <th class="text-center"> Payment Method</th>
                       </thead>
                       <tbody>
-                        <tr class="text-center">
-                            
-</tr>
+                      <?php foreach($reports as $report): ?>
+                        <tr class="text-center">    
+                            <td><?=$report->created_at?></td>
+                            <td><?=$report->id?></td>
+                            <td><?=$report->qty?></td>
+                            <td><?=$buy=0?></td>
+                            <td><?=$report->sub_total?></td>
+                            <td><?=$report->sub_total - $buy ?></td>
+                            <td><?=$report->shipping_cost?></td>
+                            <td><?=$report->payment_type?></td>
+                        </tr>
+                    <?php endforeach; ?>
                       </tbody>
                     </table>
                   </div>
