@@ -184,7 +184,7 @@
         <div class="order-action flex-item-main" style="margin-top:2em">
                 <div>
                 <button id="acceptOrder" class="btn btn-sm btn-success">Mark as Delivered</button>
-                <button class="btn btn-sm btn-warning">Cancel Order</button>
+                <button id="cancelOrder" class="btn btn-sm btn-warning">Cancel Order</button>
                 <button class="btn btn-sm btn-info">Back</button>
                 </div>
         </div>
@@ -199,11 +199,22 @@
 
 <script>
 const accept = document.getElementById('acceptOrder');
+const cancel = document.getElementById('cancelOrder');
+
+// Accept Order
 accept.addEventListener('click', function(event){
         event.preventDefault;
         const order = document.getElementById('order').value;
         console.log(order)
         window.location.replace('/deliver-order/'+order);
+
+})
+// Cancel Order
+cancel.addEventListener('click', function(event){
+        event.preventDefault;
+        const order = document.getElementById('order').value;
+        console.log(order)
+        window.location.replace('/cancel-order/'+order);
 
 })
 </script>

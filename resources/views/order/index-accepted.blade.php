@@ -31,7 +31,7 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                <h4 class="card-title ">Orders</h4>
+                <h4 class="card-title ">Accepted Orders</h4>
                   
                 @include('layouts.includes.msg')    
                 

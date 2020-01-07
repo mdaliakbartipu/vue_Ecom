@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Order;
 use App\Models\NewOrder;
 use App\Models\AcceptedOrder;
 use App\Models\DeliveredOrder;
@@ -177,10 +178,10 @@ class OrderController extends Controller
             $order->status = 1;
             $order->save();
         }
-        return view('order.recieved-view', compact('order'));
+        return view('order.accepted-view', compact('order'));
     }
 
-    public function deliverOrder(NewOrder $order)
+    public function deliverOrder(AcceptedOrder $order)
     {
         if($order){
             $order->status = 2;
@@ -189,13 +190,29 @@ class OrderController extends Controller
         return view('order.delivered-view', compact('order'));
     }
 
-    public function cancelOrder(NewOrder $order)
+    public function deliveredOrder(DeliveredOrder $order)
+    {
+        return view('order.delivered-view', compact('order'));
+    }
+
+    public function cancelledOrder(CancelledOrder $order)
+    {
+        return view('order.cancelled-view', compact('order'));
+    }
+
+    public function deliveredOrderList()
+    {
+        $orders = DeliveredOrder::with('client')->get();
+        return view('order.index-delivered', compact('orders'));
+    }
+
+    public function cancelOrder(Order $order)
     {
         if($order){
             $order->status = 3;
             $order->save();
         }
-        return view('order.recieved-view', compact('order'));
+        return view('order.cancelled-view', compact('order'));
     }
 
 
@@ -218,9 +235,16 @@ class OrderController extends Controller
         return view('order.index-accepted', compact('orders'));
     }
 
+    public function CancelledOrderList()
+    {
+        $orders = \App\Models\CancelledOrder::with('client')->get();
+
+        return view('order.index-cancelled', compact('orders'));
+    }
+
     public function acceptedOrder(AcceptedOrder $order)
     {
-        dd($order);
+        return view('order.accepted-view', compact('order'));
     }
     
 }

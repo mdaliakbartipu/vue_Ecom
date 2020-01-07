@@ -4,8 +4,6 @@ namespace App\Models;
 
 class CancelledOrder extends Order
 {
-    protected $table = "new_orders";
-
         // status 3 for cancelled
 
         public function newQuery($excludeDeleted = true)

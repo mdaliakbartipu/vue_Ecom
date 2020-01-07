@@ -15,9 +15,6 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/', 'Front\PagesController@index');
 Route::get('/store', 'Front\PagesController@index');
-Route::get('/cat', function(){return "not found";});
-Route::get('/super', function(){return "not found";});
-Route::get('/sub', function(){return "not found";});
 
 Route::get('/cat/{slug}', 'Front\PagesController@cat');
 Route::get('/super/{slug}', 'Front\PagesController@super');
@@ -74,9 +71,7 @@ Route::put('category/{id}/sub-sub-category', 'CategoryController@subSubUpdate')
 Route::DELETE('sub-sub-delete/{id}','CategoryController@subSubDelete')->name('sub-sub-delete');
 
 
-Route::get('form', function (){
-   return view('form');
-});
+
 
 Auth::routes();
 
@@ -141,14 +136,16 @@ Route::get('/accepted-order','OrderController@acceptedOrderList')->name('accepte
 Route::get('/accept-order/{order}','OrderController@acceptOrder');
 Route::get('/accepted-order/{order}','OrderController@acceptedOrder');
 
-Route::get('/deliver-order','OrderController@deliverOrderList');
+Route::get('/delivered-order','OrderController@deliveredOrderList')->name('delivered-order');
 Route::get('/deliver-order/{order}','OrderController@deliverOrder');
+Route::get('/delivered-order/{order}','OrderController@deliveredOrder');
 
 Route::get('/returned-order/{order}','OrderController@returnedOrder');
 Route::get('/returned-order','OrderController@returnedOrder');
 
-Route::get('/deliver-order','OrderController@cancelledOrderList');
-Route::get('/deliver-order/{order}','OrderController@cancelledOrderList');
+Route::get('/cancelled-order','OrderController@cancelledOrderList');
+Route::get('/cancel-order/{order}','OrderController@cancelOrder');
+Route::get('/cancelled-order/{order}','OrderController@cancelledOrder');
 
 Route::get('/new-order/view/{order}','OrderController@newOrderView')->name('neworder-view');
 

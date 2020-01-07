@@ -198,11 +198,21 @@
 
 <script>
 const accept = document.getElementById('acceptOrder');
+const cancel = document.getElementById('cancel');
+
 accept.addEventListener('click', function(event){
         event.preventDefault;
         const order = document.getElementById('order').value;
         console.log(order)
         window.location.replace('/returned-order/'+order);
+
+})
+// Cancel Order
+cancel.addEventListener('click', function(event){
+        event.preventDefault;
+        const order = document.getElementById('order').value;
+        console.log(order)
+        window.location.replace('/cancel-order/'+order);
 
 })
 </script>

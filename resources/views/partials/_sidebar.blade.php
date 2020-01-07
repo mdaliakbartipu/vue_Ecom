@@ -543,6 +543,14 @@
                     <b class="arrow"></b>
                 </li>
 
+                <li class="{{ request()->is('cancelled-order') ? 'active' : '' }}">
+                    <a href="{{ url('cancelled-order') }}">
+                        <i class="menu-icon fa fa-list-alt"></i>
+                        <span class="menu-text"> Cancelled Orders </span>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+
 
             </ul>
         </li>

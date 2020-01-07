@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title','Table')
 @section('page-header')
-    <i class="fa fa-list"></i> Table
+    <i class="fa fa-list"></i> Order
 @stop
 @section('css')
 
@@ -31,7 +31,7 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                <h4 class="card-title ">Orders</h4>
+                <h4 class="card-title ">Cancelled Orders</h4>
                   
                 @include('layouts.includes.msg')    
                 
@@ -68,7 +68,7 @@
                             <td> {{ $subtotal }}</td>
                             <td> {{ $order->payment_type }} </td>
                             <td> 
-                                <a href="{{route('neworder-view', $order->id)}}" class="btn btn-sm btn-info fa fa-eye"></a>
+                                <a href="{{url('/cancelled-order', $order->id)}}" class="btn btn-sm btn-info fa fa-eye"></a>
                             </td>
             
 </tr>
