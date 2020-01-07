@@ -160,6 +160,14 @@ Route::get('/api/commoninfo','CommonInfoController@apiGetCommonInfo');
 
 
 
+// Reports
+Route::get('/report/sale-single','ReportController@saleSingle');
+Route::get('/report/sale-daily','ReportController@saleDaily');
+Route::get('/report/sale-monthly','ReportController@saleMonthly');
+Route::get('/report/sale-yearly','ReportController@saleYearly');
+
+
+
 
 // API section
 // new controller for all api
