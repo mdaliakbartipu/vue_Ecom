@@ -32,12 +32,22 @@ class OrderController extends Controller
     public function gotNewOrder(Request $request)
     {
         // dd($request->all());
+
         $cart = \Session::get('cart');
+        // Variant_id and qty are needed
+        // dd($cart);
+
         $error = false;
 
         foreach($cart as $item){
-            $userProfile = UserProfile::create($request->all());
-            $shipping = null;
+            // Creating profile for all except Logged in user
+            if(\Auth::user()){
+                $userProfile = UserProfile::find(\Auth::user()->id);
+                $userProfile->update($request->all());
+            } else {
+                $userProfile = UserProfile::create($request->all());
+            }
+             $shipping = null;
 
             if(isset($request->shipping)){
                 $request->validate([
@@ -59,7 +69,7 @@ class OrderController extends Controller
                 $shipping->street     = $request->sstreet;
                 $shipping->city       = $request->scity;
                 $shipping->state      = $request->sstate;
-                $shipping->address   = $request->saddress;
+                $shipping->address    = $request->saddress;
                 $shipping->save();
             }
 
@@ -68,6 +78,7 @@ class OrderController extends Controller
             $user->shipping = $shipping?$shipping->id:null;
             $user->billing = $userProfile?$userProfile->id:null;
             
+            $this->orderNote = $request->order_note??null;
             $order = $this->saveOrder( 
                             $user ,
                             (int)$item['variant_id'],
@@ -120,17 +131,24 @@ class OrderController extends Controller
             $order->shipping_id = $user->shipping??null;
             $order->billing_id = $user->billing;
             $order->variant_id = $variantID;
-            $order->qty = $qty;
             // qty
             // unit price
             $order->unit_price = $product->price;
+            $order->qty = $qty;
+            // subtotal
+            $order->sub_total = $order->unit_price * $order->qty;
             // shipping cost
-            $order->shipping_cost = 100; // must be from database
+            $vat    = 0; //5%
+            $ship   = 0; //100tk
+
+            $order->shipping_cost = $ship; // must be from database
             // vat
-            $order->vat = 100; // must be from database
+            $order->vat = $vat; // must be from database
             // discount
             $order->discount = $product->discount;
+            $order->total = $order->sub_total + ($order->sub_total*$order->vat/100) + $order->shipping_cost - ($order->sub_total*$order->discount/100);
             $order->payment_type = $paymentMethod??'none';
+            $order->note = $this->orderNote;
             
             if($order->save())
                 return true;

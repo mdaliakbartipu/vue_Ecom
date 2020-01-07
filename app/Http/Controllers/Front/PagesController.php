@@ -126,11 +126,22 @@ class PagesController extends FrontController
     public function checkout()
     {
         $carts = \Session::get('cart');
+        
         if(!$carts){
             return redirect('/');
         }
 
-        return view('front.checkout',['cartProducts' => $carts]);
+        //get user info for automatic fillup
+        $user  = \Auth::user()?\Auth::user()->id:null;
+        if($user):
+            $user = \App\User::with('profile')->find($user);
+        endif;
+        // dd($user);
+
+        return view('front.checkout',[
+                    'cartProducts' => $carts,
+                    'user'         => $user
+                ]);
     }
 
     public function about()
@@ -150,8 +161,13 @@ class PagesController extends FrontController
 
     public function dashboard()
     {
+        if(!\Auth::user())
+            return redirect('/');
+
         $user = \App\User::where('id',\Auth::user()->id)->with('profile')->first();
+        // dd($user);
         $orders = \App\Models\NewOrder::where('user_id', $user->id)->get();
+        // dd($orders);
         return view('front.dashboard', [
             'user' => $user,
             'orders' => $orders

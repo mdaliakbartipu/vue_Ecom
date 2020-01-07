@@ -68,7 +68,7 @@ class RegisterController extends FrontController
     protected function create(array $data)
     {
         return User::create([
-            'name'      => 'Set Your Name',
+            'name'      => $data['name'],
             'email'     => $data['email'],
             'password'  => Hash::make($data['password']),
             'role'      => '2'

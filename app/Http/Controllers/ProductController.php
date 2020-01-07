@@ -622,7 +622,8 @@ class ProductController extends Controller
 
 
         $subTotal = 0;
-        $shipping = 100;
+        $shipping = 0;
+
         header('Content-Type: application/json');
 
         if ($cart) {

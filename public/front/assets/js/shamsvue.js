@@ -178,9 +178,9 @@ Vue.component('cart_row', {
     <td class="product_name"><a href="#">{{this.product.name}}</a></td>
     <td class="product_color"><a href="#">{{this.product.color}}</a></td>
     <td class="product_size"><a href="#">{{this.product.size}}</a></td>
-    <td class="product-price">£ {{this.product.price}}</td>
+    <td class="product-price">$ {{this.product.price}}</td>
     <td class="product_quantity"><label>Quantity</label> <input  :value="this.product.qty" type="number"></td>
-    <td class="product_total">£ {{parseInt(this.product.price)*parseInt(this.product.qty)}}</td>
+    <td class="product_total">$ {{parseInt(this.product.price)*parseInt(this.product.qty)}}</td>
 </tr>
     `
 })
@@ -220,16 +220,16 @@ Vue.component('cart_total', {
             <div class="coupon_inner">
                     <div class="cart_subtotal">
                         <p>Subtotal</p>
-                        <p class="cart_amount">£ {{this.subtotal}}</p>
+                        <p class="cart_amount">$ {{this.subtotal}}</p>
                     </div>
                     <div class="cart_subtotal ">
                         <p>Shipping</p>
-                        <p class="cart_amount"><span>Flat Rate:</span> £ {{this.shipping}}</p>
+                        <p class="cart_amount"><span>Flat Rate:</span> $ {{this.shipping}}</p>
                     </div>
 
                     <div class="cart_subtotal">
                         <p>Total</p>
-                        <p class="cart_amount">£ {{this.subtotal+this.shipping}}</p>
+                        <p class="cart_amount">$ {{this.subtotal+this.shipping}}</p>
                     </div>
                     <div class="checkout_btn">
                         <a href="/checkout">Proceed to Checkout</a>

@@ -154,23 +154,14 @@ class UserController extends Controller
 
         $profile = UserProfile::where('user_id',$userID)->first();
         $user = User::find($userID);
+        $name =  preg_split('/\s+/', $request->name??"No Name");
 
         if($profile){
             if($user){
                 $user->name = $request->name??'No';
-                if($request->email){
-                    $user->email = $request->email??'No';
-                }
                 $user->save();
             }
-            $profile->user_id = \Auth::user()->id;
-            $profile->first_name = $request->first_name??'No';
-            $profile->last_name = $request->last_name??'Name';
-            $profile->email = $request->email??'';
-            $profile->phone = $request->phone??'';
-            // $profile->dob = $request->dob;
-            $profile->gender = $request->id_gender??'';
-            $profile->save();
+            $profile->update($request->all());
             return redirect('/dashboard')->with('success', 'Profile updated');
         } else{
             if($user){
@@ -182,15 +173,10 @@ class UserController extends Controller
             }
 
             $profile  = new UserProfile;
-            $profile->user_id = \Auth::user()->id;
-            $profile->user_id = $userID;
-            $profile->first_name = $request->first_name??'NO';
-            $profile->last_name = $request->last_name??'Name';
-            $profile->email = $request->email??'';
-            $profile->phone = $request->phone??'';
-            // $profile->dob = $request->dob;
-            $profile->gender = $request->id_gender??'';
+            $profile->user_id   = \Auth::user()->id;
             $profile->save();
+            $profile->update($request->all());
+
             return redirect('/dashboard')->with('success', 'New Profile Created');
         }
 

@@ -12,7 +12,11 @@
                             <form action="" method="post">
                                 <?=csrf_field()?>
                                 <p>
-                                    <label>Username or email <span>*</span></label>
+                                    <label>Name</label>
+                                    <input type="text" name="name">
+                                </p>
+                                <p>
+                                    <label>Email <span>*</span></label>
                                     <input type="text" name="email">
                                 </p>
                                 <p>

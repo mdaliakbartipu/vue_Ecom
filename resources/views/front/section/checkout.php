@@ -8,25 +8,35 @@ include("partials/breadcumb.php"); ?>
     <div class="container">
         <div class="Checkout_section">
             <div class="checkout_form">
-            <form action="/order" method="post">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="checkout_form_left">
-                            
+                <form action="/order" method="post">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="checkout_form_left">
+
                                 <h3>Billing Details</h3>
                                 <div class="row">
-
+                                    <?php
+                                    $name = preg_split('/\s+/', $user->name);
+                                    ?>
                                     <div class="col-lg-6 mb-20">
                                         <label>First Name <span>*</span></label>
-                                        <input type="text" name="first_name">
+                                        <input type="text" name="first_name" value="<?= $name ? $name[0] : null ?>">
                                     </div>
                                     <div class="col-lg-6 mb-20">
                                         <label>Last Name <span>*</span></label>
-                                        <input type="text" name="last_name">
+                                        <input type="text" name="last_name" value="<?= $name ? $name[1] : null ?>">
                                     </div>
-                                    <div class="col-12 mb-20">
-                                        <label for="country">country <span>*</span></label>
-                                        <select class="niceselect_option" name="cuntry" id="country" style="display: none;">
+                                    <div class="col-lg-6 mb-20">
+                                        <label>Phone<span>*</span></label>
+                                        <input type="text" name="phone" value="<?= $user->profile ? $user->profile->phone : null ?>">
+                                    </div>
+                                    <div class="col-lg-6 mb-20">
+                                        <label> Email Address <span>*</span></label>
+                                        <input type="text" name="email" value="<?= $user->profile ? $user->profile->email : null ?>">
+                                    </div>
+                                    <div class="col-6 mb-20">
+                                        <label for="country">Country <span>*</span></label>
+                                        <select class="niceselect_option" name="country" id="country" style="display: none;">
                                             <option value="2">bangladesh</option>
                                             <option value="3">Algeria</option>
                                             <option value="4">Afghanistan</option>
@@ -38,32 +48,23 @@ include("partials/breadcumb.php"); ?>
 
                                         </select>
                                     </div>
-
-                                    <div class="col-12 mb-20">
-                                        <label>Street address <span>*</span></label>
-                                        <input name="street" placeholder="House number and street name" type="text">
+                                    <div class="col-6 mb-20">
+                                        <label>State<span>*</span></label>
+                                        <input type="text" name="state" value="<?= $user->profile ? $user->profile->state : null ?>">
                                     </div>
-                                    <div class="col-12 mb-20">
-                                        <input name="address" placeholder="Apartment, suite, unit etc. (optional)" type="text">
-                                    </div>
-                                    <div class="col-12 mb-20">
+                                    <div class="col-6 mb-20">
                                         <label>Town / City <span>*</span></label>
-                                        <input type="text" name="city">
+                                        <input type="text" name="city" value="<?= $user->profile ? $user->profile->city : null ?>">
                                     </div>
+                                    <div class="col-6 mb-20">
+                                        <label>Street address <span>*</span></label>
+                                        <input name="street" placeholder="House number and street name" type="text" value="<?= $user->profile ? $user->profile->street : null ?>">
+                                    </div>
+
                                     <div class="col-12 mb-20">
-                                        <label>State / County <span>*</span></label>
-                                        <input type="text" name="state">
+                                        <input name="address" placeholder="Apartment, suite, unit etc. (optional)" type="text" value="<?= $user->profile ? $user->profile->address : null ?>">
                                     </div>
-                                    <div class="col-lg-6 mb-20">
-                                        <label>Phone<span>*</span></label>
-                                        <input type="text" name="phone">
 
-                                    </div>
-                                    <div class="col-lg-6 mb-20">
-                                        <label> Email Address <span>*</span></label>
-                                        <input type="text" name="email">
-
-                                    </div>
                                     <div class="col-12 mb-20">
                                         <input id="account" type="checkbox" data-target="createp_account">
                                         <label for="account" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">Create an account?</label>
@@ -83,54 +84,49 @@ include("partials/breadcumb.php"); ?>
                                             <div class="row">
                                                 <div class="col-lg-6 mb-20">
                                                     <label>First Name <span>*</span></label>
-                                                    <input type="text"name="sfirst_name">
+                                                    <input type="text" name="sfirst_name" value="<?= $name ? $name[0] : null ?>">
                                                 </div>
                                                 <div class="col-lg-6 mb-20">
                                                     <label>Last Name <span>*</span></label>
-                                                    <input type="text" name="slast_name">
-                                                </div>
-
-                                                <div class="col-12 mb-20">
-                                                    <div class="select_form_select">
-                                                        <label for="countru_name">country <span>*</span></label>
-                                                        <select class="niceselect_option" name="scuntry" id="countru_name" style="display: none;">
-                                                            <option value="2">bangladesh</option>
-                                                            <option value="3">Algeria</option>
-                                                            <option value="4">Afghanistan</option>
-                                                            <option value="5">Ghana</option>
-                                                            <option value="6">Albania</option>
-                                                            <option value="7">Bahrain</option>
-                                                            <option value="8">Colombia</option>
-                                                            <option value="9">Dominican Republic</option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12 mb-20">
-                                                    <label>Street address <span>*</span></label>
-                                                    <input name="sstreet" placeholder="House number and street name" type="text">
-                                                </div>
-                                                <div class="col-12 mb-20">
-                                                    <input name="saddress" placeholder="Apartment, suite, unit etc. (optional)" type="text">
-                                                </div>
-                                                <div class="col-12 mb-20">
-                                                    <label>Town / City <span>*</span></label>
-                                                    <input type="text" name="scity">
-                                                </div>
-                                                <div class="col-12 mb-20">
-                                                    <label>State / County <span>*</span></label>
-                                                    <input type="text" name="sstate">
+                                                    <input type="text" name="slast_name" value="<?= $name ? $name[1] : null ?>">
                                                 </div>
                                                 <div class="col-lg-6 mb-20">
                                                     <label>Phone<span>*</span></label>
-                                                    <input type="text" name="sphone">
-
+                                                    <input type="text" name="sphone" value="<?= $user->profile ? $user->profile->phone : null ?>">
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-6 mb-20">
                                                     <label> Email Address <span>*</span></label>
-                                                    <input type="text" name="semail">
+                                                    <input type="text" name="semail" value="<?= $user->profile ? $user->profile->email : null ?>">
+                                                </div>
+                                                <div class="col-6 mb-20">
+                                                    <label for="country">Country <span>*</span></label>
+                                                    <select class="niceselect_option" name="scountry" id="scountry" style="display: none;">
+                                                        <option value="2">bangladesh</option>
+                                                        <option value="3">Algeria</option>
+                                                        <option value="4">Afghanistan</option>
+                                                        <option value="5">Ghana</option>
+                                                        <option value="6">Albania</option>
+                                                        <option value="7">Bahrain</option>
+                                                        <option value="8">Colombia</option>
+                                                        <option value="9">Dominican Republic</option>
 
+                                                    </select>
+                                                </div>
+                                                <div class="col-6 mb-20">
+                                                    <label>State<span>*</span></label>
+                                                    <input type="text" name="sstate" value="<?= $user->profile ? $user->profile->state : null ?>">
+                                                </div>
+                                                <div class="col-6 mb-20">
+                                                    <label>Town / City <span>*</span></label>
+                                                    <input type="text" name="scity" value="<?= $user->profile ? $user->profile->city : null ?>">
+                                                </div>
+                                                <div class="col-6 mb-20">
+                                                    <label>Street address <span>*</span></label>
+                                                    <input name="sstreet" placeholder="House number and street name" type="text" value="<?= $user->profile ? $user->profile->street : null ?>">
+                                                </div>
+
+                                                <div class="col-12 mb-20">
+                                                    <input name="saddress" placeholder="Apartment, suite, unit etc. (optional)" type="text" value="<?= $user->profile ? $user->profile->address : null ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -142,83 +138,84 @@ include("partials/breadcumb.php"); ?>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="checkout_form_right">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="checkout_form_right">
 
-                            <input type="hidden" name="_token" value="<?= csrf_token() ?>">
-                            <h3>Your order</h3>
-                            <div class="order_table table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($cartProducts as $item) : ?>
+                                <input type="hidden" name="_token" value="<?= csrf_token() ?>">
+                                <h3>Your order</h3>
+                                <div class="order_table table-responsive">
+                                    <table>
+                                        <thead>
                                             <tr>
-                                                <td><?= $item['name'] ?><strong> × <?= $item['qty'] ?></strong></td>
-                                                <td> $<?= (int) $item['price'] * (int) $item['qty'] ?></td>
+                                                <th>Product</th>
+                                                <th>Total</th>
                                             </tr>
-                                        <?php endforeach; ?>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($cartProducts as $item) : ?>
+                                                <tr>
+                                                    <td><?= $item['name'] ?><strong> × <?= $item['qty'] ?></strong></td>
+                                                    <td> $<?= (int) $item['price'] * (int) $item['qty'] ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
 
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Cart Subtotal</th>
-                                            <?php
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Cart Subtotal</th>
+                                                <?php
 
-                                            $subtotal = 0;
-                                            $ship = 5;
-                                            foreach ($cartProducts as $item) {
-                                                $subtotal += (int) $item['price'] * (int) $item['qty'];
-                                            }
-                                            ?>
-                                            <td>$<?= $subtotal ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Shipping</th>
-                                            <td><strong>$<?= $ship ?></strong></td>
-                                        </tr>
-                                        <tr class="order_total">
-                                            <th>Order Total</th>
-                                            <td><strong>$<?= $subtotal + $ship ?></strong></td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <div class="payment_method">
-                                <div class="panel-default">
-                                    <input id="payment" name="payment_method" type="radio" value="cash" data-target="createp_account">
-                                    <label for="payment" data-toggle="collapse" data-target="#method" aria-controls="method">Cash</label>
+                                                $subtotal = 0;
+                                                $ship = 0;
 
-                                    <div id="method" class="collapse one" data-parent="#accordion">
-                                        <div class="card-body1">
-                                            <p>Cash on delivery</p>
+                                                foreach ($cartProducts as $item) {
+                                                    $subtotal += (int) $item['price'] * (int) $item['qty'];
+                                                }
+                                                ?>
+                                                <td>$<?= $subtotal ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Shipping</th>
+                                                <td><strong>$<?= $ship ?></strong></td>
+                                            </tr>
+                                            <tr class="order_total">
+                                                <th>Order Total</th>
+                                                <td><strong>$<?= $subtotal + $ship ?></strong></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="payment_method">
+                                    <div class="panel-default">
+                                        <input id="payment" name="payment_method" type="radio" value="cash" data-target="createp_account">
+                                        <label for="payment" data-toggle="collapse" data-target="#method" aria-controls="method">Cash</label>
+
+                                        <div id="method" class="collapse one" data-parent="#accordion">
+                                            <div class="card-body1">
+                                                <p>Cash on delivery</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="panel-default">
-                                    <input id="payment_defult" name="payment_method" type="radio" value="online" data-target="createp_account">
-                                    <label for="payment_defult" data-toggle="collapse" data-target="#collapsedefult" aria-controls="collapsedefult">Online Payment<img src="assets/img/icon/papyel.png" alt=""></label>
+                                    <div class="panel-default">
+                                        <input id="payment_defult" name="payment_method" type="radio" value="online" data-target="createp_account">
+                                        <label for="payment_defult" data-toggle="collapse" data-target="#collapsedefult" aria-controls="collapsedefult">Online Payment<img src="assets/img/icon/papyel.png" alt=""></label>
 
-                                    <div id="collapsedefult" class="collapse one" data-parent="#accordion">
-                                        <div class="card-body1">
-                                            <p>Pay via Cards or online options</p>
+                                        <div id="collapsedefult" class="collapse one" data-parent="#accordion">
+                                            <div class="card-body1">
+                                                <p>Pay via Cards or online options</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="order_button">
-                                    <button type="submit">Proceed to Order</button>
+                                    <div class="order_button">
+                                        <button type="submit">Proceed to Order</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
             </div>
         </div>
     </div>

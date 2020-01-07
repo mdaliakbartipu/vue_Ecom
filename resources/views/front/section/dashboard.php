@@ -14,12 +14,10 @@ include("partials/breadcumb.php"); ?>
                             <!-- Nav tabs -->
                             <div class="dashboard_tab_button">
                                 <ul role="tablist" class="nav flex-column dashboard-list">
-                                    <li><a href="#dashboard" data-toggle="tab" class="nav-link active">Dashboard</a></li>
+                                    <li><a href="#dashboard" data-toggle="tab" class="nav-link">Dashboard</a></li>
                                     <li> <a href="#orders" data-toggle="tab" class="nav-link">Orders</a></li>
                                     <!-- <li><a href="#downloads" data-toggle="tab" class="nav-link">Downloads</a></li> -->
-                                    <li><a href="#account-details" data-toggle="tab" class="nav-link">Account details</a></li>
-                                    <li><a href="#address" data-toggle="tab" class="nav-link">Addresses</a></li>
-                                    
+                                    <li><a href="#account-details" data-toggle="tab" class="nav-link active">Account details</a></li> 
                                     <li><a href="/logout" class="nav-link">logout</a></li>
                                 </ul>
                             </div>
@@ -27,7 +25,7 @@ include("partials/breadcumb.php"); ?>
                         <div class="col-sm-12 col-md-9 col-lg-9">
                             <!-- Tab panes -->
                             <div class="tab-content dashboard_content">
-                                <div class="tab-pane fade show active" id="dashboard">
+                                <div class="tab-pane fade" id="dashboard">
                                     <h3><?=\Auth::user()->name?>'s Dashboard</h3>
 
                                     <p>Welcome <?=\Auth::user()->name?> to your dashboard</p>
@@ -44,24 +42,21 @@ include("partials/breadcumb.php"); ?>
                                                     <th>Date</th>
                                                     <th>Status</th>
                                                     <th>Total</th>
-                                                    <th>Actions</th>
+                                                    <!-- <th>Actions</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <?php 
+                                            $index = 0;
+                                            foreach($orders as $key=>$order): ?>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>May 10, 2018</td>
-                                                    <td><span class="success">Completed</span></td>
-                                                    <td>$25.00 for 1 item </td>
-                                                    <td><a href="cart.html" class="view">view</a></td>
+                                                    <td><?=++$index?></td>
+                                                    <td><?=$order->created_at?></td>
+                                                    <td><span class="success"><?=$order->payment_status?'Completed':'Processing'?> </span></td>
+                                                    <td><?=$order->total_amount?></td>
+                                                    <!-- <td><a href="cart.html" class="view">view</a></td> -->
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>May 10, 2018</td>
-                                                    <td>Processing</td>
-                                                    <td>$17.00 for 1 item </td>
-                                                    <td><a href="cart.html" class="view">view</a></td>
-                                                </tr>
+                                            <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -110,10 +105,10 @@ include("partials/breadcumb.php"); ?>
                                     </address>
                                         <p>Bangladesh</p>
                                 </div>
-                                <div class="tab-pane fade" id="account-details">
+                                <div class="tab-pane fade show active" id="account-details">
                                     <h3>Account details </h3>
                                     <div class="login">
-                                        <div class="login_form_container">
+                                        <div class="login_form_container" style="width:45%;float:left;margin:1em">
                                             <div class="account_login_form">
                                                 <form action="/save-user-info" method="POST">
                                                 <input type="hidden" name="_token" value="<?=csrf_token()?>">
@@ -126,7 +121,41 @@ include("partials/breadcumb.php"); ?>
                                                     <label>Email</label>
                                                     <input type="text" name="email" value="<?=$user->email?>">
                                                     <label>Phone</label>
-                                                    <input type="text" name="phone" value="<?=$user->profile->phone?>">
+                                                    <input type="text" name="phone" value="<?=$user->profile?$user->profile->phone:null?>">
+                                                    <!-- <label>Birthdate</label>
+                                                    <input type="text" placeholder="MM/DD/YYYY" value="" name="dob">
+                                                    <span class="example">
+                                                      (E.g.: 05/31/1970)
+                                                    </span> -->
+                                                  
+                                                    <br>
+                                                    <!-- <span class="custom_checkbox">
+                                                        <input type="checkbox" value="1" name="newsletter">
+                                                        <label>Sign up for our newsletter<br><em>You may unsubscribe at any moment. For that purpose, please find our contact info in the legal notice.</em></label>
+                                                    </span> -->
+                                                    <div class="save_button primary_btn default_button">
+                                                        <button type="submit">Save</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="login_form_container" style="width:45%;float:right;margin:1em">
+                                            <div class="account_login_form">
+                                                <form action="/save-user-info" method="POST">
+                                                <input type="hidden" name="_token" value="<?=csrf_token()?>">
+                                                    <!-- <div class="input-radio">
+                                                        <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mr.</span>
+                                                        <span class="custom-radio"><input type="radio" value="2" name="id_gender"> Mrs.</span>
+                                                    </div> <br> -->
+                                                    <label>Country</label>
+                                                    <input type="text" name="country" value="<?=$user->profile?$user->profile->country:null?>">
+                                                    <label>State</label>
+                                                    <input type="text" name="state" value="<?=$user->profile?$user->profile->state:null?>">
+                                                    <label>City</label>
+                                                    <input type="text" name="city" value="<?=$user->profile?$user->profile->city:null?>">
+                                                    <label>Street</label>
+                                                    <input type="text" name="street" value="<?=$user->profile?$user->profile->street:null?>">
+                                                    <input type="text" name="address" value="<?=$user->profile?$user->profile->address:null?>">
                                                     <!-- <label>Birthdate</label>
                                                     <input type="text" placeholder="MM/DD/YYYY" value="" name="dob">
                                                     <span class="example">
