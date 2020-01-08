@@ -66,7 +66,7 @@ class InventoryController extends Controller
             'qty'           => 'required'
         ]);
 
-        $product = Product::find($request->product)->with('variants')->first();
+        $product = Product::where('id', $request->product)->with('variants')->first();
         $variants = $product->variants;
 
         $valid = false;
@@ -75,7 +75,7 @@ class InventoryController extends Controller
         foreach ($variants as $key=>$variant) {
             $color  = $variant->color_id;
             $size   = $variant->size_id;
-            if ($color == $request->color && $size == $request->size) {
+            if (((int)$color == (int)$request->color) && ((int)$size == (int)$request->size)) {
                 $valid = true;
                 $var = $variant;
                 break;
@@ -84,12 +84,11 @@ class InventoryController extends Controller
         if($valid && $var){
             // increase qty
             $var->qty += $request->qty;
-            $var->save()?function(){
+            if($var->save()){
                 return json_encode(['status' => 200, 'msg' => 'Quantity added successfully']);
-            }:function(){
+            } else {
                 return json_encode(['status' => 503, 'msg' => 'Quantity NOT added successfully']);
-            };
-
+            }
         } else { 
             // if no existing paired found
             $var                = new ProductVariant;
@@ -97,10 +96,12 @@ class InventoryController extends Controller
             $var->color_id      = $request->color;
             $var->size_id       = $request->size;
             $var->qty           = $request->qty;
-            $var->save()?function(){
+            if($var->save()){
                 return json_encode(['status' => 200, 'msg' => 'New Quantity added successfully']);
+            } else {
+               return json_encode(['status' => 503, 'msg' => 'Quantity NOT added successfully']);
             }
-            :function(){return json_encode(['status' => 503, 'msg' => 'Quantity NOT added successfully']);};
+            
         }
 
     }

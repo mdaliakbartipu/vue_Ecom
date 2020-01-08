@@ -107,11 +107,12 @@
                 // adding another row each time user clicks to any "add button"
                 function addRow(that) {
                     event.preventDefault();
-
+                    var sbutton = that;
                     $name = that.parentElement.parentElement.getElementsByClassName('name')[0].value;
                     $color = that.parentElement.parentElement.getElementsByClassName('color')[0].value;
                     $size = that.parentElement.parentElement.getElementsByClassName('size')[0].value;
                     $qty = that.parentElement.parentElement.getElementsByClassName('qty')[0].value;
+                  
                     if($name && $color && $size && $qty){
                         // alert("all iz well");
                         axios
@@ -120,11 +121,10 @@
                         color: $color,
                         size: $size,
                         qty: $qty,
-                        _token: '<?php csrf_token()?>',
+                        _token: '<?=csrf_token()?>',
                     })
                     .then(function (response) {
-                        console.log(response);
-                        alert("Got request");
+                        gotIt(response.data);
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -166,6 +166,28 @@
                 // Click On Purchase and make Purchase
                 function purchase() {
                     alert("hello")
+                }
+
+                function gotIt(data){
+                    console.log(data);
+                    if(data.status==200){
+
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Quantity Added!',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            width:'200px',
+                            height:'100px'
+                            })
+                        // alert success
+                        // change button green
+
+                    } else{
+                        swal.fire("Sorry! Server says Error!!");
+                    }
+
                 }
             </script>
             <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
