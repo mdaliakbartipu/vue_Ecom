@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class ProductVariant extends Model
 {
     protected $table = 'product_variant';
-
+    public $timestamps = false;
+    
     public static function getVariants($productID = null){
       if($productID):
             $variantsID = array();

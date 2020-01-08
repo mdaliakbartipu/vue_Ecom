@@ -107,6 +107,7 @@ Route::get('/get-sub/ajax/{id}','ProductController@ajaxGetSub');
 Route::get('/get-sub/sub/ajax/{id}','ProductController@ajaxGetSubsub');	
 });
 
+Route::get('/api/products','ProductController@apiAllProducts');
 Route::get('/api/get-product/{tag}','ProductController@getProductByTag');
 Route::get('/api/get-product-tags','ProductController@getProductTags');
 Route::get('/api/get-cart','ProductController@getCart');
@@ -166,8 +167,14 @@ Route::get('/report/sale-daily','ReportController@saleDaily');
 Route::get('/report/sale-monthly','ReportController@saleMonthly');
 Route::get('/report/sale-yearly','ReportController@saleYearly');
 
+// Inventory
+Route::get('/inventory/purchase','InventoryController@purchase');
+Route::get('/inventory/purchase/{product}','InventoryController@purchaseProduct');
+Route::get('/inventory/stock','Inventory@stock');
+Route::get('/inventory/sold','Inventory@sold');
 
 
 
 // API section
+Route::post('/api/inventory/add','InventoryController@addVariant');
 // new controller for all api

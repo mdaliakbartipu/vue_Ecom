@@ -13,7 +13,7 @@ class YearlyReport extends Report
 
     public function getReport()
     {
-        $orders = $this->orderModel->with('variant')->get();  
+        $orders = $this->orderModel->whereYear('created_at', '=', date('Y'))->with('variant')->get();  
         return $orders;
     }
 }
