@@ -48,7 +48,6 @@
                                     <th class="text-center"> Action </th>
                                 </thead>
                                 <tbody id="tBody">
-                                <form action="/inventory/add" method="post">
                                     <tr class="tRow"> 
                                             <td>
                                                 <select class="name" name="product">
@@ -78,7 +77,6 @@
                                             <td><input class="qty" type="text" name="qty[]" placeholder="Quantity"></td>
                                             <td><button onclick="addRow(this)" class="btn btn-info"> <i class="fa fa-plus"></i>Add</button></td>
                                     </tr>
-                                    </form>
                                 </tbody>
                             </table>
                             <button onclick="purchase()" class="btn btn-warning pull-right">Purchase</button>
@@ -108,10 +106,10 @@
                 function addRow(that) {
                     event.preventDefault();
                     var sbutton = that;
-                    $name = that.parentElement.parentElement.getElementsByClassName('name')[0].value;
-                    $color = that.parentElement.parentElement.getElementsByClassName('color')[0].value;
-                    $size = that.parentElement.parentElement.getElementsByClassName('size')[0].value;
-                    $qty = that.parentElement.parentElement.getElementsByClassName('qty')[0].value;
+                    var $name = that.parentElement.parentElement.getElementsByClassName('name')[0].value;
+                    var $color = that.parentElement.parentElement.getElementsByClassName('color')[0].value;
+                    var $size = that.parentElement.parentElement.getElementsByClassName('size')[0].value;
+                    var $qty = that.parentElement.parentElement.getElementsByClassName('qty')[0].value;
                   
                     if($name && $color && $size && $qty){
                         // alert("all iz well");
@@ -140,27 +138,37 @@
                 
 
 
+                    var thisRow = that.parentElement.parentElement;
                     const rparent = document.getElementById('tBody');
-                    const rchild = document.getElementsByClassName('tRow')
+                    // const rchild = thisRow.getElementsByClassName('tRow')[0]
+                    const cchild = thisRow.cloneNode(true);
+                    
+                    var dis = thisRow.getElementsByTagName('select');
+                    for(var $in=0 ; $in <dis.length; $in++){
+                        dis[$in].disabled = true;
+                    }
+                    // rchild.getElementsByTagName('select');
 
-                    const tRow = document.createElement('tr');
-                    var name = document.createElement('td');
-                    name.innerHTML = `<input  type="text" name="product" placeholder="search your product">`;
-                    tRow.appendChild(name)
-                    var color = document.createElement('td');
-                    color.innerHTML = `<input type="text" name="color" placeholder="Select Color">`;
-                    tRow.appendChild(color)
-                    var size = document.createElement('td');
-                    size.innerHTML = `<input type="text" name="size" placeholder="Select Size">`;
-                    tRow.appendChild(size)
-                    var qty = document.createElement('td');
-                    qty.innerHTML = `<input type="text" name="qty" placeholder="Quantity">`;
-                    tRow.appendChild(qty)
-                    var add = document.createElement('td');
-                    add.innerHTML = `<button onclick="addRow()" class="btn btn-info"> <i class="fa fa-plus"></i>Add</button>`
-                    tRow.appendChild(add)
-                    // Appending all td to tr
-                    rparent.appendChild(tRow)
+                    rparent.appendChild(cchild);
+                    
+                    // const tRow = document.createElement('tr');
+                    // var name = document.createElement('td');
+                    // name.innerHTML = `<input  type="text" name="product" placeholder="search your product">`;
+                    // tRow.appendChild(name)
+                    // var color = document.createElement('td');
+                    // color.innerHTML = `<input type="text" name="color" placeholder="Select Color">`;
+                    // tRow.appendChild(color)
+                    // var size = document.createElement('td');
+                    // size.innerHTML = `<input type="text" name="size" placeholder="Select Size">`;
+                    // tRow.appendChild(size)
+                    // var qty = document.createElement('td');
+                    // qty.innerHTML = `<input type="text" name="qty" placeholder="Quantity">`;
+                    // tRow.appendChild(qty)
+                    // var add = document.createElement('td');
+                    // add.innerHTML = `<button onclick="addRow()" class="btn btn-info"> <i class="fa fa-plus"></i>Add</button>`
+                    // tRow.appendChild(add)
+                    // // Appending all td to tr
+                    // rparent.appendChild(tRow)
                 }
 
                 // Click On Purchase and make Purchase
@@ -178,8 +186,8 @@
                             title: 'Quantity Added!',
                             showConfirmButton: false,
                             timer: 1500,
-                            width:'200px',
-                            height:'100px'
+                            width:'300px',
+                            height:'200px'
                             })
                         // alert success
                         // change button green
