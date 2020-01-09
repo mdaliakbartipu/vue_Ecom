@@ -81,7 +81,7 @@ class PagesController extends FrontController
             ]);
     }
 
-    public function singleProduct($id)
+    public function singleProduct($id, $slug)
     {
         return view('front.singleProduct',
         [

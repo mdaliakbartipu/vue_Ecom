@@ -591,7 +591,7 @@ Vue.component('product_info', {
             selected: {
                 variant: null,
                 color: null,
-                qty: null
+                qty: 1
             },
             cart: []
             ,
@@ -633,16 +633,7 @@ Vue.component('product_info', {
                     let cartQty = document.querySelector('#cart-qty');
                     cartQty.innerText = parseInt(response.data.cart.length);
 
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'This Product is added to cart! Buy more !',
-                        showConfirmButton: false,
-                        timer: 1500,
-                        height:'50px',
-                        width:'400px',
-                        
-                    })
+                    Notiflix.Notify.Success('This product is added to your cart');
 
                 })
                 .catch(function (error) {
@@ -1107,8 +1098,8 @@ Vue.component('product_article', {
     <article class="single_product">
     <figure>
         <div class="product_thumb">
-            <a class="primary_img" :href="this.link+this.product.id"><img loading="lazy" :src="this.src+this.product.thumb1" alt=""></a>
-            <a class="secondary_img" :href="this.link+this.product.id"><img loading="lazy" :src="this.src+this.product.thumb2" alt=""></a>
+            <a class="primary_img" :href="this.link+this.product.id+'/'+this.product.slug"><img loading="lazy" :src="this.src+this.product.thumb1" alt=""></a>
+            <a class="secondary_img" :href="this.link+this.product.id+'/'+this.product.slug"><img loading="lazy" :src="this.src+this.product.thumb2" alt=""></a>
             <div class="label_product_left label_product">
                 <span v-if="this.product.new" class="label_sale_left">New</span>
             </div>
