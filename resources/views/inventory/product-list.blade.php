@@ -79,7 +79,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <button onclick="purchase()" class="btn btn-warning pull-right">Purchase</button>
 
                         </div>
                     </div>
@@ -147,6 +146,9 @@
                     for(var $in=0 ; $in <dis.length; $in++){
                         dis[$in].disabled = true;
                     }
+                    // diasble input for qty
+                    thisRow.getElementsByTagName('input')[0].disabled = true;
+                    thisRow.getElementsByTagName('button')[0].disabled = true;
                     // rchild.getElementsByTagName('select');
 
                     rparent.appendChild(cchild);

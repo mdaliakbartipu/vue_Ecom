@@ -531,7 +531,7 @@ Vue.component('product_extra_info', {
         props: ['variant'],
         data: function () {
             return {
-                count: 0
+                count: 1
             }
         },
         methods: {
@@ -541,7 +541,7 @@ Vue.component('product_extra_info', {
                 this.$emit('setQty', this.count);
             },
             down() {
-                if ((this.count - 1) > 0)
+                if ((this.count - 1) > 1)
                     this.count--;
                 this.$emit('setQty', this.count);
             },
@@ -638,7 +638,10 @@ Vue.component('product_info', {
                         icon: 'success',
                         title: 'This Product is added to cart! Buy more !',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 1500,
+                        height:'50px',
+                        width:'400px',
+                        
                     })
 
                 })

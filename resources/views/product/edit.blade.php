@@ -339,7 +339,7 @@
                     <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> Save</button>
                     <div style="width:150%">
                         <h2>Variants</h2><p class="text-warning">You can Update imges here. But You shouldn't changes color or sizes or quantity.It shows that what you have right now.
-                            <br>If you have purchased new product then Add it with new parameters</p>
+                            <br>If you have purchased new product then add it from inventory</p>
                     </div>
                     <div class="" style="width:150%">
                         <div class="table-responsive">
@@ -356,9 +356,6 @@
                                                         <option value="{{ $color->id }}" {{$color->id==$variant[0]->color_id?'selected':''}}>{{ $color->name }}</option>
                                                         @endforeach
                                                     </select>
-                                                </div>
-                                                <div>
-                                                    <button style="width:100%;margin-top:10px" class="purchase btn btn-warning">purchase</button>
                                                 </div>
                                             </td>
                                             <td class="col-md-2">
@@ -380,9 +377,11 @@
                                             @endforeach
                                             </td>
                                             <td class="col-md-6">
+                                            @if($images[$key]??null)
                                             @foreach($images[$key] as $image)
                                                 <img onclick="showBig(this)" style="margin-top:5px" height="60px" width="60px" src="/front/assets/.uploads/products/thumbs/<?=$image->image?>" alt=""> <button class="btn btn-sm btn-danger"  onClick="deleteImage(this)" style="font-size:.5em" id="<?=$image->image?>"><i class="fa fa-close"></i></button>
                                             @endforeach
+                                            @endif
                                                 <div style="margin-top:1em">
                                                     <input multiple="" type="file" id="id-input-file-3" name="image[{{$variant[0]->color_id}}][]" />
                                                 </div>
