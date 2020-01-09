@@ -143,10 +143,6 @@ include("partials/breadcumb.php"); ?>
                                             <div class="account_login_form">
                                                 <form action="/save-user-info" method="POST">
                                                 <input type="hidden" name="_token" value="<?=csrf_token()?>">
-                                                    <!-- <div class="input-radio">
-                                                        <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mr.</span>
-                                                        <span class="custom-radio"><input type="radio" value="2" name="id_gender"> Mrs.</span>
-                                                    </div> <br> -->
                                                     <label>Country</label>
                                                     <input type="text" name="country" value="<?=$user->profile?$user->profile->country:null?>">
                                                     <label>State</label>

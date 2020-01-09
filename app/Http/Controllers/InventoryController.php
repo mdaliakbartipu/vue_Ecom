@@ -16,6 +16,7 @@ use App\SubSubCategory;
 use App\ProductTags;
 use App\ProductImages;
 use App\ProductAttribute;
+use App\ProductInventory;
 
 
 use App\ProductStorage;
@@ -81,8 +82,16 @@ class InventoryController extends Controller
                 break;
             }
         }
+
         if($valid && $var){
-            // increase qty
+            // add to inventory
+            $inventory = new ProductInventory;
+            $inventory->product_id    = $request->product;
+            $inventory->color_id      = $request->color;
+            $inventory->size_id       = $request->size;
+            $inventory->qty           = $request->qty;
+            $inventory->save();
+// increase qty
             $var->qty += $request->qty;
             if($var->save()){
                 return json_encode(['status' => 200, 'msg' => 'Quantity added successfully']);
@@ -91,6 +100,15 @@ class InventoryController extends Controller
             }
         } else { 
             // if no existing paired found
+            // add to inventory
+            $inventory = new ProductInventory;
+            $inventory->product_id    = $request->product;
+            $inventory->color_id      = $request->color;
+            $inventory->size_id       = $request->size;
+            $inventory->qty           = $request->qty;
+            $inventory->save();
+
+
             $var                = new ProductVariant;
             $var->product_id    = $request->product;
             $var->color_id      = $request->color;
