@@ -285,5 +285,15 @@ class PagesController extends FrontController
         
     }
 
+    public function paypalSuccess(Request $request)
+    {
+        return view('front.success');
+    }
+
+    public function paypalfails(Request $request)
+    {
+        return view('front.fails');
+    }
+
 
 }

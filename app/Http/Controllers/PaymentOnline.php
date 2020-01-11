@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\URL;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\Controller;
 use Paypalpayment;
+use PaypalPaymentController;
 
 class PaymentOnline extends Controller
 {
@@ -54,6 +55,11 @@ class PaymentOnline extends Controller
     {
         $this->loadSSLCOM();
         $this->send($this->setData());
+    }
+
+    public function paypal($info = null)
+    {
+        dd($info);
     }
 
     /**

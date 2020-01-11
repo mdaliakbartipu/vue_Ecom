@@ -15,6 +15,7 @@ use App\Product;
 use App\ProductVariant;
 use App\UserProfile;
 use App\UserShippingAddress;
+use Paypalpayment;
 
 
 // orders type
@@ -33,6 +34,7 @@ class OrderController extends Controller
     public function gotNewOrder(Request $request)
     {
         // dd($request->all());
+        
 
         $cart = \Session::get('cart');
         // Variant_id and qty are needed

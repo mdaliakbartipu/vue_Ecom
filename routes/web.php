@@ -130,7 +130,7 @@ Route::get('/api/check-if-color','ProductController@apiCheckIfColor');
 Route::post('/save-user-info','UserController@saveUserInfo');
 
 // order
-Route::post('/order','OrderController@gotNewOrder');
+// Route::post('/order','OrderController@gotNewOrder');
 Route::get('/order/new/list','OrderController@list');
 
 Route::get('/accepted-order','OrderController@acceptedOrderList')->name('accepted-order');
@@ -206,4 +206,8 @@ Route::get('payment/test','PaymentOnline@index');
 
 Route::get('paypal/credit','PaypalPaymentController@index');
 Route::get('paypal/pay','PaypalPaymentController@paywithPaypal');
+Route::post('/order','PaypalPaymentController@paywithPaypal');
+
+Route::get('paypal/fails','Front\PagesController@paypalFails');
+Route::get('paypal/success','Front\PagesController@paypalSuccess');
 
