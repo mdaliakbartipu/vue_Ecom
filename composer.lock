@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd8a67bc8cf99ce7f9f7fc15a8e1e542",
+    "content-hash": "35f5adcd3c7978b723ab78dc738fa16b",
     "packages": [
         {
             "name": "anouar/paypalpayment",

@@ -205,4 +205,5 @@ Route::post('payment/cancel',function(){
 Route::get('payment/test','PaymentOnline@index');
 
 Route::get('paypal/credit','PaypalPaymentController@index');
+Route::get('paypal/pay','PaypalPaymentController@paywithPaypal');
 
