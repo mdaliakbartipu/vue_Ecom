@@ -55,7 +55,7 @@
                       <tbody>
                         <tr class="text-center">
                             
-</tr>
+                        </tr>
                       </tbody>
                     </table>
                   </div>

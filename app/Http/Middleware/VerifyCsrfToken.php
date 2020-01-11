@@ -19,6 +19,11 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+    'sandbox.sslcommerz.com/*',
+       'payment/success',
+       'payment/error',
+       'payment/cancel',
+       'cart',
+       'securepay.sslcommerz.com'
     ];
 }

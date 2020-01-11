@@ -556,79 +556,35 @@
         </li>
 
         <li class="{{ request()->segment(1) == "inventory" ? 'open' : '' }}">
-        <a href="#" class="dropdown-toggle">
-            <i class="menu-icon fa fa-gear">
-            </i>
-            <span class="menu-text">
-                Inventory
-            </span>
-            <b class="arrow fa fa-angle-down"></b>
-        </a>
-        <b class="arrow"></b>
-        <ul class="submenu">
-            <li class="{{-- {{ request()->segment(1) == 'inventory' ? 'open' : '' }} --}}">
-            <li class="{{ request()->is('inventory/purchase') ? 'active' : '' }}">
-                <a href="{{ url('inventory/purchase') }}">
-                    <i class="menu-icon fa fa-list-alt"></i>
-                    <span class="menu-text"> Purchase </span>
-                </a>
-            </li>
-
-            <li class="{{ request()->is('inventory/stock') ? 'active' : '' }}">
-                <a href="{{ url('inventory/stock') }}">
-                    <i class="menu-icon fa fa-list-alt"></i>
-                    <span class="menu-text"> Products In Hand </span>
-                </a>
-            </li>
-
-            <li class="{{ request()->is('inventory/sold') ? 'active' : '' }}">
-                <a href="{{ url('inventory/sold') }}">
-                    <i class="menu-icon fa fa-list-alt"></i>
-                    <span class="menu-text"> Product Sold Out </span>
-                </a>
-            </li>
-
-    </li>
-    </ul>
-    </li>
-
-        <li class="{{ request()->segment(1) == "report" ? 'open' : '' }}">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-gear">
                 </i>
                 <span class="menu-text">
-                    Reports
+                    Inventory
                 </span>
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
             <ul class="submenu">
-                <li class="{{-- {{ request()->segment(1) == "report" ? 'open' : '' }} --}}">
-                <li class="{{ request()->is('report/sale-single') ? 'active' : '' }}">
-                    <a href="{{ url('report/sale-single') }}">
+                <li class="{{-- {{ request()->segment(1) == 'inventory' ? 'open' : '' }} --}}">
+                <li class="{{ request()->is('inventory/purchase') ? 'active' : '' }}">
+                    <a href="{{ url('inventory/purchase') }}">
                         <i class="menu-icon fa fa-list-alt"></i>
-                        <span class="menu-text"> Single Sale Report </span>
+                        <span class="menu-text"> Purchase </span>
                     </a>
                 </li>
 
-                <li class="{{ request()->is('report/sale-daily') ? 'active' : '' }}">
-                    <a href="{{ url('report/sale-daily') }}">
+                <li class="{{ request()->is('inventory/stock') ? 'active' : '' }}">
+                    <a href="{{ url('inventory/stock') }}">
                         <i class="menu-icon fa fa-list-alt"></i>
-                        <span class="menu-text"> Daily Sales </span>
+                        <span class="menu-text"> Products In Hand </span>
                     </a>
                 </li>
 
-                <li class="{{ request()->is('report/sale-monthly') ? 'active' : '' }}">
-                    <a href="{{ url('report/sale-monthly') }}">
+                <li class="{{ request()->is('inventory/sold') ? 'active' : '' }}">
+                    <a href="{{ url('inventory/sold') }}">
                         <i class="menu-icon fa fa-list-alt"></i>
-                        <span class="menu-text"> Monthly Sale </span>
-                    </a>
-                </li>
-
-                <li class="{{ request()->is('report/sale-yearly') ? 'active' : '' }}">
-                    <a href="{{ url('report/sale-yearly') }}">
-                        <i class="menu-icon fa fa-list-alt"></i>
-                        <span class="menu-text"> Yearly Sale </span>
+                        <span class="menu-text"> Product Sold Out </span>
                     </a>
                 </li>
 
@@ -638,6 +594,81 @@
 
 
 
+    <li class="{{ request()->segment(1) == "report" ? 'open' : '' }}">
+        <a href="#" class="dropdown-toggle">
+            <i class="menu-icon fa fa-gear">
+            </i>
+            <span class="menu-text">
+                Reports
+            </span>
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+        <b class="arrow"></b>
+        <ul class="submenu">
+            <li class="{{-- {{ request()->segment(1) == "report" ? 'open' : '' }} --}}">
+            <li class="{{ request()->is('report/sale-single') ? 'active' : '' }}">
+                <a href="{{ url('report/sale-single') }}">
+                    <i class="menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text"> Single Sale Report </span>
+                </a>
+            </li>
+
+            <li class="{{ request()->is('report/sale-daily') ? 'active' : '' }}">
+                <a href="{{ url('report/sale-daily') }}">
+                    <i class="menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text"> Daily Sales </span>
+                </a>
+            </li>
+
+            <li class="{{ request()->is('report/sale-monthly') ? 'active' : '' }}">
+                <a href="{{ url('report/sale-monthly') }}">
+                    <i class="menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text"> Monthly Sale </span>
+                </a>
+            </li>
+
+            <li class="{{ request()->is('report/sale-yearly') ? 'active' : '' }}">
+                <a href="{{ url('report/sale-yearly') }}">
+                    <i class="menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text"> Yearly Sale </span>
+                </a>
+            </li>
+
+    </li>
+    </ul>
+    </li>
+
+
+
+
+    <li class="{{ request()->segment(1) == "settings" ? 'open' : '' }}">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-gear">
+                </i>
+                <span class="menu-text">
+                    Technical Settings
+                </span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+            <ul class="submenu">
+                <li class="{{-- {{ request()->segment(1) == 'settings' ? 'open' : '' }} --}}">
+                <li class="{{ request()->is('settings/payment') ? 'active' : '' }}">
+                    <a href="{{ url('settings/payment') }}">
+                        <i class="menu-icon fa fa-list-alt"></i>
+                        <span class="menu-text"> Payment setting </span>
+                    </a>
+                </li>
+
+                <li class="{{ request()->is('settings/mail') ? 'active' : '' }}">
+                    <a href="{{ url('settings/mail') }}">
+                        <i class="menu-icon fa fa-list-alt"></i>
+                        <span class="menu-text"> Mail Setting </span>
+                    </a>
+                </li>
+        </li>
+    </ul>
+    </li>
 
     <li class="{{ request()->segment(1) == "group" ? 'open' : '' }}">
         <a href="#" class="dropdown-toggle">

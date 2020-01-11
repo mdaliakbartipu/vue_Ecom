@@ -182,3 +182,24 @@ Route::get('/inventory/sold',function(){
 // API section
 Route::post('/api/inventory/add','InventoryController@addVariant');
 // new controller for all api
+
+// Settings
+Route::get('/settings/payment',function(){
+    echo "Under Construction";
+});
+Route::get('/settings/mail',function(){
+    echo "Under Construction";
+});
+
+
+
+// SSLCOM
+Route::post('payment/success','PaymentOnline@success');
+
+Route::post('payment/fail',function(){
+    echo "Under Construction";
+});
+Route::post('payment/cancel',function(){
+    echo "Under Construction";
+});
+Route::get('payment/test','PaymentOnline@index');
