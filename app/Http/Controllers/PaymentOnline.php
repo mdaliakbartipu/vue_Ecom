@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\URL;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\Controller;
 use Paypalpayment;
-use PaypalPaymentController;
+use App\Models\PaymentConfig;
 
 class PaymentOnline extends Controller
 {
@@ -251,6 +251,26 @@ class PaymentOnline extends Controller
     public function cancel( Request $request )
     {
         return redirect()->route('cart')->with('message', 'Your Online Payment Cancelled!\n We accept payment by CASH also ');
+    }
+
+
+    // backend payment config
+
+    public function paymentSetting(Request $request)
+    {
+
+        $config = PaymentConfig::first();
+        
+        if(!$config){
+            $config = PaymentConfig::create([
+                'host'      => 'demo',
+                'api_url'   => 'demo',
+                'store_id'  => 'demo',
+                'store_password' => 'demo'
+
+            ]);
+        }
+        return view('payment.config');
     }
 
 

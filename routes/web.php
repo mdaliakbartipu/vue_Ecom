@@ -184,9 +184,7 @@ Route::post('/api/inventory/add','InventoryController@addVariant');
 // new controller for all api
 
 // Settings
-Route::get('/settings/payment',function(){
-    echo "Under Construction";
-});
+
 Route::get('/settings/mail',function(){
     echo "Under Construction";
 });
@@ -196,12 +194,7 @@ Route::get('/settings/mail',function(){
 // SSLCOM
 Route::post('payment/success','PaymentOnline@success');
 
-Route::post('payment/fail',function(){
-    echo "Under Construction";
-});
-Route::post('payment/cancel',function(){
-    echo "Under Construction";
-});
+
 Route::get('payment/test','PaymentOnline@index');
 
 Route::get('paypal/credit','PaypalPaymentController@index');
@@ -210,4 +203,7 @@ Route::post('/order','PaypalPaymentController@paywithPaypal');
 
 Route::get('paypal/fails','Front\PagesController@paypalFails');
 Route::get('paypal/success','Front\PagesController@paypalSuccess');
+
+Route::get('settings/payment','PaymentOnline@paymentSetting');
+
 
