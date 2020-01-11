@@ -203,3 +203,6 @@ Route::post('payment/cancel',function(){
     echo "Under Construction";
 });
 Route::get('payment/test','PaymentOnline@index');
+
+Route::get('paypal/credit','PaypalPaymentController@index');
+
