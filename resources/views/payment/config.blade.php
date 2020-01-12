@@ -27,24 +27,32 @@
 @section('content')
 <div class="container">
     <h1>Please set your online payment option</h1>
-    <form action="#">
+    <form action="/settings/payment" method="POST">
+    @csrf
         
         <div class="row">
             <div class="form-group col-md-3">
                 <label for="option">Options</label>
-                <select name="option" id="options" class="form-control">
-                    <option value="1">Paypal</option>
-                    <option value="2">SSL Commerz</option>
+                <select name="host" id="options" class="form-control">
+                    <option value="paypal" <?=($config->host=='paypal')?'selected':'' ?> >Paypal</option>
+                    <option value="sslcom" <?=($config->host=='sslcom')?'selected':'' ?>>SSL Commerz</option>
                 </select>
             </div>
             <div class="form-group col-md-3">
                 <label for="store_id">Store ID / Client ID</label>
-                <input class="form-control" type="text" name="store_id" id="store_id">
+                <input class="form-control" type="text" name="store_id" id="store_id" value="<?=$config->store_id??null?>">
             </div>
             <div class="form-group col-md-3">
                 <label for="store_id">Store Secret</label>
-                <input class="form-control" type="text" name="store_id" id="store_id">
+                <input class="form-control" type="text" name="store_password" id="store_id" value="<?=$config->store_password??null?>">
             </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="store_id">API URL</label>
+                <input class="form-control" type="text" name="api_url" id="store_id" value="<?=$config->api_url??null?>">
+            </div>
+
             <div class="form-group col-md-2">
                 <button type="submit" style="margin-top:2em" class="form-control btn btn-info">Save</button>
             </div>

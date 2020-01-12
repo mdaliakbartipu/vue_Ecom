@@ -205,5 +205,6 @@ Route::get('paypal/fails','Front\PagesController@paypalFails');
 Route::get('paypal/success','Front\PagesController@paypalSuccess');
 
 Route::get('settings/payment','PaymentOnline@paymentSetting');
+Route::post('settings/payment','PaymentOnline@paymentSetting');
 
 

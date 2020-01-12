@@ -258,19 +258,35 @@ class PaymentOnline extends Controller
 
     public function paymentSetting(Request $request)
     {
+        
+        // if request is post
+        if($request->get('_token')){
+            $request->validate([
+                'host'              => 'required',
+                'store_id'          => 'required',
+                'store_password'    => 'required',
+                'api_url'           => 'required'
+            ]);
+    
+            $config = PaymentConfig::first();
+            if($config){
+                $config->update($request->except('_token'));
+            } else {
+                $config->create($request->except('_token'));
+            }
+        }
 
         $config = PaymentConfig::first();
-        
+
         if(!$config){
             $config = PaymentConfig::create([
-                'host'      => 'demo',
+                'host'      => 'paypal',
                 'api_url'   => 'demo',
                 'store_id'  => 'demo',
                 'store_password' => 'demo'
-
             ]);
         }
-        return view('payment.config');
+        return view('payment.config',compact('config'));
     }
 
 
