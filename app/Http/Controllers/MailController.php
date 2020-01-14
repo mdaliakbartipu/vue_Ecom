@@ -60,11 +60,20 @@ class MailController extends Controller
     public function send($param)
     {
         // dd($this->mail->subject);
-
         Mail::send('front.emails.contact', $param, function ($mail) use ($param) {
             $mail->from($this->mail->from, $this->mail->sender)
                 ->to((string)$this->mail->to)
                 ->subject("contact");
+        });
+        return true;
+    }
+
+    public function sendOrderMail($param)
+    {
+        Mail::send('front.emails.order', $param, function ($mail) use ($param) {
+            $mail->from($this->mail->from, $this->mail->sender)
+                ->to((string)$this->mail->to)
+                ->subject(((string)$param['subject']));
         });
         return true;
     }
@@ -79,8 +88,17 @@ class MailController extends Controller
     public function orderMail($data)
     {
         $data = (array)$data;
+        $data['subject'] = "Thank you for your order...";
 
-        $this->send($data);
+        $this->sendOrderMail($data);
+    }
+
+    public function orderAccepted($data)
+    {
+        $data = (array)$data;
+        $data['subject'] = "Thank you for your order...";
+        
+        $this->sendOrderMail($data);
     }
 
 }

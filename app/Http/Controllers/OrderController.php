@@ -111,7 +111,8 @@ class OrderController extends Controller
         }
         if(!$error){
             // send mail
-
+            $mail = new MailController;
+            $mail->orderMail("something");
             session(['cart' => null]);
             return \redirect('/')->with('success','Your order is placed. Thanks you!');
         } else {
