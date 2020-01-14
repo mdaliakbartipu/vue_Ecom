@@ -176,6 +176,7 @@ class OrderController extends Controller
                 // increasing product order
                 echo $product->id."  ".$variantID; 
                 $sale = ProductSale::where('product_id', $product->id)->where('variant_id', $variantID)->first();
+                
                 if($sale){
                     $sale->order = $sale->order + $qty;
                     $sale->save();
@@ -187,6 +188,9 @@ class OrderController extends Controller
                         'order'     => $qty
                     ]);
                 }
+                // decreasing qty
+                $info->qty = $info->qty - $qty;
+                $info->save();
 
                 return true;
             }
