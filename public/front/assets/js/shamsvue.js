@@ -1089,7 +1089,15 @@ Vue.component('product_article', {
     },
     created() {
         // alert(this.product.discount_till)
-        this.dateCount = this.product.discount_till;
+        let dateTimeParts= this.product.discount_till.split(/[- :]/); // regular expression split that creates array with: year, month, day, hour, minutes, seconds values
+        dateTimeParts[1]--; // monthIndex begins with 0 for January and ends with 11 for December so we need to decrement by one
+        const dateObject = new Date(...dateTimeParts);
+        const nowDate = new Date();
+        if(dateObject >= nowDate){
+            this.dateCount = this.product.discount_till;
+        }
+        // console.log(dateObject);
+        // console.log(nowDate);
 
     },
 
@@ -1116,7 +1124,7 @@ Vue.component('product_article', {
         </div>
         <div class="product_content">
          <div class="product_timing">
-                    <div v-if="this.product.discount" :data-countdown="dateCount"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">2</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">30</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
+                    <div v-if="dateCount" :data-countdown="dateCount"><div class="countdown_area"><div class="single_countdown"><div class="countdown_number">2</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">07</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">30</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">13</div><div class="countdown_title">secs</div></div></div></div>
                 </div>
             <div class="product_content_inner">
                 <h2 class="product_name_brand_name">{{this.product.brand}}</h2>
