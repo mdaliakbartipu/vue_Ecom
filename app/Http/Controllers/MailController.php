@@ -43,10 +43,10 @@ class MailController extends Controller
 
         $this->mail =  new stdClass();
         $this->mail->to             = $mail->to ?? 'suspathan@gmail.com';
-        $this->mail->from       = $mail->from ?? 'nomail@example.com';
-        $this->mail->sender    = $mail->sender ?? 'No Name';
-        $this->mail->subject    = $mail->subject ?? 'Your adams';
-        $this->mail->view         = $view;
+        $this->mail->from           = $mail->from ?? 'nomail@example.com';
+        $this->mail->sender         = $mail->sender ?? 'No Name';
+        $this->mail->subject        = $mail->subject ?? 'Your adams';
+        $this->mail->view           = $view;
     }
 
     public function sendPasswordReset(array $param = null)
@@ -63,7 +63,7 @@ class MailController extends Controller
 
         Mail::send('front.emails.contact', $param, function ($mail) use ($param) {
             $mail->from($this->mail->from, $this->mail->sender)
-                ->to("suspathan@gmail.com")
+                ->to((string)$this->mail->to)
                 ->subject("contact");
         });
         return true;
@@ -72,6 +72,14 @@ class MailController extends Controller
     public function contactMail($data)
     {
         $data = (array)$data;
+
+        $this->send($data);
+    }
+
+    public function orderMail($data)
+    {
+        $data = (array)$data;
+
         $this->send($data);
     }
 
