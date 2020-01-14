@@ -1,5 +1,7 @@
                         /*Shams*/
-                    
+                        .normal-text{
+                            font-weight: 200;
+                        }
                         .old-price{
                             text-decoration-line: line-through;
                             font-size: .7em !important;

@@ -575,9 +575,15 @@ Vue.component('product_name', {
 Vue.component('product_price', {
     data(){
         return {
+            // class
             current_price : 'current_price',
             oldClass:'new-price',
-            newClass:'new-price'
+            newClass:'new-price',
+            inVat:'normal-text',
+            exVat:'',
+            // var 
+            price:0,
+            newPrice:0
         }
     },
     props: ['product'],
@@ -594,13 +600,33 @@ Vue.component('product_price', {
             this.newPrice = price;
             this.oldClass = 'old-price'
         }
+        this.price = this.product.price;
+
         // console.log(dateObject);
         // console.log(nowDate);
 
     },
+    methods:{
+        includeVat(){
+            // alert("hi")
+            this.price = this.product.price + this.product.price * this.product.discount/100;
+            this.exVat = 'normal-text'
+            this.inVat = ''
+        },
+        excludeVat(){
+            this.price = this.product.price;
+            this.inVat = 'normal-text'
+            this.exVat = ''
+        }
+    },
     template: `
     <div class="price_box">
-        <span class="current_price"> <span :class="oldClass">{{product.price}}</span> <span v-if="newPrice" :class="newClass">{{newPrice}}</span> EUR <span style="font-weight:400">( <b>inc VAT</b> | ex VAT</span>)</span>
+        <span class="current_price">
+            <span :class="oldClass">{{price}}</span>
+            <span v-if="newPrice" :class="newClass">{{newPrice}}</span>EUR ( 
+             <span @click="includeVat()" :class="inVat">inc VAT</span> | 
+             <span @click="excludeVat()" :class="exVat">ex VAT</span>)
+        </span>
     </div>
     `
 });
