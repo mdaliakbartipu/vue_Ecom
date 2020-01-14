@@ -200,7 +200,7 @@ Route::get('payment/test','PaymentOnline@index');
 Route::get('paypal/credit','PaypalPaymentController@index');
 Route::get('paypal/pay','PaypalPaymentController@paywithPaypal');
 
-Route::post('/order','PaypalPaymentController@paywithPaypal');
+Route::post('/order','OrderController@gotNewOrder');
 
 Route::get('paypal/fails','Front\PagesController@paypalFails');
 Route::get('paypal/success','Front\PagesController@paypalSuccess');
