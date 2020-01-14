@@ -541,7 +541,7 @@ Vue.component('product_extra_info', {
                 this.$emit('setQty', this.count);
             },
             down() {
-                if ((this.count - 1) > 1)
+                if ((this.count - 1) >= 1)
                     this.count--;
                 this.$emit('setQty', this.count);
             },
@@ -573,10 +573,34 @@ Vue.component('product_name', {
 });
 
 Vue.component('product_price', {
-    props: ['price'],
+    data(){
+        return {
+            current_price : 'current_price',
+            oldClass:'new-price',
+            newClass:'new-price'
+        }
+    },
+    props: ['product'],
+    created() {
+        // alert(this.product.discount_till)
+        let dateTimeParts= this.product.discount_till.split(/[- :]/); // regular expression split that creates array with: year, month, day, hour, minutes, seconds values
+        dateTimeParts[1]--; // monthIndex begins with 0 for January and ends with 11 for December so we need to decrement by one
+        const dateObject = new Date(...dateTimeParts);
+        const nowDate = new Date();
+        if(dateObject >= nowDate){
+            this.dateCount = this.product.discount_till;
+            // calculate discounted price and current price
+            const price = this.product.price* (100-this.product.discount)/100;
+            this.newPrice = price;
+            this.oldClass = 'old-price'
+        }
+        // console.log(dateObject);
+        // console.log(nowDate);
+
+    },
     template: `
     <div class="price_box">
-        <span class="current_price">{{price}} EUR <span style="font-weight:400">( <b>inc VAT</b> | ex VAT</span>)</span>
+        <span class="current_price"> <span :class="oldClass">{{product.price}}</span> <span v-if="newPrice" :class="newClass">{{newPrice}}</span> EUR <span style="font-weight:400">( <b>inc VAT</b> | ex VAT</span>)</span>
     </div>
     `
 });
@@ -652,7 +676,7 @@ Vue.component('product_info', {
 
                 <product_name :name="this.product.name"></product_name>
                 <product_price_notice></product_price_notice>
-                <product_price :price="this.product.price"></product_price>
+                <product_price :product="this.product"></product_price>
                 <product_description 
                     description_line_one="from 5 items: 9,40"
                     description_line_two="from 30 items: 8,21"
@@ -1046,6 +1070,7 @@ Vue.component('product_article', {
             link: "/singleProduct/",
             src: '/front/assets/.uploads/products/thumbs/',
             dateCount: null,
+            newPrice: null
         }
     },
     methods: {
@@ -1095,6 +1120,9 @@ Vue.component('product_article', {
         const nowDate = new Date();
         if(dateObject >= nowDate){
             this.dateCount = this.product.discount_till;
+            // calculate discounted price and current price
+            const price = this.product.price* (100-this.product.discount)/100;
+            this.newPrice = price;
         }
         // console.log(dateObject);
         // console.log(nowDate);
@@ -1111,7 +1139,7 @@ Vue.component('product_article', {
             <div class="label_product_left label_product">
                 <span v-if="this.product.new" class="label_sale_left">New</span>
             </div>
-             <div class="label_product" v-if="this.product.discount">
+             <div class="label_product" v-if="dateCount">
                 <span class="label_sale">{{this.product.discount}}%</span>
             </div>
             <div class="action_links">
@@ -1131,8 +1159,8 @@ Vue.component('product_article', {
                 <h3 class="product_name"><a :href="this.link+this.product.id">{{this.product.name}}</a></h3>
                 <h4 class="product_name_h4"><a href="#">{{tab.name}}</a></h4>
                 <div class="price_box">
-                    <span class="old_price">Reg. $ {{this.product.price}}</span><br>
-                    <span class="current_price">Sale $ {{this.product.price* (100-this.product.discount)/100}}</span>
+                    <span class="old_price">Price. $ {{this.product.price}}</span><br>
+                    <span v-if="newPrice" class="current_price">Sale $ {{newPrice}}</span>
                 </div>
                 <div class="countdown_text mb-3">
                    <!-- <a href="">Extra 15% off use:SUNDAY </a>-->

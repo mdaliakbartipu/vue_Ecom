@@ -1,5 +1,13 @@
                         /*Shams*/
                     
+                        .old-price{
+                            text-decoration-line: line-through;
+                            font-size: .7em !important;
+                            color: rgb(110, 57, 57);
+                        }
+                        .new-price{
+                            font-size: 1em !important;
+                        }
                         .fade-enter-active, .fade-leave-active {
                           transition: opacity 1s;
                         }
