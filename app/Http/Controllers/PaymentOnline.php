@@ -21,7 +21,7 @@ class PaymentOnline extends Controller
     // main password 5DCCD184B4F1B22379
 
     private $api = null;
-    private $storeID = 'gheeg5db9272aeb1d0';
+    private $storeID = null;
     private $storePassword = null;
 
     private $totalAmount = 0;
