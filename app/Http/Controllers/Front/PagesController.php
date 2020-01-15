@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Front;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Front\FrontController;
 use App\Models\Front\UI;
 use App\Page;
@@ -14,6 +15,7 @@ use App\SubSubCategory;
 use App\Color;
 use App\Size;
 use App\Brand;
+use App\Models\Blog;
 use App\Http\Controllers\MailController;
 use App\ProductAttribute;
 use Illuminate\Http\Request;
@@ -29,10 +31,6 @@ class PagesController extends FrontController
 
     public function index()
     {   
-        // $p = Product::with('brandName')->get();
-        // foreach($p as $a){
-        //     dd($a->brandName->name);
-        // }
         return view('front.index',
         [   
             'sliders'              => UI::getAll(),
@@ -42,6 +40,11 @@ class PagesController extends FrontController
             'testimonials'         => UI::getTestimonials(),
             
         ]);
+    }
+
+    public function blog(Blog $blog, $slug = null)
+    {   
+        return view('front.blogSingle')->withBlog(UI::getBlog($blog))->withRelatedBlogs(UI::getFourBlogsWithoutThis($blog));
     }
 
 

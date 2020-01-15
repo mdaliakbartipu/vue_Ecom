@@ -23,7 +23,7 @@
                         </div>
                     </figcaption>
                         <div class="short_note"><?=$blog->desc?></div>
-                        <a href="/blog/<?=$blog->id?>/<?=$blog->slug?>" class="btn btn-info">Read more...</a>
+                        <a href="/ui/blog/<?=$blog->id?>/<?=$blog->slug?>" class="btn btn-info">Read more...</a>
                 </figure>
             </article>
         </div>

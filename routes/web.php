@@ -14,6 +14,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 // UI Routes
 
 Route::get('/', 'Front\PagesController@index');
+Route::get('/ui/blog/{blog}/{slug}', 'Front\PagesController@blog');
 Route::get('/store', 'Front\PagesController@index');
 
 Route::get('/cat/{slug}', 'Front\PagesController@cat');
