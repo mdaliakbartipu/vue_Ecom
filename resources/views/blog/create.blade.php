@@ -110,7 +110,7 @@ $('.summernote').summernote({
             placeholder: 'Write short description about your products',
             tabsize: 2,
             height: 300,
-            width: 800
+            width: 200
         });
 
 

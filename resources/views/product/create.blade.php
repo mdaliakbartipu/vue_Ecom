@@ -146,7 +146,7 @@
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Product Details </label>
 
                         <div class="col-sm-9">
-                            <textarea type="text" placeholder="Product Details" class="form-control summernote" name="details">{{old('details')}}</textarea>
+                            <textarea type="text" placeholder="Product Details" class="form-control summernote" name="details" style="width:unset!important">{{old('details')}}</textarea>
                         </div>
                     </div>
 
@@ -159,7 +159,7 @@
                                 @foreach($attributes->where('sleeve',1) as $key=>$sleeve)
                                 <label>
                                     <input type="checkbox" class="ace" name="sleeve[]" value="{{ $sleeve->id }}" >
-                                    <span class="lbl"> {{ $sleeve->name }} </span>
+                                    <span class="lbl label label-xlg label-light"> {{ $sleeve->name }} </span>
                                 </label>
                                 @endforeach
                             </div>
@@ -172,7 +172,7 @@
                                 @foreach($attributes->where('leg_length',1) as $key=>$leglength)
                                 <label>
                                     <input type="checkbox" class="ace" name="leglength[]" value="{{ $leglength->id }}">
-                                    <span class="lbl"> {{ $leglength->name }} </span>
+                                    <span class="lbl label label-xlg label-light"> {{ $leglength->name }} </span>
                                 </label>
                                 @endforeach
                             </div>
@@ -185,7 +185,7 @@
                                 @foreach($attributes->where('fit',1) as $key=>$fit)
                                 <label>
                                     <input type="checkbox" class="ace" name="fit[]" value="{{ $fit->id }}">
-                                    <span class="lbl"> {{ $fit->name }}</span>
+                                    <span class="lbl label label-xlg label-light"> {{ $fit->name }}</span>
                                 </label>
                                 @endforeach
                             </div>
@@ -225,27 +225,29 @@
 
                     <div class="form-group">
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Tags</label>
+                        
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($tags as $key=>$tag)
-                                <label>
+                                <label style="margin-top:5px">
                                     <input type="checkbox" class="ace" name="tags[]" value="{{ $key+1 }}">
-                                    <span class="lbl"> {{ $tag->name }}</span>
+                                    <span class="lbl label label-xlg label-light"> {{ $tag->name }}</span>
                                 </label>
                                 @endforeach
                             </div>
                         </div>
+                        
                     </div>
 
 
                     <div class="form-group">
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Discount</label>
-                        <div class="col-xs-12 col-sm-9 col-md-4">
+                        <!-- <div class="col-xs-12 col-sm-9 col-md-4">
                             <div class="checkbox">
                                 <label>    
                                     <span class="lbl"> Amount</span>
                                 </label>
-                                <input type="text" name="discount" placeholder="Discount per 100" value="0"> %
+                                <input type="text"  placeholder="Discount per 100" > %
                             </div>
                             <div class="checkbox">
                                 <label>    
@@ -253,14 +255,31 @@
                                 </label>
                                 <input type="text" name="discount_days" placeholder="Discount per 100" value="0"> Days
                             </div>
-                        </div>
+                        </div> -->
+
+                        <div class="col-sm-9">
+											<span class="input-icon input-icon-right">
+												<input type="text" id="form-field-icon-1" name="discount" value="0">
+												<i class="ace-icon fa fa-leaf blue"> discount in %</i>
+											</span>
+
+											<span class="input-icon input-icon-right">
+												<input type="text" id="form-field-icon-2" name="discount_days" value="0">
+												<i class="ace-icon fa fa-leaf green"> valid for (days)</i>
+											</span>
+										</div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="form-field-1-1"> Embroidery & Print</label>
 
                         <div class="col-sm-9">
-                            <input type="file" name="embroidery">
+                            <label class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                                <i class="fa fa-upload"></i>
+                                Upload FIle
+                                <input type="file" name="embroidery" style="display:none">
+                                </label>
+                            
                         </div>
                     </div>
 
@@ -316,7 +335,13 @@
                                         </td>
                                         <td>
                                             <div class="col-xs-12 col-sm-12">
-                                                <input multiple="" type="file" id="id-input-file-3" name="image[0][]" />
+                                        
+                                                <label class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                                <i class="fa fa-upload"></i>
+                                Upload Images
+                                <input multiple="" type="file" id="id-input-file-3" name="image[0][]" style="display:none"/>
+                                
+                                </label>
                                             </div>
                                         </td>
                                     </tr>
@@ -358,6 +383,10 @@
 <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
     <script src="{{ asset('assets/js/ace.min.js') }}"></script>
 <script type="text/javascript">
+
+
+// tags 
+
     var rowIndex = 1;
     //  will start by naming name from adding 2 as postfix
 
@@ -604,6 +633,12 @@
         });
 
     });
+    $('.summernote').summernote({
+            placeholder: 'Write short description about your products',
+            tabsize: 2,
+            height: 300,
+           
+        });
 </script>
 
 

@@ -1,4 +1,7 @@
                         /*Shams*/
+                        .note-editor{
+                            width:100px !important;
+                        }
                         .normal-text{
                             font-weight: 200;
                         }
