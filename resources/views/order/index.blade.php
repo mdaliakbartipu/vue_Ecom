@@ -51,6 +51,7 @@
                       </thead>
                       <tbody>
                        @foreach($orders as $key=>$order)
+                    
                         <tr class="text-center">
                             <td> {{ $key +1 }} </td>
                             <td> {{ $order->id}} </td>
@@ -58,7 +59,7 @@
                                 $date = new DateTime($order->created_at);
                             ?>
                             <td> {{ $date->format('d M Y')}} </td>
-                            <td> {{ $order->client->first_name }} </td>
+                            <td> {{ $order->client->first_name??null }} </td>
                             <?php
                                 $price = (int)$order->qty * (float)$order->unit_price;
                                 $discount = $price*$order->discount/100;

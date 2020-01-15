@@ -50,17 +50,13 @@ class OrderController extends Controller
         // such as email, phone, name, shipping address and billing address
         if(\Auth::user()){
             $userProfile = UserProfile::find(\Auth::user()->id);
-            $userProfile = $userProfile->update($request->all());
-        } else {
-            
-            $userProfile = UserProfile::where('email',$request->email)->first();
-            
-            if($userProfile):
+            if($userProfile){
                 $userProfile->update($request->all());
-            else:
+            } else {
                 $userProfile = UserProfile::create($request->all());
-            endif;
-            
+            }
+        } else {
+                $userProfile = UserProfile::create($request->all());
         }
 
         // saving shipping address
@@ -89,12 +85,12 @@ class OrderController extends Controller
             $shipping->save();
         }
 
-
         foreach($cart as $item){
             // Creating profile for all except Logged in user
 
             $user = new \stdClass;            
             $user->id = $userProfile->id;
+            
             $user->shipping = $shipping?$shipping->id:null;
             $user->billing = $userProfile?$userProfile->id:null;
             

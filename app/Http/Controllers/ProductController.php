@@ -19,7 +19,7 @@ use App\ProductTags;
 use App\Product;
 use App\Brand;
 use App\ProductImages;
-use App\ProductStorage;
+use App\Models\ProductStorage;
 use App\ProductVariant;
 
 use Carbon\Carbon;
