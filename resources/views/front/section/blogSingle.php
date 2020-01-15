@@ -24,7 +24,7 @@
                                     <div class="entry_content">
                                         <div class="social_sharing">
                                         <div id="share_this">
-                                            <button class="btn btn-sm btn-outline"><img src="/Ecom/static/share-icon.webp" alt=""> Share This</button>
+                                            <button class="btn btn-sm btn-outline"><img src="/front/assets/img/share-icon.webp" alt=""> Share This</button>
                                         </div>
                                             <div id="share_options" class="sharebox" style="display:none" 
                                                     data-url="{{url()->current()}}"
@@ -52,37 +52,10 @@
                         <div class="related_posts">
                             <h3>Related posts</h3>
                             <div class="row">
-                                <div class="row">
-                                    <?php foreach ($relatedBlogs as $blog) : ?>
-                                        <div class="col-lg-4 col-md-6">
-                                            <article class="single_related article_one">
-                                                <figure>
-                                                    <?php
-                                                    $image = file_exists(ltrim(ASSETS, '/') . "/.uploads/blogs/" . $blog->image) ?
-                                                        ASSETS . '/.uploads/blogs/' . $blog->image :
-                                                        ASSETS . '/img/blogs/' . $blog->image;
-                                                    ?>
-
-                                                    <div class="related_thumb">
-                                                        <img src="<?= $image ?>" alt="">
-                                                        <div class="overlay">
-                                                            <a href=""></a>
-                                                        </div>
-                                                    </div>
-                                                    <figcaption class="related_content">
-                                                        <h4><a href="#"><?= $blog->title ?></a></h4>
-                                                        <div class="blog_meta">
-                                                            <span class="author">By : <a href="#"><?= $blog->author_name ?></a> / </span>
-                                                            <span class="meta_date"> <?= $blog->updated_at ?> </span>
-                                                        </div>
-                                                    </figcaption>
-                                                    <div class="short_note"><?= $blog->desc ?></div>
-                                                    <a href="/ui/blog/<?= $blog->id ?>/<?= $blog->slug ?>" class="btn btn-info">Read more...</a>
-                                                </figure>
-                                            </article>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
+                            <?php
+                                    $blogs = $relatedBlogs;
+                                    include('blogs.php');
+                                    ?>
                             </div>
                         </div>
                         <div class="comments_box">
