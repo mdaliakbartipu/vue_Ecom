@@ -15,11 +15,9 @@
 
 <div class="row">
 
-    <div class="col-sm-8">
-        {{-- <div class="widget-box"> --}}
+    <div class="col-sm-10">
         <div class="widget-header">
             <h4 class="widget-title"> @yield('page-header')</h4>
-
             @include('layouts.includes.msg')
 
         </div>
@@ -33,6 +31,13 @@
 
                         <div class="col-sm-9">
                             <input type="text" id="form-field-1-1" placeholder="Product Name" class="form-control" name="name" value="{{old('name')}}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Hover Name</span>  </label>
+
+                        <div class="col-sm-9">
+                            <input type="text" id="form-field-1-1" placeholder="Product Hover Name" class="form-control" name="hover_name" value="{{old('hover_name')}}"/>
                         </div>
                     </div>
 
@@ -108,7 +113,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Brand</span></label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Brand</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="brand" name="brand">

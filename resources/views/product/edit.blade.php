@@ -34,15 +34,23 @@
                     @csrf
                     {{ method_field('PUT') }}
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Name </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Name</span>  </label>
                         <input type="hidden" id="product" name="product" value="{{$product->id}}">
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" class="form-control" name="name" value="{{ $product->name }}" />
+                        <input type="text" id="form-field-1-1" class="form-control" name="name" value="{{ $product->name }}" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Search Category</label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Hover Name</span>  </label>
+
+                        <div class="col-sm-9">
+                        <input type="text" id="form-field-1-1" class="form-control" name="hover_name" value="{{ $product->hover_name }}" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Category</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="category" name="category">
@@ -56,7 +64,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Search Sub Category</label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Sub Category</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="sub_category" name="sub_category">
@@ -103,8 +111,7 @@
                         });
                     </script>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Search Sub sub Category</label>
-
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Super Category</span></label>
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" name="sub_sub_category" id="sub_sub_category">
                                 @foreach($subsubcats as $subsubcat)
@@ -114,7 +121,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Search Brand</label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Brand</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="brand" name="brand">
@@ -126,7 +133,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Web ID </label>
+                    <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Web ID </span></label>
 
                         <div class="col-sm-9">
                         <input type="hidden" id="form-field-1-1" placeholder="Product Code" class="form-control" name="code" value="{{ $product->code }}" />    
@@ -134,7 +141,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Short Description </label>
+                    <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Short Description</span>  </label>
 
                         <div class="col-sm-9">
                             <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control" name="desc">{{ $product->description }}</textarea>
@@ -142,15 +149,14 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Price </label>
+                    <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Price</span>  </label>
 
                         <div class="col-sm-9">
                             <input type="text" id="form-field-1-1" placeholder="Product price" class="form-control" name="price" value="{{ $product->price }}" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Discount </label>
-
+                    <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Details</span> </label>
                         <div class="col-sm-9">
                             <input type="text" id="form-field-1-1" placeholder="Product Discount" class="form-control" name="discount" value="{{ $product->discount }}" />
                         </div>
@@ -166,7 +172,7 @@
 
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Sleeve</label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Sleeve</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
@@ -188,7 +194,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Leg Length</label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right"> Leg Length</span></label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($leglenghts as $key=>$leglength)
@@ -208,7 +214,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Fit</label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Fit</span></label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($fits as $key=>$fit)
@@ -229,7 +235,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Feature </label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> <span class="label label-lg label-info arrowed-right">Feature </span></label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
 
@@ -247,7 +253,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Rating</label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Rating</span></label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 <label>
@@ -260,7 +266,7 @@
                     </div>
 
                     <div class="form-group" style="width:100%">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Tags</label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Tags</span></label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($tags as $key=>$tag)
@@ -281,7 +287,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Discount</label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Discount</span></label>
                         <div class="col-xs-12 col-sm-9 col-md-4">
                             <div class="checkbox">
                                 <label>    
@@ -316,7 +322,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Embroidery & Print</label>
+                    <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Embroidery & Print</span></label>
 
                         <div class="col-sm-9">
                             <input type="file" name="embroidery">
@@ -325,7 +331,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Video link</label>
+                    <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Video link</span></label>
 
                         <div class="col-sm-9">
                             <input type="text" name="video" placeholder="Associate video link" value="<?=$product->video_link?>"> 

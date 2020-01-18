@@ -86,12 +86,13 @@ class ProductController extends Controller
         // dd($request->all());
         $this->validate($request, [
             'name'              => 'required|max:190',
+            'hover_name'        => 'required|max:190',
             'code'              => 'required|unique:products|max:190',
             'desc'              => 'required|max:190',
-            'price'             => 'required',
+            'price'             => 'required|numeric|min:2',
             'brand'             => 'required',
-            'discount'          => 'required',
-            'discount_days'     => 'required',
+            'discount'          => 'required|numeric',
+            'discount_days'     => 'required|numeric',
             'details'           => 'required',
             'new'               => 'required',
             'category'          => 'required',
@@ -99,22 +100,21 @@ class ProductController extends Controller
             'sub_sub_category'  => 'required',
         ]);
 
-
-
         // saving product
-        $product = new Product();
-        $product->name = $request->name;
-        $product->slug = str_slug($product->name);
-        $product->cat = $request->category;
-        $product->new = $request->new;
-        $product->sub = $request->sub_category;
-        $product->super = $request->sub_sub_category;
-        $product->code = $request->code;
-        $product->brand = $request->brand;
-        $product->description = $request->desc;
-        $product->price = $request->price;
-        $product->details = $request->details;
-        $product->discount = $request->discount ?? 0;
+        $product                = new Product();
+        $product->name          = $request->name;
+        $product->hover_name    = $request->hover_name;
+        $product->slug          = str_slug($product->name);
+        $product->cat           = $request->category;
+        $product->new           = $request->new;
+        $product->sub           = $request->sub_category;
+        $product->super         = $request->sub_sub_category;
+        $product->code          = $request->code;
+        $product->brand         = $request->brand;
+        $product->description   = $request->desc;
+        $product->price         = $request->price;
+        $product->details       = $request->details;
+        $product->discount      = $request->discount ?? 0;
 
         // Embroiddery PDF 
         if($request->embroidery):
@@ -138,10 +138,6 @@ class ProductController extends Controller
                     $product->embroidery = '$pdfName';
         endif;
 
-        
-        
-        
-        
         $product->video_link = $request->video ?? '';
         
         // calculating discount days with date
@@ -333,6 +329,7 @@ class ProductController extends Controller
 
         $this->validate($request, [
             'name'              => 'required|max:190',
+            'hover_name'              => 'required|max:190',
             'code'              => 'required|max:190',
             'desc'              => 'required|max:190',
             'price'             => 'required',
@@ -348,6 +345,7 @@ class ProductController extends Controller
 
         $product = Product::find($id);
         $product->name = $request->name;
+        $product->hover_name = $request->hover_name;
         $product->slug = str_slug($product->name);
         $product->cat = $request->category;
         $product->new = $request->new;
