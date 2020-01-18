@@ -46,8 +46,8 @@
 
                         <!-- Comment List -->
 
-                        <comment_box blog_id="<?=$blog->id?>">
-                            
+                        <comment_box blog_id="<?= $blog->id ?>">
+
                         </comment_box>
                         <!-- Comment Form -->
                         <comment_form blog_id="" reply_to=""></comment_form>

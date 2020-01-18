@@ -700,6 +700,21 @@ Vue.component('second_level_comment', {
 });
 
 Vue.component('comment_form',{
+    data:function(){
+        return {
+            comment : {
+                name: 'Your Name',
+                email: 'Your Email',
+                text: 'What to say',
+                website: 'your website'    
+            }
+        }
+    },
+    methods:{
+        commented(){
+            Notiflix.Notify.Success('Thank you for your comment');
+        }
+    },
     template:`
     <div class="comments_form">
         <h3>Leave a Reply </h3>
@@ -708,23 +723,23 @@ Vue.component('comment_form',{
             <div class="row">
                 <div class="col-12">
                     <label for="review_comment">Comment </label>
-                    <textarea name="comment" id="review_comment"></textarea>
+                    <textarea name="comment" id="review_comment">{{comment.text}}</textarea>
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <label for="author">Name</label>
-                    <input id="author" type="text">
+                    <input id="author" type="text" :value="comment.name">
 
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <label for="email">Email </label>
-                    <input id="email" type="text">
+                    <input id="email" type="text" :value="comment.email">
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <label for="website">Website </label>
-                    <input id="website" type="text">
+                    <input id="website" type="text" :value="comment.website">
                 </div>
             </div>
-            <button class="button" type="submit">Post Comment</button>
+            <button @click.prevent="commented" class="button">Post Comment</button>
         </form>
     </div>
     `
