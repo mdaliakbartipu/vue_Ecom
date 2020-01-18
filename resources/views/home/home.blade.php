@@ -23,16 +23,16 @@
         <!-- <span class=" label label-info arrowed-right arrowed-in" style="height:100px;width:90%;font-size:5em">D7Brigus Admin Panel</span> -->
 
         <div style="height:250px;">
-            <canvas id="myChart" width="100" height="100"></canvas>
+            <canvas id="myChart1" width="100" height="100"></canvas>
         </div>
-        <div style="height:250px;background:rebeccapurple">
-            <!-- <canvas id="myChart" width="100" height="100"></canvas> -->
+        <div style="height:250px;">
+            <canvas id="myChart2" width="100" height="100"></canvas>
         </div>
-        <div style="height:250px;background:rebeccapurple">
-            <!-- <canvas id="myChart" width="100" height="100"></canvas> -->
+        <div style="height:250px;">
+            <canvas id="myChart3" width="100" height="100"></canvas>
         </div>
-        <div style="height:250px;background:rebeccapurple">
-            <!-- <canvas id="myChart" width="100" height="100"></canvas> -->
+        <div style="height:250px;">
+            <canvas id="myChart4" width="100" height="100"></canvas>
         </div>
         
 
@@ -53,45 +53,136 @@
     <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
     <script src="{{ asset('assets/js/ace.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="{{ asset('assets/js/chart/utils.js') }}"></script>
+    <script src="{{ asset('assets/js/chart/analyser.js') }}"></script>
     <!-- Chart JS -->
     <script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
+var ctx1 = document.getElementById('myChart1').getContext('2d');
+var ctx2 = document.getElementById('myChart2').getContext('2d');
+var ctx3 = document.getElementById('myChart3').getContext('2d');
+var ctx4 = document.getElementById('myChart4').getContext('2d');
+var presets = window.chartColors;
+var utils = Samples.utils;
+
+var inputs = {
+			min: 0,
+			max: 100,
+			count: 10,
+			decimals: 2,
+			continuity: 1
+		};
+
+		function generateData(config) {
+			return utils.numbers(Chart.helpers.merge(inputs, config || {}));
+		}
+
+		function generateLabels(config) {
+			return utils.months(Chart.helpers.merge({
+				count: inputs.count,
+				section: 3
+			}, config || {}));
+		}
+
+		var options = {
+			maintainAspectRatio: false,
+			spanGaps: false,
+			elements: {
+				line: {
+					tension: 0.000001
+				}
+			},
+			plugins: {
+				filler: {
+					propagate: false
+				}
+			},
+			scales: {
+				x: {
+					ticks: {
+						autoSkip: false,
+						maxRotation: 0
+					}
+				}
+			}
+		};
+utils.srand(8);
+
+			new Chart(ctx1, {
+				type: 'line',
+				data: {
+					labels: generateLabels(),
+					datasets: [{
+						backgroundColor: utils.transparentize(presets.red),
+						borderColor: presets.red,
+						data: generateData(),
+						label: 'Total Sales',
+						fill: 'start'
+					}]
+				},
+				options: Chart.helpers.merge(options, {
+					title: {
+						text: 'fill: ' + 'start',
+						display: false
+					}
+				})
+			});
+            new Chart(ctx2, {
+				type: 'line',
+				data: {
+					labels: generateLabels(),
+					datasets: [{
+						backgroundColor: utils.transparentize(presets.red),
+						borderColor: presets.red,
+						data: generateData(),
+						label: 'Orders Count',
+						fill: 'start'
+					}]
+				},
+				options: Chart.helpers.merge(options, {
+					title: {
+						text: 'fill: ' + 'start',
+						display: false
+					}
+				})
+			});
+            new Chart(ctx3, {
+				type: 'line',
+				data: {
+					labels: generateLabels(),
+					datasets: [{
+						backgroundColor: utils.transparentize(presets.red),
+						borderColor: presets.red,
+						data: generateData(),
+						label: 'Gross Profit',
+						fill: 'start'
+					}]
+				},
+				options: Chart.helpers.merge(options, {
+					title: {
+						text: 'fill: ' + 'start',
+						display: false
+					}
+				})
+			});
+            new Chart(ctx4, {
+				type: 'line',
+				data: {
+					labels: generateLabels(),
+					datasets: [{
+						backgroundColor: utils.transparentize(presets.red),
+						borderColor: presets.red,
+						data: generateData(),
+						label: 'Total Payments',
+						fill: 'start'
+					}]
+				},
+				options: Chart.helpers.merge(options, {
+					title: {
+						text: 'fill: ' + 'start',
+						display: false
+					}
+				})
+			});
 </script>
 
     <script type="text/javascript">
