@@ -1,21 +1,4 @@
-<!doctype html>
-
-<html class="no-js" lang="en">
-<?php include('section/head.php');?>
-
-<body>
-
-   <!--Offcanvas menu area start-->
-    <?php include("section/offcanvas.php");?>
-    <!--Offcanvas menu area end-->
-    <!--header area start-->
-    <div class="new-mar-pad">
-    <?php include("section/header.php");?>
-    <!--header area end-->
-    </ div
-    <!--header area end-->
-
-    <div class="blog_bg_area">
+<div class="blog_bg_area">
         <div class="container">
             <!--blog area start-->
             <div class="blog_page_section">
@@ -230,7 +213,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="widget_list widget_post">
+
+                            <!-- <div class="widget_list widget_post">
                                 <div class="widget_title">
                                     <h3>Recent Posts</h3>
                                 </div>
@@ -270,8 +254,8 @@
                                         <span>March 16, 2018 </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="widget_list widget_categories">
+                            </div> -->
+                            <!-- <div class="widget_list widget_categories">
                                 <div class="widget_title">
                                     <h3>Categories</h3>
                                 </div>
@@ -283,8 +267,9 @@
                                     <li><a href="#">Other</a></li>
                                     <li><a href="#">Travel</a></li>
                                 </ul>
-                            </div>
-                            <div class="widget_list widget_tag">
+                            </div> -->
+                            <!-- Tag -->
+                            <!-- <div class="widget_list widget_tag">
                                 <div class="widget_title">
                                     <h3>Tag products</h3>
                                 </div>
@@ -295,7 +280,8 @@
                                         <li><a href="#">euro</a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
+
                         </div>
                     </div>
                 </div>
@@ -305,18 +291,3 @@
 
         </div>
     </div>
-
- <!--footer area start-->
-    <?php include("section/footer.php");?>
-    <!--footer area end-->
-
-    <!-- modal area start-->
-    <?php include("section/modelArea.php");?>
-    <!-- modal area end-->
-
-    <!--news letter popup start-->
-     <?php include("section/newsLetter.php");?>
-    <!--news letter popup start-->
-    <?php include("section/script.php");?>
-    
-<?php include("section/foot.php");?>
