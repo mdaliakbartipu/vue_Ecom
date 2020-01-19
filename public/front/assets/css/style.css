@@ -473,6 +473,8 @@ $MISC
                   .single_related .short_note {
                       margin-bottom: 10px !important;
                       margin-top: 10px;
+                      height: 7em;
+                      overflow: hidden;
                   }
                   
                   .author_item {
