@@ -34,24 +34,6 @@
                             </figure>
                         </article>
 
-                        <div class="related_posts">
-                            <h3>Related posts</h3>
-                            <div class="row">
-                                <?php
-                                $blogs = $relatedBlogs;
-                                include('blogs.php');
-                                ?>
-                            </div>
-                        </div>
-
-                        <!-- Comment List -->
-
-                        <comment_box blog_id="<?= $blog->id ?>">
-
-                        </comment_box>
-                        <!-- Comment Form -->
-                        <comment_form blog_id="" reply_to=""></comment_form>
-
                     </div>
                     <!--blog grid area start-->
                 </div>
@@ -66,18 +48,13 @@
                                 <button type="submit">search</button>
                             </form>
                         </div>
-                        <div class="widget_list comments">
-                            <div class="widget_title">
-                                <h3>Recent Comments</h3>
-                            </div>
-                            <div class="post_wrapper">
-                                <div class="post_thumb">
-                                    <a href="blog-details.html"><img src="assets/img/blog/comment2.png.jpg" alt=""></a>
-                                </div>
-                                <div class="post_info">
-                                    <span> <a href="#">demo</a> says:</span>
-                                    <a href="blog-details.html">Quisque semper nunc</a>
-                                </div>
+                        <div class="related_posts">
+                            <h3>Related posts</h3>
+                            <div class="row">
+                                <?php
+                                $blogs = $relatedBlogs;
+                                include('blogSidebar.php');
+                                ?>
                             </div>
                         </div>
                         <!-- <div class="widget_list widget_post">
