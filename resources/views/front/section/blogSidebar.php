@@ -9,7 +9,7 @@
                         ASSETS . '/img/blogs/' . $blog->image;
                     ?>
                     <a href="/ui/blog/<?= $blog->id ?>/<?= $blog->slug ?>">
-                        <div class="" style="height:100%;width:100%">
+                        <div class="" style="height:100%;max-width:270px">
                             <img src="<?= $image ?>" alt="">
                             <!-- <div class="overlay">
                             <a href="/ui/blog/<?= $blog->id ?>/<?= $blog->slug ?>"></a>
@@ -24,8 +24,8 @@
                 <span class="meta_date"> <?= $blog->updated_at ?> </span>
             </div>
         </figcaption>
-        <div class="short_note"><?= $blog->desc ?></div>
-        <a href="/ui/blog/<?= $blog->id ?>/<?= $blog->slug ?>" class="btn btn-info">Read more...</a>
+        <div class="short_note" style="white-space:pre-warp;height:80px;overflow:hidden;"><?= $blog->desc ?></div>
+        <a style="margin-top:1em" href="/ui/blog/<?= $blog->id ?>/<?= $blog->slug ?>" class="btn btn-info">Read more...</a>
         </figure>
         </article>
 </div>

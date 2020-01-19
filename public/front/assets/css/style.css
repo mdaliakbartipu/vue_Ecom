@@ -1,4 +1,8 @@
-                        /*Shams*/
+.short_note div {
+    white-space: pre-wrap;
+}
+
+/*Shams*/
                         .note-editor{
                             width:100px !important;
                         }
@@ -11898,6 +11902,9 @@ $MISC
                       margin-bottom: 10px;
                       font-size: 15px;
                   }
+                  .blog_details .post_content>div {
+                    white-space: pre-wrap!important;
+                }
                   
                   @media only screen and (max-width: 767px) {
                       .blog_details .post_content>p {

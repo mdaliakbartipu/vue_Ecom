@@ -1,3 +1,12 @@
+<?php
+$imageFile = "./front/assets/.uploads/blogs/$blog->image";
+if(!file_exists($imageFile)){
+    $imageFile = "/front/assets/img/blogs/$blog->image";
+} else{
+    $imageFile = "/front/assets/.uploads/blogs/$blog->image";
+}
+?>
+
 <div class="blog_bg_area">
     <div class="container">
         <div class="blog_page_section">
@@ -15,7 +24,7 @@
                                     </div>
                                 </div>
                                 <div class="blog_thumb">
-                                    <img src="/front/assets/img/blogs/<?= $blog->image ?>" width="100%" alt="">
+                                    <img src="<?=$imageFile?>" width="100%" alt="">
                                 </div>
                                 <figcaption class="blog_content">
                                     <div class="post_content">
