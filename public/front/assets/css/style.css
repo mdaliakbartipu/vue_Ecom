@@ -14598,3 +14598,7 @@ $MISC
 .flex div{
   width: 230px;
 }
+
+.center th{
+    text-align: center !important;
+}
