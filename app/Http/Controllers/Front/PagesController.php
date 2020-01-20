@@ -29,6 +29,11 @@ class PagesController extends FrontController
         parent::__construct();
     }
 
+
+    public function testEmail()
+    {
+        return view('front.emails.order');
+    }
     public function index()
     {   
         return view('front.index',

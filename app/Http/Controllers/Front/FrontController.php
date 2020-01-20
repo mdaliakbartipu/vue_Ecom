@@ -12,6 +12,8 @@ use App\SubCategory;
 use App\SubSubCategory;
 use App\Page;
 use App\Tags;
+
+use Illuminate\Support\Facades\View;
 // use View;
 
 class FrontController extends Controller
@@ -40,13 +42,14 @@ class FrontController extends Controller
          }
 
          
+         $commonInfo = CommonInfo::all();
          \View::share('company'          , $this->company );
          \View::share('cats'             , $this->cat );
          \View::share('subCats'          , $this->subCat );
          \View::share('subSubCats'       , $this->subSubCat );
          \View::share('tags'             , Tags::forPage() );
          \View::share('pages'            , Page::all() );
-         \View::share('commonInfo'       , CommonInfo::all() );
+         \View::share('commonInfo'       , $commonInfo );
 
         //  Sharing User
         view()->share('signedIn', \Auth::check());
@@ -54,6 +57,8 @@ class FrontController extends Controller
         if(\Auth::check()){
             view()->share('user', \Auth::user());
         }
+
+        
         
 
 

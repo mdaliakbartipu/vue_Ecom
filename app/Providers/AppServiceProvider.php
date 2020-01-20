@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Company;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +27,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        View::composer(['front.emails.*'], function($view){
+            $view->with('company', Company::first());
+        });
     }
 }

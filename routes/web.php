@@ -1,4 +1,9 @@
 <?php
+
+// test
+
+Route::get('test/mail', 'Front\PagesController@testEmail');
+
 // Should be deleted
 
 Route::get('/catagory_products/', 'Front\PagesController@catagoryProducts');
