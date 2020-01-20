@@ -45,6 +45,8 @@
 
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
+          <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body class="no-skin">
@@ -98,6 +100,18 @@
 
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+<script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('assets/js/chosen.jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-timepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/js/daterangepicker.min.js') }}"></script>
+
+    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.dataTables.bootstrap.min.js') }}"></script>
+
+    <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
+    <script src="{{ asset('assets/js/ace.min.js') }}"></script>
 
 @yield('js')
 

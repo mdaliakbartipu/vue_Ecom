@@ -1,7 +1,7 @@
 @extends('layouts.master')
-@section('title','Order')
+@section('title','Form')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> Order
+<i class="fa fa-plus-circle"></i> Product
 @stop
 @section('css')
 <style>

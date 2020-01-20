@@ -71,7 +71,7 @@ var inputs = {
 			max: 100,
 			count: 10,
 			decimals: 2,
-			continuity: 1
+			continuity: 2
 		};
 
 		function generateData(config) {
@@ -87,10 +87,10 @@ var inputs = {
 
 		var options = {
 			maintainAspectRatio: false,
-			spanGaps: false,
+			spanGaps: true,
 			elements: {
 				line: {
-					tension: 0.000001
+					tension: 1
 				}
 			},
 			plugins: {
@@ -101,7 +101,7 @@ var inputs = {
 			scales: {
 				x: {
 					ticks: {
-						autoSkip: false,
+						autoSkip: true,
 						maxRotation: 0
 					}
 				}
@@ -117,7 +117,7 @@ utils.srand(8);
 						backgroundColor: utils.transparentize('rgba(208, 202, 249, 0.75)'),
 						borderColor: 'rgba(208, 202, 249, 0.75)',
 						data: <?=html_entity_decode($saleY)?>,
-						label: 'USD',
+						label: <?=$saleTotal?>+' USD',
 						fill: 'start'
 					}]
 				},
@@ -136,14 +136,14 @@ utils.srand(8);
 						backgroundColor: utils.transparentize(presets.red),
 						borderColor: presets.red,
 						data: <?=html_entity_decode($orderY)?>,
-						label: 'Orders Count',
+						label: "<?=$orderCount?>"+' orders till now',
 						fill: 'start'
 					}]
 				},
 				options: Chart.helpers.merge(options, {
 					title: {
-						text: 'fill: ' + 'start',
-						display: false
+						text: 'Orders',
+						display: true
 					}
 				})
 			});

@@ -84,19 +84,6 @@
 
 @section('js')
 
-    <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('assets/js/chosen.jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-timepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
-    <script src="{{ asset('assets/js/daterangepicker.min.js') }}"></script>
-
-    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.dataTables.bootstrap.min.js') }}"></script>
-
-    <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
-    <script src="{{ asset('assets/js/ace.min.js') }}"></script>
-
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
 

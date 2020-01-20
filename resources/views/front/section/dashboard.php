@@ -52,7 +52,7 @@ include("partials/breadcumb.php"); ?>
                                                 <tr>
                                                     <td><?= ++$index ?></td>
                                                     <td><?= $order->created_at ?></td>
-                                                    <td><span class="success"><?= $order->payment_status ? 'Completed' : 'Processing' ?> </span></td>
+                                                    <td><span class="success"><?= $order->payment_status ? 'Paid' : 'Unpaid' ?> </span></td>
                                                     <td><?= $order->total ?></td>
                                                     <td><button><i class="fa fa-eye"></i></button></td>
                                                     <!-- <td><a href="cart.html" class="view">view</a></td> -->
