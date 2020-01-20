@@ -27,17 +27,17 @@
                 <form class="form-horizontal" role="form" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Name</span>  </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Name</span> </label>
 
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product Name" class="form-control" name="name" value="{{old('name')}}"/>
+                            <input type="text" id="form-field-1-1" placeholder="Product Name" class="form-control" name="name" value="{{old('name')}}" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Hover Name</span>  </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Hover Name</span> </label>
 
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product Hover Name" class="form-control" name="hover_name" value="{{old('hover_name')}}"/>
+                            <input type="text" id="form-field-1-1" placeholder="Product Hover Name" class="form-control" name="hover_name" value="{{old('hover_name')}}" />
                         </div>
                     </div>
 
@@ -46,9 +46,9 @@
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="category" name="category">
-                            <option value="0">Select Category</option>
+                                <option value="0">Select Category</option>
                                 @foreach($categories as $category)
-                                <option value="{{ $category->id }}" >{{ $category->name }}</option>
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -113,7 +113,7 @@
                     </div>
 
                     <div class="form-group">
-                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Brand</span></label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Brand</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="brand" name="brand">
@@ -133,7 +133,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Short Description</span>  </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Short Description</span> </label>
 
                         <div class="col-sm-9">
                             <textarea type="text" id="form-field-1-1" placeholder="Product short Description" rows="4" cols="63" name="desc">{{old('desc')}}</textarea>
@@ -141,14 +141,14 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Price</span>  </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Price</span> </label>
 
                         <div class="col-sm-9">
                             <input type="text" id="form-field-1-1" placeholder="Product price" class="form-control" name="price" value="{{old('price')}}" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Details</span>  </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Details</span> </label>
 
                         <div class="col-sm-9">
                             <textarea type="text" placeholder="Product Details" class="form-control summernote" name="details" style="width:unset!important">{{old('details')}}</textarea>
@@ -163,7 +163,7 @@
                             <div class="checkbox">
                                 @foreach($attributes->where('sleeve',1) as $key=>$sleeve)
                                 <label>
-                                    <input type="checkbox" class="ace" name="sleeve[]" value="{{ $sleeve->id }}" >
+                                    <input type="checkbox" class="ace" name="sleeve[]" value="{{ $sleeve->id }}">
                                     <span class="lbl label label-xlg label-light"> {{ $sleeve->name }} </span>
                                 </label>
                                 @endforeach
@@ -230,7 +230,7 @@
 
                     <div class="form-group">
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Tags</span></label>
-                        
+
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($tags as $key=>$tag)
@@ -241,7 +241,7 @@
                                 @endforeach
                             </div>
                         </div>
-                        
+
                     </div>
 
 
@@ -263,16 +263,16 @@
                         </div> -->
 
                         <div class="col-sm-9">
-											<span class="input-icon input-icon-right">
-												<input type="text" id="form-field-icon-1" name="discount" value="0">
-												<i class="ace-icon fa fa-leaf blue"> discount in %</i>
-											</span>
+                            <span class="input-icon input-icon-right">
+                                <input type="text" id="form-field-icon-1" name="discount" value="0">
+                                <i class="ace-icon fa fa-leaf blue"> discount in %</i>
+                            </span>
 
-											<span class="input-icon input-icon-right">
-												<input type="text" id="form-field-icon-2" name="discount_days" value="0">
-												<i class="ace-icon fa fa-leaf green"> valid for (days)</i>
-											</span>
-										</div>
+                            <span class="input-icon input-icon-right">
+                                <input type="text" id="form-field-icon-2" name="discount_days" value="0">
+                                <i class="ace-icon fa fa-leaf green"> valid for (days)</i>
+                            </span>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -283,8 +283,8 @@
                                 <i class="fa fa-upload"></i>
                                 Upload FIle
                                 <input type="file" name="embroidery" style="display:none">
-                                </label>
-                            
+                            </label>
+
                         </div>
                     </div>
 
@@ -340,13 +340,13 @@
                                         </td>
                                         <td>
                                             <div class="col-xs-12 col-sm-12">
-                                        
+
                                                 <label class="label label-xlg label-grey arrowed-in-right arrowed-in">
-                                <i class="fa fa-upload"></i>
-                                Upload Images
-                                <input multiple="" type="file" id="id-input-file-3" name="image[0][]" style="display:none"/>
-                                
-                                </label>
+                                                    <i class="fa fa-upload"></i>
+                                                    Upload Images
+                                                    <input multiple="" type="file" id="id-input-file-3" name="image[0][]" style="display:none" />
+
+                                                </label>
                                             </div>
                                         </td>
                                     </tr>
@@ -386,11 +386,9 @@
 
 @section('js')
 <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
-    <script src="{{ asset('assets/js/ace.min.js') }}"></script>
+<script src="{{ asset('assets/js/ace.min.js') }}"></script>
 <script type="text/javascript">
-
-
-// tags 
+    // tags 
 
     var rowIndex = 1;
     //  will start by naming name from adding 2 as postfix
@@ -639,11 +637,11 @@
 
     });
     $('.summernote').summernote({
-            placeholder: 'Write short description about your products',
-            tabsize: 2,
-            height: 300,
-           
-        });
+        placeholder: 'Write short description about your products',
+        tabsize: 2,
+        height: 300,
+
+    });
 </script>
 
 

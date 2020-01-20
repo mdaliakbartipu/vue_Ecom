@@ -25,11 +25,11 @@ include("partials/breadcumb.php"); ?>
                                     ?>
                                     <div class="col-lg-6 mb-20">
                                         <label>First Name <span>*</span></label>
-                                        <input type="text" name="first_name" value="<?= $name ? $name[0] : null ?>">
+                                        <input type="text" name="first_name" value="<?= $name[0]??null ?>">
                                     </div>
                                     <div class="col-lg-6 mb-20">
                                         <label>Last Name <span>*</span></label>
-                                        <input type="text" name="last_name" value="<?= $name ? $name[1] : null ?>">
+                                        <input type="text" name="last_name" value="<?= $name[1]??null ?>">
                                     </div>
                                     <div class="col-lg-6 mb-20">
                                         <label>Phone<span>*</span></label>
@@ -89,11 +89,11 @@ include("partials/breadcumb.php"); ?>
                                             <div class="row">
                                                 <div class="col-lg-6 mb-20">
                                                     <label>First Name <span>*</span></label>
-                                                    <input type="text" name="sfirst_name" value="<?= $name ? $name[0] : null ?>">
+                                                    <input type="text" name="sfirst_name" value="<?= $name[0]??null ?>">
                                                 </div>
                                                 <div class="col-lg-6 mb-20">
                                                     <label>Last Name <span>*</span></label>
-                                                    <input type="text" name="slast_name" value="<?= $name ? $name[1] : null ?>">
+                                                    <input type="text" name="slast_name" value="<?= $name[1]??null ?>">
                                                 </div>
                                                 <div class="col-lg-6 mb-20">
                                                     <label>Phone<span>*</span></label>

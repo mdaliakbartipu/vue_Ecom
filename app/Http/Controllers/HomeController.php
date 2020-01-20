@@ -34,12 +34,14 @@ class HomeController extends Controller
     public function index(Request $user)
     {
         // get sale data from database
-
+        // all sell count 
         $sales = ProductSale::get();
-        $orders = NewOrder::get();
 
-        $saleX = ['jan','fev','mar','mar','mar','mar','mar','mar','mar','mar'];
-        $saleY = [$sales->sum('sell'),0,0,0,0,0,0,0,0,0];
+        $orders = NewOrder::get();
+        // dd($orders);
+
+        $saleX = [0,0,0,0,0,0,0,0,0,0];
+        $saleY = [$sales->sum('sell'), 100,0,0,0,0,0,0];
 
         $orderX = ['jan','fev','mar','mar','mar','mar','mar','mar','mar','mar'];
         $orderY = [$orders->sum('total'),2,3,4,5,6,7,8,9,19];
@@ -60,7 +62,7 @@ class HomeController extends Controller
             'profitY'=>json_encode($profitY),
             'paymentX'=>json_encode($paymentX),
             'paymentY'=>json_encode($paymentY),
-        ],
+        ]
     );
     }
 }

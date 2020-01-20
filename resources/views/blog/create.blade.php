@@ -44,7 +44,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Title</label>
-                          <input type="text" class="form-control" name="title">
+                          <input type="text" class="form-control" name="title" value="{{old('title')}}">
                         </div>
                        </div>
                       </div>
@@ -58,7 +58,7 @@
             <!-- /.box-header -->
             <div class="box-body pad">
               
-        <textarea  name="desc" class="summernote">  </textarea>
+        <textarea  name="desc" class="summernote"> {{old('desc')}} </textarea>
             
             </div>
           </div>             

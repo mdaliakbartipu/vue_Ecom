@@ -114,17 +114,17 @@ utils.srand(8);
 				data: {
 					labels: <?=html_entity_decode($saleX)?>,
 					datasets: [{
-						backgroundColor: utils.transparentize(presets.red),
-						borderColor: presets.red,
+						backgroundColor: utils.transparentize('rgba(208, 202, 249, 0.75)'),
+						borderColor: 'rgba(208, 202, 249, 0.75)',
 						data: <?=html_entity_decode($saleY)?>,
-						label: 'Total Sales',
+						label: 'USD',
 						fill: 'start'
 					}]
 				},
 				options: Chart.helpers.merge(options, {
 					title: {
-						text: 'fill: ' + 'start',
-						display: false
+						text: 'Total Sales',
+						display: true
 					}
 				})
 			});

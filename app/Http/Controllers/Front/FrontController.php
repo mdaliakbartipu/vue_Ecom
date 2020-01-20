@@ -22,19 +22,19 @@ class FrontController extends Controller
         $this->cat = Category::all();
         $this->company = Company::first();
 
-        if(!$this->cat){
-            die("Please configure your Database");
+        if(!count($this->cat)){
+            die("Please configure your Database, set categories");
         }
 
         foreach($this->cat as $this->category){
             $this->subCat[$this->category->id] = SubCategory::getAllsubcat($this->category->id);
-            if(!$this->subCat){
-                die("Please configure your Database");
+            if(!count($this->subCat)){
+                die("Please configure your Database, set sub categories");
             }          
         foreach($this->subCat[$this->category->id] as $this->subCategory){
             $this->subSubCat[$this->subCategory->id] = SubSubCategory::getAllSubSubCat($this->subCategory->id);
-            if(!$this->subSubCat){
-                die("Please configure your Database");
+            if(!count($this->subSubCat)){
+                die("Please configure your Database, set sub categories");
             }
         }
          }
@@ -50,7 +50,11 @@ class FrontController extends Controller
 
         //  Sharing User
         view()->share('signedIn', \Auth::check());
-        view()->share('user', \Auth::user());
+        
+        if(\Auth::check()){
+            view()->share('user', \Auth::user());
+        }
+        
 
 
     }
