@@ -229,7 +229,7 @@ class OrderController extends Controller
             $order->status = 2;
 
             // write down that we sold 
-            $product = ProductSale::find($order->variant)->first();
+            $product = ProductSale::find($order->variant_id)->first();
             $product->sell += $order->qty;
 
             if($order->save() && $product->save()){
@@ -260,18 +260,22 @@ class OrderController extends Controller
     {
         if($order){
             $order->status = CANCELLED;
-            if($order->save()){
                 if($order->save()){
+
+                    // count cencel
+                    $sale = ProductSale::find($order->variant_id);
+                    $sale->cancel = (int)$sale->cancel+ (int)$order->qty;
+                    $sale->save();
+
+                    // Put back those products to showcase
+                    $product       = ProductVariant::find($order->variant_id);
+                    $product->qty += (int)$order->qty;
+                    $product->save();
+
                     $mail = new MailController;
                     $mail->orderCancelled("something");
                 }
-            }
         }
-        
-        // Put back those products to showcase
-        $product       = ProductVariant::find($order->variant)->first();
-        $product->qty += (int)$order->qty;
-        $product->save();
 
         // Increase product qty
         return view('order.cancelled-view', compact('order'));

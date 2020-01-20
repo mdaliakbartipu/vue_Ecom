@@ -21,6 +21,7 @@ class CreateProductSellTable extends Migration
             // $table->foreign('variant_id')->references('id')->on('product_variant')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('sell');
             $table->unsignedBigInteger('order');
+            $table->unsignedBigInteger('cancel');
             $table->index('product_id');
             $table->timestamps();
         });
