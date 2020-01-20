@@ -34,6 +34,7 @@ class OrderController extends Controller
     
     public function gotNewOrder(Request $request)
     {
+
         $userProfile = null;
         $shipping    = null;
         
@@ -214,16 +215,27 @@ class OrderController extends Controller
     {
         if($order){
             $order->status = 1;
-            $order->save();
+            if($order->save()){
+                $mail = new MailController;
+                $mail->orderAccepted("something");
+            }
         }
-        return view('order.accepted-view', compact('order'));
+        return view('order.accepted-view', compact('order'))->with('success','Order Successfully Accepted');
     }
 
     public function deliverOrder(AcceptedOrder $order)
     {
         if($order){
             $order->status = 2;
-            $order->save();
+
+            // write down that we sold 
+            $product = ProductSale::find($order->variant)->first();
+            $product->sell += $order->qty;
+
+            if($order->save() && $product->save()){
+                $mail = new MailController;
+                $mail->orderDelivered("something");
+            }
         }
         return view('order.delivered-view', compact('order'));
     }
@@ -248,7 +260,12 @@ class OrderController extends Controller
     {
         if($order){
             $order->status = CANCELLED;
-            $order->save();
+            if($order->save()){
+                if($order->save()){
+                    $mail = new MailController;
+                    $mail->orderCancelled("something");
+                }
+            }
         }
         
         // Put back those products to showcase
