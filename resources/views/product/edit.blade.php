@@ -313,7 +313,7 @@
                                 <input type="text" name="discount_days" placeholder="Discount per 100" value="<?=$diff->days??0?>"> Days
                                 <?php
                                 if($nowTime < $discount_till): ?>
-                                    <span> <?=$diff->h??0?> Hours <?=$diff->i??0?> Minutes <?=$diff->s??0?> Seconds left </span> 
+                                    <br/>And <span> <?=$diff->h??0?> Hours <?=$diff->i??0?> Minutes </span> 
                                 <?php endif;?>
                                 
 
