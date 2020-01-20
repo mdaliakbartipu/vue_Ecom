@@ -136,8 +136,7 @@ Vue.component('cart_row', {
     props: ['id','name', 'price', 'size', 'color', 'variant_id', 'qty', 'image'],
     methods: {
         remove: function (variant) {
-
-            swal.fire({
+            Swal.fire({
                 title: "Are you sure?",
 
                 icon: "info",
@@ -147,17 +146,12 @@ Vue.component('cart_row', {
                 .then((willDelete) => {
                     if (willDelete) {
 
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Your cart item has been deleted!',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
+                        Notiflix.Notify.Success('Your cart item has been deleted!');
                         axios
                             .get('/api/remove-from-cart/' + variant)
-                            .then(response => response.data).then(data => (data.response != 200)).then(status => this.active = status);
+                            .then(response => response.data).then(data => (data.response != 200)).then(status => this.active = status).then(setTimeout(function(){  window.location = '/cart' }, 1000));
                         console.log(variant);
+                        
                     } else {
                         Swal.fire({
                             position: 'top-end',

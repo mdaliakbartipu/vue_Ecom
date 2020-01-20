@@ -208,6 +208,7 @@ class ProductController extends Controller
                 $variant->qty        = $qty;
                 $variant->timestamps = false;
                 $variant->save();
+                // dd($variant);
                 // saving product image for that variant
                 //cheacking if image folder is there
                 $imagePath = "front/assets/.uploads/products";

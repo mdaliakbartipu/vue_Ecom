@@ -32,7 +32,7 @@ class PagesController extends FrontController
 
     public function testEmail()
     {
-        return view('front.emails.order');
+        return view('front.emails.test');
     }
     public function index()
     {   
