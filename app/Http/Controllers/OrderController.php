@@ -247,9 +247,16 @@ class OrderController extends Controller
     public function cancelOrder(Order $order)
     {
         if($order){
-            $order->status = 3;
+            $order->status = CANCELLED;
             $order->save();
         }
+        
+        // Put back those products to showcase
+        $product       = ProductVariant::find($order->variant)->first();
+        $product->qty += (int)$order->qty;
+        $product->save();
+
+        // Increase product qty
         return view('order.cancelled-view', compact('order'));
     }
 
