@@ -133,8 +133,8 @@ utils.srand(8);
 				data: {
 					labels: <?=html_entity_decode($orderX)?>,
 					datasets: [{
-						backgroundColor: utils.transparentize(presets.red),
-						borderColor: presets.red,
+						backgroundColor: utils.transparentize('rgba(208, 202, 249, 0.75)'),
+						borderColor: 'rgba(208, 202, 249, 0.75)',
 						data: <?=html_entity_decode($orderY)?>,
 						label: "<?=$orderCount?>"+' orders till now',
 						fill: 'start'
@@ -152,8 +152,8 @@ utils.srand(8);
 				data: {
 					labels: <?=html_entity_decode($profitX)?>,
 					datasets: [{
-						backgroundColor: utils.transparentize(presets.red),
-						borderColor: presets.red,
+						backgroundColor: utils.transparentize('rgba(208, 202, 249, 0.75)'),
+						borderColor: 'rgba(208, 202, 249, 0.75)',
 						data: <?=html_entity_decode($profitY)?>,
 						label: 'Gross Profit',
 						fill: 'start'
@@ -171,8 +171,8 @@ utils.srand(8);
 				data: {
 					labels: <?=html_entity_decode($paymentX)?>,
 					datasets: [{
-						backgroundColor: utils.transparentize(presets.red),
-						borderColor: presets.red,
+						backgroundColor: utils.transparentize('rgba(208, 202, 249, 0.75)'),
+						borderColor: 'rgba(208, 202, 249, 0.75)',
 						data: <?=html_entity_decode($paymentY)?>,
 						label: 'Total Payments',
 						fill: 'start'
