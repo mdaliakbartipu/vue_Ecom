@@ -99,7 +99,7 @@ class OrderController extends Controller
                             $user ,
                             (int)$item['variant_id'],
                             $item['qty'],
-                            $request->payment_method,
+                            $request->payment_method
                     );  
             if(!$order){
                 $error = true;

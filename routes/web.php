@@ -171,12 +171,6 @@ Route::get('/report/sale-yearly','ReportController@saleYearly');
 // Inventory
 Route::get('/inventory/purchase','InventoryController@purchase');
 Route::get('/inventory/purchase/{product}','InventoryController@purchaseProduct');
-Route::get('/inventory/stock',function(){
-    echo "not yet implemented";
-}); //'Inventory@stock'
-Route::get('/inventory/sold',function(){
-    echo "not yet implemented";
-}); //'Inventory@sold'
 
 
 
@@ -186,9 +180,7 @@ Route::post('/api/inventory/add','InventoryController@addVariant');
 
 // Settings
 
-Route::get('/settings/mail',function(){
-    echo "Under Construction";
-});
+
 
 
 
