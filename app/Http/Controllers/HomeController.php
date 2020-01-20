@@ -60,7 +60,6 @@ class HomeController extends Controller
             'profitY'=>json_encode($profitY),
             'paymentX'=>json_encode($paymentX),
             'paymentY'=>json_encode($paymentY),
-        ]
-        );
+        ]);
     }
 }
