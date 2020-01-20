@@ -530,9 +530,13 @@ Vue.component('product_extra_info', {
         },
         methods: {
             up() {
-                if ((this.count + 1) <= this.variant.qty)
+                if ((this.count + 1) <= this.variant.qty){
                     this.count++;
-                this.$emit('setQty', this.count);
+                    this.$emit('setQty', this.count);
+                } else {
+                    Notiflix.Notify.Info(`We have ${this.count} products in hand.`);
+                }
+                
             },
             down() {
                 if ((this.count - 1) >= 1)
