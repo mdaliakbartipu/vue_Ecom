@@ -8,7 +8,6 @@
     <!-- Plugins JS -->
     <script src="<?=ASSETS?>/js/owl.carousel.min.js"></script>
     <script src="<?=ASSETS?>/js/wow.min.js"></script>
-    <script src="<?=ASSETS?>/js/notiflix-1.9.1.min.js"></script>
 
 <script>
 <?php if(\Session::get('success')): ?>

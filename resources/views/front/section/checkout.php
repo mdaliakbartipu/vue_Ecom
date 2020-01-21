@@ -14,6 +14,12 @@ include("partials/breadcumb.php"); ?>
                             <div class="checkout_form_left">
 
                                 <h3>Billing Details</h3>
+                                <!-- notification -->
+                                <?php if ($errors->any()): ?>
+                                            <?php foreach ($errors->all() as $error):?>
+                                            <script> Notiflix.Notify.Failure("<?=$error?>"); </script>
+                                            <?php endforeach;?>
+                                 <?php endif; ?>
                                 <div class="row">
                                     <?php
                                     // dd($user);

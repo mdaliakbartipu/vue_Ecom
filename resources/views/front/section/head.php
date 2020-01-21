@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="<?=ASSETS?>/css/style.css">
     <link rel="stylesheet" href="<?=ASSETS?>/css/animate.css">
     <link rel="stylesheet" href="<?=ASSETS?>/css/notiflix-1.9.1.min.css">
+    <script src="<?=ASSETS?>/js/notiflix-1.9.1.min.js"></script>
     
     
 <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
