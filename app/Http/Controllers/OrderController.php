@@ -34,6 +34,17 @@ class OrderController extends Controller
     
     public function gotNewOrder(Request $request)
     {
+        $request->validate([
+            'first_name'        => 'required',
+            'last_name'         => 'required',
+            'phone'             => 'required',
+            'email'             => 'required',
+            'state'             => 'required',
+            'city'              => 'required',
+            'street'            => 'required',
+            'address'           => 'required',
+            'payment_method'    => 'required',
+        ]);
 
         $userProfile = null;
         $shipping    = null;
