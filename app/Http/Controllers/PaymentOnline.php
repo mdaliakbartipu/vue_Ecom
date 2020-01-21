@@ -33,9 +33,12 @@ class PaymentOnline extends Controller
 
      private function loadSSLCOM()
     {
-        $this->api = "https://sandbox.sslcommerz.com/gwprocess/v4/api.php";
-        $this->storeID = "gheeg5db9272aeb1d0";
-        $this->storePassword = "gheeg5db9272aeb1d0@ssl";
+
+        // dd(PaymentConfig::first());
+        $type = PaymentConfig::first();
+        $this->api = $type->api_url??"https://sandbox.sslcommerz.com/gwprocess/v4/api.php";
+        $this->storeID = $type->store_id??"gheeg5db9272aeb1d0";
+        $this->storePassword = $type->store_password??"gheeg5db9272aeb1d0@ssl";
     }
 
     public function __construct( $request = null, $cart = null){
@@ -68,7 +71,8 @@ class PaymentOnline extends Controller
 
     public function loadPaypal()
     {
-        dd("paypal");
+        $paypal = new PaypalPaymentController();
+        $paypal->paywithPaypal();
     }
 
     /**

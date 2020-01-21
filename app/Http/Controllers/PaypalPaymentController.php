@@ -4,7 +4,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Paypalpayment;
+use Anouar\Paypalpayment\Facades\PaypalPayment;
 
 class PaypalPaymentController extends Controller
 {
@@ -29,13 +29,14 @@ class PaypalPaymentController extends Controller
         endif;
     }
 
-    public function paywithPaypal(Request $info)
+    public function paywithPaypal()
     {
         // dd($info->all());
         // dd((new Paypalpayment));
         // ### Address
         // Base Address object used as shipping or billing
         // address in a payment. [Optional]
+
         $shippingAddress = Paypalpayment::shippingAddress();
 
         $shippingAddress->setLine1("3909 Witmer Road")
@@ -124,9 +125,11 @@ class PaypalPaymentController extends Controller
             // using a valid ApiContext
             // The return object contains the status;
             $payment->create(Paypalpayment::apiContext());
+
         } catch (\PPConnectionException $ex) {
             return response()->json(["error" => $ex->getMessage()], 400);
         }
+
         return redirect($payment->getApprovalLink());
         // return response()->json([$payment->toArray(), 'approval_url' => $payment->getApprovalLink()], 200);
     }

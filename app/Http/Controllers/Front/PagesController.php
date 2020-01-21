@@ -302,11 +302,13 @@ class PagesController extends FrontController
 
     public function paypalSuccess(Request $request)
     {
+        dd($request);
         return view('front.success');
     }
 
     public function paypalfails(Request $request)
     {
+        dd($request);
         return view('front.fails');
     }
 

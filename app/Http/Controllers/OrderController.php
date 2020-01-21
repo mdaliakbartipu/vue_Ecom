@@ -55,11 +55,10 @@ class OrderController extends Controller
         // Variant_id and qty are needed (vat,discount,shipping cost needed)
         $cart = \Session::get('cart');
 
-        $paymentType = 'paypal';
+        $paymentType = 'sslcom';
 
             $online = new PaymentOnline($request, $cart);
             $online->payNow($paymentType);
-            die("sd");
         
         // setting error flags, false means all is good! 
         $error = false;
@@ -124,11 +123,11 @@ class OrderController extends Controller
             }
         }
         if(!$error){
-            // get payment type from database
-            $paymentType = 'sslcom';
+            // // get payment type from database
+            // $paymentType = 'sslcom';
 
-            $online = new PaymentOnline($request, $cart);
-            $online->payNow($paymentType);
+            // $online = new PaymentOnline($request, $cart);
+            // $online->payNow($paymentType);
 
             // send mail
             $mail = new MailController;
