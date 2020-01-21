@@ -1,4 +1,9 @@
 <?php
+
+// test
+
+Route::get('test/mail', 'Front\PagesController@testEmail');
+
 // Should be deleted
 
 Route::get('/catagory_products/', 'Front\PagesController@catagoryProducts');
@@ -14,6 +19,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 // UI Routes
 
 Route::get('/', 'Front\PagesController@index');
+Route::get('/ui/blog/{blog}/{slug}', 'Front\PagesController@blog');
 Route::get('/store', 'Front\PagesController@index');
 
 Route::get('/cat/{slug}', 'Front\PagesController@cat');
@@ -170,12 +176,6 @@ Route::get('/report/sale-yearly','ReportController@saleYearly');
 // Inventory
 Route::get('/inventory/purchase','InventoryController@purchase');
 Route::get('/inventory/purchase/{product}','InventoryController@purchaseProduct');
-Route::get('/inventory/stock',function(){
-    echo "not yet implemented";
-}); //'Inventory@stock'
-Route::get('/inventory/sold',function(){
-    echo "not yet implemented";
-}); //'Inventory@sold'
 
 
 
@@ -185,9 +185,7 @@ Route::post('/api/inventory/add','InventoryController@addVariant');
 
 // Settings
 
-Route::get('/settings/mail',function(){
-    echo "Under Construction";
-});
+
 
 
 
@@ -199,11 +197,13 @@ Route::get('payment/test','PaymentOnline@index');
 
 Route::get('paypal/credit','PaypalPaymentController@index');
 Route::get('paypal/pay','PaypalPaymentController@paywithPaypal');
-Route::post('/order','PaypalPaymentController@paywithPaypal');
+
+Route::post('/order','OrderController@gotNewOrder');
 
 Route::get('paypal/fails','Front\PagesController@paypalFails');
 Route::get('paypal/success','Front\PagesController@paypalSuccess');
 
 Route::get('settings/payment','PaymentOnline@paymentSetting');
+Route::post('settings/payment','PaymentOnline@paymentSetting');
 
 

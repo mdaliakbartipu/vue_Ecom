@@ -1,5 +1,22 @@
-                        /*Shams*/
-                    
+.short_note div {
+    white-space: pre-wrap;
+}
+
+/*Shams*/
+                        .note-editor{
+                            width:100px !important;
+                        }
+                        .normal-text{
+                            font-weight: 200;
+                        }
+                        .old-price{
+                            text-decoration-line: line-through;
+                            font-size: .7em !important;
+                            color: rgb(110, 57, 57);
+                        }
+                        .new-price{
+                            font-size: 1em !important;
+                        }
                         .fade-enter-active, .fade-leave-active {
                           transition: opacity 1s;
                         }
@@ -456,6 +473,8 @@ $MISC
                   .single_related .short_note {
                       margin-bottom: 10px !important;
                       margin-top: 10px;
+                      height: 7em;
+                      overflow: hidden;
                   }
                   
                   .author_item {
@@ -5100,7 +5119,7 @@ $MISC
                   }
                   
                   .home_section_bg {
-                      padding: 60px 0 132px;
+                      padding: 60px 0 3em;
                   }
                   
                   @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -11885,6 +11904,9 @@ $MISC
                       margin-bottom: 10px;
                       font-size: 15px;
                   }
+                  .blog_details .post_content>div {
+                    white-space: pre-wrap!important;
+                }
                   
                   @media only screen and (max-width: 767px) {
                       .blog_details .post_content>p {
@@ -11949,7 +11971,7 @@ $MISC
                   
                   .blog_details .social_sharing ul li a {
                       background: #e6e6e6;
-                      border-radius: 100%;
+                      /* border-radius: 100%; */
                       display: inline-block;
                       font-size: 12px;
                       height: 26px;
@@ -13319,7 +13341,7 @@ $MISC
                   }
                   
                   .cart_img_page img {
-                      max-width: 63%;
+                      max-width: 46%;
                       text-align: right;
                       margin-right: 2px;
                   }
@@ -14507,5 +14529,76 @@ $MISC
                     }
 
                     .sidebar_banner_area .single_banner{
-                        height: 150px;
+                        /* height: 150px; */
                     }
+
+.sharebox-buttons{
+  display:flex !important;
+  flex-direction: row !important;
+  justify-content: space-around !important;
+}
+
+.sharebox-buttons li{
+      width: 100% !important;
+      /* height: 30px !important; */
+      /* background-color: yellow !important; */
+}
+
+.sharebox-buttons .share-facebook a{
+  background-color: #4264ab !important;
+  color: white !important;
+  margin-left: 1em;
+  /* height: 30px !important; */
+  /* background-color: yellow !important; */
+}
+
+.sharebox-buttons .share-twitter a{
+  background-color: #6cb7f0 !important;
+  color: white !important;
+  /* height: 30px !important; */
+  /* background-color: yellow !important; */
+}
+.sharebox-buttons .share-linkedin a{
+  background-color: #0088cf !important;
+  color: white !important;
+  /* height: 30px !important; */
+  /* background-color: yellow !important; */
+}
+.sharebox-buttons .share-instagram a{
+  background-color: #e75672 !important;
+  color: white !important;
+  /* height: 30px !important; */
+  /* background-color: yellow !important; */
+}
+.sharebox-buttons .share-pinterest a{
+  background-color: #d50920 !important;
+  color: white !important;
+  /* height: 30px !important; */
+  /* background-color: yellow !important; */
+}
+
+.sharebox-buttons li a{
+  color:white !important;
+  height: 30px !important;
+  padding-top:5px !important;
+
+  width: 110px !important;
+  ;
+}
+
+.sharebox-buttons li:hover{
+  opacity: 0.7 !important;
+}
+
+.flex{
+  display:flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.flex div{
+  width: 230px;
+}
+
+.center th{
+    text-align: center !important;
+}

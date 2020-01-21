@@ -12,11 +12,12 @@ use App\Models\CancelledOrder;
 use App\Models\ReturnedOrder;
 
 use App\Product;
+use App\ProductSale;
 use App\ProductVariant;
 use App\UserProfile;
 use App\UserShippingAddress;
 use Paypalpayment;
-
+use Session;
 
 // orders type
 define("NEW",           0);
@@ -33,51 +34,81 @@ class OrderController extends Controller
     
     public function gotNewOrder(Request $request)
     {
+        $request->validate([
+            'first_name'        => 'required',
+            'last_name'         => 'required',
+            'phone'             => 'required',
+            'email'             => 'required',
+            'state'             => 'required',
+            'city'              => 'required',
+            'street'            => 'required',
+            'address'           => 'required',
+            'payment_method'    => 'required',
+        ]);
+
+        $userProfile = null;
+        $shipping    = null;
+        
         // dd($request->all());
         
-
+        // get cart items
+        // Variant_id and qty are needed (vat,discount,shipping cost needed)
         $cart = \Session::get('cart');
-        // Variant_id and qty are needed
-        // dd($cart);
 
+        $paymentType = 'paypal';
+
+            $online = new PaymentOnline($request, $cart);
+            $online->payNow($paymentType);
+            die("sd");
+        
+        // setting error flags, false means all is good! 
         $error = false;
 
-        foreach($cart as $item){
-            // Creating profile for all except Logged in user
-            if(\Auth::user()){
-                $userProfile = UserProfile::find(\Auth::user()->id);
+        // updating or creating user informations
+        // such as email, phone, name, shipping address and billing address
+        if(\Auth::user()){
+            $userProfile = UserProfile::find(\Auth::user()->id);
+            if($userProfile){
                 $userProfile->update($request->all());
             } else {
                 $userProfile = UserProfile::create($request->all());
             }
-             $shipping = null;
+        } else {
+                $userProfile = UserProfile::create($request->all());
+        }
 
-            if(isset($request->shipping)){
-                $request->validate([
-                    'sfirst_name'=>'required',
-                    'slast_name'=>'required',
-                    'sphone'=>'required',
-                    'semail'=>'required',
-                    'scountry'=>'required',
-                    'sstreet'=>'required',
-                    'scity'=>'required',
-                    'sstate'=>'required'
-                ]);
-                $shipping = new UserShippingAddress;
-                $shipping->first_name = $request->sfirst_name;
-                $shipping->last_name  = $request->slast_name;
-                $shipping->phone      = $request->sphone;
-                $shipping->email      = $request->semail;
-                $shipping->country    = $request->scountry;
-                $shipping->street     = $request->sstreet;
-                $shipping->city       = $request->scity;
-                $shipping->state      = $request->sstate;
-                $shipping->address    = $request->saddress;
-                $shipping->save();
-            }
+        // saving shipping address
+        if(isset($request->shipping)){
+            $request->validate([
+                'sfirst_name'=>'required',
+                'slast_name'=>'required',
+                'sphone'=>'required',
+                'semail'=>'required',
+                'scountry'=>'required',
+                'sstreet'=>'required',
+                'scity'=>'required',
+                'sstate'=>'required'
+            ]);
+            $shipping             = new UserShippingAddress;
+            $shipping->user_id    = $userProfile?$userProfile->id:null;
+            $shipping->first_name = $request->sfirst_name;
+            $shipping->last_name  = $request->slast_name;
+            $shipping->phone      = $request->sphone;
+            $shipping->email      = $request->semail;
+            $shipping->country    = $request->scountry;
+            $shipping->street     = $request->sstreet;
+            $shipping->city       = $request->scity;
+            $shipping->state      = $request->sstate;
+            $shipping->address    = $request->saddress;
+            $shipping->save();
+        }
+
+        foreach($cart as $item){
+            // Creating profile for all except Logged in user
 
             $user = new \stdClass;            
             $user->id = $userProfile->id;
+            
             $user->shipping = $shipping?$shipping->id:null;
             $user->billing = $userProfile?$userProfile->id:null;
             
@@ -86,13 +117,22 @@ class OrderController extends Controller
                             $user ,
                             (int)$item['variant_id'],
                             $item['qty'],
-                            $request->payment_method,
+                            $request->payment_method
                     );  
             if(!$order){
                 $error = true;
             }
         }
         if(!$error){
+            // get payment type from database
+            $paymentType = 'sslcom';
+
+            $online = new PaymentOnline($request, $cart);
+            $online->payNow($paymentType);
+
+            // send mail
+            $mail = new MailController;
+            $mail->orderMail("something");
             session(['cart' => null]);
             return \redirect('/')->with('success','Your order is placed. Thanks you!');
         } else {
@@ -153,8 +193,31 @@ class OrderController extends Controller
             $order->payment_type = $paymentMethod??'none';
             $order->note = $this->orderNote;
             
-            if($order->save())
+            if($order->save()){
+                // increasing product order
+
+                $sale = ProductSale::where('product_id', $product->id)->where('variant_id', $variantID)->first();
+                
+                if($sale){
+                    $sale->order = $sale->order + $qty;
+                    $sale->save();
+                } else {
+                    ProductSale::create([
+                        'product_id'=> $product->id,
+                        'variant_id'=> $variantID,
+                        'sell'      => 0,
+                        'order'     => $qty
+                    ]);
+                }
+                // decreasing qty
+                $info->qty = $info->qty - $qty;
+                if($info->qty<0){
+                    dd("something went wrong on saving process");
+                }
+                $info->save();
+
                 return true;
+            }
              else 
              return false;
 
@@ -178,16 +241,27 @@ class OrderController extends Controller
     {
         if($order){
             $order->status = 1;
-            $order->save();
+            if($order->save()){
+                $mail = new MailController;
+                $mail->orderAccepted("something");
+            }
         }
-        return view('order.accepted-view', compact('order'));
+        return view('order.accepted-view', compact('order'))->with('success','Order Successfully Accepted');
     }
 
     public function deliverOrder(AcceptedOrder $order)
     {
         if($order){
             $order->status = 2;
-            $order->save();
+
+            // write down that we sold 
+            $product = ProductSale::find($order->variant_id)->first();
+            $product->sell += $order->qty;
+
+            if($order->save() && $product->save()){
+                $mail = new MailController;
+                $mail->orderDelivered("something");
+            }
         }
         return view('order.delivered-view', compact('order'));
     }
@@ -211,9 +285,25 @@ class OrderController extends Controller
     public function cancelOrder(Order $order)
     {
         if($order){
-            $order->status = 3;
-            $order->save();
+            $order->status = CANCELLED;
+                if($order->save()){
+
+                    // count cencel
+                    $sale = ProductSale::find($order->variant_id);
+                    $sale->cancel = (int)$sale->cancel+ (int)$order->qty;
+                    $sale->save();
+
+                    // Put back those products to showcase
+                    $product       = ProductVariant::find($order->variant_id);
+                    $product->qty += (int)$order->qty;
+                    $product->save();
+
+                    $mail = new MailController;
+                    $mail->orderCancelled("something");
+                }
         }
+
+        // Increase product qty
         return view('order.cancelled-view', compact('order'));
     }
 

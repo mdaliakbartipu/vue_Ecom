@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('super');
             $table->foreign('super')->references('id')->on('sub_sub_categories');
             $table->string('name');
+            $table->string('hover_name');
             $table->string('slug');
             $table->unsignedBigInteger('brand')->nullable();
             $table->foreign('brand')->references('id')->on('brands');

@@ -21,7 +21,7 @@ class PaymentOnline extends Controller
     // main password 5DCCD184B4F1B22379
 
     private $api = null;
-    private $storeID = 'gheeg5db9272aeb1d0';
+    private $storeID = null;
     private $storePassword = null;
 
     private $totalAmount = 0;
@@ -51,15 +51,24 @@ class PaymentOnline extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function payNow($type = null)
     {
-        $this->loadSSLCOM();
-        $this->send($this->setData());
+        switch($type){
+            case 'sslcom':
+                $this->loadSSLCOM();
+                $this->send($this->setData());
+            break;
+            case 'paypal':
+                $this->loadPaypal();
+            break;
+            default:
+                die("we do not support ".$type);
+        }
     }
 
-    public function paypal($info = null)
+    public function loadPaypal()
     {
-        dd($info);
+        dd("paypal");
     }
 
     /**
@@ -258,19 +267,35 @@ class PaymentOnline extends Controller
 
     public function paymentSetting(Request $request)
     {
+        
+        // if request is post
+        if($request->get('_token')){
+            $request->validate([
+                'host'              => 'required',
+                'store_id'          => 'required',
+                'store_password'    => 'required',
+                'api_url'           => 'required'
+            ]);
+    
+            $config = PaymentConfig::first();
+            if($config){
+                $config->update($request->except('_token'));
+            } else {
+                $config->create($request->except('_token'));
+            }
+        }
 
         $config = PaymentConfig::first();
-        
+
         if(!$config){
             $config = PaymentConfig::create([
-                'host'      => 'demo',
+                'host'      => 'paypal',
                 'api_url'   => 'demo',
                 'store_id'  => 'demo',
                 'store_password' => 'demo'
-
             ]);
         }
-        return view('payment.config');
+        return view('payment.config',compact('config'));
     }
 
 

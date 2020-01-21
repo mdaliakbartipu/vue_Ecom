@@ -18,6 +18,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::all();
+        
         foreach($blogs as &$blog){
             $blog->author_name = Blog::getAuthorName($blog->author_id);
         }

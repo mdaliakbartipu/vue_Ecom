@@ -19,7 +19,7 @@ use App\ProductTags;
 use App\Product;
 use App\Brand;
 use App\ProductImages;
-use App\ProductStorage;
+use App\Models\ProductStorage;
 use App\ProductVariant;
 
 use Carbon\Carbon;
@@ -86,12 +86,13 @@ class ProductController extends Controller
         // dd($request->all());
         $this->validate($request, [
             'name'              => 'required|max:190',
+            'hover_name'        => 'required|max:190',
             'code'              => 'required|unique:products|max:190',
             'desc'              => 'required|max:190',
-            'price'             => 'required',
+            'price'             => 'required|numeric|min:2',
             'brand'             => 'required',
-            'discount'          => 'required',
-            'discount_days'     => 'required',
+            'discount'          => 'required|numeric',
+            'discount_days'     => 'required|numeric',
             'details'           => 'required',
             'new'               => 'required',
             'category'          => 'required',
@@ -99,22 +100,21 @@ class ProductController extends Controller
             'sub_sub_category'  => 'required',
         ]);
 
-
-
         // saving product
-        $product = new Product();
-        $product->name = $request->name;
-        $product->slug = str_slug($product->name);
-        $product->cat = $request->category;
-        $product->new = $request->new;
-        $product->sub = $request->sub_category;
-        $product->super = $request->sub_sub_category;
-        $product->code = $request->code;
-        $product->brand = $request->brand;
-        $product->description = $request->desc;
-        $product->price = $request->price;
-        $product->details = $request->details;
-        $product->discount = $request->discount ?? 0;
+        $product                = new Product();
+        $product->name          = $request->name;
+        $product->hover_name    = $request->hover_name;
+        $product->slug          = str_slug($product->name);
+        $product->cat           = $request->category;
+        $product->new           = $request->new;
+        $product->sub           = $request->sub_category;
+        $product->super         = $request->sub_sub_category;
+        $product->code          = $request->code;
+        $product->brand         = $request->brand;
+        $product->description   = $request->desc;
+        $product->price         = $request->price;
+        $product->details       = $request->details;
+        $product->discount      = $request->discount ?? 0;
 
         // Embroiddery PDF 
         if($request->embroidery):
@@ -138,10 +138,6 @@ class ProductController extends Controller
                     $product->embroidery = '$pdfName';
         endif;
 
-        
-        
-        
-        
         $product->video_link = $request->video ?? '';
         
         // calculating discount days with date
@@ -212,6 +208,7 @@ class ProductController extends Controller
                 $variant->qty        = $qty;
                 $variant->timestamps = false;
                 $variant->save();
+                // dd($variant);
                 // saving product image for that variant
                 //cheacking if image folder is there
                 $imagePath = "front/assets/.uploads/products";
@@ -333,6 +330,7 @@ class ProductController extends Controller
 
         $this->validate($request, [
             'name'              => 'required|max:190',
+            'hover_name'              => 'required|max:190',
             'code'              => 'required|max:190',
             'desc'              => 'required|max:190',
             'price'             => 'required',
@@ -348,6 +346,7 @@ class ProductController extends Controller
 
         $product = Product::find($id);
         $product->name = $request->name;
+        $product->hover_name = $request->hover_name;
         $product->slug = str_slug($product->name);
         $product->cat = $request->category;
         $product->new = $request->new;
@@ -564,12 +563,16 @@ class ProductController extends Controller
     public function addToCart(Request $request)
     {
 
+        // echo json_encode(['response' => "200", 'cart' => $request->product['variant_id']]);die('');
         // dd(\Session::get('cart'));
         $request->validate([
             'product' => 'required'
         ]);
 
+        // \Session::put('req', $request);
+            // dd(\Session::get('req'));
         $cart = \Session::get('cart');
+        // dd($cart);
         $newList = $request->product;
 
         if (!$cart) {
@@ -577,7 +580,18 @@ class ProductController extends Controller
             array_push($cart, $newList);
             \Session::put('cart', $cart);
         } else {
-            array_push($cart, $newList);
+            $updated = 0;
+            foreach($cart as &$item){
+                // echo json_encode(['response' => "200", 'cart' => $item['variant_id']]);die('');
+                if($item['variant_id'] == $newList['variant_id']){
+                    $item['qty'] += $newList['qty'];
+                    $updated++;
+                }
+            }
+            if(!$updated){
+                array_push($cart, $newList);
+            }
+            
             \Session::put('cart', $cart);
         }
 

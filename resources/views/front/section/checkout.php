@@ -14,25 +14,37 @@ include("partials/breadcumb.php"); ?>
                             <div class="checkout_form_left">
 
                                 <h3>Billing Details</h3>
+                                <!-- notification -->
+                                <?php if ($errors->any()): ?>
+                                            <?php foreach ($errors->all() as $error):?>
+                                            <script> Notiflix.Notify.Failure("<?=$error?>"); </script>
+                                            <?php endforeach;?>
+                                 <?php endif; ?>
                                 <div class="row">
                                     <?php
-                                    $name = preg_split('/\s+/', $user->name);
+                                    // dd($user);
+                                    $userProfile = null;
+                                    if($user){
+                                        $userProfile = $user->profile;
+                                        // dd($userProfile);
+                                    }
+                                    $name = $user?preg_split('/\s+/', $user->name):null;
                                     ?>
                                     <div class="col-lg-6 mb-20">
                                         <label>First Name <span>*</span></label>
-                                        <input type="text" name="first_name" value="<?= $name ? $name[0] : null ?>">
+                                        <input type="text" name="first_name" value="<?= $name[0]??null ?>">
                                     </div>
                                     <div class="col-lg-6 mb-20">
                                         <label>Last Name <span>*</span></label>
-                                        <input type="text" name="last_name" value="<?= $name ? $name[1] : null ?>">
+                                        <input type="text" name="last_name" value="<?= $name[1]??null ?>">
                                     </div>
                                     <div class="col-lg-6 mb-20">
                                         <label>Phone<span>*</span></label>
-                                        <input type="text" name="phone" value="<?= $user->profile ? $user->profile->phone : null ?>">
+                                        <input type="text" name="phone" value="<?= $userProfile? $user->profile->phone : null ?>">
                                     </div>
                                     <div class="col-lg-6 mb-20">
                                         <label> Email Address <span>*</span></label>
-                                        <input type="text" name="email" value="<?= $user->profile ? $user->profile->email : null ?>">
+                                        <input type="text" name="email" value="<?= $userProfile? $user->profile->email : null ?>">
                                     </div>
                                     <div class="col-6 mb-20">
                                         <label for="country">Country <span>*</span></label>
@@ -50,19 +62,19 @@ include("partials/breadcumb.php"); ?>
                                     </div>
                                     <div class="col-6 mb-20">
                                         <label>State<span>*</span></label>
-                                        <input type="text" name="state" value="<?= $user->profile ? $user->profile->state : null ?>">
+                                        <input type="text" name="state" value="<?= $userProfile? $user->profile->state : null ?>">
                                     </div>
                                     <div class="col-6 mb-20">
                                         <label>Town / City <span>*</span></label>
-                                        <input type="text" name="city" value="<?= $user->profile ? $user->profile->city : null ?>">
+                                        <input type="text" name="city" value="<?= $userProfile? $user->profile->city : null ?>">
                                     </div>
                                     <div class="col-6 mb-20">
                                         <label>Street address <span>*</span></label>
-                                        <input name="street" placeholder="House number and street name" type="text" value="<?= $user->profile ? $user->profile->street : null ?>">
+                                        <input name="street" placeholder="House number and street name" type="text" value="<?= $userProfile ? $user->profile->street : null ?>">
                                     </div>
 
                                     <div class="col-12 mb-20">
-                                        <input name="address" placeholder="Apartment, suite, unit etc. (optional)" type="text" value="<?= $user->profile ? $user->profile->address : null ?>">
+                                        <input name="address" placeholder="Apartment, suite, unit etc. (optional)" type="text" value="<?= $userProfile ? $user->profile->address : null ?>">
                                     </div>
 
                                     <div class="col-12 mb-20">
@@ -84,19 +96,19 @@ include("partials/breadcumb.php"); ?>
                                             <div class="row">
                                                 <div class="col-lg-6 mb-20">
                                                     <label>First Name <span>*</span></label>
-                                                    <input type="text" name="sfirst_name" value="<?= $name ? $name[0] : null ?>">
+                                                    <input type="text" name="sfirst_name" value="<?= $name[0]??null ?>">
                                                 </div>
                                                 <div class="col-lg-6 mb-20">
                                                     <label>Last Name <span>*</span></label>
-                                                    <input type="text" name="slast_name" value="<?= $name ? $name[1] : null ?>">
+                                                    <input type="text" name="slast_name" value="<?= $name[1]??null ?>">
                                                 </div>
                                                 <div class="col-lg-6 mb-20">
                                                     <label>Phone<span>*</span></label>
-                                                    <input type="text" name="sphone" value="<?= $user->profile ? $user->profile->phone : null ?>">
+                                                    <input type="text" name="sphone" value="<?= $userProfile? $user->profile->phone : null ?>">
                                                 </div>
                                                 <div class="col-lg-6 mb-20">
                                                     <label> Email Address <span>*</span></label>
-                                                    <input type="text" name="semail" value="<?= $user->profile ? $user->profile->email : null ?>">
+                                                    <input type="text" name="semail" value="<?= $userProfile? $user->profile->email : null ?>">
                                                 </div>
                                                 <div class="col-6 mb-20">
                                                     <label for="country">Country <span>*</span></label>
@@ -114,19 +126,19 @@ include("partials/breadcumb.php"); ?>
                                                 </div>
                                                 <div class="col-6 mb-20">
                                                     <label>State<span>*</span></label>
-                                                    <input type="text" name="sstate" value="<?= $user->profile ? $user->profile->state : null ?>">
+                                                    <input type="text" name="sstate" value="<?= $userProfile? $user->profile->state : null ?>">
                                                 </div>
                                                 <div class="col-6 mb-20">
                                                     <label>Town / City <span>*</span></label>
-                                                    <input type="text" name="scity" value="<?= $user->profile ? $user->profile->city : null ?>">
+                                                    <input type="text" name="scity" value="<?= $userProfile? $user->profile->city : null ?>">
                                                 </div>
                                                 <div class="col-6 mb-20">
                                                     <label>Street address <span>*</span></label>
-                                                    <input name="sstreet" placeholder="House number and street name" type="text" value="<?= $user->profile ? $user->profile->street : null ?>">
+                                                    <input name="sstreet" placeholder="House number and street name" type="text" value="<?= $userProfile? $user->profile->street : null ?>">
                                                 </div>
 
                                                 <div class="col-12 mb-20">
-                                                    <input name="saddress" placeholder="Apartment, suite, unit etc. (optional)" type="text" value="<?= $user->profile ? $user->profile->address : null ?>">
+                                                    <input name="saddress" placeholder="Apartment, suite, unit etc. (optional)" type="text" value="<?= $userProfile? $user->profile->address : null ?>">
                                                 </div>
                                             </div>
                                         </div>

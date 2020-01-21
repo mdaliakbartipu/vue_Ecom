@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="s_banner col-lg-3 col-md-12">
 				<!--banner area start-->
-				<div class="sidebar_banner_area">
+				<div class="sidebar_banner_area" style="margin-bottom:-8px">
 					<?php foreach ($banners as $banner) :
 						$image = file_exists(ltrim(ASSETS, '/') . "/.uploads/banners/" . $banner->image) ?
 							ASSETS . '/.uploads/banners/' . $banner->image : ASSETS . '/img/banners/' . $banner->image;

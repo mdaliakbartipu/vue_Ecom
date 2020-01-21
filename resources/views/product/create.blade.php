@@ -15,11 +15,9 @@
 
 <div class="row">
 
-    <div class="col-sm-8">
-        {{-- <div class="widget-box"> --}}
+    <div class="col-sm-10">
         <div class="widget-header">
             <h4 class="widget-title"> @yield('page-header')</h4>
-
             @include('layouts.includes.msg')
 
         </div>
@@ -29,27 +27,34 @@
                 <form class="form-horizontal" role="form" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Name </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Name</span> </label>
 
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product Name" class="form-control" name="name" value="{{old('name')}}"/>
+                            <input type="text" id="form-field-1-1" placeholder="Product Name" class="form-control" name="name" value="{{old('name')}}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Hover Name</span> </label>
+
+                        <div class="col-sm-9">
+                            <input type="text" id="form-field-1-1" placeholder="Product Hover Name" class="form-control" name="hover_name" value="{{old('hover_name')}}" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Search Category</label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Category</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="category" name="category">
-                            <option value="0">Select Category</option>
+                                <option value="0">Select Category</option>
                                 @foreach($categories as $category)
-                                <option value="{{ $category->id }}" >{{ $category->name }}</option>
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Search Sub Category</label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Sub Category</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="sub_category" name="sub_category">
@@ -96,7 +101,7 @@
                         });
                     </script>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Search Sub sub Category</label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Super Category</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" name="sub_sub_category" id="sub_sub_category">
@@ -108,7 +113,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Search Brand</label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Brand</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="brand" name="brand">
@@ -120,7 +125,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Web ID </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Web ID </span></label>
 
                         <div class="col-sm-9">
                             <input type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" name="code" value="{{old('code')}}" />
@@ -128,7 +133,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Short Description </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Short Description</span> </label>
 
                         <div class="col-sm-9">
                             <textarea type="text" id="form-field-1-1" placeholder="Product short Description" rows="4" cols="63" name="desc">{{old('desc')}}</textarea>
@@ -136,56 +141,56 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Price </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Price</span> </label>
 
                         <div class="col-sm-9">
                             <input type="text" id="form-field-1-1" placeholder="Product price" class="form-control" name="price" value="{{old('price')}}" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Details </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Details</span> </label>
 
                         <div class="col-sm-9">
-                            <textarea type="text" placeholder="Product Details" class="form-control summernote" name="details">{{old('details')}}</textarea>
+                            <textarea type="text" placeholder="Product Details" class="form-control summernote" name="details" style="width:unset!important">{{old('details')}}</textarea>
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Sleeve</label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Sleeve</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($attributes->where('sleeve',1) as $key=>$sleeve)
                                 <label>
-                                    <input type="checkbox" class="ace" name="sleeve[]" value="{{ $sleeve->id }}" >
-                                    <span class="lbl"> {{ $sleeve->name }} </span>
+                                    <input type="checkbox" class="ace" name="sleeve[]" value="{{ $sleeve->id }}">
+                                    <span class="lbl label label-xlg label-light"> {{ $sleeve->name }} </span>
                                 </label>
                                 @endforeach
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Leg Length</label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right"> Leg Length</span></label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($attributes->where('leg_length',1) as $key=>$leglength)
                                 <label>
                                     <input type="checkbox" class="ace" name="leglength[]" value="{{ $leglength->id }}">
-                                    <span class="lbl"> {{ $leglength->name }} </span>
+                                    <span class="lbl label label-xlg label-light"> {{ $leglength->name }} </span>
                                 </label>
                                 @endforeach
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Fit</label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Fit</span></label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($attributes->where('fit',1) as $key=>$fit)
                                 <label>
                                     <input type="checkbox" class="ace" name="fit[]" value="{{ $fit->id }}">
-                                    <span class="lbl"> {{ $fit->name }}</span>
+                                    <span class="lbl label label-xlg label-light"> {{ $fit->name }}</span>
                                 </label>
                                 @endforeach
                             </div>
@@ -193,7 +198,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Feature </label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> <span class="label label-lg label-info arrowed-right">Feature </span></label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
 
@@ -211,7 +216,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Rating</label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Rating</span></label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 <label>
@@ -224,28 +229,30 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Tags</label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Tags</span></label>
+
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($tags as $key=>$tag)
-                                <label>
+                                <label style="margin-top:5px">
                                     <input type="checkbox" class="ace" name="tags[]" value="{{ $key+1 }}">
-                                    <span class="lbl"> {{ $tag->name }}</span>
+                                    <span class="lbl label label-xlg label-light"> {{ $tag->name }}</span>
                                 </label>
                                 @endforeach
                             </div>
                         </div>
+
                     </div>
 
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Discount</label>
-                        <div class="col-xs-12 col-sm-9 col-md-4">
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Discount</span></label>
+                        <!-- <div class="col-xs-12 col-sm-9 col-md-4">
                             <div class="checkbox">
                                 <label>    
                                     <span class="lbl"> Amount</span>
                                 </label>
-                                <input type="text" name="discount" placeholder="Discount per 100" value="0"> %
+                                <input type="text"  placeholder="Discount per 100" > %
                             </div>
                             <div class="checkbox">
                                 <label>    
@@ -253,19 +260,36 @@
                                 </label>
                                 <input type="text" name="discount_days" placeholder="Discount per 100" value="0"> Days
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Embroidery & Print</label>
+                        </div> -->
 
                         <div class="col-sm-9">
-                            <input type="file" name="embroidery">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" id="form-field-icon-1" name="discount" value="0">
+                                <i class="ace-icon fa fa-leaf blue"> discount in %</i>
+                            </span>
+
+                            <span class="input-icon input-icon-right">
+                                <input type="text" id="form-field-icon-2" name="discount_days" value="0">
+                                <i class="ace-icon fa fa-leaf green"> valid for (days)</i>
+                            </span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Video link</label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Embroidery & Print</span></label>
+
+                        <div class="col-sm-9">
+                            <label class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                                <i class="fa fa-upload"></i>
+                                Upload FIle
+                                <input type="file" name="embroidery" style="display:none">
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Video link</span></label>
 
                         <div class="col-sm-9">
                             <input type="text" name="video" placeholder="Associate video link">
@@ -316,7 +340,13 @@
                                         </td>
                                         <td>
                                             <div class="col-xs-12 col-sm-12">
-                                                <input multiple="" type="file" id="id-input-file-3" name="image[0][]" />
+
+                                                <label class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                                                    <i class="fa fa-upload"></i>
+                                                    Upload Images
+                                                    <input multiple="" type="file" id="id-input-file-3" name="image[0][]" style="display:none" />
+
+                                                </label>
                                             </div>
                                         </td>
                                     </tr>
@@ -356,8 +386,10 @@
 
 @section('js')
 <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
-    <script src="{{ asset('assets/js/ace.min.js') }}"></script>
+<script src="{{ asset('assets/js/ace.min.js') }}"></script>
 <script type="text/javascript">
+    // tags 
+
     var rowIndex = 1;
     //  will start by naming name from adding 2 as postfix
 
@@ -602,6 +634,12 @@
         $("#tags").autocomplete({
             source: availableTags
         });
+
+    });
+    $('.summernote').summernote({
+        placeholder: 'Write short description about your products',
+        tabsize: 2,
+        height: 300,
 
     });
 </script>

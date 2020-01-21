@@ -43,10 +43,10 @@ class MailController extends Controller
 
         $this->mail =  new stdClass();
         $this->mail->to             = $mail->to ?? 'suspathan@gmail.com';
-        $this->mail->from       = $mail->from ?? 'nomail@example.com';
-        $this->mail->sender    = $mail->sender ?? 'No Name';
-        $this->mail->subject    = $mail->subject ?? 'Your adams';
-        $this->mail->view         = $view;
+        $this->mail->from           = $mail->from ?? 'nomail@example.com';
+        $this->mail->sender         = $mail->sender ?? 'No Name';
+        $this->mail->subject        = $mail->subject ?? 'Your adams';
+        $this->mail->view           = $view;
     }
 
     public function sendPasswordReset(array $param = null)
@@ -60,11 +60,20 @@ class MailController extends Controller
     public function send($param)
     {
         // dd($this->mail->subject);
-
         Mail::send('front.emails.contact', $param, function ($mail) use ($param) {
             $mail->from($this->mail->from, $this->mail->sender)
-                ->to("suspathan@gmail.com")
+                ->to((string)$this->mail->to)
                 ->subject("contact");
+        });
+        return true;
+    }
+
+    public function sendOrderMail($param)
+    {
+        Mail::send('front.emails.order', $param, function ($mail) use ($param) {
+            $mail->from($this->mail->from, $this->mail->sender)
+                ->to((string)$this->mail->to)
+                ->subject(((string)$param['subject']));
         });
         return true;
     }
@@ -72,7 +81,44 @@ class MailController extends Controller
     public function contactMail($data)
     {
         $data = (array)$data;
+
         $this->send($data);
+    }
+
+    public function orderMail($data)
+    {
+        $data = (array)$data;
+        $data['msg'] = "We will notify you after we have confirmed your order.";
+        $data['subject'] = "Thank you for your order...";
+
+        $this->sendOrderMail($data);
+    }
+
+    public function orderAccepted($data)
+    {
+        $data = (array)$data;
+        $data['msg'] = "You are getting this notification because we preccessed your order and we found that we are ready to deliver your order.<br/>You will get your products soon...";
+        $data['subject'] = "Your Order Is Accepted";
+        
+        $this->sendOrderMail($data);
+    }
+
+    public function orderCancelled($data)
+    {
+        $data = (array)$data;
+        $data['msg'] = "We are sorry to inform you that we just cancelled your order you made with our company.There are some issues with that order.Please contact with us for further information...";
+        $data['subject'] = "Upss!! Your Order Is Cancelled";
+        
+        $this->sendOrderMail($data);
+    }
+
+    public function orderDelivered($data)
+    {
+        $data = (array)$data;
+        $data['msg'] = "We noticed that you made an order and we successfully delivered it to you.We are very glad to serve you.Please stay with us and make us serve you in future.If you have any complain or suggession then please feel free to conact with us.";
+        $data['subject'] = "Thank you for being with us";
+        
+        $this->sendOrderMail($data);
     }
 
 }

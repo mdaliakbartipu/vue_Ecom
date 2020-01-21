@@ -5,11 +5,10 @@
 @stop
 @section('css')
 
-<link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/chosen.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker3.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-timepicker.min.css') }}" />
-        <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
     <style type="text/css">
         .pagination {
             padding-left: 0;
@@ -20,6 +19,10 @@
     </style>
 
 @stop
+
+@push('css')
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+@endpush 
 
 
 @section('content')
@@ -41,7 +44,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Title</label>
-                          <input type="text" class="form-control" name="title">
+                          <input type="text" class="form-control" name="title" value="{{old('title')}}">
                         </div>
                        </div>
                       </div>
@@ -55,7 +58,7 @@
             <!-- /.box-header -->
             <div class="box-body pad">
               
-        <textarea  name="desc" class="summernote">  </textarea>
+        <textarea  name="desc" class="summernote"> {{old('desc')}} </textarea>
             
             </div>
           </div>             
@@ -83,8 +86,7 @@
             
 
 @endsection
-<script>
-</script>
+
 @section('js')
 
     <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
@@ -93,26 +95,15 @@
     <script src="{{ asset('assets/js/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ asset('assets/js/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/daterangepicker.min.js') }}"></script>
+
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.bootstrap.min.js') }}"></script>
 
     <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
     <script src="{{ asset('assets/js/ace.min.js') }}"></script>
 
-
-<!-- Rich text editor -->
-
-
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
-
-$('.summernote').summernote({
-            placeholder: 'Write short description about your products',
-            tabsize: 2,
-            height: 300,
-            width: 800
-        });
-
 
         function delete_check(id)
         {
@@ -163,6 +154,7 @@ $('.summernote').summernote({
                 // https://github.com/yajra/laravel-datatables
                 // processing: true,
                 // serverSide: true,
+                {{--ajax: '{{ url('') }}',--}}
                 // columns:[
                 //     {"data":"first_name"},
                 //     {"data":"last_name"},
@@ -218,7 +210,25 @@ $('.summernote').summernote({
     <!--Drag and drop-->
     <script type="text/javascript">
 
-  
+        jQuery(function($) {
+
+
+            $('#id-input-file-3').ace_file_input({
+                style: 'well',
+                btn_choose: 'Drop files here or click to choose',
+                btn_change: null,
+                no_icon: 'ace-icon fa fa-cloud-upload',
+                droppable: true,
+                thumbnail: 'small'//large | fit
+
+            }).on('change', function(){
+                //console.log($(this).data('ace_input_files'));
+                //console.log($(this).data('ace_input_method'));
+            });
+
+
+        });
+
     </script>
 
     <!--date range picker-->
@@ -296,7 +306,24 @@ $('.summernote').summernote({
 
         });
     </script>
+    <script>
+   $(document).ready(function() {
+    $('#table').DataTable();
+} );
+    </script>
 
 
 @stop
+
+
+
+<!--@push('scripts')
+ <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"> </script>
+<script>
+   $(document).ready(function() {
+    $('#table').DataTable();
+} );
+    </script>
+@endpush  --!>
 

@@ -100,6 +100,7 @@
                     <h3>Billing Info</h3>
                     <p>
                     @php($billing = $newOrder->billingAddress)
+                    @if($billing)
                     Name: <?=$billing->first_name.' '.$billing->last_name?> <br/>
                     Email: <?=$billing->email?> <br/>
                     Phone: <?=$billing->phone?> <br/>
@@ -110,12 +111,13 @@
                     <?=$billing->country?><br/>
                     </Address>
                     </p>
-                    
+                    @endif
                 </div>
                 <div class="shipping">
                     <h3>Shipping Info</h3>
                     <p>
                     @php($shipping = $newOrder->shippingAddress??$newOrder->billingAddress)
+                    @if($shipping)
                     Name: <?=$shipping->first_name.' '.$shipping->last_name?> <br/>
                     Email: <?=$shipping->email?> <br/>
                     Phone: <?=$shipping->phone?> <br/>
@@ -125,6 +127,7 @@
                     <?=$shipping->city?>,
                     <?=$shipping->country?><br/>
                     </Address>
+                    @endif
                     </p>
                 </div>
             </div>

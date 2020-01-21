@@ -24,7 +24,6 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="<?=\Auth::user()?\Auth::user()->name:''?>'s Photo" />
                         <span class="user-info">
 									<small>Welcome,</small>
 									<?=\Auth::user()?\Auth::user()->name:''?>

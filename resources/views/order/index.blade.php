@@ -51,6 +51,7 @@
                       </thead>
                       <tbody>
                        @foreach($orders as $key=>$order)
+                    
                         <tr class="text-center">
                             <td> {{ $key +1 }} </td>
                             <td> {{ $order->id}} </td>
@@ -58,7 +59,7 @@
                                 $date = new DateTime($order->created_at);
                             ?>
                             <td> {{ $date->format('d M Y')}} </td>
-                            <td> {{ $order->client->first_name }} </td>
+                            <td> {{ $order->client->first_name??null }} </td>
                             <?php
                                 $price = (int)$order->qty * (float)$order->unit_price;
                                 $discount = $price*$order->discount/100;
@@ -82,19 +83,6 @@
 @endsection
 
 @section('js')
-
-    <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('assets/js/chosen.jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-timepicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
-    <script src="{{ asset('assets/js/daterangepicker.min.js') }}"></script>
-
-    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.dataTables.bootstrap.min.js') }}"></script>
-
-    <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
-    <script src="{{ asset('assets/js/ace.min.js') }}"></script>
 
     <!-- inline scripts related to this page -->
     <script type="text/javascript">

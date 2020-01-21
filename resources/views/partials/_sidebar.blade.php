@@ -660,12 +660,12 @@
                     </a>
                 </li>
 
-                <li class="{{ request()->is('settings/mail') ? 'active' : '' }}">
+                <!-- <li class="{{ request()->is('settings/mail') ? 'active' : '' }}">
                     <a href="{{ url('settings/mail') }}">
                         <i class="menu-icon fa fa-list-alt"></i>
                         <span class="menu-text"> Mail Setting </span>
                     </a>
-                </li>
+                </li> -->
         </li>
     </ul>
     </li>

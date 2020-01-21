@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Front;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Front\FrontController;
 use App\Models\Front\UI;
 use App\Page;
@@ -14,8 +15,10 @@ use App\SubSubCategory;
 use App\Color;
 use App\Size;
 use App\Brand;
+use App\Models\Blog;
 use App\Http\Controllers\MailController;
 use App\ProductAttribute;
+use App\UserProfile;
 use Illuminate\Http\Request;
 use Session;
 
@@ -27,12 +30,13 @@ class PagesController extends FrontController
         parent::__construct();
     }
 
+
+    public function testEmail()
+    {
+        return view('front.emails.test');
+    }
     public function index()
     {   
-        // $p = Product::with('brandName')->get();
-        // foreach($p as $a){
-        //     dd($a->brandName->name);
-        // }
         return view('front.index',
         [   
             'sliders'              => UI::getAll(),
@@ -42,6 +46,11 @@ class PagesController extends FrontController
             'testimonials'         => UI::getTestimonials(),
             
         ]);
+    }
+
+    public function blog(Blog $blog, $slug = null)
+    {   
+        return view('front.blogSingle')->withBlog(UI::getBlog($blog))->withRelatedBlogs(UI::getFourBlogsWithoutThis($blog));
     }
 
 
@@ -166,7 +175,13 @@ class PagesController extends FrontController
 
         $user = \App\User::where('id',\Auth::user()->id)->with('profile')->first();
         // dd($user);
-        $orders = \App\Models\NewOrder::where('user_id', $user->id)->get();
+        // get billign id
+        $billing = UserProfile::find($user->id);
+        $orders = array();
+
+        if($billing){
+            $orders = \App\Models\Order::where('billing_id', $billing->id)->get();
+        }
         // dd($orders);
         return view('front.dashboard', [
             'user' => $user,
