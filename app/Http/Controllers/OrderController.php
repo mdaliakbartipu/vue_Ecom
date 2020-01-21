@@ -54,6 +54,12 @@ class OrderController extends Controller
         // get cart items
         // Variant_id and qty are needed (vat,discount,shipping cost needed)
         $cart = \Session::get('cart');
+
+        $paymentType = 'paypal';
+
+            $online = new PaymentOnline($request, $cart);
+            $online->payNow($paymentType);
+            die("sd");
         
         // setting error flags, false means all is good! 
         $error = false;
@@ -118,6 +124,12 @@ class OrderController extends Controller
             }
         }
         if(!$error){
+            // get payment type from database
+            $paymentType = 'sslcom';
+
+            $online = new PaymentOnline($request, $cart);
+            $online->payNow($paymentType);
+
             // send mail
             $mail = new MailController;
             $mail->orderMail("something");
@@ -183,7 +195,7 @@ class OrderController extends Controller
             
             if($order->save()){
                 // increasing product order
-                echo $product->id."  ".$variantID; 
+
                 $sale = ProductSale::where('product_id', $product->id)->where('variant_id', $variantID)->first();
                 
                 if($sale){
@@ -199,6 +211,9 @@ class OrderController extends Controller
                 }
                 // decreasing qty
                 $info->qty = $info->qty - $qty;
+                if($info->qty<0){
+                    dd("something went wrong on saving process");
+                }
                 $info->save();
 
                 return true;

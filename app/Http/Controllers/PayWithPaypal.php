@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Paypalpayment;
 
 
-class paywithPaypal {
+class PayWithPaypal {
         // ### Address
         // Base Address object used as shipping or billing
         // address in a payment. [Optional]

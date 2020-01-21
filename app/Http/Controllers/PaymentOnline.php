@@ -51,15 +51,24 @@ class PaymentOnline extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function payNow($type = null)
     {
-        $this->loadSSLCOM();
-        $this->send($this->setData());
+        switch($type){
+            case 'sslcom':
+                $this->loadSSLCOM();
+                $this->send($this->setData());
+            break;
+            case 'paypal':
+                $this->loadPaypal();
+            break;
+            default:
+                die("we do not support ".$type);
+        }
     }
 
-    public function paypal($info = null)
+    public function loadPaypal()
     {
-        dd($info);
+        dd("paypal");
     }
 
     /**
