@@ -17,6 +17,7 @@ include("partials/breadcumb.php"); ?>
                                 <div class="row">
                                     <?php
                                     // dd($user);
+                                    $userProfile = null;
                                     if($user){
                                         $userProfile = $user->profile;
                                         // dd($userProfile);

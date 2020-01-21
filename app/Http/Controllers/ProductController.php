@@ -563,12 +563,16 @@ class ProductController extends Controller
     public function addToCart(Request $request)
     {
 
+        // echo json_encode(['response' => "200", 'cart' => $request->product['variant_id']]);die('');
         // dd(\Session::get('cart'));
         $request->validate([
             'product' => 'required'
         ]);
 
+        // \Session::put('req', $request);
+            // dd(\Session::get('req'));
         $cart = \Session::get('cart');
+        // dd($cart);
         $newList = $request->product;
 
         if (!$cart) {
@@ -576,7 +580,18 @@ class ProductController extends Controller
             array_push($cart, $newList);
             \Session::put('cart', $cart);
         } else {
-            array_push($cart, $newList);
+            $updated = 0;
+            foreach($cart as &$item){
+                // echo json_encode(['response' => "200", 'cart' => $item['variant_id']]);die('');
+                if($item['variant_id'] == $newList['variant_id']){
+                    $item['qty'] += $newList['qty'];
+                    $updated++;
+                }
+            }
+            if(!$updated){
+                array_push($cart, $newList);
+            }
+            
             \Session::put('cart', $cart);
         }
 

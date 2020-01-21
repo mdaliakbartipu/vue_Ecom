@@ -661,6 +661,11 @@ Vue.component('product_info', {
         },
         addToCart() {
             console.log("Quantity selected in child VariantID:" + this.selected);
+            // if(this.cart.le){
+            //     console.log("#######Yes! cart!")
+            // } else {
+            //     console.log("#######No! cart!")
+            // }
             this.cart.push({ variant: this.selected.variant.id, qty: this.selected.qty });
 
             axios.post('/add-to-cart', {
@@ -676,7 +681,7 @@ Vue.component('product_info', {
                 }
             })
                 .then(function (response) {
-                    console.log(response.data.cart.length);
+                    console.log(response.data);
                     let cartQty = document.querySelector('#cart-qty');
                     cartQty.innerText = parseInt(response.data.cart.length);
 
