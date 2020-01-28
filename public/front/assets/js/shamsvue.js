@@ -299,7 +299,7 @@ Vue.component('catproduct', {
                 <slot></slot> 
                 </ul>
             </div>
-            <a :href="catlink" type="button" class="shopnow btn btn-primary" style="color:black">Shop Now</a>
+            <a :href="catlink" type="button" class="shopnow btn btn-primary" style="color:white">Shop Now</a>
         </div>
     </div>
     `

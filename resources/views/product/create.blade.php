@@ -113,7 +113,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Brand</span></label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Brand Name</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="brand" name="brand">
@@ -133,15 +133,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Short Description</span> </label>
-
-                        <div class="col-sm-9">
-                            <textarea type="text" id="form-field-1-1" placeholder="Product short Description" rows="4" cols="63" name="desc">{{old('desc')}}</textarea>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Price</span> </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Regular Price</span> </label>
 
                         <div class="col-sm-9">
                             <input type="text" id="form-field-1-1" placeholder="Product price" class="form-control" name="price" value="{{old('price')}}" />
@@ -155,47 +147,6 @@
                         </div>
                     </div>
 
-
-                    <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Sleeve</span></label>
-
-                        <div class="col-xs-12 col-sm-9">
-                            <div class="checkbox">
-                                @foreach($attributes->where('sleeve',1) as $key=>$sleeve)
-                                <label>
-                                    <input type="checkbox" class="ace" name="sleeve[]" value="{{ $sleeve->id }}">
-                                    <span class="lbl label label-xlg label-light"> {{ $sleeve->name }} </span>
-                                </label>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right"> Leg Length</span></label>
-                        <div class="col-xs-12 col-sm-9">
-                            <div class="checkbox">
-                                @foreach($attributes->where('leg_length',1) as $key=>$leglength)
-                                <label>
-                                    <input type="checkbox" class="ace" name="leglength[]" value="{{ $leglength->id }}">
-                                    <span class="lbl label label-xlg label-light"> {{ $leglength->name }} </span>
-                                </label>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Fit</span></label>
-                        <div class="col-xs-12 col-sm-9">
-                            <div class="checkbox">
-                                @foreach($attributes->where('fit',1) as $key=>$fit)
-                                <label>
-                                    <input type="checkbox" class="ace" name="fit[]" value="{{ $fit->id }}">
-                                    <span class="lbl label label-xlg label-light"> {{ $fit->name }}</span>
-                                </label>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> <span class="label label-lg label-info arrowed-right">Feature </span></label>
@@ -229,7 +180,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Tags</span></label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Collection Tags</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
