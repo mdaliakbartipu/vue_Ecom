@@ -13218,8 +13218,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .banner_area .row .col-md-6 {
-    /* padding-right: 14px; */
-    /* padding-left:0px; */
+    padding-right: 14px;
+    padding-left:0px;
 }
 
 .abc .row .bcd {

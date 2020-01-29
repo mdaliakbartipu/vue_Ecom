@@ -27,7 +27,6 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('brand')->nullable();
             $table->foreign('brand')->references('id')->on('brands');
             $table->string('code');
-            $table->text('description');
             $table->unsignedInteger('views')->nullable()->dafault(0);
             $table->unsignedInteger('buy_price')->nullable();
             $table->unsignedInteger('price');

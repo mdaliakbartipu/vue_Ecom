@@ -480,6 +480,20 @@ Vue.component('product_extra_info', {
                 <div class="card-header" id="headingTwo">
                     <h2 class="mb-0">
                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <span style="float:left">Price Details</span><i class="fa fa-plus pull-right"></i>
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div v-html="commoninfo.shipping_and_return"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             <span style="float:left">Special Offers</span> <i class="fa fa-plus pull-right"></i>
                         </button>
                     </h2>
@@ -1184,7 +1198,7 @@ Vue.component('product_article', {
                 </div>
             <div class="product_content_inner">
                 <h2 class="product_name_brand_name">{{this.product.brand}}</h2>
-                <h3 class="product_name"><a :href="this.link+this.product.id">{{this.product.name}}</a></h3>
+                <h3 class="product_name"><a :href="this.link+this.product.id" :title="this.product.hover_name">{{this.product.name}}</a></h3>
                 <h4 class="product_name_h4"><a href="#">{{tab.name}}</a></h4>
                 <div class="price_box">
                     <span class="old_price">Price. $ {{this.product.price}}</span><br>

@@ -88,7 +88,6 @@ class ProductController extends Controller
             'name'              => 'required|max:190',
             'hover_name'        => 'required|max:190',
             'code'              => 'required|unique:products|max:190',
-            'desc'              => 'required|max:190',
             'price'             => 'required|numeric|min:2',
             'brand'             => 'required',
             'discount'          => 'required|numeric',
@@ -111,7 +110,6 @@ class ProductController extends Controller
         $product->super         = $request->sub_sub_category;
         $product->code          = $request->code;
         $product->brand         = $request->brand;
-        $product->description   = $request->desc;
         $product->price         = $request->price;
         $product->details       = $request->details;
         $product->discount      = $request->discount ?? 0;
