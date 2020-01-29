@@ -429,7 +429,7 @@ Vue.component('colors_variant', {
     <ul>
         <li v-for="(color,index) in variants"  :key="index" class="color1">
         <div :style="'background:'+color[0].color.code" class="ml-2 btn btn-sm" data-toggle="tooltip" :title="color[0].color.name" @click.prevent="selected(index)">
-        <div style="height:20px;width:20px;"></div> 
+        <div style="height:20px;"></div> 
         </div>
         </li>
     </ul>
@@ -481,7 +481,7 @@ Vue.component('product_extra_info', {
                     <h2 class="mb-0">
                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             <span style="float:left">Price Details</span><i class="fa fa-plus pull-right"></i>
-                        </button>
+                        </button>color
                     </h2>
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
