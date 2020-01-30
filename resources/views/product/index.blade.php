@@ -29,8 +29,6 @@
 
     <div class="page-content">
         <div class="ace-settings-container" id="ace-settings-container">
-            
-
             <div class="ace-settings-box clearfix" id="ace-settings-box">
                 <div class="pull-left width-50">
                     <div class="ace-settings-item">
@@ -166,9 +164,6 @@
 
                                             <td>
                                                 <div class="hidden-sm hidden-xs action-buttons">
-                                                    <a class="blue" href="#">
-                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
-                                                    </a>
 
                                                     <a class="green" href="#">
                                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
@@ -186,13 +181,6 @@
                                                         </button>
 
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                                            <li>
-                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
-                                                                    <span class="blue">
-                                                                        <i class="ace-icon fa fa-search-plus bigger-120"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </li>
 
                                                             <li>
                                                                 <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
