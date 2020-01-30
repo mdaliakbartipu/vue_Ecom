@@ -130,7 +130,8 @@
                                 <table id="dynamic-table" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="dynamic-table_info">
                                     <thead>
                                         <tr role="row">
-                                        <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">SL.</th></th>
+                                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">SL.</th>
+                                            </th>
                                             <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">Name</th>
                                             <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">Web ID.</th>
                                             <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">Brand</th>
@@ -144,12 +145,12 @@
 
                                     <tbody>
 
-                                    @foreach($products as $key=>$product)
+                                        @foreach($products as $key=>$product)
                                         <tr role="row" class="odd">
                                             <td>{{$loop->index+1}}</td>
 
                                             <td>
-                                               {{$product->name}}
+                                                {{$product->name}}
                                             </td>
                                             <td>{{$product->web_id??'Not Set'}}</td>
                                             <td>{{$product->brandInfo->name}}</td>
@@ -158,20 +159,26 @@
 
                                             <td>{{ $product->active?'active':'hidden' }}</td>
                                             <td>
-                                            <img height="40px" width="40px" src="/front/assets/.uploads/products/thumbs/{{ $product->thumb1 }}" alt="">
-                                <img height="40px" width="40px" src="/front/assets/.uploads/products/thumbs/{{ $product->thumb2 }}" alt="">  
+                                                <img height="40px" width="40px" src="/front/assets/.uploads/products/thumbs/{{ $product->thumb1 }}" alt="">
+                                                <img height="40px" width="40px" src="/front/assets/.uploads/products/thumbs/{{ $product->thumb2 }}" alt="">
                                             </td>
 
                                             <td>
                                                 <div class="hidden-sm hidden-xs action-buttons">
 
-                                                    <a class="green" href="#">
+                                                    <a class="green" href="/product/{{$product->id}}/edit">
                                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                     </a>
-
-                                                    <a class="red" href="#">
-                                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                                    </a>
+                                                    <form id="delete-form-{{ $product->id }}" method="POST" action="{{ route('product.destroy',$product->id)}}" style="display: none;">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                                                    </form>
+                                                    <a onclick="if(confirm('Are you sure to delete')){
+            event.preventDefault();
+            document.getElementById('delete-form-{{ $product->id }}').submit();       
+        }else {
+            event.preventDefault();
+        }"><span class="glyphicon glyphicon-trash"></span></a>
                                                 </div>
 
                                                 <div class="hidden-md hidden-lg">
@@ -203,7 +210,7 @@
                                             </td>
                                         </tr>
                                         @endforeach
-                                    
+
                                     </tbody>
                                 </table>
                             </div>
@@ -253,7 +260,7 @@
                 "aoColumns": [{
                         "bSortable": false
                     },
-                    null, null, null, null, null,null,null,
+                    null, null, null, null, null, null, null,
                     {
                         "bSortable": false
                     }
