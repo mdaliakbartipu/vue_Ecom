@@ -24,8 +24,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('hover_name');
             $table->string('slug');
-            $table->unsignedBigInteger('brand')->nullable();
-            $table->foreign('brand')->references('id')->on('brands');
+            $table->unsignedBigInteger('brand_id')->nullable();
+            $table->foreign('brand_id')->references('id')->on('brands');
             $table->string('code');
             $table->unsignedInteger('views')->nullable()->dafault(0);
             $table->unsignedInteger('buy_price')->nullable();
