@@ -47,19 +47,19 @@
                       <div class="row" >
                       <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">HEX<a target="_blank" href="https://www.color-hex.com/color-names.html"> <b>Colors List</b></a></label>
+                          <label class="bmd-label-floating">HEX<a target="_blank" href="https://www.color-hex.com/color-names.html"> <b> Colors List</b></a></label>
                           <input type="text" class="form-control" name="hex" value="{{old('hex')}}">
                         </div>
                        </div>
                        <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">RGB<a target="_blank" href="https://www.color-hex.com/color-names.html"> <b>Colors List</b></a></label>
+                          <label class="bmd-label-floating">RGB<a target="_blank" href="https://rgbcolorcode.com/color/converter/"> <b> Hex2Rgb</b></a></label>
                           <input type="text" class="form-control" name="rgb" value="{{old('rgb')}}">
                         </div>
                        </div>
                        <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Pantone<a target="_blank" href="https://www.color-hex.com/color-names.html"> <b>Colors List</b></a></label>
+                          <label class="bmd-label-floating">Pantone<a target="_blank" href="https://codebeautify.org/rgb-to-pantone-converter"> <b> Rgb2Pantone</b></a></label>
                           <input type="text" class="form-control" name="pantone" value="{{old('pantone')}}">
                         </div>
                        </div>
