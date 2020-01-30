@@ -43,8 +43,10 @@
                       <thead class=" text-primary">
                         <th> ID </th>
                         <th> Color Name </th>
-                        <th> Color code  </th> </span>
-                        <th> Image </th>
+                        <th> HEX code</th>
+                        <th> RGB code</th>
+                        <th> Pantone code</th>
+                        <th> Swatch </th>
                         <th> Action </th>
                       </thead>
                       <tbody>
@@ -52,10 +54,11 @@
                         <tr>
                             <td> {{ $key +1 }} </td>
                             <td> {{ $color->name }} </td>
-                            <td class="text-center" style='padding-top:1em;background:"{{$color->code}}"'>
-                                 {{ $color->code }} 
+                            <td class="text-center" style="padding-top:1em;background:{{$color->hex}}">
+                                 {{ $color->hex }} 
                             </td>
-         
+                            <td> {{ $color->rgb }} </td>
+                            <td> {{ $color->pantone }} </td>
                      <?php
                         $colorImage = file_exists('front/assets/.uploads/color/'."{{$color->image}}")?'front/assets/.uploads/color/{{$color->image}}':'front/assets/img/color/color.gif';
                      ?>

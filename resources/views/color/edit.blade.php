@@ -47,10 +47,22 @@
                        </div>
                       </div>
                       <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                         <div class="form-group">
-                          <label class="bmd-label-floating"> Color Code</label>
-                          <input type="text" class="form-control" name="code" value="{{ $color->code }}">
+                          <label class="bmd-label-floating">Hex</label>
+                          <input type="text" class="form-control" name="hex" value="{{ $color->hex }}">
+                        </div>
+                       </div>
+                       <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Rgb</label>
+                          <input type="text" class="form-control" name="rgb" value="{{ $color->rgb }}">
+                        </div>
+                       </div>
+                       <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Pantone</label>
+                          <input type="text" class="form-control" name="pantone" value="{{ $color->pantone }}">
                         </div>
                        </div>
                       </div>  

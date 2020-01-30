@@ -16,7 +16,9 @@ class CreateColorsTable extends Migration
         Schema::create('colors', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->string('name');
-            $table->string('code');
+            $table->string('hex')->nullable();
+            $table->string('rgb')->nullable();
+            $table->string('pantone')->nullable();
             $table->string('image')->default('color.png');
             $table->timestamps();
         });
