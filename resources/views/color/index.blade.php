@@ -60,7 +60,9 @@
                             <td> {{ $color->rgb }} </td>
                             <td> {{ $color->pantone }} </td>
                      <?php
-                        $colorImage = file_exists('front/assets/.uploads/color/'."{{$color->image}}")?'front/assets/.uploads/color/{{$color->image}}':'front/assets/img/color/color.gif';
+                    //  dd("./front/assets/.uploads/color/$color->image");
+                    $path = '/front/assets/.uploads/color/'.$color->image;
+                        $colorImage = file_exists("./front/assets/.uploads/color/".$color->image)?$path:'front/assets/img/color/color.gif';
                      ?>
      <td class="text-center"> 
         <img style="border-radius:50%;width:50px;height:50px" class="img-responsive img-thumbnail" src="{{ $colorImage }}"/>
