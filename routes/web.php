@@ -91,6 +91,7 @@ Route::resource('slider','SliderContoller');
 Route::get('size/chart','SizeController@chart');
 
 Route::resource('size','SizeController');
+Route::resource('ptags','PtagsController');
 
 Route::resource('page','PageController');
 Route::get('user/blocked','UserController@blocked');

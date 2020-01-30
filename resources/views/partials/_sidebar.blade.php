@@ -150,6 +150,34 @@
                     </ul>
                 </li>
 
+                <li class="{{ request()->is('ptags')||request()->is('ptags/create') ? 'active' : '' }}">
+
+                    <a href="#" class="dropdown-toggle">
+                        </i>
+                        <span class="menu-text">
+                            Product Tags
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a><b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="{{ request()->is('ptags/create') ? 'active' : '' }}">
+                            <a href="{{ url('ptags/create') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> Add </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{{ request()->is('ptags') ? 'active' : '' }}">
+                            <a href="{{ url('ptags') }}">
+                                <i class="menu-icon fa fa-list-alt"></i>
+                                <span class="menu-text"> List </span>
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="{{ request()->is('size')||request()->is('size/create') ? 'active' : '' }}">
 
                     <a href="#" class="dropdown-toggle">
