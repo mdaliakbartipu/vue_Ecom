@@ -49,7 +49,7 @@
                       </div>
                      
          <button type="submit" class="btn btn-primary"> Save </button>     
-         <a href="{{route('page.index')}}" class="btn btn-danger">Back</a>
+         <a href="{{route('size.index')}}" class="btn btn-danger">Back</a>
         
 
                     </form>
