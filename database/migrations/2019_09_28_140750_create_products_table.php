@@ -41,7 +41,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('discount')->nullable()->default(0);
             $table->dateTime('discount_till')->nullable();
             $table->unsignedInteger('free_shipping')->nullable();
-            $table->boolean('active')->nullable()->default(0);
+            $table->boolean('active')->nullable()->default(1);
             $table->string('thumb1')->nullable()->default('thumb1.jpg');
             $table->string('thumb2')->nullable()->default('thumb2.jpg');
             $table->timestamps();
