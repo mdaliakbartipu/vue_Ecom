@@ -27,6 +27,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->foreign('brand_id')->references('id')->on('brands');
             $table->string('code');
+            $table->text('details');
             $table->unsignedInteger('views')->nullable()->dafault(0);
             $table->unsignedInteger('buy_price')->nullable();
             $table->unsignedInteger('price');
@@ -34,11 +35,12 @@ class CreateProductsTable extends Migration
             $table->string('embroidery');
             $table->string('video_link');
             $table->float('rating');
+            $table->integer('vat')->default(0);
+            $table->integer('delivery_time')->default(0);
             $table->float('rating_default');
             $table->unsignedInteger('discount')->nullable()->default(0);
             $table->dateTime('discount_till')->nullable();
             $table->unsignedInteger('free_shipping')->nullable();
-            $table->text('details');
             $table->boolean('active')->nullable()->default(0);
             $table->string('thumb1')->nullable()->default('thumb1.jpg');
             $table->string('thumb2')->nullable()->default('thumb2.jpg');

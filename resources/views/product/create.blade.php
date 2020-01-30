@@ -41,6 +41,26 @@
                         </div>
                     </div>
 
+                    <!-- <div class="form-group">
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Front Images </label>
+                        <div class="col-sm-9">
+                            <label class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                                        <i class="fa fa-image"></i>
+                                        Upload Front Image
+                                        <input type="file" name="front-image" style="display:none">
+                            </label>
+                            <span id="front-image-show"></span>
+                            &nbsp;&nbsp;
+                            <label class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                                <i class="fa fa-image"></i>
+                                    Upload Hover Image
+                                <input type="file" name="hover-image" style="display:none">
+                            </label>
+                            <span id="hover-image-show"></span>
+                        </div>
+                    </div> -->
+
+
                     <div class="form-group">
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Category</span></label>
 
@@ -198,20 +218,6 @@
 
                     <div class="form-group">
                         <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Discount</span></label>
-                        <!-- <div class="col-xs-12 col-sm-9 col-md-4">
-                            <div class="checkbox">
-                                <label>    
-                                    <span class="lbl"> Amount</span>
-                                </label>
-                                <input type="text"  placeholder="Discount per 100" > %
-                            </div>
-                            <div class="checkbox">
-                                <label>    
-                                    <span class="lbl"> Duration</span>
-                                </label>
-                                <input type="text" name="discount_days" placeholder="Discount per 100" value="0"> Days
-                            </div>
-                        </div> -->
 
                         <div class="col-sm-9">
                             <span class="input-icon input-icon-right">
@@ -221,11 +227,25 @@
 
                             <span class="input-icon input-icon-right">
                                 <input type="text" id="form-field-icon-2" name="discount_days" value="0">
-                                <i class="ace-icon fa fa-leaf green"> valid for (days)</i>
+                                <i class="ace-icon fa fa-leaf green"> discount for (days)</i>
                             </span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Vat & Ship</span></label>
+                        <div class="col-sm-9">
+                        <span class="input-icon input-icon-right">
+                                <input type="text" id="form-field-icon-1" name="vat" value="0">
+                                <i class="ace-icon blue"> vat in %</i>
+                        </span>
+                        <span class="input-icon input-icon-right">
+                            <input type="text" id="form-field-icon-1" name="delivery_time" value="0">
+                            <i class="ace-icon green"> delivery time (days)</i>
+                        </span>
 
+
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Embroidery & Print</span></label>
 
@@ -293,7 +313,7 @@
                                             <div class="col-xs-12 col-sm-12">
 
                                                 <label class="label label-xlg label-grey arrowed-in-right arrowed-in">
-                                                    <i class="fa fa-upload"></i>
+                                                    <i class="fa fa-image"></i>
                                                     Upload Images
                                                     <input multiple="" type="file" id="id-input-file-3" name="image[0][]" style="display:none" />
 

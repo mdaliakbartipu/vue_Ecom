@@ -125,9 +125,9 @@
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="brand" name="brand">
-                                <option value="0">Select Brand</option>
+                                <option value="0">Brand Name</option>
                                 @foreach($brand as $item)
-                                <option value="{{ $item->id }}" {{($item->id==$product->brand)?'selected':''}}>{{ $item->name }}</option>
+                                <option value="{{ $item->id }}" {{($item->id==$product->brand_id)?'selected':''}}>{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -140,16 +140,9 @@
                         <input disabled type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" value="{{ $product->code }}" />
                         </div>
                     </div>
+                
                     <div class="form-group">
-                    <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Short Description</span>  </label>
-
-                        <div class="col-sm-9">
-                            <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control" name="desc">{{ $product->description }}</textarea>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                    <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Price</span>  </label>
+                    <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Regular Price</span>  </label>
 
                         <div class="col-sm-9">
                             <input type="text" id="form-field-1-1" placeholder="Product price" class="form-control" name="price" value="{{ $product->price }}" />
@@ -157,12 +150,6 @@
                     </div>
                     <div class="form-group">
                     <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Details</span> </label>
-                        <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product Discount" class="form-control" name="discount" value="{{ $product->discount }}" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Details </label>
 
                         <div class="col-sm-9">
                             <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control summernote" name="details">{{ $product->details }}</textarea>
@@ -170,69 +157,6 @@
                         </div>
                     </div>
 
-
-                    <div class="form-group">
-                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Sleeve</span></label>
-
-                        <div class="col-xs-12 col-sm-9">
-                            <div class="checkbox">
-                                @foreach($sleeves as $key=>$sleeve)
-                                <?php
-                                    $selected = false;
-                                    foreach ($productAttributes as $item) :
-                                        if ($item->attribute_id == $sleeve->id)
-                                            $selected = true;
-                                    endforeach;
-                                ?>
-                                <label>
-                                    <input type="checkbox" class="ace " name="sleeve[]" value="{{ $sleeve->id }}" <?= $selected ? 'checked' : '' ?>>
-
-                                    <span class="lbl"> {{ $sleeve->name }} </span>
-                                </label>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right"> Leg Length</span></label>
-                        <div class="col-xs-12 col-sm-9">
-                            <div class="checkbox">
-                                @foreach($leglenghts as $key=>$leglength)
-                                <?php
-                                    $selected = false;
-                                    foreach ($productAttributes as $item) :
-                                        if ($item->attribute_id == $leglength->id)
-                                            $selected = true;
-                                    endforeach;
-                                ?>
-                                <label>
-                                    <input type="checkbox" class="ace" name="leglength[]" value="{{ $leglength->id }}" <?= $selected ? 'checked' : '' ?>>
-                                    <span class="lbl"> {{ $leglength->name }} </span>
-                                </label>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Fit</span></label>
-                        <div class="col-xs-12 col-sm-9">
-                            <div class="checkbox">
-                                @foreach($fits as $key=>$fit)
-                                <?php
-                                    $selected = false;
-                                    foreach ($productAttributes as $item) :
-                                        if ($item->attribute_id == $fit->id)
-                                            $selected = true;
-                                    endforeach;
-                                ?>
-                                <label>
-                                    <input type="checkbox" class="ace" name="fit[]" value="{{ $fit->id }}" <?= $selected ? 'checked' : '' ?>>
-                                    <span class="lbl"> {{ $fit->name }}</span>
-                                </label>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="form-group">
                     <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> <span class="label label-lg label-info arrowed-right">Feature </span></label>
@@ -266,7 +190,7 @@
                     </div>
 
                     <div class="form-group" style="width:100%">
-                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Tags</span></label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Collection Tags</span></label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($tags as $key=>$tag)
@@ -286,7 +210,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                     <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Discount</span></label>
                         <div class="col-xs-12 col-sm-9 col-md-4">
                             <div class="checkbox">
@@ -319,7 +243,24 @@
 
                             </div>
                         </div>
+                        
+                    </div> -->
+                    <div class="form-group">
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Discount</span></label>
+
+                        <div class="col-sm-9">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" id="form-field-icon-1" name="discount" value="<?=$product->discount??0?>">
+                                <i class="ace-icon fa fa-leaf blue"> discount in %</i>
+                            </span>
+
+                            <span class="input-icon input-icon-right">
+                                <input type="text" id="form-field-icon-2" name="discount_days" value="<?=$diff->days??0?>">
+                                <i class="ace-icon fa fa-leaf green"> valid for (days)</i>
+                            </span>
+                        </div>
                     </div>
+
 
                     <div class="form-group">
                     <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Embroidery & Print</span></label>

@@ -91,6 +91,7 @@ class ProductController extends Controller
             'price'             => 'required|numeric|min:2',
             'brand'             => 'required',
             'discount'          => 'required|numeric',
+            'vat'               => 'required|numeric',
             'discount_days'     => 'required|numeric',
             'details'           => 'required',
             'new'               => 'required',
@@ -109,10 +110,11 @@ class ProductController extends Controller
         $product->sub           = $request->sub_category;
         $product->super         = $request->sub_sub_category;
         $product->code          = $request->code;
-        $product->brand         = $request->brand;
+        $product->brand_id         = $request->brand;
         $product->price         = $request->price;
         $product->details       = $request->details;
         $product->discount      = $request->discount ?? 0;
+        $product->vat           = $request->vat ?? 0;
 
         // Embroiddery PDF 
         if($request->embroidery):
@@ -253,6 +255,7 @@ class ProductController extends Controller
                     $im->save();
                 endforeach;
                 // saving first two thumbs to product table
+
                 $product->thumb1 = $thumbs[0];
                 $product->thumb2 = $thumbs[1];
                 $product->save();
@@ -328,9 +331,8 @@ class ProductController extends Controller
 
         $this->validate($request, [
             'name'              => 'required|max:190',
-            'hover_name'              => 'required|max:190',
+            'hover_name'        => 'required|max:190',
             'code'              => 'required|max:190',
-            'desc'              => 'required|max:190',
             'price'             => 'required',
             'brand'             => 'required',
             'discount'          => 'required',
@@ -351,11 +353,11 @@ class ProductController extends Controller
         $product->sub = $request->sub_category;
         $product->super = $request->sub_sub_category;
         $product->code = $request->code;
-        $product->brand = $request->brand;
-        $product->description = $request->desc;
+        $product->brand_id = $request->brand;
         $product->price = $request->price;
         $product->details = $request->details;
         $product->discount = $request->discount ?? 0;
+        $product->vat = $request->vat ?? 0;
         // Embroiddery PDF 
         if($request->embroidery):
             $pdf = $request->embroidery;
