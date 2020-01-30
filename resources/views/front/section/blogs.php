@@ -1,4 +1,6 @@
+<h2 class="h1 pt-3" style="text-align: left;">Recent Blogs</h2>
 <div class="row">
+    
     <?php foreach($blogs as $blog): ?>
         <div class="col-lg-4 col-md-6">
             <article class="single_related article_one">

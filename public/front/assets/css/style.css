@@ -1,3 +1,9 @@
+.blog-and-tes{
+    display: flex;
+}
+
+
+
 .short_note div {
     white-space: pre-wrap;
 }
@@ -484,7 +490,7 @@ $MISC
 .single_related .short_note {
     margin-bottom: 10px !important;
     margin-top: 10px;
-    height: 7em;
+    /* height: 7em; */
     overflow: hidden;
 }
 
@@ -498,8 +504,8 @@ $MISC
 }
 
 .bg-gray {
-    background: #F5F5F9;
-    padding-right: 1em;
+    /* background: #F5F5F9; */
+    /* padding-right: 1em; */
 }
 
 .related_thumb {
