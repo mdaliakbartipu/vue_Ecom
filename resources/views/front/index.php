@@ -42,7 +42,7 @@
     <!--footer area end-->
 
     <!-- modal area start-->
-<modal :product="product"><modal>
+    <modal :product="product"><modal>
     <!-- modal area end-->
  
 

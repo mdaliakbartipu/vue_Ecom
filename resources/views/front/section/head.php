@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="<?=ASSETS?>/css/plugins.css">
 
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="<?=ASSETS?>/css/style.css">
+    <link rel="stylesheet" href="<?=asset('dist/style.css')?>">
     <link rel="stylesheet" href="<?=ASSETS?>/css/animate.css">
 
     

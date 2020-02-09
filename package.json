@@ -1,0 +1,38 @@
+{
+  "name": "d7b",
+  "version": "1.0.0",
+  "description": "this is my closest project",
+  "main": "webpack.mix.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sahenarafin/d7bDevlopment.git"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "shams pathan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sahenarafin/d7bDevlopment/issues"
+  },
+  "homepage": "https://github.com/Sahenarafin/d7bDevlopment#readme",
+  "devDependencies": {
+    "cross-env": "^7.0.0",
+    "laravel-mix": "^5.0.1",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.25.0",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11"
+  }
+}

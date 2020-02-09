@@ -1,13 +1,25 @@
+<script src="<?=asset('assets/js/jquery-2.1.4.min.js')?>"></script>
+<script src="<?=asset('assets/js/ace-extra.min.js')?>"></script>
 <script src="<?=ASSETS?>/js/plugins.js"></script>
     <!-- Main JS -->
     <script src="<?=ASSETS?>/js/sweetalert2@9.js"></script>
     <script src="<?=ASSETS?>/js/axios.min.js"></script>
     <script src="<?=ASSETS?>/js/vue.js"></script>
-    <script src="<?=ASSETS?>/js/shamsvue.js"></script>
-    <script src="<?=ASSETS?>/js/main.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script> -->
+    <script src="<?=asset('dist/shams.js')?>"></script>
     <!-- Plugins JS -->
     <script src="<?=ASSETS?>/js/owl.carousel.min.js"></script>
     <script src="<?=ASSETS?>/js/wow.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+
+    <![endif]-->
+    <script type="text/javascript">
+        if('ontouchstart' in document.documentElement) document.write("<script src='{{ asset('assets/js/jquery.mobile.custom.min.js') }}'>"+"<"+"/script>");
+    </script>
+    <!-- ace scripts -->
+    <script src="<?=asset('assets/js/bootstrap.min.js')?>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
+
 <script>
             $(document).ready(function() {
               var owl = $('.owl-carousel');
@@ -64,6 +76,30 @@
     }
     return outputArray;
 }
+
+$('.summernote').summernote({
+            placeholder: 'Write short description about your products',
+            tabsize: 2,
+            height: 300,
+            width: 800
+        });
+
+
+
+if("<?=session()->get('message')?>")
+    swal.fire({
+        title: "Success",
+        text: "<?=session()->get('message')?>",
+        type: "success",
+        timer: 3000
+    });
+    else if("<?=session()->get('error')?>")
+    swal.fire({
+        title: "Error",
+        text: "<?=session()->get('error')?>",
+        type: "error",
+        timer: 3000
+    });
 
 </script>
 
