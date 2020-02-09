@@ -51,7 +51,10 @@
                   </div>
       
         <button type="submit" class="btn btn-primary"> Save </button> 
-        <a href="" class="btn btn-danger">Back</a>
+        <?php
+// dd($subCategory);
+        ?>
+        <a href="/category/<?=$subCategory->category_id?>/sub-category" class="btn btn-danger">Back</a>
         
 
                     </form>

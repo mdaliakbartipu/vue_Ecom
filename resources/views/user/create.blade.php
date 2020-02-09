@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title','Table')
 @section('page-header')
-    <i class="fa fa-list"></i> Table
+    <i class="fa fa-list"></i> User
 @stop
 @section('css')
 
@@ -30,17 +30,17 @@
         </div>
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Add new Pages</h4>
+                  <h4 class="card-title ">Add new User</h4>
                   
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.store') }}">
+                    <form method="POST" action="{{ route('admin-user.store') }}">
                          @csrf
 
                  <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">User Name</label>
+                          <label class="bmd-label-floating">Name</label>
                           <input type="text" class="form-control" name="name">
                         </div>
                        </div>
@@ -48,7 +48,7 @@
                       <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">User Email</label>
+                          <label class="bmd-label-floating">Email</label>
                           <input type="text" class="form-control" name="email">
                         </div>
                        </div>
@@ -57,35 +57,53 @@
                       <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">User Password</label>
+                          <label class="bmd-label-floating">Password</label>
                           <input type="password" class="form-control" id="password" name="password">
                         </div>
                        </div>
                       </div>
 
-              <label>Assign Role</label>
-                <div class="form-group">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox">
-                       Editor
-                    </label>
-                  </div>
-                   <div class="checkbox">
-                    <label>
-                      <input type="checkbox">
-                       Publisher
-                    </label>
-                  </div>
+                      <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Confirm Password</label>
+                          <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                        </div>
+                       </div>
+                      </div>
 
-              </div> 
+                      <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">User Type</label>
+                                    <select  class="form-control" name="role" id="type">
+                                        <option value="1">Admin</option>
+                                        <option value="2" selected>User</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Activity</label>
+                                    <select  class="form-control" name="active" id="type">
+                                        <option value="1">Active</option>
+                                        <option value="0">Blocked</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
 
 
          
       
         <button type="submit" class="btn btn-primary"> Save </button> 
-         <a href="{{route('page.index')}}" class="btn btn-danger">Back</a>
+         <!--there should be conditional back to user or admin user  -->
+        <a href="{{route('admin-user.index')}}" class="btn btn-secondary">Back to admin list</a>
+        <a href="{{route('user.index')}}" class="btn btn-info">Back to user list</a>
          
 
                     </form>

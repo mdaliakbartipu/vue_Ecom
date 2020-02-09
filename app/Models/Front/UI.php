@@ -5,6 +5,7 @@ namespace App\Models\Front;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\Blog;
 
 class UI extends Model
 {
@@ -36,6 +37,22 @@ class UI extends Model
         return $blogs;
     }
 
+    public static function getFourBlogsWithoutThis(Blog $blog){
+
+        $blogs = DB::table('blogs')->where('id' , '!=' ,$blog->id)->orderBy('id','desc')->take(4)->get();
+        
+        foreach($blogs as &$blog){
+            $blog->author_name = DB::table('users')->where('id', $blog->author_id)->pluck('name')->first();
+        }
+        
+        return $blogs;
+    }
+
+    public static function getBlog(Blog $blog)
+    {
+        $blog->author_name = DB::table('users')->where('id', $blog->author_id)->pluck('name')->first();
+        return $blog;
+    }
     public static function getTestimonials(){
         return DB::table('testimonials')->orderBy('id','desc')->take(2)->get();
     }

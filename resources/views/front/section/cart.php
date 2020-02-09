@@ -3,7 +3,7 @@ $_GET['thisPage'] = 'Checkout' ;
 include("partials/breadcumb.php"); ?>
 
 <?php
-// $cartProducts;
+// dd($cartProducts);
 ?>
 <cart>
 <cart_table>

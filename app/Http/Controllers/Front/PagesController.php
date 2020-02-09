@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Front;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Front\FrontController;
 use App\Models\Front\UI;
 use App\Page;
@@ -14,8 +15,10 @@ use App\SubSubCategory;
 use App\Color;
 use App\Size;
 use App\Brand;
+use App\Models\Blog;
 use App\Http\Controllers\MailController;
 use App\ProductAttribute;
+use App\UserProfile;
 use Illuminate\Http\Request;
 use Session;
 
@@ -27,12 +30,13 @@ class PagesController extends FrontController
         parent::__construct();
     }
 
+
+    public function testEmail()
+    {
+        return view('front.emails.test');
+    }
     public function index()
     {   
-        // $p = Product::with('brandName')->get();
-        // foreach($p as $a){
-        //     dd($a->brandName->name);
-        // }
         return view('front.index',
         [   
             'sliders'              => UI::getAll(),
@@ -42,6 +46,11 @@ class PagesController extends FrontController
             'testimonials'         => UI::getTestimonials(),
             
         ]);
+    }
+
+    public function blog(Blog $blog, $slug = null)
+    {   
+        return view('front.blogSingle')->withBlog(UI::getBlog($blog))->withRelatedBlogs(UI::getFourBlogsWithoutThis($blog));
     }
 
 
@@ -81,7 +90,7 @@ class PagesController extends FrontController
             ]);
     }
 
-    public function singleProduct($id)
+    public function singleProduct($id, $slug)
     {
         return view('front.singleProduct',
         [
@@ -126,11 +135,22 @@ class PagesController extends FrontController
     public function checkout()
     {
         $carts = \Session::get('cart');
+        
         if(!$carts){
             return redirect('/');
         }
 
-        return view('front.checkout',['cartProducts' => $carts]);
+        //get user info for automatic fillup
+        $user  = \Auth::user()?\Auth::user()->id:null;
+        if($user):
+            $user = \App\User::with('profile')->find($user);
+        endif;
+        // dd($user);
+
+        return view('front.checkout',[
+                    'cartProducts' => $carts,
+                    'user'         => $user
+                ]);
     }
 
     public function about()
@@ -150,8 +170,22 @@ class PagesController extends FrontController
 
     public function dashboard()
     {
+        if(!\Auth::user())
+            return redirect('/');
+
+        $user = \App\User::where('id',\Auth::user()->id)->with('profile')->first();
+        // dd($user);
+        // get billign id
+        $billing = UserProfile::find($user->id);
+        $orders = array();
+
+        if($billing){
+            $orders = \App\Models\Order::where('billing_id', $billing->id)->get();
+        }
+        // dd($orders);
         return view('front.dashboard', [
-            
+            'user' => $user,
+            'orders' => $orders
         ]);
     }
 
@@ -264,6 +298,18 @@ class PagesController extends FrontController
         //     return json_encode(['status'=>502, 'msg'=> 'Something wnet wrong and message wasn\'t sent']);
         // }
         
+    }
+
+    public function paypalSuccess(Request $request)
+    {
+        dd($request);
+        return view('front.success');
+    }
+
+    public function paypalfails(Request $request)
+    {
+        dd($request);
+        return view('front.fails');
     }
 
 

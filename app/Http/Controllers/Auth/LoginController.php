@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Front\FrontController;
 
-class LoginController extends Controller
+class LoginController extends FrontController
 {
     /*
     |--------------------------------------------------------------------------
@@ -20,7 +21,6 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-
     /**
      * Where to redirect users after login.
      *
@@ -34,9 +34,14 @@ class LoginController extends Controller
      * @return void
      */
     public function __construct()
-    {  
+    {
         // dd(Auth::user());
+        parent::__construct();
         $this->middleware('guest')->except('logout');
     }
 
+    public function showLoginForm()
+    {
+        return view('front.login');
+    }
 }

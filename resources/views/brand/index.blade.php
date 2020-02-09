@@ -43,7 +43,10 @@
                       <thead class=" text-primary">
                         <th> ID </th>
                         <th>  Name of Brand </th>
-                        
+                        <th>  Brand ID </th>
+                        <th>  Address </th>
+                        <th>  Contact Person </th>
+                        <th>  Contact No. </th>
                          <th> Action </th>
                       </thead>
                       <tbody>
@@ -51,10 +54,10 @@
                         <tr>
                             <td> {{ $key +1 }} </td>
                             <td> {{ $brand->name }} </td>
-                           
-                            
-                           
-                           
+                            <td> {{ $brand->brand_id }} </td>
+                            <td> {{ $brand->address }} </td>
+                            <td> {{ $brand->contact_person }} </td>
+                            <td> {{ $brand->contact_no }} </td>
                   <td> <a href="{{route('brand.edit',$brand->id)}}" style="margin-right:10px"><span class="glyphicon glyphicon-edit"></span>  </a>  
                   
              

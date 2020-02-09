@@ -34,15 +34,23 @@
                     @csrf
                     {{ method_field('PUT') }}
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Name </label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Name</span>  </label>
                         <input type="hidden" id="product" name="product" value="{{$product->id}}">
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" class="form-control" name="name" value="{{ $product->name }}" />
+                        <input type="text" id="form-field-1-1" class="form-control" name="name" value="{{ $product->name }}" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Search Category</label>
+                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Hover Name</span>  </label>
+
+                        <div class="col-sm-9">
+                        <input type="text" id="form-field-1-1" class="form-control" name="hover_name" value="{{ $product->hover_name }}" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Category</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="category" name="category">
@@ -56,7 +64,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Search Sub Category</label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Sub Category</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="sub_category" name="sub_category">
@@ -103,8 +111,7 @@
                         });
                     </script>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Search Sub sub Category</label>
-
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Super Category</span></label>
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" name="sub_sub_category" id="sub_sub_category">
                                 @foreach($subsubcats as $subsubcat)
@@ -114,48 +121,35 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label">Search Brand</label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Brand</span></label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="brand" name="brand">
-                                <option value="0">Select Brand</option>
+                                <option value="0">Brand Name</option>
                                 @foreach($brand as $item)
-                                <option value="{{ $item->id }}" {{($item->id==$product->brand)?'selected':''}}>{{ $item->name }}</option>
+                                <option value="{{ $item->id }}" {{($item->id==$product->brand_id)?'selected':''}}>{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Code </label>
+                    <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Web ID </span></label>
 
                         <div class="col-sm-9">
-                            <input disabled type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" name="code" value="{{ $product->code }}" />
+                        <input type="hidden" id="form-field-1-1" placeholder="Product Code" class="form-control" name="code" value="{{ $product->code }}" />    
+                        <input disabled type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" value="{{ $product->code }}" />
                         </div>
                     </div>
+                
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Short Description </label>
-
-                        <div class="col-sm-9">
-                            <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control" name="desc">{{ $product->description }}</textarea>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Price </label>
+                    <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Regular Price</span>  </label>
 
                         <div class="col-sm-9">
                             <input type="text" id="form-field-1-1" placeholder="Product price" class="form-control" name="price" value="{{ $product->price }}" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Discount </label>
-
-                        <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product Discount" class="form-control" name="discount" value="{{ $product->discount }}" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> Product Details </label>
+                    <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Details</span> </label>
 
                         <div class="col-sm-9">
                             <textarea type="text" id="form-field-1-1" placeholder="Product short Description" class="form-control summernote" name="details">{{ $product->details }}</textarea>
@@ -165,70 +159,38 @@
 
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Sleeve</label>
-
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> <span class="label label-lg label-info arrowed-right">Feature </span></label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
-                                @foreach($sleeves as $key=>$sleeve)
-                                <?php
-                                    $selected = false;
-                                    foreach ($productAttributes as $item) :
-                                        if ($item->attribute_id == $sleeve->id)
-                                            $selected = true;
-                                    endforeach;
-                                ?>
-                                <label>
-                                    <input type="checkbox" class="ace " name="sleeve[]" value="{{ $sleeve->id }}" <?= $selected ? 'checked' : '' ?>>
 
-                                    <span class="lbl"> {{ $sleeve->name }} </span>
+                                <label>
+                                    <input type="radio" class="ace" name="new" value="1" <?=$product->new?'checked':''?>>
+                                    <span class="lbl"> New </span>
                                 </label>
-                                @endforeach
+                                <label>
+                                    <input type="radio" class="ace" name="new" value="0" <?=$product->new?'':'checked'?>>
+                                    <span class="lbl"> Repeat </span>
+                                </label>
+
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Leg Length</label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Rating</span></label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
-                                @foreach($leglenghts as $key=>$leglength)
-                                <?php
-                                    $selected = false;
-                                    foreach ($productAttributes as $item) :
-                                        if ($item->attribute_id == $leglength->id)
-                                            $selected = true;
-                                    endforeach;
-                                ?>
                                 <label>
-                                    <input type="checkbox" class="ace" name="leglength[]" value="{{ $leglength->id }}" <?= $selected ? 'checked' : '' ?>>
-                                    <span class="lbl"> {{ $leglength->name }} </span>
+                                    <input type="checkbox" class="ace" name="rating" <?=$product->rating_default?'checked':''?>>
+                                    <span class="lbl"> Set </span>
                                 </label>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Fit</label>
-                        <div class="col-xs-12 col-sm-9">
-                            <div class="checkbox">
-                                @foreach($fits as $key=>$fit)
-                                <?php
-                                    $selected = false;
-                                    foreach ($productAttributes as $item) :
-                                        if ($item->attribute_id == $fit->id)
-                                            $selected = true;
-                                    endforeach;
-                                ?>
-                                <label>
-                                    <input type="checkbox" class="ace" name="fit[]" value="{{ $fit->id }}" <?= $selected ? 'checked' : '' ?>>
-                                    <span class="lbl"> {{ $fit->name }}</span>
-                                </label>
-                                @endforeach
+                                <input type="text" name="rating_default" value="<?=$product->rating_default??0?>" placeholder="(If not auto) Default Rating">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group" style="width:100%">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> Tags</label>
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Collection Tags</span></label>
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 @foreach($tags as $key=>$tag)
@@ -247,10 +209,84 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- <div class="form-group">
+                    <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Discount</span></label>
+                        <div class="col-xs-12 col-sm-9 col-md-4">
+                            <div class="checkbox">
+                                <label>    
+                                    <span class="lbl"> Amount</span>
+                                </label>
+                                <input type="text" name="discount" placeholder="Discount per 100" value="<?=$product->discount??0?>"> %
+                            </div>
+                            <div class="checkbox">
+                                <label>    
+                                    <span class="lbl"> Duration</span>
+                                </label>
+
+                                <?php
+
+                                    //getting how many days left for that discount
+
+                                    // get date from database
+                                    $nowTime = new DateTime(now());
+                                    $discount_till = new DateTime($product->discount_till??$nowTime);
+                                    //difference
+                                    $diff = $discount_till->diff($nowTime);
+                                ?>
+                                <input type="text" name="discount_days" placeholder="Discount per 100" value="<?=$diff->days??0?>"> Days
+                                <?php
+                                if($nowTime < $discount_till): ?>
+                                    <br/>And <span> <?=$diff->h??0?> Hours <?=$diff->i??0?> Minutes </span> 
+                                <?php endif;?>
+                                
+
+                            </div>
+                        </div>
+                        
+                    </div> -->
+                    <div class="form-group">
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Discount</span></label>
+
+                        <div class="col-sm-9">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" id="form-field-icon-1" name="discount" value="<?=$product->discount??0?>">
+                                <i class="ace-icon fa fa-leaf blue"> discount in %</i>
+                            </span>
+
+                            <span class="input-icon input-icon-right">
+                                <input type="text" id="form-field-icon-2" name="discount_days" value="<?=$diff->days??0?>">
+                                <i class="ace-icon fa fa-leaf green"> valid for (days)</i>
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                    <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Embroidery & Print</span></label>
+
+                        <div class="col-sm-9">
+                            <input type="file" name="embroidery">
+                            <a class="btn btn-sm btn-secondary" target="_blank" href="/front/assets/.uploads/products/pdf/<?=$product->embroidery?>">View</a>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                    <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Video link</span></label>
+
+                        <div class="col-sm-9">
+                            <input type="text" name="video" placeholder="Associate video link" value="<?=$product->video_link?>"> 
+                            <a class="btn btn-sm btn-secondary" target="_blank" href="<?=$product->video_link?>">Play</a>
+                        </div>
+                    </div>
+
+
+
+
                     <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> Save</button>
                     <div style="width:150%">
                         <h2>Variants</h2><p class="text-warning">You can Update imges here. But You shouldn't changes color or sizes or quantity.It shows that what you have right now.
-                            <br>If you have purchased new product then Add it with new parameters</p>
+                            <br>If you have purchased new product then add it from inventory</p>
                     </div>
                     <div class="" style="width:150%">
                         <div class="table-responsive">
@@ -267,9 +303,6 @@
                                                         <option value="{{ $color->id }}" {{$color->id==$variant[0]->color_id?'selected':''}}>{{ $color->name }}</option>
                                                         @endforeach
                                                     </select>
-                                                </div>
-                                                <div>
-                                                    <button style="width:100%;margin-top:10px" class="purchase btn btn-warning">purchase</button>
                                                 </div>
                                             </td>
                                             <td class="col-md-2">
@@ -291,9 +324,11 @@
                                             @endforeach
                                             </td>
                                             <td class="col-md-6">
+                                            @if($images[$key]??null)
                                             @foreach($images[$key] as $image)
                                                 <img onclick="showBig(this)" style="margin-top:5px" height="60px" width="60px" src="/front/assets/.uploads/products/thumbs/<?=$image->image?>" alt=""> <button class="btn btn-sm btn-danger"  onClick="deleteImage(this)" style="font-size:.5em" id="<?=$image->image?>"><i class="fa fa-close"></i></button>
                                             @endforeach
+                                            @endif
                                                 <div style="margin-top:1em">
                                                     <input multiple="" type="file" id="id-input-file-3" name="image[{{$variant[0]->color_id}}][]" />
                                                 </div>

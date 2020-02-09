@@ -40,7 +40,6 @@ class ColorController extends Controller
     {
          $this->validate($request,[
            'name'     => 'required',
-           'code' => 'required',
            'image'     => 'nullable|mimes:jpeg,jpg,png,gif'
        ]);
 
@@ -59,9 +58,11 @@ class ColorController extends Controller
             $imageName = 'default.png';
         }
 
-        $color = new Color();
+        $color = new Color;
         $color->name = $request->name;
-        $color->code = $request->code;
+        $color->hex = $request->hex;
+        $color->rgb = $request->rgb;
+        $color->pantone = $request->pantone;
         $color->image = $imageName;
         $color->save();
         return redirect()->route('color.index')->with('successMsg','Color Successfully Added');
@@ -101,7 +102,6 @@ class ColorController extends Controller
     {
          $this->validate($request,[
             'name'     => 'required',
-            'code'     => 'required',
             'image'    => 'mimes:jpeg,jpg,png,gif',
         ]);
      
@@ -113,6 +113,7 @@ class ColorController extends Controller
 
 
          $color = Color::find($id);
+
         if(Input::hasFile('image'))
     {
         $usersImage = "/".$path; // get previous image from folder
@@ -128,7 +129,9 @@ class ColorController extends Controller
     }
 
          $color->name = $request->name;
-         $color->code = $request->code;
+         $color->hex = $request->hex;
+         $color->rgb = $request->rgb;
+         $color->pantone = $request->pantone;
          $color->save();
          return redirect()->route('color.index')->with('successMsg','Color Successfully Updated');
     }

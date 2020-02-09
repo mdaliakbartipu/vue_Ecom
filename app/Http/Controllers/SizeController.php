@@ -28,6 +28,16 @@ class SizeController extends Controller
         return view('size.create');
     }
 
+    public function chart()
+    {
+        $info = \App\CommonInfo::first();
+
+        if(!$info){
+            $info = new \App\CommonInfo;
+        }
+        return view('size.chart', compact('info'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *

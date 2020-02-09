@@ -7,8 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Controllers\Front\FrontController;
 
-class RegisterController extends Controller
+class RegisterController extends FrontController
 {
     /*
     |--------------------------------------------------------------------------
@@ -37,6 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
         // die("This option is deactivated for security reasons. It will open soon <a style='color:white; background:green;padding:5px'  href='/'>Go Back</a>");
         $this->middleware('guest');
     }
@@ -49,11 +51,12 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // dd($data);
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
+
     }
 
     /**
@@ -65,9 +68,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name'      => $data['name'],
+            'email'     => $data['email'],
+            'password'  => Hash::make($data['password']),
+            'role'      => '2'
         ]);
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('front/register');
     }
 }

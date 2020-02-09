@@ -16,11 +16,12 @@ class CreateProductSellTable extends Migration
         Schema::create('product_sell', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
+            // $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('variant_id');
-            $table->foreign('variant_id')->references('id')->on('product_variant');
+            // $table->foreign('variant_id')->references('id')->on('product_variant')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('sell');
             $table->unsignedBigInteger('order');
+            $table->unsignedBigInteger('cancel')->default(0);
             $table->index('product_id');
             $table->timestamps();
         });

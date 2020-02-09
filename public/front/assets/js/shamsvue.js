@@ -120,6 +120,7 @@ Vue.component('cart_row', {
         return {
             active: true,
             product: {
+                id:this.id,
                 name: this.name,
                 price: this.price,
                 size: this.size,
@@ -132,11 +133,10 @@ Vue.component('cart_row', {
             path: "/front/assets/.uploads/products/thumbs/"
         }
     },
-    props: ['name', 'price', 'size', 'color', 'variant_id', 'qty', 'image'],
+    props: ['id','name', 'price', 'size', 'color', 'variant_id', 'qty', 'image'],
     methods: {
         remove: function (variant) {
-
-            swal.fire({
+            Swal.fire({
                 title: "Are you sure?",
 
                 icon: "info",
@@ -146,17 +146,12 @@ Vue.component('cart_row', {
                 .then((willDelete) => {
                     if (willDelete) {
 
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Your cart item has been deleted!',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
+                        Notiflix.Notify.Success('Your cart item has been deleted!');
                         axios
                             .get('/api/remove-from-cart/' + variant)
-                            .then(response => response.data).then(data => (data.response != 200)).then(status => this.active = status);
+                            .then(response => response.data).then(data => (data.response != 200)).then(status => this.active = status).then(setTimeout(function(){  window.location = '/cart' }, 1000));
                         console.log(variant);
+                        
                     } else {
                         Swal.fire({
                             position: 'top-end',
@@ -173,13 +168,13 @@ Vue.component('cart_row', {
     template: `
     <tr v-if="this.active">
     <td class="product_remove"><a @click.prevent="remove(variant_id)" href="#"><i class="fa fa-trash-o"></i></a></td>
-    <td><a href="#"><img loading="lazy" :src="this.path+this.product.image" ></a></td>
+    <td><a :href="'/singleProduct/'+product.id"><img width="50px" loading="lazy" :src="this.path+this.product.image" ></a></td>
     <td class="product_name"><a href="#">{{this.product.name}}</a></td>
     <td class="product_color"><a href="#">{{this.product.color}}</a></td>
     <td class="product_size"><a href="#">{{this.product.size}}</a></td>
-    <td class="product-price">£ {{this.product.price}}</td>
+    <td class="product-price">$ {{this.product.price}}</td>
     <td class="product_quantity"><label>Quantity</label> <input  :value="this.product.qty" type="number"></td>
-    <td class="product_total">£ {{parseInt(this.product.price)*parseInt(this.product.qty)}}</td>
+    <td class="product_total">$ {{parseInt(this.product.price)*parseInt(this.product.qty)}}</td>
 </tr>
     `
 })
@@ -219,16 +214,16 @@ Vue.component('cart_total', {
             <div class="coupon_inner">
                     <div class="cart_subtotal">
                         <p>Subtotal</p>
-                        <p class="cart_amount">£ {{this.subtotal}}</p>
+                        <p class="cart_amount">$ {{this.subtotal}}</p>
                     </div>
                     <div class="cart_subtotal ">
                         <p>Shipping</p>
-                        <p class="cart_amount"><span>Flat Rate:</span> £ {{this.shipping}}</p>
+                        <p class="cart_amount"><span>Flat Rate:</span> $ {{this.shipping}}</p>
                     </div>
 
                     <div class="cart_subtotal">
                         <p>Total</p>
-                        <p class="cart_amount">£ {{this.subtotal+this.shipping}}</p>
+                        <p class="cart_amount">$ {{this.subtotal+this.shipping}}</p>
                     </div>
                     <div class="checkout_btn">
                         <a href="/checkout">Proceed to Checkout</a>
@@ -304,7 +299,7 @@ Vue.component('catproduct', {
                 <slot></slot> 
                 </ul>
             </div>
-            <a :href="catlink" type="button" class="shopnow btn btn-primary" style="color:black">Shop Now</a>
+            <a :href="catlink" type="button" class="shopnow btn btn-primary" style="color:white">Shop Now</a>
         </div>
     </div>
     `
@@ -377,7 +372,7 @@ Vue.component('imagescolumn', {
             this.big = newVal;
         }
     },
-    props: ['images', 'bigImage', 'variant'],
+    props: ['images', 'bigImage', 'variant', 'product'],
     template: `
     <div class="col-lg-6 col-md-6">
         <div class="product-details-tab">
@@ -393,7 +388,7 @@ Vue.component('imagescolumn', {
                 ></productbigimage> 
                 </transition>
                 <transition name="fade">
-                <product_options></product_options>
+                <product_options :product="product"></product_options>
                 </transition>
                 
             </div>
@@ -403,11 +398,12 @@ Vue.component('imagescolumn', {
 });
 
 Vue.component('product_options', {
+    props:['product'],
     template: `
     <div class="product_options mt-5 ml-5">
-        <span class="btn last-day2" style="width:30%"><i class="fa fa-puzzle-piece"></i> Embroidery &amp; Print</span>
-        <span class="btn" style="width:15%"><i class="fa fa-play"></i> Video</span>
-        <span class="btn" style="width:35%"><i class="fa fa-thumb-tack"></i> Article recommendation</span>
+        <a target="_blank" :href="'/front/assets/.uploads/products/pdf/' + product.embroidery" class="btn btn-light" style="width:30%"><i class="fa fa-puzzle-piece"></i> Embroidery &amp; Print</a>
+        <a target="_blank" :href="product.video_link" class="btn btn-light" style="width:15%"><i class="fa fa-play"></i> Video</a>
+        <a class="btn btn-light" style="width:35%"><i class="fa fa-thumb-tack"></i> Article recommendation</a>
     </div>
     `
 });
@@ -433,7 +429,7 @@ Vue.component('colors_variant', {
     <ul>
         <li v-for="(color,index) in variants"  :key="index" class="color1">
         <div :style="'background:'+color[0].color.code" class="ml-2 btn btn-sm" data-toggle="tooltip" :title="color[0].color.name" @click.prevent="selected(index)">
-        <div style="height:20px;width:20px;"></div> 
+        <div style="height:20px;"></div> 
         </div>
         </li>
     </ul>
@@ -463,7 +459,7 @@ Vue.component('product_availability', {
 });
 
 Vue.component('product_extra_info', {
-    props: ['details'],
+    props: ['details','commoninfo'],
     template: `
     <div class="accordion product_accordian">
             <div class="card">
@@ -484,32 +480,27 @@ Vue.component('product_extra_info', {
                 <div class="card-header" id="headingTwo">
                     <h2 class="mb-0">
                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <span style="float:left">Price Details</span> <i class="fa fa-plus pull-right"></i>
+                            <span style="float:left">Price Details</span><i class="fa fa-plus pull-right"></i>
+                        </button>color
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div v-html="commoninfo.shipping_and_return"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <span style="float:left">Special Offers</span> <i class="fa fa-plus pull-right"></i>
                         </button>
                     </h2>
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                     <div class="card-body">
-                        <div class="product_d_table">
-                            <form action="#">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="first_child">Compositions</td>
-                                            <td>Polyester</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="first_child">Styles</td>
-                                            <td>Girly</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="first_child">Properties</td>
-                                            <td>Short Dress</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </form>
-                        </div>
+                        <div v-html="commoninfo.shipping_and_return"></div>
                     </div>
                 </div>
             </div>
@@ -523,7 +514,7 @@ Vue.component('product_extra_info', {
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                     <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    <div v-if="commoninfo" v-html="commoninfo.shipping_and_return"></div>
                     </div>
                 </div>
             </div>
@@ -548,17 +539,21 @@ Vue.component('product_extra_info', {
         props: ['variant'],
         data: function () {
             return {
-                count: 0
+                count: 1
             }
         },
         methods: {
             up() {
-                if ((this.count + 1) <= this.variant.qty)
+                if ((this.count + 1) <= this.variant.qty){
                     this.count++;
-                this.$emit('setQty', this.count);
+                    this.$emit('setQty', this.count);
+                } else {
+                    Notiflix.Notify.Info(`We have ${this.count} products in hand.`);
+                }
+                
             },
             down() {
-                if ((this.count - 1) > 0)
+                if ((this.count - 1) >= 1)
                     this.count--;
                 this.$emit('setQty', this.count);
             },
@@ -590,25 +585,74 @@ Vue.component('product_name', {
 });
 
 Vue.component('product_price', {
-    props: ['price'],
+    data(){
+        return {
+            // class
+            current_price : 'current_price',
+            oldClass:'new-price',
+            newClass:'new-price',
+            inVat:'normal-text',
+            exVat:'',
+            // var 
+            price:0,
+            newPrice:0
+        }
+    },
+    props: ['product'],
+    created() {
+        // alert(this.product.discount_till)
+        let dateTimeParts= this.product.discount_till.split(/[- :]/); // regular expression split that creates array with: year, month, day, hour, minutes, seconds values
+        dateTimeParts[1]--; // monthIndex begins with 0 for January and ends with 11 for December so we need to decrement by one
+        const dateObject = new Date(...dateTimeParts);
+        const nowDate = new Date();
+        if(dateObject >= nowDate){
+            this.dateCount = this.product.discount_till;
+            // calculate discounted price and current price
+            const price = this.product.price* (100-this.product.discount)/100;
+            this.newPrice = price;
+            this.oldClass = 'old-price'
+        }
+        this.price = this.product.price;
+
+        // console.log(dateObject);
+        // console.log(nowDate);
+
+    },
+    methods:{
+        includeVat(){
+            // alert("hi")
+            this.price = this.product.price + this.product.price * this.product.discount/100;
+            this.exVat = 'normal-text'
+            this.inVat = ''
+        },
+        excludeVat(){
+            this.price = this.product.price;
+            this.inVat = 'normal-text'
+            this.exVat = ''
+        }
+    },
     template: `
     <div class="price_box">
-        <span class="current_price">{{price}} EUR <span style="font-weight:400">( <b>inc VAT</b> | ex VAT</span>)</span>
+        <span class="current_price">
+            <span :class="oldClass">{{price}}</span>
+            <span v-if="newPrice" :class="newClass">{{newPrice}}</span>EUR ( 
+             <span @click="includeVat()" :class="inVat">inc VAT</span> | 
+             <span @click="excludeVat()" :class="exVat">ex VAT</span>)
+        </span>
     </div>
     `
 });
 
-
 Vue.component('product_info', {
     // Variant will be sorted by Color
     //  so loop will provide simple integration
-    props: ['product', 'variants'],
+    props: ['product', 'variants','commoninfo'],
     data: function () {
         return {
             selected: {
                 variant: null,
                 color: null,
-                qty: null
+                qty: 1
             },
             cart: []
             ,
@@ -631,6 +675,11 @@ Vue.component('product_info', {
         },
         addToCart() {
             console.log("Quantity selected in child VariantID:" + this.selected);
+            // if(this.cart.le){
+            //     console.log("#######Yes! cart!")
+            // } else {
+            //     console.log("#######No! cart!")
+            // }
             this.cart.push({ variant: this.selected.variant.id, qty: this.selected.qty });
 
             axios.post('/add-to-cart', {
@@ -646,17 +695,11 @@ Vue.component('product_info', {
                 }
             })
                 .then(function (response) {
-                    console.log(response.data.cart.length);
+                    console.log(response.data);
                     let cartQty = document.querySelector('#cart-qty');
                     cartQty.innerText = parseInt(response.data.cart.length);
 
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'This Product is added to cart! Buy more !',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    Notiflix.Notify.Success('This product is added to your cart');
 
                 })
                 .catch(function (error) {
@@ -675,7 +718,7 @@ Vue.component('product_info', {
 
                 <product_name :name="this.product.name"></product_name>
                 <product_price_notice></product_price_notice>
-                <product_price :price="this.product.price"></product_price>
+                <product_price :product="this.product"></product_price>
                 <product_description 
                     description_line_one="from 5 items: 9,40"
                     description_line_two="from 30 items: 8,21"
@@ -683,7 +726,7 @@ Vue.component('product_info', {
                
                 <colors_variant :variants="variants" @color-selected="selectColor"></colors_variant>
                 <transition name="fade">
-                <size_variant v-if="variants[this.selected.color]"  :sizeVariants="variants[this.selected.color]" @variant-selected="selectVariant"></size_variant>
+                <size_variant v-if="variants[this.selected.color]"  :sizeVariants="variants[this.selected.color]" @variant-selected="selectVariant" :commoninfo="commoninfo"></size_variant>
                 </transition>
                 <br>
                 <transition name="fade">
@@ -701,7 +744,7 @@ Vue.component('product_info', {
 
 
 Vue.component('product_details', {
-    props: ['images', 'product'],
+    props: ['images', 'product','commoninfo'],
     data: function () {
         return {
             variant: null,
@@ -727,8 +770,8 @@ Vue.component('product_details', {
     template: `
     <div class="product_details">
         <div class="row">
-            <imagescolumn v-if="this.variant" :images="this.thumbs" :bigImage="this.big" :variant="this.variant" ></imagescolumn>
-            <product_info @colorChanged="requestNewImages" v-if="this.variant" :variants="this.variant" :product="product"> </product_info>
+            <imagescolumn v-if="this.variant" :images="this.thumbs" :bigImage="this.big" :variant="this.variant" :product="product"></imagescolumn>
+            <product_info v-if="this.variant" :commoninfo="this.commoninfo" @colorChanged="requestNewImages"  :variants="this.variant" :product="product"> </product_info>
         </div>
     </div>  
     `
@@ -755,7 +798,7 @@ Vue.component('product_description', {
 
 
 Vue.component('size_variant', {
-    props: ['sizeVariants'],
+    props: ['sizeVariants', 'commoninfo'],
     data: function () {
         return {
             listClass: "mr-2",
@@ -775,14 +818,21 @@ Vue.component('size_variant', {
             console.log("selected:sizeid: " + this.sizeVariants[index].size_id);
             console.log("selected:Variant: " + this.sizeVariants[index].id);
             this.selected.size.name = this.sizeVariants[index].size.name;
+        },
+
+        showSizeTable(){
+            Swal.fire({
+                title: '<strong> Size Table </strong>',
+                html:this.commoninfo.size_chart,
+            })
         }
     },
     template: `
     <div class="product_size">
-    <p style="float:right">SizeTable</p><br>
+    <p style="float:right" class="btn btn-secondary" @click="showSizeTable">SizeTable</p><br>
     <hr>
     <transition name="fade">
-    <h4 v-if="!this.selected.size.name">Select Size</h4>
+    <h4 v-if="!this.selected.size.name" >Select Size</h4>
     </transition>
     <ul id="product_size">
         <li v-for="(variant, $index) in sizeVariants" :key="$index" class="mr-3">
@@ -791,8 +841,9 @@ Vue.component('size_variant', {
     </ul>
     <transition name="fade">
     <p v-if="this.selected.size.name" style="color:grey;font-weight:.8em;margin-top:1em">Selected size : {{this.selected.size.name}}
-    </transition>
     </p>
+    </transition>
+    
 </div>
     `
 });
@@ -1061,6 +1112,7 @@ Vue.component('product_article', {
             link: "/singleProduct/",
             src: '/front/assets/.uploads/products/thumbs/',
             dateCount: null,
+            newPrice: null
         }
     },
     methods: {
@@ -1104,7 +1156,18 @@ Vue.component('product_article', {
     },
     created() {
         // alert(this.product.discount_till)
-        this.dateCount = this.product.discount_till;
+        let dateTimeParts= this.product.discount_till.split(/[- :]/); // regular expression split that creates array with: year, month, day, hour, minutes, seconds values
+        dateTimeParts[1]--; // monthIndex begins with 0 for January and ends with 11 for December so we need to decrement by one
+        const dateObject = new Date(...dateTimeParts);
+        const nowDate = new Date();
+        if(dateObject >= nowDate){
+            this.dateCount = this.product.discount_till;
+            // calculate discounted price and current price
+            const price = this.product.price* (100-this.product.discount)/100;
+            this.newPrice = price;
+        }
+        // console.log(dateObject);
+        // console.log(nowDate);
 
     },
 
@@ -1113,12 +1176,12 @@ Vue.component('product_article', {
     <article class="single_product">
     <figure>
         <div class="product_thumb">
-            <a class="primary_img" :href="this.link+this.product.id"><img loading="lazy" :src="this.src+this.product.thumb1" alt=""></a>
-            <a class="secondary_img" :href="this.link+this.product.id"><img loading="lazy" :src="this.src+this.product.thumb2" alt=""></a>
+            <a class="primary_img" :href="this.link+this.product.id+'/'+this.product.slug"><img loading="lazy" :src="this.src+this.product.thumb1" alt=""></a>
+            <a class="secondary_img" :href="this.link+this.product.id+'/'+this.product.slug"><img loading="lazy" :src="this.src+this.product.thumb2" alt=""></a>
             <div class="label_product_left label_product">
-                <span class="label_sale_left">New</span>
+                <span v-if="this.product.new" class="label_sale_left">New</span>
             </div>
-             <div class="label_product">
+             <div class="label_product" v-if="dateCount">
                 <span class="label_sale">{{this.product.discount}}%</span>
             </div>
             <div class="action_links">
@@ -1135,11 +1198,11 @@ Vue.component('product_article', {
                 </div>
             <div class="product_content_inner">
                 <h2 class="product_name_brand_name">{{this.product.brand}}</h2>
-                <h3 class="product_name"><a :href="this.link+this.product.id">{{this.product.name}}</a></h3>
+                <h3 class="product_name"><a :href="this.link+this.product.id" :title="this.product.hover_name">{{this.product.name}}</a></h3>
                 <h4 class="product_name_h4"><a href="#">{{tab.name}}</a></h4>
                 <div class="price_box">
-                    <span class="old_price">Reg. $ {{this.product.price}}</span><br>
-                    <span class="current_price">Sale $ {{this.product.price* (100-this.product.discount)/100}}</span>
+                    <span class="old_price">Price. $ {{this.product.price}}</span><br>
+                    <span v-if="newPrice" class="current_price">Sale $ {{newPrice}}</span>
                 </div>
                 <div class="countdown_text mb-3">
                    <!-- <a href="">Extra 15% off use:SUNDAY </a>-->
@@ -1368,21 +1431,30 @@ Vue.component('single_product_section', {
 
     data: function () {
         return {
-            product: null,
+            product:    null,
+            commonInfo: null,
         }
     },
-
+    methods:{
+        setCommonInfo(data){
+            this.commonInfo = data;
+        }
+    },
     props: ['images', 'id'],
     mounted() {
         axios
             .get('/get_product/' + this.id)
             .then(response => (this.product = response.data
             ));
+        axios
+        .get('/api/commoninfo')
+        .then(response => (this.setCommonInfo(response.data.info)
+        ));
     },
     template: `
     <div>
-        <product_details v-if="product" :product="product" :images="images"></product_details>
-        <product_extra_info v-if="product" :details="this.product.details"></product_extra_info>
+        <product_details v-if="product" :product="product" :images="images" :commoninfo="this.commonInfo"></product_details>
+        <product_extra_info v-if="commonInfo" :commoninfo="this.commonInfo" :details="this.product.details"></product_extra_info>
     </div>
     `
 });
@@ -1691,6 +1763,10 @@ Vue.component('header_top', {
                                 <li v-if="!user">
                                     <a  href="/register"><i class="fa fa-user" style="color:#008F95" ></i> Register</a>
                                 </li>
+                                <li v-if="user">
+                                    <i class="fa fa-pagelines" style="color:white" ></i> Welcome {{user_name}}
+                                </li>
+
                                 <li v-if="user">
                                     <a  href="/dashboard"><i class="fa fa-user" style="color:#008F95" ></i> My Account</a>
                                 </li>

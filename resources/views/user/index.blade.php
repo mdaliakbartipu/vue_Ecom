@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title','Table')
 @section('page-header')
-    <i class="fa fa-list"></i> Pages
+    <i class="fa fa-list"></i> Admin Users
 @stop
 @section('css')
 
@@ -29,7 +29,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
-                <a href="{{route('user.create')}}" class="btn btn-primary">Add new</a>
+               
               <div class="card">
                 <div class="card-header card-header-primary">
                 <h4 class="card-title ">Users</h4>
@@ -44,7 +44,8 @@
                         <th> ID </th>
                         <th> Name </th>
                         <th> Email </th>
-                        <th> Assigned role </th> 
+                        <th> User Type </th> 
+                        <th> Active</th> 
                        
                        
                         <th> Action </th>
@@ -55,7 +56,8 @@
                             <td> {{ $key +1 }} </td>
                             <td> {{ $user->name }} </td>
                             <td> {{ $user->email }} </td>
-                            <td>  </td>
+                            <td> {{ ($user->role==1)?'Admin':'User'}}</td>
+                            <td> {{ $user->active?'Yes':'No'}}</td>
 
                      
                     
@@ -66,11 +68,11 @@
                   </td> --}}
                            
                            
-                  <td> <a href="{{route('user.edit',$user->id)}}" style="margin-right:10px"><span class="glyphicon glyphicon-edit"></span>  </a>  
+                  <td> <a href="{{route('admin-user.edit',$user->id)}}" style="margin-right:10px"><span class="glyphicon glyphicon-edit"></span>  </a>  
                   
              
                     
-        <form id="delete-form-{{ $user->id }}" method="POST" action="{{ route('user.destroy',$user->id)}}" style="display: none;">
+        <form id="delete-form-{{ $user->id }}" method="POST" action="{{ route('admin-user.destroy',$user->id)}}" style="display: none;">
          {{ csrf_field() }}
          {{ method_field('DELETE') }}
         </form>

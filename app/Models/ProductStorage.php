@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductsStorage extends Model
+class ProductStorage extends Model
 {
-    //
+    protected $table = "product_sell";
 }

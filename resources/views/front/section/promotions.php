@@ -31,7 +31,7 @@ ASSETS.'/img/category/'.$cat->image;
                     </div>
 
                     <div class="col">
-                        <div class="row">
+                        <div class="row" style="margin-bottom:.6em">
                             <figure class="single_banner" style="height:100%;margin-top:-3px" >
                                 <div class="banner_thumb">
                                     <a href="<?=$src[1]??'#'?>">

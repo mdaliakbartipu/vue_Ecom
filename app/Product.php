@@ -8,13 +8,13 @@ use App\Brand;
 class Product extends Model
 {
     public function category(){
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class,'cat');
     }
     public function subcategory(){
-        return $this->belongsTo(SubCategory::class);
+        return $this->belongsTo(SubCategory::class,'sub');
     }
      public function subsubcats(){
-        return $this->belongsTo(SubSubCategory::class);
+        return $this->belongsTo(SubSubCategory::class,'super');
     }
     
     public function color(){
@@ -44,5 +44,13 @@ class Product extends Model
     public function variants()
     {
         return  $this->hasMany(ProductVariant::class);
+    }
+    public function brandInfo()
+    {
+        return  $this->belongsTo(Brand::class, 'brand_id');
+    }
+    public function images()
+    {
+        return  $this->hasMany(ProductImages::class, 'product_id');
     }
 }

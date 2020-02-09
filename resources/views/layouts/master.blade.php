@@ -44,6 +44,8 @@
 
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
+          <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body class="no-skin">
@@ -79,6 +81,80 @@
 @include('partials._footer')
 </div><!-- /.main-container -->
 
+
+<script src="{{ asset('assets/js/jquery-2.1.4.min.js') }}"></script>
+<script src="/front/assets/js/axios.min.js"></script>
+
+<![endif]-->
+<script type="text/javascript">
+    if('ontouchstart' in document.documentElement) document.write("<script src='{{ asset('assets/js/jquery.mobile.custom.min.js') }}'>"+"<"+"/script>");
+</script>
+<!-- ace scripts -->
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
+
+<!-- rich text editor -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+
 @yield('js')
+
+
+<!-- <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('assets/js/chosen.jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-timepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/js/daterangepicker.min.js') }}"></script>
+
+
+    <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
+    <script src="{{ asset('assets/js/ace.min.js') }}"></script> -->
+
+
+<script>
+        $('.summernote').summernote({
+            placeholder: 'Write short description about your products',
+            tabsize: 2,
+            height: 300,
+            width: 800
+        });
+
+    
+$('.input-file').ace_file_input({
+    style: 'well',
+    btn_choose: 'Drop files here or click to choose',
+    btn_change: null,
+    no_icon: 'ace-icon fa fa-cloud-upload',
+    droppable: true,
+    thumbnail: 'small'//large | fit
+
+}).on('change', function(){
+    //console.log($(this).data('ace_input_files'));
+    //console.log($(this).data('ace_input_method'));
+});
+
+ </script>
+
+
+
+<script type="text/javascript">
+
+    if("{{session()->get('message')}}")
+    swal.fire({
+        title: "Success",
+        text: "{{ session()->get('message') }}",
+        type: "success",
+        timer: 3000
+    });
+    elseif("{{session()->get('error')}}")
+    swal.fire({
+        title: "Error",
+        text: "{{ session()->get('error') }}",
+        type: "error",
+        timer: 3000
+    });
+    endif
+
+</script>
 </body>
 </html>

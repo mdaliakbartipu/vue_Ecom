@@ -56,7 +56,7 @@
                       <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Page Tag</label>
+                          <label class="bmd-label-floating">Footer Tag</label>
                           <select name="tag" id="tag" class="form-control">
                               <?php foreach($tags as $tag): ?>
                               <option value="<?=$tag->id?>"><?=$tag->name?></option>

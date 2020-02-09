@@ -30,13 +30,12 @@ class ColorTableSeeder extends Seeder
             ['name'=>'Maroon','code'=>'#800000'],
             ['name'=>'Green','code'=>'#008000'],
             ['name'=>'Olive','code'=>'#808000']
-
         ];
         
         foreach($colors as $color){
             DB::table('colors')->insert([
                 'name' => $color['name'],
-                'code' => $color['code']
+                'hex' => $color['code']
             ]);
         }
 }

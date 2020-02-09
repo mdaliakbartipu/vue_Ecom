@@ -15,7 +15,7 @@ class CreateUserShippingAddressTable extends Migration
     {
         Schema::create('user_shipping_address', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email')->nullable();
@@ -25,6 +25,7 @@ class CreateUserShippingAddressTable extends Migration
             $table->string('state')->nullable();
             $table->string('street')->nullable();
             $table->string('address')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

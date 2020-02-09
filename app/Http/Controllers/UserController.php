@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\User;
+use App\User;
 use App\UserProfile;
 
 use Illuminate\Http\Request;
@@ -17,7 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-         $users = User::all();
+         $users = User::where('role', '!=', 1)->get();
+
         return view('user.index',compact('users'));
     }
 
@@ -39,17 +40,38 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-         $this->validate($request,[
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:6'
+
+        $this->validate($request,[
+            'name'                  => 'required|string|max:255',
+            'email'                 => 'required|string|email|max:255|unique:users',
+            'password'              => 'required|confirmed|string|min:6',
+            'password_confirmation' => 'min:6',
+            'role'                  => 'required',
+            'active'                => 'required'
 
        ]);
-    
-         $request['password'] = bcrypt($request->password);
-         $user = User::create($request->all());
-       
-        return redirect(route('user.index'))->with('successMsg','User Added Successfully');
+
+        //Checking if a !admin user is creating an Admin account    
+       $loggedUser = \Auth::user()->role;
+       if($request->role == 1):
+        if($loggedUser!=1):
+            return redirect()->back()->with('error', 'Your do not have permisson to Create this type user');
+        endif;
+       endif;
+
+       $data = $request->all();
+    //    dd($data);
+       $data->password = bcrypt($data->password);
+       $create = User::create($data);
+
+       if($create):
+            if($create->role==1):
+                return redirect(route('admin-user.index'))->with('successMsg','User Added Successfully');         
+            else:
+                return redirect(route('user.index'))->with('successMsg','User Added Successfully');         
+            endif;
+        endif;
+       return redirect()->back()-with("error", 'Something went wrong.User could not be saved');
       
     }
 
@@ -105,7 +127,19 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id)->delete();
+        
+        $loggedUser = \Auth::user()->role;
+        $user = User::find($id);
+
+
+        if($loggedUser!=1):
+            if($user->role==1):
+                return redirect()->back()->with('error', 'Your do not have permisson to delete this user');
+            endif;
+        endif;
+
+        $user->delete();
+        
         return redirect(route('user.index'))->with('successMsg','User Deleted Successfully');
     }
 
@@ -113,35 +147,47 @@ class UserController extends Controller
 
     public function saveUserInfo(Request $request)
     {
-        // dd($request->all());
         // validation
 
 
         $userID = \Auth::user()->id;
-        $profile = UserProfile::find($userID);
+
+        $profile = UserProfile::where('user_id',$userID)->first();
+        $user = User::find($userID);
+        $name =  preg_split('/\s+/', $request->name??"No Name");
+
         if($profile){
-            $profile->first_name = $request->first_name;
-            $profile->last_name = $request->last_name;
-            $profile->email = $request->email;
-            $profile->phone = $request->phone;
-            // $profile->dob = $request->dob;
-            $profile->gender = $request->id_gender;
-            $profile->save();
+            if($user){
+                $user->name = $request->name??'No';
+                $user->save();
+            }
+            $profile->update($request->all());
             return redirect('/dashboard')->with('success', 'Profile updated');
         } else{
+            if($user){
+                $user->name = $request->name??'No';
+                if($request->email){
+                    $user->email = $request->email??'No';
+                }
+                $user->save();
+            }
+
             $profile  = new UserProfile;
-            $profile->user_id = $userID;
-            $profile->first_name = $request->first_name;
-            $profile->last_name = $request->last_name;
-            $profile->email = $request->email;
-            $profile->phone = $request->phone;
-            // $profile->dob = $request->dob;
-            $profile->gender = $request->id_gender;
+            $profile->user_id   = \Auth::user()->id;
             $profile->save();
+            $profile->update($request->all());
+
             return redirect('/dashboard')->with('success', 'New Profile Created');
         }
 
         return redirect('/dashboard')->with('error', 'Profile Not Updated');
         
+    }
+
+    public function blocked()
+    {
+        $users = User::where('role','!=',1)
+                        ->where('active', 0)->get();
+        return view('user.index', compact('users'));
     }
 }

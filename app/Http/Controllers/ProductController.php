@@ -19,7 +19,7 @@ use App\ProductTags;
 use App\Product;
 use App\Brand;
 use App\ProductImages;
-use App\ProductStorage;
+use App\Models\ProductStorage;
 use App\ProductVariant;
 
 use Carbon\Carbon;
@@ -36,8 +36,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-
+        $products = Product::with('brandInfo','category')->get();
         return view('product.index', compact('products'));
     }
 
@@ -83,33 +82,74 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //print_r($request->color);die();
+
+        // dd($request->all());
         $this->validate($request, [
-            'name'     => 'required|max:190',
-            'code' => 'required|unique:products|max:190',
-            'desc'     => 'required|max:190',
-            'price'    => 'required',
-            'brand'    => 'required',
-            'discount' => 'required',
-            'details'  => 'required',
-            'category'  => 'required',
-            'sub_category'  => 'required',
-            'sub_sub_category'  => 'required'
+            'name'              => 'required|max:190',
+            'hover_name'        => 'required|max:190',
+            'code'              => 'required|unique:products|max:190',
+            'price'             => 'required|numeric|min:2',
+            'brand'             => 'required',
+            'discount'          => 'required|numeric',
+            'vat'               => 'required|numeric',
+            'discount_days'     => 'required|numeric',
+            'details'           => 'required',
+            'new'               => 'required',
+            'category'          => 'required',
+            'sub_category'      => 'required',
+            'sub_sub_category'  => 'required',
         ]);
 
-
         // saving product
-        $product = new Product();
-        $product->name = $request->name;
-        $product->slug = str_slug($product->name);
-        $product->cat = $request->category;
-        $product->sub = $request->sub_category;
-        $product->super = $request->sub_sub_category;
-        $product->code = $request->code;
-        $product->brand = $request->brand;
-        $product->description = $request->desc;
-        $product->price = $request->price;
-        $product->details = $request->details;
-        $product->discount = $request->discount ?? 0;
+        $product                = new Product();
+        $product->name          = $request->name;
+        $product->hover_name    = $request->hover_name;
+        $product->slug          = str_slug($product->name);
+        $product->cat           = $request->category;
+        $product->new           = $request->new;
+        $product->sub           = $request->sub_category;
+        $product->super         = $request->sub_sub_category;
+        $product->code          = $request->code;
+        $product->brand_id         = $request->brand;
+        $product->price         = $request->price;
+        $product->details       = $request->details;
+        $product->discount      = $request->discount ?? 0;
+        $product->vat           = $request->vat ?? 0;
+
+        // Embroiddery PDF 
+        if($request->embroidery):
+            $pdf = $request->embroidery;
+            $pdfPath = 'front/assets/.uploads/products/pdf';
+            // creating folder if not available
+            if (!file_exists($pdfPath)) {
+                mkdir($pdfPath, 0777, true);
+            };
+            // saving pdf
+            $pdfName = "ppdf" . '-' . time() * rand(10000, 99999) . '-' . uniqid() . '.' . $pdf->getClientOriginalExtension();
+                    // continue;
+                    try {
+                        if (!$pdf->move(public_path($pdfPath), $pdfName))
+                            throw new \Exception('Not saved');
+                    } catch (\Exception $e) {
+                        echo 'Not saved image' . var_dump($pdf);
+                    }
+            $product->embroidery = $pdfName;
+                else:
+                    $product->embroidery = '$pdfName';
+        endif;
+
+        $product->video_link = $request->video ?? '';
+        
+        // calculating discount days with date
+        $days = (int)$request->discount_days??0;
+        $date = new \DateTime(now());
+        // adding days
+        $newDate = $date->add(new \DateInterval('P'.$days.'D'));
+
+        $product->discount_till = $newDate;
+
+        $product->rating_default = $request->rating_default??0;
+        $product->rating = 0;
         $product->save();
 
 
@@ -168,6 +208,7 @@ class ProductController extends Controller
                 $variant->qty        = $qty;
                 $variant->timestamps = false;
                 $variant->save();
+                // dd($variant);
                 // saving product image for that variant
                 //cheacking if image folder is there
                 $imagePath = "front/assets/.uploads/products";
@@ -183,6 +224,7 @@ class ProductController extends Controller
                 // and first level keys will be same as COLORS,Size and Quantities
                 // So foreach COLORS we get $image(s) 
                 // / each color got these images
+                if(isset($images[$key])):
                 foreach ($images[$key] as $img) :
                     // Uploading to server
                     $imageName = "pimg" . '-' . time() * rand(10000, 99999) . '-' . uniqid() . '.' . $img->getClientOriginalExtension();
@@ -213,9 +255,11 @@ class ProductController extends Controller
                     $im->save();
                 endforeach;
                 // saving first two thumbs to product table
+
                 $product->thumb1 = $thumbs[0];
                 $product->thumb2 = $thumbs[1];
                 $product->save();
+            endif;
                 // managing product storage
                 $storage = new ProductStorage;
                 $storage->product_id = $product->id;
@@ -286,29 +330,68 @@ class ProductController extends Controller
     {
 
         $this->validate($request, [
-            'name'     => 'required|max:190',
-            //    what was that! changing unique keys often create problems
-            //    'code'     => 'required|unique:products|max:190',
-            'desc'     => 'required|max:190',
-            'price'    => 'required',
-            'discount' => 'required',
-            'details'  => 'required',
-            // 'image'    => 'required|mimes:jpeg,jpg,png',
+            'name'              => 'required|max:190',
+            'hover_name'        => 'required|max:190',
+            'code'              => 'required|max:190',
+            'price'             => 'required',
+            'brand'             => 'required',
+            'discount'          => 'required',
+            'discount_days'     => 'required',
+            'details'           => 'required',
+            'new'               => 'required',
+            'category'          => 'required',
+            'sub_category'      => 'required',
+            'sub_sub_category'  => 'required',
         ]);
 
         $product = Product::find($id);
-        // saving product
         $product->name = $request->name;
+        $product->hover_name = $request->hover_name;
+        $product->slug = str_slug($product->name);
         $product->cat = $request->category;
+        $product->new = $request->new;
         $product->sub = $request->sub_category;
         $product->super = $request->sub_sub_category;
-        // each time updating new key are needed problem
-        // $product->code = $request->code;
-        $product->brand = $request->brand;
-        $product->description = $request->desc;
+        $product->code = $request->code;
+        $product->brand_id = $request->brand;
         $product->price = $request->price;
         $product->details = $request->details;
+        $product->discount = $request->discount ?? 0;
+        $product->vat = $request->vat ?? 0;
+        // Embroiddery PDF 
+        if($request->embroidery):
+            $pdf = $request->embroidery;
+            $pdfPath = 'front/assets/.uploads/products/pdf';
+            // creating folder if not available
+            if (!file_exists($pdfPath)) {
+                mkdir($pdfPath, 0777, true);
+            };
+            // saving pdf
+            $pdfName = "ppdf" . '-' . time() * rand(10000, 99999) . '-' . uniqid() . '.' . $pdf->getClientOriginalExtension();
+                    // continue;
+                    try {
+                        if (!$pdf->move(public_path($pdfPath), $pdfName))
+                            throw new \Exception('Not saved');
+                    } catch (\Exception $e) {
+                        echo 'Not saved image' . var_dump($pdf);
+                    }
+            $product->embroidery = $pdfName;
+        endif;
+
+
+
+        $product->video_link = $request->video ?? '';
+        
+        // calculating discount days with date
+        $days = (int)$request->discount_days??0;
+        $date = new \DateTime(now());
+        // adding days
+        $newDate = $date->add(new \DateInterval('P'.$days.'D'));
+
+        $product->discount_till = $newDate;
+        $product->rating_default = $request->rating?$request->rating_default:0;
         $product->save();
+
         // dd($product->id);
 
         // Updating Tags
@@ -444,12 +527,28 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
-        if (file_exists('uploads/product' . $product->image)) {
-            // file_delete($product->image);
-            unlink($product->image);
+        $product = Product::where('id', $id)->with('images')->first();
+
+        // deleting thumbs
+        $thumbPath = 'front/assets/.uploads/products/thumbs/';
+        $imagePath = 'front/assets/.uploads/products/';
+        if (file_exists($thumbPath.$product->thumb1)) {
+            unlink($thumbPath.$product->thumb1);
         }
-        $product->delete();
+        if (file_exists($thumbPath.$product->thumb2)) {
+            unlink($thumbPath.$product->thumb2);
+        }
+
+        // deleting all images
+        foreach($product->images as $img){
+            if(file_exists($imagePath.$img->image))
+            unlink($imagePath.$img->image);
+        }
+        // deleting product images entry
+        ProductImages::where('product_id', $product->id)->delete();
+        // deleting product attributes
+        
+         $product->delete();
         return redirect()->back()->with('successMsg', 'Product Deleted successfully');
     }
 
@@ -464,12 +563,16 @@ class ProductController extends Controller
     public function addToCart(Request $request)
     {
 
+        // echo json_encode(['response' => "200", 'cart' => $request->product['variant_id']]);die('');
         // dd(\Session::get('cart'));
         $request->validate([
             'product' => 'required'
         ]);
 
+        // \Session::put('req', $request);
+            // dd(\Session::get('req'));
         $cart = \Session::get('cart');
+        // dd($cart);
         $newList = $request->product;
 
         if (!$cart) {
@@ -477,7 +580,18 @@ class ProductController extends Controller
             array_push($cart, $newList);
             \Session::put('cart', $cart);
         } else {
-            array_push($cart, $newList);
+            $updated = 0;
+            foreach($cart as &$item){
+                // echo json_encode(['response' => "200", 'cart' => $item['variant_id']]);die('');
+                if($item['variant_id'] == $newList['variant_id']){
+                    $item['qty'] += $newList['qty'];
+                    $updated++;
+                }
+            }
+            if(!$updated){
+                array_push($cart, $newList);
+            }
+            
             \Session::put('cart', $cart);
         }
 
@@ -522,7 +636,8 @@ class ProductController extends Controller
 
 
         $subTotal = 0;
-        $shipping = 100;
+        $shipping = 0;
+
         header('Content-Type: application/json');
 
         if ($cart) {
@@ -680,4 +795,5 @@ class ProductController extends Controller
     {
         dd($request->all());
     }
+
 }

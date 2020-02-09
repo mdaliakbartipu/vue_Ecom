@@ -38,14 +38,45 @@
                        {{ method_field('PUT') }}
                     
 
-            <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating"> Name of Brand</label>
-                          <input type="text" class="form-control" name="name" value="{{ $brand->name }}">
+                       <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Name of Brand</label>
+                                    <input type="text" class="form-control" name="name" value="{{$brand->name??old('name')}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Brand ID</label>
+                                    <input type="text" class="form-control" name="brand_id" value="{{$brand->brand_id??old('brand_id')}}">
+                                </div>
+                            </div>
+
                         </div>
-                       </div>
-                      </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating"> <i class="fa fa-envelope-o"></i> Address</label>
+                                    <textarea  class="form-control" rows="6" name="address" id="address" >{{$brand->address??old('address')}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating"><i class="fa fa-user"></i> Contact Person</label>
+                                    <input type="text" class="form-control" name="contact_person" value="{{$brand->contact_person??old('contact_person')}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating"> <i class="fa fa-phone"></i> Contact No.</label>
+                                    <input type="text" class="form-control" name="contact_no" value="{{$brand->contact_no??old('contact_no')}}">
+                                </div>
+                            </div>
+
+                        </div>
                      
                      <button type="submit" class="btn btn-primary"> Save </button>
                     <a href="{{route('brand.index')}}" class="btn btn-danger">Back</a>

@@ -1,4 +1,9 @@
 <?php
+
+// test
+
+Route::get('test/mail', 'Front\PagesController@testEmail');
+
 // Should be deleted
 
 Route::get('/catagory_products/', 'Front\PagesController@catagoryProducts');
@@ -9,18 +14,13 @@ Route::get('/subsubcat_products/', 'Front\PagesController@subsubcatProducts');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Route::get('register', function(){
-   echo "Deactivated for security reasons. It will Open soon";
-});
 
 
 // UI Routes
 
 Route::get('/', 'Front\PagesController@index');
+Route::get('/ui/blog/{blog}/{slug}', 'Front\PagesController@blog');
 Route::get('/store', 'Front\PagesController@index');
-Route::get('/cat', function(){return "not found";});
-Route::get('/super', function(){return "not found";});
-Route::get('/sub', function(){return "not found";});
 
 Route::get('/cat/{slug}', 'Front\PagesController@cat');
 Route::get('/super/{slug}', 'Front\PagesController@super');
@@ -37,7 +37,7 @@ Route::get('/subsubcat_products/{id}', 'Front\PagesController@subsubcatProducts'
 Route::get('/productCart', 'Front\PagesController@cart');
 
 Route::get('/productCheckout', 'Front\PagesController@checkout');
-Route::get('/singleProduct/{id}', 'Front\PagesController@singleProduct');
+Route::get('/singleProduct/{id}/{slug}', 'Front\PagesController@singleProduct');
 Route::get('/get_product/{id}', 'Front\PagesController@get_product');
 Route::get('/get_variant/{id}', 'Front\PagesController@get_variant');
 
@@ -77,9 +77,7 @@ Route::put('category/{id}/sub-sub-category', 'CategoryController@subSubUpdate')
 Route::DELETE('sub-sub-delete/{id}','CategoryController@subSubDelete')->name('sub-sub-delete');
 
 
-Route::get('form', function (){
-   return view('form');
-});
+
 
 Auth::routes();
 
@@ -89,9 +87,18 @@ Route::get('/sadmin', 'HomeController@index')->name('home');
 Route::resource('group', 'GroupController');
 Route::resource('brand', 'BrandController');
 Route::resource('slider','SliderContoller');
+
+Route::get('size/chart','SizeController@chart');
+
 Route::resource('size','SizeController');
+Route::resource('ptags','PtagsController');
+
 Route::resource('page','PageController');
+Route::get('user/blocked','UserController@blocked');
 Route::resource('user','UserController');
+Route::get('admin-user/blocked','AdminUserController@blocked');
+Route::get('admin-user/all','AdminUserController@all');
+Route::resource('admin-user','AdminUserController');
 Route::resource('company','CompanyController');
 Route::resource('category','CategoryController');
 Route::resource('testimonial','TestimonialController');
@@ -107,6 +114,7 @@ Route::get('/get-sub/ajax/{id}','ProductController@ajaxGetSub');
 Route::get('/get-sub/sub/ajax/{id}','ProductController@ajaxGetSubsub');	
 });
 
+Route::get('/api/products','ProductController@apiAllProducts');
 Route::get('/api/get-product/{tag}','ProductController@getProductByTag');
 Route::get('/api/get-product-tags','ProductController@getProductTags');
 Route::get('/api/get-cart','ProductController@getCart');
@@ -129,5 +137,74 @@ Route::get('/api/check-if-color','ProductController@apiCheckIfColor');
 Route::post('/save-user-info','UserController@saveUserInfo');
 
 // order
+// Route::post('/order','OrderController@gotNewOrder');
+Route::get('/order/new/list','OrderController@list');
+
+Route::get('/accepted-order','OrderController@acceptedOrderList')->name('accepted-order');
+Route::get('/accept-order/{order}','OrderController@acceptOrder');
+Route::get('/accepted-order/{order}','OrderController@acceptedOrder');
+
+Route::get('/delivered-order','OrderController@deliveredOrderList')->name('delivered-order');
+Route::get('/deliver-order/{order}','OrderController@deliverOrder');
+Route::get('/delivered-order/{order}','OrderController@deliveredOrder');
+
+Route::get('/returned-order/{order}','OrderController@returnedOrder');
+Route::get('/returned-order','OrderController@returnedOrder');
+
+Route::get('/cancelled-order','OrderController@cancelledOrderList');
+Route::get('/cancel-order/{order}','OrderController@cancelOrder');
+Route::get('/cancelled-order/{order}','OrderController@cancelledOrder');
+
+Route::get('/new-order/view/{order}','OrderController@newOrderView')->name('neworder-view');
+
+
+
+// Common info
+Route::post('/size/chart/save','CommonInfoController@sizeChart')->name('save-size-chart');
+Route::get('/commoninfo','CommonInfoController@index');
+Route::post('/commoninfo','CommonInfoController@store')->name('commoninfo');
+
+Route::get('/api/commoninfo','CommonInfoController@apiGetCommonInfo');
+
+
+
+// Reports
+Route::get('/report/sale-single','ReportController@saleSingle');
+Route::get('/report/sale-daily','ReportController@saleDaily');
+Route::get('/report/sale-monthly','ReportController@saleMonthly');
+Route::get('/report/sale-yearly','ReportController@saleYearly');
+
+// Inventory
+Route::get('/inventory/purchase','InventoryController@purchase');
+Route::get('/inventory/purchase/{product}','InventoryController@purchaseProduct');
+
+
+
+// API section
+Route::post('/api/inventory/add','InventoryController@addVariant');
+// new controller for all api
+
+// Settings
+
+
+
+
+
+// SSLCOM
+Route::post('payment/success','PaymentOnline@success');
+
+
+Route::get('payment/test','PaymentOnline@index');
+
+Route::get('paypal/credit','PaypalPaymentController@index');
+Route::get('paypal/pay','PaypalPaymentController@paywithPaypal');
+
 Route::post('/order','OrderController@gotNewOrder');
+
+Route::get('paypal/fails','Front\PagesController@paypalFails');
+Route::get('paypal/success','Front\PagesController@paypalSuccess');
+
+Route::get('settings/payment','PaymentOnline@paymentSetting');
+Route::post('settings/payment','PaymentOnline@paymentSetting');
+
 
