@@ -9,9 +9,6 @@ Vue.component('productblock', {
     `
 });
 
-
-
-
 Vue.component('vuelist', {
     props: ['listlink', 'listdata'],
     template: `
@@ -20,7 +17,6 @@ Vue.component('vuelist', {
     </li>
     `
 });
-
 
 Vue.component('addvertise', {
     props: ['image', 'slug'],
@@ -50,7 +46,6 @@ Vue.component('slider-image', {
 });
 
 // cartstart
-
 
 Vue.component('cart_table', {
 
@@ -428,8 +423,8 @@ Vue.component('colors_variant', {
     <h4 v-if="!colorName">Select Color</h4>
     <ul>
         <li v-for="(color,index) in variants"  :key="index" class="color1">
-        <div :style="'background:'+color[0].color.code" class="ml-2 btn btn-sm" data-toggle="tooltip" :title="color[0].color.name" @click.prevent="selected(index)">
-        <div style="height:20px;"></div> 
+        <div :style="'background:'+color[0].color.hex" class="ml-2 btn btn-sm" data-toggle="tooltip" :title="color[0].color.name" @click.prevent="selected(index)">
+        <div style="height:20px;background:red"></div> 
         </div>
         </li>
     </ul>

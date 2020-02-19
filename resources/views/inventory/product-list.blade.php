@@ -37,7 +37,7 @@
                         @include('layouts.includes.msg')
 
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" id="inventor">
                         <div class="table-responsive">
                             <table id="table" class="table table-striped table-bordered text-center" style="width:100%">
                                 <thead class="text-center">
@@ -89,7 +89,6 @@
             @endsection
 
             @section('js')
-
 
             <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
             <script>
@@ -397,7 +396,10 @@
                     });
 
                 });
+
             </script>
+
+            
 
 
             @stop

@@ -127,11 +127,10 @@
                                         <div id="dynamic-table_filter" class="dataTables_filter"></div>
                                     </div>
                                 </div>
-                                <table id="dynamic-table" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="dynamic-table_info">
+                                <table id="dynamic-table" class="draggable table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="dynamic-table_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">SL.</th>
-                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">SL.</th></th>
                                             <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">Name</th>
                                             <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">Web ID.</th>
                                             <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">Brand</th>
@@ -248,6 +247,8 @@
 
 <script src="{{ asset('assets/js/ace-elements.min.js') }}"></script>
 <script src="{{ asset('assets/js/ace.min.js') }}"></script>
+<script src="http://www.danvk.org/dragtable/dragtable.js"></script>
+
 
 <script type="text/javascript">
     jQuery(function($) {
@@ -487,7 +488,6 @@
           }
         ).css('padding-top', '12px');
         */
-
 
     })
 </script>

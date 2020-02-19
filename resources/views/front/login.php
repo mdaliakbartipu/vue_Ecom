@@ -10,10 +10,8 @@
     <?php include("section/header.php");?>
     </div>
 
-
 <!--Categories product area start-->
     <?php include("section/login.php");?>
-
     <?php include("section/footer.php");?>
     <!--footer area end-->
 
