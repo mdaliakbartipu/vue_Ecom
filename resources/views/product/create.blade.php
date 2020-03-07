@@ -11,6 +11,7 @@
 .form-field-1{
     height:3em !important;
     width:100%;
+    padding-left:1em !important;
 }
 .lbl{
     color:black !important;
@@ -36,7 +37,33 @@
     width:100%;
     text-align:left
 }
+.btn-light, .btn-light.focus, .btn-light:focus {
+    background-color: #f5f5f5!important;
+    border-color: #f5f5f5!important;
+}
 
+.no-skin .sidebar {
+    background-color: white;
+    border-style: solid;
+    border-color: #fff;
+    border-width: 0 1px 0 0;
+}
+.no-skin .nav-list>li:hover>a {
+    background-color: #FFF;
+    color: #ffb752;
+}
+
+.no-skin .nav-list>li {
+    border-color: #FFF;
+   
+}
+
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-weight: 600;
+}
 </style>
 
 @stop
@@ -114,7 +141,7 @@
                         </label>
 
                         <div class="col-xs-12 col-sm-9">
-                            <select class="chosen-select form-control" id="category" name="category">
+                            <select class="chosen-select form-control form-field-1" id="category" name="category">
                                 <option value="0">Select Category</option>
                                 @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -131,7 +158,7 @@
                         </label>
 
                         <div class="col-xs-12 col-sm-9">
-                            <select class="chosen-select form-control" id="sub_category" name="sub_category">
+                            <select class="chosen-select form-control form-field-1" id="sub_category" name="sub_category">
                                 {{-- @foreach($subcategories as $subcat)
                                      <option value="{{ $subcat->id }}">{{ $subcat->name }}</option>
                                 @endforeach --}}
@@ -184,7 +211,7 @@
 
 
                         <div class="col-xs-12 col-sm-9">
-                            <select class="chosen-select form-control" name="sub_sub_category" id="sub_sub_category">
+                            <select class="chosen-select form-control form-field-1" name="sub_sub_category" id="sub_sub_category">
                                 {{-- @foreach($subsubcats as $subsubcat)
                                         <option value="{{ $subsubcat->id }}">{{ $subsubcat->name }}</option>
                                 @endforeach --}}
@@ -201,7 +228,7 @@
                         </label>
 
                         <div class="col-xs-12 col-sm-9">
-                            <select class="chosen-select form-control" id="brand" name="brand">
+                            <select class="chosen-select form-control form-field-1" id="brand" name="brand">
                                 <option value="0">Select Brand</option>
                                 @foreach($brand as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -374,14 +401,10 @@
                         </label>
 
                         <div class="col-sm-9">
-                            <label class="label label-xlg label-info arrowed-in-right arrowed-in">
-                                <i class="fa fa-upload"></i>
-                                Upload FIle
-                                <input type="file" name="embroidery" style="display:none">
-                            </label>
-
+                                <input type="file" class="form-field-1" name="embroidery">
                         </div>
                     </div>
+                    
 
                     <div class="form-group">
                         <label class="col-sm-3 " >
