@@ -7,6 +7,19 @@
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+.form-field-1{
+    height:3em !important;
+    width:100%;
+}
+.lbl{
+    color:black !important;
+}
+.checkbox label, .radio label{
+    padding-left:10px !important;
+}
+</style>
+
 @stop
 
 
@@ -15,7 +28,7 @@
 
 <div class="row">
 
-    <div class="col-sm-10">
+    <div class="col-sm-12">
         <div class="widget-header">
             <h4 class="widget-title"> @yield('page-header')</h4>
             @include('layouts.includes.msg')
@@ -27,22 +40,34 @@
                 <form class="form-horizontal" role="form" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Name</span> </label>
+                   
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2">  Product Name</span>
+                        </span>
+                        </label>
 
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product Name" class="form-control" name="name" value="{{old('name')}}" />
+                            <input type="text" class="form-field-1" placeholder="Product Name" class="form-control" name="name" value="{{old('name')}}" />																
                         </div>
+                        
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Hover Name</span> </label>
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2">  Product Hover Name</span>
+                        </span>
+                        </label>
 
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product Hover Name" class="form-control" name="hover_name" value="{{old('hover_name')}}" />
+                            <input type="text" class="form-field-1" placeholder="Product Hover Name" class="form-control" name="hover_name" value="{{old('hover_name')}}" />
                         </div>
                     </div>
 
                     <!-- <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Front Images </label>
+                        <label class="col-sm-3 " for="form-field-1"><span class="btn btn-light arrowed-right">Product Front Images </label>
                         <div class="col-sm-9">
                             <label class="label label-xlg label-grey arrowed-in-right arrowed-in">
                                         <i class="fa fa-image"></i>
@@ -62,7 +87,12 @@
 
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Category</span></label>
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2">  Search Category</span>
+                        </span>
+                        </label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="category" name="category">
@@ -74,7 +104,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Sub Category</span></label>
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2">  Search Sub Category</span>
+                        </span>
+                        </label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="sub_category" name="sub_category">
@@ -121,7 +156,13 @@
                         });
                     </script>
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Search Super Category</span></label>
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2">  Search Super Category</span>
+                        </span>
+                        </label>
+
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" name="sub_sub_category" id="sub_sub_category">
@@ -133,7 +174,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Brand Name</span></label>
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2">  Brand Name</span>
+                        </span>
+                        </label>
 
                         <div class="col-xs-12 col-sm-9">
                             <select class="chosen-select form-control" id="brand" name="brand">
@@ -145,22 +191,41 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Web ID </span></label>
+
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2">  Web ID </span>
+                        </span>
+                        </label>
+
 
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product Code" class="form-control" name="code" value="{{old('code')}}" />
+                            <input type="text" class="form-field-1" placeholder="Product Code" class="form-control" name="code" value="{{old('code')}}" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Regular Price</span> </label>
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2">  Regular Price</span>
+                        </span>
+                        </label>
+
+
 
                         <div class="col-sm-9">
-                            <input type="text" id="form-field-1-1" placeholder="Product price" class="form-control" name="price" value="{{old('price')}}" />
+                            <input type="text" class="form-field-1" placeholder="Product price" class="form-control" name="price" value="{{old('price')}}" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"><span class="label label-lg label-info arrowed-right">Product Details</span> </label>
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2">  Product Details</span>
+                        </span>
+                        </label>
 
                         <div class="col-sm-9">
                             <textarea type="text" placeholder="Product Details" class="form-control summernote" name="details" style="width:unset!important">{{old('details')}}</textarea>
@@ -169,7 +234,14 @@
 
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"> <span class="label label-lg label-info arrowed-right">Feature </span></label>
+                       
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2"> Feature</span>
+                        </span>
+                        </label>
+                       
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
 
@@ -187,7 +259,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Rating</span></label>
+                       
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2"> Rating</span>
+                        </span>
+                        </label>
+                       
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
                                 <label>
@@ -200,7 +279,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Collection Tags</span></label>
+
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2">  Collection Tags</span>
+                        </span>
+                        </label>
+
 
                         <div class="col-xs-12 col-sm-9">
                             <div class="checkbox">
@@ -217,7 +303,13 @@
 
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"><span class="label label-lg label-info arrowed-right">Discount</span></label>
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2"> Discount</span>
+                        </span>
+                        </label>
+
 
                         <div class="col-sm-9">
                             <span class="input-icon input-icon-right">
@@ -231,8 +323,16 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Vat & Ship</span></label>
+                    <div class="form-group">            
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2"> Vat & Ship</span>
+                        </span>
+                        </label>
+                       
+                       
+                       
                         <div class="col-sm-9">
                         <span class="input-icon input-icon-right">
                                 <input type="text" id="form-field-icon-1" name="vat" value="0">
@@ -247,7 +347,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Embroidery & Print</span></label>
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2"> Embroidery & Print</span>
+                        </span>
+                        </label>
 
                         <div class="col-sm-9">
                             <label class="label label-xlg label-grey arrowed-in-right arrowed-in">
@@ -260,7 +365,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1-1"> <span class="label label-lg label-info arrowed-right">Video link</span></label>
+                        <label class="col-sm-3 " >
+                        <span class="btn btn-light arrowed-right">
+                        <input class="ace" type="checkbox" checked>
+						<span class="lbl p-2"> Video link</span>
+                        </span>
+                        </label>
 
                         <div class="col-sm-9">
                             <input type="text" name="video" placeholder="Associate video link">
@@ -271,7 +381,7 @@
 
                     <!-- Product Variant Section -->
 
-                    <div class="card-body" style="margin-left:10em;width:100%">
+                    <div class="card-body" style="width:100%">
                         <div class="table-responsive">
                             <table id="table" class="table" style="width:100%">
                                 <thead class=" text-primary">
@@ -306,7 +416,7 @@
                                         </td>
                                         <td>
                                             <div class="col-sm-9">
-                                                <input type="text" id="form-field-1-1" placeholder="Product quantity" class="form-control" name="quantity[]" />
+                                                <input type="text" class="form-field-1" placeholder="Product quantity" class="form-control" name="quantity[]" />
                                             </div>
                                         </td>
                                         <td>
@@ -325,21 +435,21 @@
                                 </tbody>
                             </table>
 
-                            <a href="" class="btn btn-info btn-sm col-lg-2 pull-right" id="addrows">
+                            <a href="" class="btn btn-light-sm col-lg-2 pull-right" id="addrows">
                                 <span class="glyphicon glyphicon-plus"></span> Add
                             </a>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label"></label>
+                        <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 "></label>
 
 
                         <div class="col-xs-12 col-sm-6">
 
-                            <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> Save</button>
-                            <button class="btn btn-gray" type="Reset"> <i class="fa fa-refresh"></i> Reset</button>
-                            <a href="" class="btn btn-info"> <i class="fa fa-list"></i> List</a>
+                            <button type="submit" class="btn btn-light-success"> <i class="fa fa-save"></i> Save</button>
+                            <button class="btn btn-light-gray" type="Reset"> <i class="fa fa-refresh"></i> Reset</button>
+                            <a href="" class="btn btn-light-info"> <i class="fa fa-list"></i> List</a>
 
                         </div>
                     </div>
@@ -388,7 +498,7 @@
                  <input multiple="" type="file" id="id-input-file-3" name="image[${rowIndex++}][]" />
      </div> </td>
      <td>
-     <a href="#" type="submit" class="btn btn-danger delete"> X
+     <a href="#" type="submit" class="btn btn-light-danger delete"> X
       </a> </td>
 
       </tr>`);
@@ -498,7 +608,7 @@
             });
 
 
-            $('#chosen-multiple-style .btn').on('click', function(e) {
+            $('#chosen-multiple-style .btn btn-light').on('click', function(e) {
                 var target = $(this).find('input[type=radio]');
                 var which = parseInt(target.val());
                 if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
@@ -516,8 +626,8 @@
 
         $('#id-input-file-3').ace_file_input({
             style: 'well',
-            btn_choose: 'Drop files here or click to choose',
-            btn_change: null,
+            btn btn-light_choose: 'Drop files here or click to choose',
+            btn btn-light_change: null,
             no_icon: 'ace-icon fa fa-cloud-upload',
             droppable: true,
             thumbnail: 'small' //large | fit
@@ -543,8 +653,8 @@
 
         //to translate the daterange picker, please copy the "examples/daterange-fr.js" contents here before initialization
         $('input[name=date-range-picker]').daterangepicker({
-                'applyClass': 'btn-sm btn-success',
-                'cancelClass': 'btn-sm btn-default',
+                'applyClass': 'btn btn-light-success',
+                'cancelClass': 'btn btn-light-default',
                 locale: {
                     applyLabel: 'Apply',
                     cancelLabel: 'Cancel'
