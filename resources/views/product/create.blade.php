@@ -18,6 +18,25 @@
 .checkbox label, .radio label{
     padding-left:10px !important;
 }
+
+.input-icon.input-icon-right>input{
+    width:319px !important;
+}
+
+
+.input-icon.input-icon-right>.ace-icon {
+    left: auto;
+    right: 3px;
+    font-size: 1.12em;
+    padding-top: 5px;
+    padding-right: 13px;
+}
+
+.btn-light{
+    width:100%;
+    text-align:left
+}
+
 </style>
 
 @stop
@@ -313,12 +332,12 @@
 
                         <div class="col-sm-9">
                             <span class="input-icon input-icon-right">
-                                <input type="text" id="form-field-icon-1" name="discount" value="0">
+                                <input type="text" class="form-field-1" id="form-field-icon-1" name="discount" value="0">
                                 <i class="ace-icon fa fa-leaf blue"> discount in %</i>
                             </span>
 
                             <span class="input-icon input-icon-right">
-                                <input type="text" id="form-field-icon-2" name="discount_days" value="0">
+                                <input type="text" class="form-field-1" id="form-field-icon-2" name="discount_days" value="0">
                                 <i class="ace-icon fa fa-leaf green"> discount for (days)</i>
                             </span>
                         </div>
@@ -335,11 +354,11 @@
                        
                         <div class="col-sm-9">
                         <span class="input-icon input-icon-right">
-                                <input type="text" id="form-field-icon-1" name="vat" value="0">
+                                <input type="text" class="form-field-1" id="form-field-icon-1" name="vat" value="0">
                                 <i class="ace-icon blue"> vat in %</i>
                         </span>
                         <span class="input-icon input-icon-right">
-                            <input type="text" id="form-field-icon-1" name="delivery_time" value="0">
+                            <input type="text" class="form-field-1" id="form-field-icon-1" name="delivery_time" value="0">
                             <i class="ace-icon green"> delivery time (days)</i>
                         </span>
 
@@ -355,7 +374,7 @@
                         </label>
 
                         <div class="col-sm-9">
-                            <label class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                            <label class="label label-xlg label-info arrowed-in-right arrowed-in">
                                 <i class="fa fa-upload"></i>
                                 Upload FIle
                                 <input type="file" name="embroidery" style="display:none">
@@ -372,8 +391,8 @@
                         </span>
                         </label>
 
-                        <div class="col-sm-9">
-                            <input type="text" name="video" placeholder="Associate video link">
+                        <div class="col-sm-9 ">
+                            <input type="text" class="form-field-1" name="video" placeholder="Associate video link">
                         </div>
                     </div>
 
@@ -397,7 +416,7 @@
                                         <td>
 
                                             <div class="col-sm-20">
-                                                <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Color..." name="color[]">
+                                                <select class="chosen-select form-control form-field-1" id="form-field-select-3" data-placeholder="Choose a Color..." name="color[]">
                                                     @foreach ($colors as $color)
                                                     <option value="{{ $color->id }}">{{ $color->name }}</option>
                                                     @endforeach
@@ -407,7 +426,7 @@
                                         <td>
 
                                             <div class="col-md-20">
-                                                <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a Size..." name="size[]">
+                                                <select class="chosen-select form-control form-field-1" id="form-field-select-3" data-placeholder="Choose a Size..." name="size[]">
                                                     @foreach($sizes as $size)
                                                     <option value="{{ $size->id }}">{{ $size->name }} </option>
                                                     @endforeach
@@ -422,7 +441,7 @@
                                         <td>
                                             <div class="col-xs-12 col-sm-12">
 
-                                                <label class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                                                <label class="label label-xlg label-info arrowed-in-right arrowed-in">
                                                     <i class="fa fa-image"></i>
                                                     Upload Images
                                                     <input multiple="" type="file" id="id-input-file-3" name="image[0][]" style="display:none" />
@@ -435,7 +454,7 @@
                                 </tbody>
                             </table>
 
-                            <a href="" class="btn btn-light-sm col-lg-2 pull-right" id="addrows">
+                            <a href="" class="btn btn-purple col-lg-2 pull-right" id="addrows">
                                 <span class="glyphicon glyphicon-plus"></span> Add
                             </a>
                         </div>
@@ -447,9 +466,9 @@
 
                         <div class="col-xs-12 col-sm-6">
 
-                            <button type="submit" class="btn btn-light-success"> <i class="fa fa-save"></i> Save</button>
-                            <button class="btn btn-light-gray" type="Reset"> <i class="fa fa-refresh"></i> Reset</button>
-                            <a href="" class="btn btn-light-info"> <i class="fa fa-list"></i> List</a>
+                            <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> Save</button>
+                            <button class="btn btn-yellow" type="Reset"> <i class="fa fa-refresh"></i> Reset</button>
+                            <a href="" class="btn btn-info"> <i class="fa fa-list"></i> List</a>
 
                         </div>
                     </div>
@@ -480,25 +499,25 @@
         console.log(rowIndex);
         $('#table tr:last').after(`<tr>
       <td>   <div class="col-md-20">
-      <select class="chosen-select form-control"  name="color[]">
+      <select class="chosen-select form-control form-field-1"  name="color[]">
                  @foreach ($colors as $color)
                         <option value="{{ $color->id }}">{{ $color->name }}</option>
                  @endforeach
       </select> </div> </td>
       <td>     <div class="col-md-20">
-       <select class="chosen-select form-control" id="form-field-select-3"  name="size[]">
+       <select class="chosen-select form-control form-field-1" id="form-field-select-3"  name="size[]">
                  @foreach ($sizes as $size)
                         <option value="{{ $size->id }}">{{ $size->name }}</option>
                 @endforeach
             </select> </div> </td>
       <td> <div class="col-sm-9">
-               <input type="text" class="form-control" placeholder="Product Quantity" name="quantity[]" /> 
+               <input type="text" class="form-control form-field-1" placeholder="Product Quantity" name="quantity[]" /> 
           </div > </td>
       <td> <div class="col-xs-12 col-sm-12">
                  <input multiple="" type="file" id="id-input-file-3" name="image[${rowIndex++}][]" />
      </div> </td>
      <td>
-     <a href="#" type="submit" class="btn btn-light-danger delete"> X
+     <a href="#" type="submit" class="btn btn-danger delete"> X
       </a> </td>
 
       </tr>`);
