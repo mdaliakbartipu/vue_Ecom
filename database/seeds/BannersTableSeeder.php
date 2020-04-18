@@ -17,19 +17,19 @@ class BannersTableSeeder extends Seeder
             [
                 'title'     => 'Something',
                 'subTitle'  => 'Something More',
-                'img'       => 'ad1.png',
+                'img'       => 'adone.png',
                 'slug'      => '#',
             ],
             [
                 'title'     => 'Something',
                 'subTitle'  => 'Something More',
-                'img'       => 'ad2.png',
+                'img'       => 'adtwo.png',
                 'slug'      => '#',
             ],
             [
                 'title'     => 'Something',
                 'subTitle'  => 'something More',
-                'img'       => 'ad3.png',
+                'img'       => 'adthree.png',
                 'slug'      => '#',
             ]
             
